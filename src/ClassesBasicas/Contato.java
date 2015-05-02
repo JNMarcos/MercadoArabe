@@ -1,6 +1,7 @@
 package ClassesBasicas;
 
 public class Contato {
+<<<<<<< HEAD
 	private String logradouro; //rua, número e complemento
 	private String bairro; 
 	private String cidade;
@@ -44,4 +45,10 @@ public class Contato {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+=======
+//test
+//test 2
+	//..s..s..s
+	asodpkaspdk
+>>>>>>> origin/master
 }
