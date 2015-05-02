@@ -44,9 +44,8 @@ public class Vendedor {
 	public int getXp() {
 		return xp;
 	}
-	private void setXp(int xp) {
+	private void setXp(int xp) {//vendedor não pode alterar seu XP por isso é private
 		this.xp = xp;
-		//comentário inútil
 	}
 
 }

@@ -1,5 +1,5 @@
 package ClassesBasicas;
 
-public class Oferta {
+public class Oferta extends Produto{
 
 }
