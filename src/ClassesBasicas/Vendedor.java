@@ -46,6 +46,7 @@ public class Vendedor {
 	}
 	private void setXp(int xp) {
 		this.xp = xp;
+		//comentário inútil
 	}
 
 }
