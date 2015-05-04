@@ -1,15 +1,16 @@
-package ClassesBasicas;
+package classes_basicas;
 
 import java.sql.Time;
 import java.util.ArrayList;
 
 public class Vendedor {
 	private String nome;
-	private String nomeUsuario;
 	private Time dataNascimento;
 	private Contato contato;
 	private ArrayList<Produto> produtos;
 	private int xp;
+	private String nomeUsuario;
+	private String senha;
 	
 	public String getNome() {
 		return nome;
@@ -46,6 +47,12 @@ public class Vendedor {
 	}
 	private void setXp(int xp) {//vendedor não pode alterar seu XP por isso é private
 		this.xp = xp;
+	}
+	public String getSenha() {
+		return senha;
+	}
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 }
