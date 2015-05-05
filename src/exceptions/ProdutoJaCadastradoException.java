@@ -1,5 +1,7 @@
 package exceptions;
 
-public class ProdutoJaCadastradoException {
-
+public class ProdutoJaCadastradoException extends Exception{
+	public String toString(){
+		return "Esse produto já foi cadastrado! É melhor patentear outra marca. :) \n#FikaDica";
+	}
 }
