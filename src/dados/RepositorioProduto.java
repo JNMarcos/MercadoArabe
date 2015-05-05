@@ -12,6 +12,8 @@ import java.util.Collections;
 import java.util.List;
 
 import classes_basicas.Produto;
+import exceptions.NaoEncontradoProdutoException;
+import exceptions.ProdutoJaCadastradoException;
 import negocio.CadastroProduto;
 
 public class RepositorioProduto implements IRepositorioProduto, Serializable{
@@ -19,14 +21,14 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable{
 	ArrayList<Produto> produtos;
 	public static CadastroProduto cadastroProduto = new CadastroProduto();
 	private static RepositorioProduto instancia;
-	
+
 	public static RepositorioProduto getInstancia() {
 		if (instancia == null) {
 			instancia = lerDoArquivo();
 		}
 		return instancia;
 	}
-	
+
 	private static RepositorioProduto lerDoArquivo() {
 		RepositorioProduto instanciaLocal = null;
 
@@ -51,7 +53,7 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable{
 
 		return instanciaLocal;
 	}
-	
+
 	public static void salvarArquivo() {
 		if (instancia == null) {
 			return;
@@ -79,21 +81,61 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable{
 	public void criarListaProdutos(){
 		produtos = new ArrayList<Produto>();
 	}
-	
+
 	public ArrayList<Produto> getProdutos() {
 		if(this.produtos!=null)
-		Collections.sort(produtos);
+			Collections.sort(produtos);
 		return produtos;
 	}
 
 	public void setProdutos(ArrayList<Produto> produtos) {
 		this.produtos = produtos;
 	}
-	
-	//continuar depois
-	public void cadastrar(Produto produto){
+
+	//o motivo de procurarPorProduto retornar o tipo int e não boolean é pq o
+	// método será usado tb. para remover, que precisa saber o índice de remoção
+	//podemos pensar, talvez numa alternativa melhor
+
+	public int procurarPorProduto(String nomeProduto){
+		int i = 0;
+		int encontrou = -1; //pq não há índice negativo
+		if (produtos != null) {
+			while(i < produtos.size() && encontrou == -1){
+				if (nomeProduto.equals(produtos.get(i).getNome())){
+					encontrou = i;
+				}
+				i++;
+			}
+		}
+		return encontrou;		
+	}
+
+	public void cadastrarProduto(Produto produto) throws ProdutoJaCadastradoException{
 		if (produtos == null){
 			criarListaProdutos();
 		}
+		int produtoJaExiste = procurarPorProduto(produto.getNome());
+		if (produtoJaExiste != -1){
+			produtos.add(produto);
+			salvarArquivo();
+		} else{
+			throw new ProdutoJaCadastradoException();
+		}
+
+	}
+
+	public void removerProduto(String nomeProduto) throws NaoEncontradoProdutoException{
+		int produtoRemovido = procurarPorProduto(nomeProduto);
+		if (produtoRemovido != -1){
+			produtos.remove(produtoRemovido);
+			salvarArquivo();
+		} else{
+			throw new NaoEncontradoProdutoException();
+		}
+	}
+
+	public Produto mostrarProduto(String nomeProduto){
+		int produtoASerMostrado = procurarPorProduto(nomeProduto);
+		return produtos.get(produtoASerMostrado);
 	}
 }
