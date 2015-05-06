@@ -72,7 +72,7 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable{
 			if (oos != null) {
 				try {
 					oos.close();
-				} catch (IOException e) {/* Silent */
+				} catch (IOException e) {/* Silent exception*/
 				}
 			}
 		}
@@ -115,7 +115,7 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable{
 			criarListaProdutos();
 		}
 		int produtoJaExiste = procurarPorProduto(produto.getNome());
-		if (produtoJaExiste != -1){
+		if (produtoJaExiste == -1){
 			produtos.add(produto);
 			salvarArquivo();
 		} else{
