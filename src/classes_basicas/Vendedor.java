@@ -7,6 +7,7 @@ public class Vendedor {
 	private String nome;
 	private Time dataNascimento;
 	private Contato contato;
+	private String cpf;
 	private ArrayList<Produto> produtos;
 	private int xp;
 	private String nomeUsuario;
@@ -35,6 +36,12 @@ public class Vendedor {
 	}
 	public void setContato(Contato contato) {
 		this.contato = contato;
+	}	
+	public String getCpf() {
+		return cpf;
+	}
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 	public ArrayList<Produto> getProdutos() {
 		return produtos;
