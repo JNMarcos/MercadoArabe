@@ -1,4 +1,4 @@
-package classes_basicas;
+package negocio.classes_basicas;
 
 public class Contato {
 

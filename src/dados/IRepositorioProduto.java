@@ -2,9 +2,9 @@ package dados;
 
 import java.util.ArrayList;
 
-import classes_basicas.Produto;
-import exceptions.NaoEncontradoProdutoException;
-import exceptions.ProdutoJaCadastradoException;
+import negocio.classes_basicas.Produto;
+import negocio.exceptions.NaoEncontradoProdutoException;
+import negocio.exceptions.ProdutoJaCadastradoException;
 
 public interface IRepositorioProduto {
 	public abstract void criarListaProdutos();

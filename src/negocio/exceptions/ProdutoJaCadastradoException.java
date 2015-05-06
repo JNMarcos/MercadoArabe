@@ -1,4 +1,4 @@
-package exceptions;
+package negocio.exceptions;
 
 public class ProdutoJaCadastradoException extends Exception{
 	public String toString(){

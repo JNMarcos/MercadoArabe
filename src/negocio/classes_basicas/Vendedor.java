@@ -1,4 +1,4 @@
-package classes_basicas;
+package negocio.classes_basicas;
 
 import java.sql.Time;
 import java.util.ArrayList;

@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import negocio.CadastroVendedor;
-import classes_basicas.Vendedor;
-import exceptions.CpfJaCadastradoException;
-import exceptions.NaoEncontradoVendedorException;
-import exceptions.NomeUsuarioJaCadastradoException;
+import negocio.classes_basicas.Vendedor;
+import negocio.exceptions.CpfJaCadastradoException;
+import negocio.exceptions.NaoEncontradoVendedorException;
+import negocio.exceptions.NomeUsuarioJaCadastradoException;
 
 public class RepositorioVendedor implements IRepositorioVendedor{
 

@@ -1,4 +1,4 @@
-package exceptions;
+package negocio.exceptions;
 
 public class NomeUsuarioJaCadastradoException extends Exception{
 	

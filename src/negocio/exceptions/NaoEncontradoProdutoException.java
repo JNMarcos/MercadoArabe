@@ -1,4 +1,4 @@
-package exceptions;
+package negocio.exceptions;
 
 public class NaoEncontradoProdutoException extends Exception{
 	public String toString(){

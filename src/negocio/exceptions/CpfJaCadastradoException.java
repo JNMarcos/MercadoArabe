@@ -1,4 +1,4 @@
-package exceptions;
+package negocio.exceptions;
 
 public class CpfJaCadastradoException extends Exception {
 	public String toString(){

@@ -9,12 +9,11 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
-import classes_basicas.Produto;
-import exceptions.NaoEncontradoProdutoException;
-import exceptions.ProdutoJaCadastradoException;
 import negocio.CadastroProduto;
+import negocio.classes_basicas.Produto;
+import negocio.exceptions.NaoEncontradoProdutoException;
+import negocio.exceptions.ProdutoJaCadastradoException;
 
 public class RepositorioProduto implements IRepositorioProduto, Serializable{
 
