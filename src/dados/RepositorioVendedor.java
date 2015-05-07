@@ -143,19 +143,19 @@ public class RepositorioVendedor implements IRepositorioVendedor{
 			criarListaVendedores();
 		}
 		int cpfJaExiste = procurarPorVendedor(vendedor.getCpf());
-		boolean nomeUsuarioJaExiste = procurarPorNomeUsuario(vendedor.getNomeUsuario());
-		if (cpfJaExiste == -1 && nomeUsuarioJaExiste == false){//se for -1 e false quer dizer que não foi encontrado, logo é para se cadastrar
+		int nomeUsuarioJaExiste = procurarPorNomeUsuario(vendedor.getNomeUsuario());
+		if (cpfJaExiste == -1 && nomeUsuarioJaExiste == -1){//se for -1 e false quer dizer que não foi encontrado, logo é para se cadastrar
 			vendedores.add(vendedor);
 			salvarArquivo();
 		} else if (cpfJaExiste != -1){
 			throw new CpfJaCadastradoException();
-		} else if (nomeUsuarioJaExiste == true){
+		} else if (nomeUsuarioJaExiste != -1){
 			throw new NomeUsuarioJaCadastradoException();
 		}
 
 	}
 
-	public void descadastrarVendedor(String cpfVendedor) throws NaoEncontradoVendedorException{
+	public void removerVendedor(String cpfVendedor) throws NaoEncontradoVendedorException{
 		int vendedorARemover = procurarPorVendedor(cpfVendedor);
 		if (vendedorARemover != -1){//se diferente de -1 é pq encontrou o objeto a ser removido
 			vendedores.remove(vendedorARemover);

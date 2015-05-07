@@ -23,7 +23,7 @@ public interface IRepositorioVendedor {
 
 	public abstract void cadastrarVendedor(Vendedor vendedor) throws CpfJaCadastradoException, NomeUsuarioJaCadastradoException;
 
-	public abstract void descadastrarVendedor(String cpfVendedor) throws NaoEncontradoVendedorException;
+	public abstract void removerVendedor(String cpfVendedor) throws NaoEncontradoVendedorException;
 
 	public abstract Vendedor mostrarVendedor(String cpfVendedor);
 
