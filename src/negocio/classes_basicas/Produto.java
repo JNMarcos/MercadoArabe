@@ -6,6 +6,7 @@ public class Produto {
 	private String nome;
 	private String descricao;
 	private String categoria;
+	//adicionar um atributo para imagem do produto, senão pôr uma imagem padrão
 	private int quantidade;
 	private double preco;
 	private boolean estado;
