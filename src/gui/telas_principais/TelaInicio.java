@@ -1,4 +1,4 @@
-package telas_principais;
+package gui.telas_principais;
 
 public class TelaInicio {
 	
