@@ -1,5 +1,7 @@
 package gui.telas_exibir_info;
 
-public class TelaExibirInfoVendedor {
+import javax.swing.JFrame;
+
+public class TelaExibirInfoVendedor extends JFrame{
 
 }

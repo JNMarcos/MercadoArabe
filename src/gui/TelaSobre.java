@@ -1,5 +1,7 @@
 package gui;
 
-public class TelaSobre {
+import javax.swing.JFrame;
+
+public class TelaSobre extends JFrame{
 
 }

@@ -1,5 +1,7 @@
 package gui.telas_cadastro;
 
-public class TelaCadastroProduto {
+import javax.swing.JFrame;
+
+public class TelaCadastroProduto extends JFrame{
 
 }

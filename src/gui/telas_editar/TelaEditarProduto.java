@@ -1,5 +1,7 @@
 package gui.telas_editar;
 
-public class TelaEditarProduto {
+import javax.swing.JFrame;
+
+public class TelaEditarProduto extends JFrame{
 
 }

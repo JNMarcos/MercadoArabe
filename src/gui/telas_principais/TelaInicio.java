@@ -1,6 +1,8 @@
 package gui.telas_principais;
 
-public class TelaInicio {
+import javax.swing.JFrame;
+
+public class TelaInicio extends JFrame {
 	
 	public static void main(String[] args){
 		

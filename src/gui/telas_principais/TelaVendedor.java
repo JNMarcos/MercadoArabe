@@ -1,5 +1,7 @@
 package gui.telas_principais;
 
-public class TelaVendedor {
+import javax.swing.JFrame;
+
+public class TelaVendedor extends JFrame{
 
 }
