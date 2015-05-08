@@ -25,7 +25,7 @@ public interface IRepositorioVendedor {
 
 	public abstract void removerVendedor(String cpfVendedor) throws NaoEncontradoVendedorException;
 
-	public abstract Vendedor mostrarVendedor(String cpfVendedor);
+	public abstract Vendedor exibirInfoVendedor(String cpfVendedor);
 
 	public abstract Vendedor verificarLogin(String nomeUsuario, String senha) throws NaoEncontradoVendedorException;
 

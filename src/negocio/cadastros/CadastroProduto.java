@@ -2,34 +2,39 @@ package negocio.cadastros;
 
 import java.util.ArrayList;
 
+import dados.IRepositorioProduto;
+import dados.RepositorioProduto;
 import negocio.classes_basicas.Produto;
 import negocio.classes_basicas.Vendedor;
+import negocio.exceptions.NaoEncontradoProdutoException;
+import negocio.exceptions.ProdutoJaCadastradoException;
 
 public class CadastroProduto {
+	private IRepositorioProduto repositorio;
 
-	public void cadastrarProduto(Produto produto) {
-		// TODO Auto-generated method stub
-		
+	public CadastroProduto(){
+		this.repositorio = RepositorioProduto.getInstancia();	
 	}
 
-	public void removerProduto(String nome) {
-		// TODO Auto-generated method stub
-		
+	public void cadastrarProduto(Produto produto) throws ProdutoJaCadastradoException {
+		repositorio.cadastrarProduto(produto);
+	}
+
+	public void removerProduto(String nomeProduto) throws NaoEncontradoProdutoException {
+		repositorio.removerProduto(nomeProduto);
 	}
 
 	public void salvarProduto() {
-		// TODO Auto-generated method stub
-		
+		RepositorioProduto.salvarArquivo();
 	}
 
 	public ArrayList<Produto> getProdutos() {
 		// TODO Auto-generated method stub
-		return null;
+		return repositorio.getProdutos();
 	}
 
-	public Vendedor exibirInfoProduto(String nome) {
-		// TODO Auto-generated method stub
-		return null;
+	public Produto exibirInfoProduto(String nomeProduto) {
+		return repositorio.exibirInfoProduto(nomeProduto);
 	}
 
 }

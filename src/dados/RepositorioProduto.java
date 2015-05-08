@@ -133,7 +133,7 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable{
 		}
 	}
 
-	public Produto mostrarProduto(String nomeProduto){
+	public Produto exibirInfoProduto(String nomeProduto){
 		int produtoASerMostrado = procurarPorProduto(nomeProduto);
 		return produtos.get(produtoASerMostrado);
 	}

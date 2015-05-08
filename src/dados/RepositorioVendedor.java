@@ -165,7 +165,7 @@ public class RepositorioVendedor implements IRepositorioVendedor{
 		}
 	}
 
-	public Vendedor mostrarVendedor(String cpfVendedor){
+	public Vendedor exibirInfoVendedor(String cpfVendedor){
 		int vendedorASerMostrado= procurarPorVendedor(cpfVendedor);
 		return vendedores.get(vendedorASerMostrado);
 	}

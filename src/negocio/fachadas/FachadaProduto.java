@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import negocio.cadastros.CadastroProduto;
 import negocio.classes_basicas.Produto;
 import negocio.classes_basicas.Vendedor;
+import negocio.exceptions.NaoEncontradoProdutoException;
 import negocio.exceptions.ProdutoJaCadastradoException;
 
 public class FachadaProduto {
@@ -18,8 +19,8 @@ public class FachadaProduto {
 		cadastroProduto.cadastrarProduto(produto);
 	}
 
-	public void removerProduto(String nome) {
-		cadastroProduto.removerProduto(nome);
+	public void removerProduto(String nomeProduto) throws NaoEncontradoProdutoException {
+		cadastroProduto.removerProduto(nomeProduto);
 	}
 
 	public void salvarProduto() {
@@ -30,7 +31,7 @@ public class FachadaProduto {
 		return cadastroProduto.getProdutos();
 	}
 
-	public Vendedor exibirInfoProduto(String nome) {
-		return cadastroProduto.exibirInfoProduto(nome);
+	public Produto exibirInfoProduto(String nomeProduto) {
+		return cadastroProduto.exibirInfoProduto(nomeProduto);
 	}
 }

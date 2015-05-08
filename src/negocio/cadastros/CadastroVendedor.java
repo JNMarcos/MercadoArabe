@@ -2,38 +2,46 @@ package negocio.cadastros;
 
 import java.util.ArrayList;
 
+import dados.IRepositorioVendedor;
+import dados.RepositorioVendedor;
 import negocio.classes_basicas.Vendedor;
+import negocio.exceptions.CpfJaCadastradoException;
+import negocio.exceptions.NaoEncontradoVendedorException;
+import negocio.exceptions.NomeUsuarioJaCadastradoException;
 
 public class CadastroVendedor {
 
-	public void cadastrarVendedor(Vendedor vendedor) {
-		// TODO Auto-generated method stub
+	private IRepositorioVendedor repositorio;
+
+	public CadastroVendedor(){
+		this.repositorio = RepositorioVendedor.getInstancia();
+	}
+
+	public void cadastrarVendedor(Vendedor vendedor) throws CpfJaCadastradoException, NomeUsuarioJaCadastradoException {
+		repositorio.cadastrarVendedor(vendedor);
 
 	}
 
-	public void removerVendedor(String cpf) {
-		// TODO Auto-generated method stub
+	public void removerVendedor(String cpf) throws NaoEncontradoVendedorException {
+		repositorio.removerVendedor(cpf);
 
 	}
 
-	public void salvarProduto() {
-		// TODO Auto-generated method stub
+	public void salvarVendedor() {
+		RepositorioVendedor.salvarArquivo();
 
 	}
-	
+
 	public ArrayList<Vendedor> getVendedores() {
-		// TODO Auto-generated method stub
-		return null;
+		return repositorio.getVendedores();
 	}
 
 	public Vendedor exibirInfoVendedor(String cpf) {
-		// TODO Auto-generated method stub
-		return null;
+		return repositorio.exibirInfoVendedor(cpf);
 	}
 
-	public Vendedor verificarLogin(String nomeUsuario, String senha) {
-		// TODO Auto-generated method stub
-		return null;
+	public Vendedor verificarLogin(String nomeUsuario, String senha) throws NaoEncontradoVendedorException {
+		return repositorio.verificarLogin(nomeUsuario, senha);
 	}
 
 

@@ -19,12 +19,12 @@ public class FachadaVendedor {
 		cadastroVendedor.cadastrarVendedor(vendedor);
 	}
 
-	public void removerVendedor(String cpf) {
+	public void removerVendedor(String cpf) throws NaoEncontradoVendedorException {
 		cadastroVendedor.removerVendedor(cpf);
 	}
 
 	public void salvarVendedor() {
-		cadastroVendedor.salvarProduto();
+		cadastroVendedor.salvarVendedor();
 	}
 
 	public ArrayList<Vendedor> retornarListaVendedores() {

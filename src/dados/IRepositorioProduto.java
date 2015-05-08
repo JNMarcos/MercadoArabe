@@ -19,5 +19,5 @@ public interface IRepositorioProduto {
 	
 	public abstract void removerProduto(String nomeProduto) throws NaoEncontradoProdutoException;
 	
-	public abstract Produto mostrarProduto(String nomeProduto);	
+	public abstract Produto exibirInfoProduto(String nomeProduto);	
 }
