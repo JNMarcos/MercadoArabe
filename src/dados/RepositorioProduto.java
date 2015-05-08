@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import negocio.CadastroProduto;
+import cadastros.CadastroProduto;
 import negocio.classes_basicas.Produto;
 import negocio.exceptions.NaoEncontradoProdutoException;
 import negocio.exceptions.ProdutoJaCadastradoException;
