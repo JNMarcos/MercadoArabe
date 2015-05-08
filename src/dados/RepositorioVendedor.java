@@ -9,7 +9,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import cadastros.CadastroVendedor;
+import negocio.cadastros.CadastroVendedor;
 import negocio.classes_basicas.Vendedor;
 import negocio.exceptions.CpfJaCadastradoException;
 import negocio.exceptions.NaoEncontradoVendedorException;

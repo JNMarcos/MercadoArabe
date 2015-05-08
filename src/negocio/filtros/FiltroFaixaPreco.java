@@ -1,4 +1,4 @@
-package filtros;
+package negocio.filtros;
 
 public class FiltroFaixaPreco {
 

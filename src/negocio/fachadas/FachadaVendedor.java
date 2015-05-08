@@ -1,8 +1,8 @@
-package fachadas;
+package negocio.fachadas;
 
 import java.util.ArrayList;
 
-import cadastros.CadastroVendedor;
+import negocio.cadastros.CadastroVendedor;
 import negocio.classes_basicas.Vendedor;
 import negocio.exceptions.CpfJaCadastradoException;
 import negocio.exceptions.NaoEncontradoVendedorException;

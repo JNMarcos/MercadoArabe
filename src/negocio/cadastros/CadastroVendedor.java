@@ -1,4 +1,4 @@
-package cadastros;
+package negocio.cadastros;
 
 import java.util.ArrayList;
 
