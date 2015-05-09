@@ -1,8 +1,6 @@
 package negocio.cadastros;
 
 import java.util.ArrayList;
-import java.util.Scanner;
-
 import dados.IRepositorioVendedor;
 import dados.RepositorioVendedor;
 import negocio.classes_basicas.Vendedor;

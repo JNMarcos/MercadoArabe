@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import dados.IRepositorioProduto;
 import dados.RepositorioProduto;
 import negocio.classes_basicas.Produto;
-import negocio.classes_basicas.Vendedor;
 import negocio.exceptions.NaoEncontradoProdutoException;
 import negocio.exceptions.ProdutoJaCadastradoException;
 
