@@ -1,6 +1,7 @@
 package negocio.cadastros;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import dados.IRepositorioVendedor;
 import dados.RepositorioVendedor;
@@ -43,7 +44,6 @@ public class CadastroVendedor {
 	public Vendedor verificarLogin(String nomeUsuario, String senha) throws NaoEncontradoVendedorException {
 		return repositorio.verificarLogin(nomeUsuario, senha);
 	}
-
 
 
 }
