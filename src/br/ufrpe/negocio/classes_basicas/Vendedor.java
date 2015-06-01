@@ -1,9 +1,10 @@
 package br.ufrpe.negocio.classes_basicas;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.ArrayList;
 
-public class Vendedor {
+public class Vendedor implements Comparable<Vendedor>, Serializable{
 	private String nome;
 	private Time dataNascimento;
 	private Contato contato;
@@ -66,6 +67,42 @@ public class Vendedor {
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+		result = prime * result	+ ((nomeUsuario == null) ? 0 : nomeUsuario.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Vendedor))
+			return false;
+		Vendedor other = (Vendedor) obj;
+		if (cpf == null) {
+			if (other.cpf != null)
+				return false;
+		} else if (!cpf.equals(other.cpf))
+			return false;
+		return true;
+	}
+
+	public int compareTo(Vendedor vendedor) {
+		return this.getNome().compareToIgnoreCase(vendedor.getNome());
 	}
 
 }
