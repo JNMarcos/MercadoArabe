@@ -11,6 +11,7 @@ import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoProdutoException;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoVendedorException;
 import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioJaCadastradoException;
 import br.ufrpe.negocio.exceptions_negocio.ProdutoJaCadastradoException;
+import br.ufrpe.negocio.exceptions_negocio.SenhaIncorretaException;
 
 public class Fachada {
 	private CadastroProduto cadastroProduto = new CadastroProduto();
@@ -61,7 +62,8 @@ public class Fachada {
 		return cadastroVendedor.exibirInfoVendedor(cpf);
 	}
 
-	public Vendedor verificarLogin(String nomeUsuario, String senha) throws NaoEncontradoVendedorException {
+	public Vendedor verificarLogin(String nomeUsuario, String senha) 
+			throws NaoEncontradoVendedorException, SenhaIncorretaException {
 		return cadastroVendedor.verificarLogin(nomeUsuario, senha);
 	}
 

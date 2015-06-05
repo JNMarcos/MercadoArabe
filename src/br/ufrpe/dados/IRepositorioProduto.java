@@ -13,11 +13,15 @@ public interface IRepositorioProduto {
 
 	public abstract void setProdutos(ArrayList<Produto> produtos);
 
-	public abstract int procurarPorProduto(String nomeProduto);
+	public abstract int retornarIndiceProduto(String nomeProduto);
 
 	public abstract void cadastrarProduto(Produto produto) throws ProdutoJaCadastradoException;
 	
 	public abstract void removerProduto(String nomeProduto) throws NaoEncontradoProdutoException;
 	
-	public abstract Produto exibirInfoProduto(String nomeProduto);	
+	public abstract Produto exibirInfoProduto(String nomeProduto);
+	
+	public abstract ArrayList<Produto> procurarProdutoPorNome(String nomeProduto) throws NaoEncontradoProdutoException;
+	
+	public abstract ArrayList<Produto> procurarProdutoPorCategoria(String categoriaProduto) throws NaoEncontradoProdutoException;
 }

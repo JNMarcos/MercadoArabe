@@ -2,11 +2,12 @@ package br.ufrpe.negocio.classes_basicas;
 
 import java.io.Serializable;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Vendedor implements Comparable<Vendedor>, Serializable{
 	private String nome;
-	private Time dataNascimento;
+	private LocalDate dataNascimento;
 	private Contato contato;
 	private String cpf;
 	private ArrayList<Produto> produtos;
@@ -22,6 +23,16 @@ public class Vendedor implements Comparable<Vendedor>, Serializable{
 		this.nome = nome;
 	}
 
+	//põe nomes no formato "Pablo Alexandre do Arrocha" (primeiras letras de cada palavra em maiúscula e sem espaço no fim dos nomes)
+	public void porNomesNoPadrao(String nome){
+		nome = nome.trim();
+		nome = nome.toLowerCase();
+		Character.toUpperCase(nome.charAt(0));
+		for (int i = 1; i < nome.length(); i++){
+			if(nome.charAt(i) == ' ')
+				Character.toUpperCase(nome.charAt(i+1));
+			}
+		}			
 	public String getNomeUsuario() {
 		return nomeUsuario;
 	}
@@ -30,11 +41,12 @@ public class Vendedor implements Comparable<Vendedor>, Serializable{
 		this.nomeUsuario = nomeUsuario;
 	}
 
-	public Time getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Time dataNascimento) {
+	public void setDataNascimento(int dia, int mes, int ano) {
+		LocalDate dataNascimento = LocalDate.of(ano, mes, dia);
 		this.dataNascimento = dataNascimento;
 	}
 

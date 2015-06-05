@@ -96,7 +96,7 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable{
 	// método será usado tb. para remover, que precisa saber o índice de remoção
 	//podemos pensar, talvez numa alternativa melhor
 
-	public int procurarPorProduto(String nomeProduto){
+	public int retornarIndiceProduto(String nomeProduto){
 		int i = 0;
 		int encontrou = -1; //pq não há índice negativo
 		if (produtos != null) {
@@ -111,31 +111,65 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable{
 	}
 
 	public void cadastrarProduto(Produto produto) throws ProdutoJaCadastradoException{
-		if (produtos == null){
+		if (this.produtos == null){
 			criarListaProdutos();
 		}
-		int produtoJaExiste = procurarPorProduto(produto.getNome());
-		if (produtoJaExiste == -1){
-			produtos.add(produto);
-			salvarArquivo();
+		if (produto == null){
+			throw new NullPointerException();
 		} else{
-			throw new ProdutoJaCadastradoException();
+			int produtoJaExiste = retornarIndiceProduto(produto.getNome());
+			if (produtoJaExiste == -1){
+				produtos.add(produto);
+				salvarArquivo();
+			} else{
+				throw new ProdutoJaCadastradoException();//acho que está errado
+			}
 		}
 
 	}
 
 	public void removerProduto(String nomeProduto) throws NaoEncontradoProdutoException{
-		int produtoRemovido = procurarPorProduto(nomeProduto);
-		if (produtoRemovido != -1){
-			produtos.remove(produtoRemovido);
-			salvarArquivo();
+		if (nomeProduto != null){
+			int produtoRemovido = retornarIndiceProduto(nomeProduto);
+			if (produtoRemovido != -1){
+				produtos.remove(produtoRemovido);
+				salvarArquivo();
+			} else{
+				throw new NaoEncontradoProdutoException();;//acho que está errado
+			}
 		} else{
-			throw new NaoEncontradoProdutoException();
+			throw new NullPointerException();
 		}
 	}
 
+	public ArrayList<Produto> procurarProdutoPorNome(String nomeProduto) throws NaoEncontradoProdutoException{
+		if (!nomeProduto.equals("") && !nomeProduto.equals(" ")){
+			int i = 0;
+			ArrayList<Produto> produtos = new ArrayList<Produto>();
+			for (Produto produto : this.produtos.get(i)){//terminar
+				if (produto.getNome().equals(nomeProduto)){
+					produtos.add(produto);
+				}
+			}
+
+		}
+		return 	
+	}
+
 	public Produto exibirInfoProduto(String nomeProduto){
-		int produtoASerMostrado = procurarPorProduto(nomeProduto);
+		int produtoASerMostrado = retornarIndiceProduto(nomeProduto);
 		return produtos.get(produtoASerMostrado);
+	}
+	
+	//TERMINAR AÍ
+	
+	public boolean hasNext(){
+		for (int i = 0; i < produtos.size(); i++)
+		if ()
+		return ;
+	}
+	
+	public Produto next(){
+		
 	}
 }

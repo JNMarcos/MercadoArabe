@@ -2,8 +2,9 @@ package br.ufrpe.negocio.classes_basicas;
 
 import java.io.Serializable;
 import java.sql.Time;
+import java.util.Iterator;
 
-public class Produto implements Comparable<Produto>, Serializable{
+public class Produto implements Comparable<Produto>, Serializable, Iterator<Produto>{
 	private String nome;
 	private String descricao;
 	private String categoria;
@@ -12,6 +13,8 @@ public class Produto implements Comparable<Produto>, Serializable{
 	private double preco;
 	private boolean estado;
 	private Time tempoVenda;
+	
+	private final static int NUMERO_MAXIMO_ITENS_POR_PRODUTO = 3;
 
 	public String getNome() {
 		return nome;
@@ -35,7 +38,14 @@ public class Produto implements Comparable<Produto>, Serializable{
 		return quantidade;
 	}
 	public void setQuantidade(int quantidade) {
+		if (quantidade <= NUMERO_MAXIMO_ITENS_POR_PRODUTO){
 		this.quantidade = quantidade;
+		}
+	}
+	//indica quantos itens faltam a serem vendidos
+	public void itensNoEstoque(){
+		if(this.quantidade > 0)
+		this.quantidade--;
 	}
 	public double getPreco() {
 		return preco;
@@ -127,5 +137,7 @@ public class Produto implements Comparable<Produto>, Serializable{
         return this.getNome().compareToIgnoreCase(produto.getNome());
         
     }
+	
+	
 
 }
