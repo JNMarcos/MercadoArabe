@@ -8,6 +8,7 @@ import br.ufrpe.negocio.classes_basicas.Vendedor;
 import br.ufrpe.negocio.exceptions_negocio.CpfJaCadastradoException;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoVendedorException;
 import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioJaCadastradoException;
+import br.ufrpe.negocio.exceptions_negocio.SenhaIncorretaException;
 
 public class CadastroVendedor {
 
@@ -40,7 +41,7 @@ public class CadastroVendedor {
 		return repositorio.exibirInfoVendedor(cpf);
 	}
 
-	public Vendedor verificarLogin(String nomeUsuario, String senha) throws NaoEncontradoVendedorException {
+	public Vendedor verificarLogin(String nomeUsuario, String senha) throws NaoEncontradoVendedorException, SenhaIncorretaException {
 		return repositorio.verificarLogin(nomeUsuario, senha);
 	}
 

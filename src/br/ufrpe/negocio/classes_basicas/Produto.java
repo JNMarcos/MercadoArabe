@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.sql.Time;
 import java.util.Iterator;
 
-public class Produto implements Comparable<Produto>, Serializable, Iterator<Produto>{
+import br.ufrpe.negocio.exceptions_negocio.QuantidadeMaximaItensUltrapassadaException;
+
+public class Produto implements Comparable<Produto>, Serializable{
 	private String nome;
 	private String descricao;
 	private String categoria;
@@ -37,14 +39,14 @@ public class Produto implements Comparable<Produto>, Serializable, Iterator<Prod
 	public int getQuantidade() {
 		return quantidade;
 	}
-	public void setQuantidade(int quantidade) {
-		if (quantidade <= NUMERO_MAXIMO_ITENS_POR_PRODUTO){
+	public void setQuantidade(int quantidade) throws QuantidadeMaximaItensUltrapassadaException {
+		if (quantidade > 0 && quantidade <= NUMERO_MAXIMO_ITENS_POR_PRODUTO){
 		this.quantidade = quantidade;
-		}
+		} else throw new QuantidadeMaximaItensUltrapassadaException();
 	}
 	//indica quantos itens faltam a serem vendidos
 	public void itensNoEstoque(){
-		if(this.quantidade > 0)
+		if (this.quantidade > 0)
 		this.quantidade--;
 	}
 	public double getPreco() {

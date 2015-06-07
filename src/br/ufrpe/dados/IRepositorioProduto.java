@@ -11,8 +11,6 @@ public interface IRepositorioProduto {
 
 	public abstract ArrayList<Produto> getProdutos();
 
-	public abstract void setProdutos(ArrayList<Produto> produtos);
-
 	public abstract int retornarIndiceProduto(String nomeProduto);
 
 	public abstract void cadastrarProduto(Produto produto) throws ProdutoJaCadastradoException;

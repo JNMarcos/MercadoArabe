@@ -14,6 +14,7 @@ import br.ufrpe.negocio.classes_basicas.Vendedor;
 import br.ufrpe.negocio.exceptions_negocio.CpfJaCadastradoException;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoVendedorException;
 import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioJaCadastradoException;
+import br.ufrpe.negocio.exceptions_negocio.SenhaIncorretaException;
 
 public class RepositorioVendedor implements IRepositorioVendedor{
 
@@ -87,15 +88,11 @@ public class RepositorioVendedor implements IRepositorioVendedor{
 		return vendedores;
 	}
 
-	public void setVendedores(ArrayList<Vendedor> vendedores) {
-		this.vendedores = vendedores;
-	}
-
 	//o motivo de procurarPorProduto retornar o tipo int e não boolean é pq o
 	// método será usado tb. para remover, que precisa saber o índice de remoção
 	//podemos pensar, talvez numa alternativa melhor
 
-	public int procurarPorVendedor(String cpfVendedor){
+	public int retornarIndiceVendedorPorCpf(String cpfVendedor){
 		int i = 0;
 		int encontrou = -1; //pq não há índice negativo
 		if (vendedores != null) {
@@ -109,7 +106,7 @@ public class RepositorioVendedor implements IRepositorioVendedor{
 		return encontrou;		
 	}
 
-	public int procurarPorNomeUsuario(String nomeUsuario) {
+	public int retornarIndiceVendedorPorNomeUsuario(String nomeUsuario) {
 		int i = 0;
 		int encontrou = -1; //pq não há índice negativo
 		if (vendedores != null) {
@@ -123,12 +120,13 @@ public class RepositorioVendedor implements IRepositorioVendedor{
 		return encontrou;	
 	}
 
-	public int procurarPorSenha(String senha) {
+	public int retornarIndicePorSenha(String senha) {
 		int i = 0;
-		int encontrou = -2;//o motivo de usar -2 é pq depois se comparará com procurarPorNomeUsuario logo após, veja login
+		int encontrou = -2;//o motivo de usar -2 é pq depois se comparará com procurarPorNomeUsuario 
+		//logo após. veja login
 
 		if (vendedores != null) { 
-			while(i < vendedores.size() && encontrou == -1){
+			while(i < vendedores.size() && encontrou == -2){
 				if (senha.equals(vendedores.get(i).getSenha())){
 					encontrou = i;
 				}
@@ -142,8 +140,8 @@ public class RepositorioVendedor implements IRepositorioVendedor{
 		if (vendedores == null){
 			criarListaVendedores();
 		}
-		int cpfJaExiste = procurarPorVendedor(vendedor.getCpf());
-		int nomeUsuarioJaExiste = procurarPorNomeUsuario(vendedor.getNomeUsuario());
+		int cpfJaExiste = retornarIndiceVendedorPorCpf(vendedor.getCpf());
+		int nomeUsuarioJaExiste = retornarIndiceVendedorPorNomeUsuario(vendedor.getNomeUsuario());
 		if (cpfJaExiste == -1 && nomeUsuarioJaExiste == -1){//se for -1 e false quer dizer que não foi encontrado, logo é para se cadastrar
 			vendedores.add(vendedor);
 			salvarArquivo();
@@ -156,7 +154,7 @@ public class RepositorioVendedor implements IRepositorioVendedor{
 	}
 
 	public void removerVendedor(String cpfVendedor) throws NaoEncontradoVendedorException{
-		int vendedorARemover = procurarPorVendedor(cpfVendedor);
+		int vendedorARemover = retornarIndiceVendedorPorCpf(cpfVendedor);
 		if (vendedorARemover != -1){//se diferente de -1 é pq encontrou o objeto a ser removido
 			vendedores.remove(vendedorARemover);
 			salvarArquivo();
@@ -166,23 +164,26 @@ public class RepositorioVendedor implements IRepositorioVendedor{
 	}
 
 	public Vendedor exibirInfoVendedor(String cpfVendedor){
-		int vendedorASerMostrado= procurarPorVendedor(cpfVendedor);
+		int vendedorASerMostrado= retornarIndiceVendedorPorCpf(cpfVendedor);
 		return vendedores.get(vendedorASerMostrado);
 	}
 
 
-	public Vendedor verificarLogin(String nomeUsuario, String senha) throws NaoEncontradoVendedorException {
-		int i = 0;
-		int indice = procurarPorSenha(senha);
+	public Vendedor verificarLogin(String nomeUsuario, String senha)
+					throws NaoEncontradoVendedorException, SenhaIncorretaException {
+		int indiceSenha = retornarIndicePorSenha(senha);
+		int indiceNomeUsuario = retornarIndiceVendedorPorNomeUsuario(nomeUsuario);
 		Vendedor vendedor = null;
 
 		try {
-				if (procurarPorNomeUsuario(nomeUsuario) == indice){
-					vendedor =  vendedores.get(indice);
-				} else throw new NaoEncontradoVendedorException();
+			if (indiceNomeUsuario != -1){//quer dizer que existe um vendedor com aquele nome, ou seja, 
+				//existe mas senha pode estar errada
+				if (indiceNomeUsuario == indiceSenha){
+					vendedor =  this.vendedores.get(indiceSenha);
+				} else throw new SenhaIncorretaException();
+			}
 		} catch (NullPointerException e1) {
-			throw new NaoEncontradoVendedorException();
-		}
+		} 
 		return vendedor;
 	} 
 

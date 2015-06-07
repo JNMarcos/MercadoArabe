@@ -6,6 +6,7 @@ import br.ufrpe.negocio.classes_basicas.Vendedor;
 import br.ufrpe.negocio.exceptions_negocio.CpfJaCadastradoException;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoVendedorException;
 import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioJaCadastradoException;
+import br.ufrpe.negocio.exceptions_negocio.SenhaIncorretaException;
 
 public interface IRepositorioVendedor {
 	
@@ -13,13 +14,11 @@ public interface IRepositorioVendedor {
 
 	public abstract ArrayList<Vendedor> getVendedores();
 
-	public abstract void setVendedores(ArrayList<Vendedor> vendedores);
+	public abstract int retornarIndiceVendedorPorCpf(String cpfVendedor);
 
-	public abstract int procurarPorVendedor(String cpfVendedor);
+	public abstract int retornarIndiceVendedorPorNomeUsuario(String nomeUsuario);
 
-	public abstract int procurarPorNomeUsuario(String nomeUsuario);
-
-	public abstract int procurarPorSenha(String senha);
+	public abstract int retornarIndicePorSenha(String senha);
 
 	public abstract void cadastrarVendedor(Vendedor vendedor) throws CpfJaCadastradoException, NomeUsuarioJaCadastradoException;
 
@@ -27,6 +26,6 @@ public interface IRepositorioVendedor {
 
 	public abstract Vendedor exibirInfoVendedor(String cpfVendedor);
 
-	public abstract Vendedor verificarLogin(String nomeUsuario, String senha) throws NaoEncontradoVendedorException;
+	public abstract Vendedor verificarLogin(String nomeUsuario, String senha) throws NaoEncontradoVendedorException, SenhaIncorretaException;
 
 }
