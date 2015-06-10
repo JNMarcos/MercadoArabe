@@ -15,7 +15,10 @@ import java.util.ListIterator;
 
 import br.ufrpe.negocio.cadastros.CadastroProduto;
 import br.ufrpe.negocio.classes_basicas.Produto;
+import br.ufrpe.negocio.classes_basicas.Vendedor;
+import br.ufrpe.negocio.exceptions_negocio.FaixaPrecoForaLimitesException;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoProdutoException;
+import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoVendedorException;
 import br.ufrpe.negocio.exceptions_negocio.ProdutoJaCadastradoException;
 
 public class RepositorioProduto implements IRepositorioProduto, Serializable, Iterator<Produto>{
@@ -86,28 +89,26 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable, It
 		produtos = new ArrayList<Produto>();
 	}
 
-	public ArrayList<Produto> getProdutos() {
+	public List<Produto> getProdutos() {
 		if(this.produtos!=null)
 			Collections.sort(produtos);
 		return produtos;
 	}
 
-	//o motivo de procurarPorProduto retornar o tipo int e não boolean é pq o
-	// método será usado tb. para remover, que precisa saber o índice de remoção
-	//podemos pensar, talvez numa alternativa melhor
-
-	public int retornarIndiceProduto(String nomeProduto){
-		int i = 0;
-		int encontrou = -1; //pq não há índice negativo
-		if (produtos != null) {
-			while(i < produtos.size() && encontrou == -1){
-				if (nomeProduto.equals(produtos.get(i).getNome())){
-					encontrou = i;
+	public boolean verificarNomeProdutoJaExiste(String nomeProduto){
+		boolean nomeProdutoJaExiste = false;
+		if (!nomeProduto.equals("") && !nomeProduto.equals(" ")){
+			Iterator<Produto> iVendedor = this.produtos.listIterator();
+			while(iVendedor.hasNext()){
+				if (iVendedor.next().getNome().equals(nomeProduto)){
+					nomeProdutoJaExiste = true;
+					zeraContadorPosicao();
+					break;
 				}
-				i++;
+				incrementaContadorPosicao();
 			}
 		}
-		return encontrou;		
+		return nomeProdutoJaExiste;
 	}
 
 	public void cadastrarProduto(Produto produto) throws ProdutoJaCadastradoException{
@@ -117,8 +118,8 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable, It
 		if (produto == null){
 			throw new NullPointerException();
 		} else{
-			int produtoJaExiste = retornarIndiceProduto(produto.getNome());
-			if (produtoJaExiste == -1){
+			boolean produtoJaExiste = verificarNomeProdutoJaExiste(produto.getNome());
+			if (produtoJaExiste == false){
 				produtos.add(produto);
 				salvarArquivo();
 			} else{
@@ -129,57 +130,90 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable, It
 	}
 
 	public void removerProduto(String nomeProduto) throws NaoEncontradoProdutoException{
-		if (nomeProduto != null){
-			int produtoRemovido = retornarIndiceProduto(nomeProduto);
-			if (produtoRemovido != -1){
-				produtos.remove(produtoRemovido);
-				salvarArquivo();
-			} else{
-				throw new NaoEncontradoProdutoException();//acho que está errado
+		boolean removeu = false;
+		if (!nomeProduto.equals("") && !nomeProduto.equals(" ")){
+			Iterator<Produto> iVendedor = this.produtos.listIterator();
+			while(iVendedor.hasNext()){
+				if (iVendedor.next().getNome().equals(nomeProduto)){
+					iVendedor.remove();
+					removeu = true;
+					zeraContadorPosicao();
+					salvarArquivo();
+					break;
+				}
+				incrementaContadorPosicao();
 			}
-		} else{
-			throw new NullPointerException();
+		}
+
+		if (removeu == false){
+			throw new NaoEncontradoProdutoException();
 		}
 	}
 
-	public ArrayList<Produto> procurarProdutoPorNome(String nomeProduto) throws NaoEncontradoProdutoException{
-		ArrayList<Produto> produtosEncontrados = null;
+	public List<Produto> procurarProdutoPorNome(String nomeProduto) throws NaoEncontradoProdutoException{
+		List<Produto> produtosEncontrados = null;
 		if (!nomeProduto.equals("") && !nomeProduto.equals(" ")){
-			int i = 0;
 			ListIterator<Produto> iProduto = this.produtos.listIterator();
 			produtosEncontrados = new ArrayList<Produto>();
 			while (iProduto.hasNext()){
 				if (iProduto.next().equals(nomeProduto)){
-					produtosEncontrados.add(this.produtos.get(posicao-1));
+					produtosEncontrados.add(this.produtos.get(posicao));
 				}
+				incrementaContadorPosicao();
 			}
 		}
 		return 	produtosEncontrados;//pode ser null
 	}
 
-	public ArrayList<Produto> procurarProdutoPorCategoria(
+	public List<Produto> procurarProdutoPorCategoria(
 			String categoriaProduto) throws NaoEncontradoProdutoException {
-		ArrayList<Produto> produtosEncontrados = null;
+		List<Produto> produtosEncontrados = null;
 		if (!categoriaProduto.equals("") && !categoriaProduto.equals(" ")){
 			ListIterator<Produto> iProduto = this.produtos.listIterator();
 			produtosEncontrados = new ArrayList<Produto>();
 			while (iProduto.hasNext()){
 				if (iProduto.next().equals(categoriaProduto)){
-					produtosEncontrados.add(this.produtos.get(posicao-1));
+					produtosEncontrados.add(this.produtos.get(posicao));
 				}
+				incrementaContadorPosicao();
 			}
 		}
 		return 	produtosEncontrados;//pode ser null
 	}
 
-	public Produto exibirInfoProduto(String nomeProduto){
-		int produtoASerMostrado = retornarIndiceProduto(nomeProduto);
-		return produtos.get(produtoASerMostrado);
-	}
+	public List<Produto> procurarProdutoPorFaixaPreco (double de, double ate)
+			throws NaoEncontradoProdutoException, FaixaPrecoForaLimitesException{
+		List<Produto> produtosEncontrados = null;
+		if (de > 0.0 && ate > 0.0 && de != ate && de < ate){
+			ListIterator<Produto> iProduto = this.produtos.listIterator();
+			produtosEncontrados = new ArrayList<Produto>();
+			while (iProduto.hasNext()){
+				if (iProduto.next().getPreco() >= de && iProduto.next().getPreco() <= ate){
+					produtosEncontrados.add(this.produtos.get(posicao));
+				}
+				incrementaContadorPosicao();
+			}
+		} else new FaixaPrecoForaLimitesException();
+		return 	produtosEncontrados;//pode ser null
+	} 
 
+	public Produto exibirInfoProduto(String nomeProduto){
+		Produto produto = null;
+		if (!nomeProduto.equals("") && !nomeProduto.equals(" ")){
+			Iterator<Produto> iProduto = this.produtos.listIterator();
+			while(iProduto.hasNext()){
+				if (iProduto.next().getNome().equals(nomeProduto)){
+					produto = iProduto.next();
+					zeraContadorPosicao();
+					break;
+				}
+				incrementaContadorPosicao();
+			}	
+		}
+		return produto;
+	}
 	public Produto next(){
 		Produto produto = this.produtos.get(posicao);
-		posicao++;
 		return produto;
 	}
 
@@ -192,7 +226,10 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable, It
 		return temProximo;
 	}
 
-	public void zeraContadorPosicao(){
+	public static void incrementaContadorPosicao(){
+		posicao++;
+	}
+	public static void zeraContadorPosicao(){
 		posicao = 0;
 	}
 }

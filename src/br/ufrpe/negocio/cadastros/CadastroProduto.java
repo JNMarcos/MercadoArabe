@@ -1,6 +1,6 @@
 package br.ufrpe.negocio.cadastros;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import br.ufrpe.dados.IRepositorioProduto;
 import br.ufrpe.dados.RepositorioProduto;
@@ -27,7 +27,7 @@ public class CadastroProduto {
 		RepositorioProduto.salvarArquivo();
 	}
 
-	public ArrayList<Produto> getProdutos() {
+	public List<Produto> getProdutos() {
 		// TODO Auto-generated method stub
 		return repositorio.getProdutos();
 	}

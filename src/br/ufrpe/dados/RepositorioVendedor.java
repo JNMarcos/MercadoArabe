@@ -6,18 +6,24 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 import br.ufrpe.negocio.cadastros.CadastroVendedor;
+import br.ufrpe.negocio.classes_basicas.Produto;
 import br.ufrpe.negocio.classes_basicas.Vendedor;
 import br.ufrpe.negocio.exceptions_negocio.CpfJaCadastradoException;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoVendedorException;
 import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioJaCadastradoException;
 import br.ufrpe.negocio.exceptions_negocio.SenhaIncorretaException;
 
-public class RepositorioVendedor implements IRepositorioVendedor{
+public class RepositorioVendedor implements IRepositorioVendedor, Serializable, Iterator<Vendedor>{
 
+	private static int posicao = 0;
 	ArrayList<Vendedor> vendedores;
 	public static CadastroVendedor cadastroVendedor = new CadastroVendedor();
 	private static RepositorioVendedor instancia;
@@ -82,111 +88,154 @@ public class RepositorioVendedor implements IRepositorioVendedor{
 		vendedores = new ArrayList<Vendedor>();
 	}
 
-	public ArrayList<Vendedor> getVendedores() {
+	public List<Vendedor> getVendedores() {
 		if(this.vendedores!=null)
 			Collections.sort(vendedores);
 		return vendedores;
 	}
 
-	//o motivo de procurarPorProduto retornar o tipo int e não boolean é pq o
-	// método será usado tb. para remover, que precisa saber o índice de remoção
-	//podemos pensar, talvez numa alternativa melhor
 
-	public int retornarIndiceVendedorPorCpf(String cpfVendedor){
-		int i = 0;
-		int encontrou = -1; //pq não há índice negativo
-		if (vendedores != null) {
-			while(i < vendedores.size() && encontrou == -1){
-				if (cpfVendedor.equals(vendedores.get(i).getCpf())){
-					encontrou = i;
+	public boolean verificarCpfJaExiste(String cpfVendedor){
+		boolean cpfJaExiste = false;
+		if (!cpfVendedor.equals("") && !cpfVendedor.equals(" ")){
+			ListIterator<Vendedor> iVendedor = this.vendedores.listIterator();
+			while(iVendedor.hasNext()){
+				if (iVendedor.next().getCpf().equals(cpfVendedor)){
+					cpfJaExiste = true;
+					zeraContadorPosicao();
+					break;
 				}
-				i++;
 			}
 		}
-		return encontrou;		
+		return cpfJaExiste;
 	}
 
-	public int retornarIndiceVendedorPorNomeUsuario(String nomeUsuario) {
-		int i = 0;
-		int encontrou = -1; //pq não há índice negativo
-		if (vendedores != null) {
-			while(i < vendedores.size() && encontrou == -1){
-				if (nomeUsuario.equals(vendedores.get(i).getNomeUsuario())){
-					encontrou = -1;
+	public boolean verificarNomeUsuarioJaExiste(String nomeUsuario){
+		boolean nomeUsuarioJaExiste = false;
+		if (!nomeUsuario.equals("") && !nomeUsuario.equals(" ")){
+			ListIterator<Vendedor> iVendedor = this.vendedores.listIterator();
+			while(iVendedor.hasNext()){
+				if (iVendedor.next().getNomeUsuario().equals(nomeUsuario)){
+					nomeUsuarioJaExiste = true;
+					zeraContadorPosicao();
+					break;
 				}
-				i++;
+				incrementaContadorPosicao();
 			}
 		}
-		return encontrou;	
+		return nomeUsuarioJaExiste;
 	}
 
-	public int retornarIndicePorSenha(String senha) {
-		int i = 0;
-		int encontrou = -2;//o motivo de usar -2 é pq depois se comparará com procurarPorNomeUsuario 
-		//logo após. veja login
-
-		if (vendedores != null) { 
-			while(i < vendedores.size() && encontrou == -2){
-				if (senha.equals(vendedores.get(i).getSenha())){
-					encontrou = i;
+	public boolean verificarSenha(String senha){
+		boolean senhaNoRepositorio = true;
+		if (!senha.equals("") && !senha.equals(" ")){
+			ListIterator<Vendedor> iVendedor = this.vendedores.listIterator();
+			while(iVendedor.hasNext()){
+				if (iVendedor.next().getSenha().equals(senhaNoRepositorio)){
+					senhaNoRepositorio = false;
+					zeraContadorPosicao();
+					break;
 				}
-				i++;
+				incrementaContadorPosicao();
 			}
 		}
-		return encontrou;
-	} 
+		return senhaNoRepositorio;
+	}
 
 	public void cadastrarVendedor(Vendedor vendedor) throws CpfJaCadastradoException, NomeUsuarioJaCadastradoException{
-		if (vendedores == null){
+		if (this.vendedores == null){
 			criarListaVendedores();
 		}
-		int cpfJaExiste = retornarIndiceVendedorPorCpf(vendedor.getCpf());
-		int nomeUsuarioJaExiste = retornarIndiceVendedorPorNomeUsuario(vendedor.getNomeUsuario());
-		if (cpfJaExiste == -1 && nomeUsuarioJaExiste == -1){//se for -1 e false quer dizer que não foi encontrado, logo é para se cadastrar
-			vendedores.add(vendedor);
-			salvarArquivo();
-		} else if (cpfJaExiste != -1){
-			throw new CpfJaCadastradoException();
-		} else if (nomeUsuarioJaExiste != -1){
-			throw new NomeUsuarioJaCadastradoException();
+		if (vendedor == null){
+			throw new NullPointerException();
+		} else{
+			boolean cpfJaExiste = verificarCpfJaExiste(vendedor.getCpf());
+			boolean nomeUsuarioJaExiste = verificarNomeUsuarioJaExiste(vendedor.getNomeUsuario());
+			if (cpfJaExiste == false && nomeUsuarioJaExiste == false){
+				this.vendedores.add(vendedor);
+				salvarArquivo();
+			} else if (cpfJaExiste == true){
+				throw new CpfJaCadastradoException();
+			} else if (nomeUsuarioJaExiste == true){
+				throw new NomeUsuarioJaCadastradoException();
+			}
 		}
-
 	}
 
 	public void removerVendedor(String cpfVendedor) throws NaoEncontradoVendedorException{
-		int vendedorARemover = retornarIndiceVendedorPorCpf(cpfVendedor);
-		if (vendedorARemover != -1){//se diferente de -1 é pq encontrou o objeto a ser removido
-			vendedores.remove(vendedorARemover);
-			salvarArquivo();
-		} else{
+		boolean removeu = false;
+		if (!cpfVendedor.equals("") && !cpfVendedor.equals(" ")){
+			ListIterator<Vendedor> iVendedor = this.vendedores.listIterator();
+			while(iVendedor.hasNext()){
+				if (iVendedor.next().getCpf().equals(cpfVendedor)){
+					iVendedor.remove();
+					removeu = true;
+					zeraContadorPosicao();
+					salvarArquivo();
+					break;
+				}
+				incrementaContadorPosicao();
+			}
+		}
+
+		if (removeu == false){
 			throw new NaoEncontradoVendedorException();
 		}
 	}
 
 	public Vendedor exibirInfoVendedor(String cpfVendedor){
-		int vendedorASerMostrado= retornarIndiceVendedorPorCpf(cpfVendedor);
-		return vendedores.get(vendedorASerMostrado);
+		Vendedor vendedor = null;
+		if (!cpfVendedor.equals("") && !cpfVendedor.equals(" ")){
+			Iterator<Vendedor> iVendedor = this.vendedores.listIterator();
+			while(iVendedor.hasNext()){
+				if (iVendedor.next().getCpf().equals(cpfVendedor)){
+					vendedor = iVendedor.next();
+					zeraContadorPosicao();
+					break;
+				}
+				incrementaContadorPosicao();
+			}	
+		}
+		return vendedor;
 	}
 
 
 	public Vendedor verificarLogin(String nomeUsuario, String senha)
-					throws NaoEncontradoVendedorException, SenhaIncorretaException {
-		int indiceSenha = retornarIndicePorSenha(senha);
-		int indiceNomeUsuario = retornarIndiceVendedorPorNomeUsuario(nomeUsuario);
+			throws NaoEncontradoVendedorException, SenhaIncorretaException {
 		Vendedor vendedor = null;
-
-		try {
-			if (indiceNomeUsuario != -1){//quer dizer que existe um vendedor com aquele nome, ou seja, 
-				//existe mas senha pode estar errada
-				if (indiceNomeUsuario == indiceSenha){
-					vendedor =  this.vendedores.get(indiceSenha);
-				} else throw new SenhaIncorretaException();
+		ListIterator<Vendedor> iVendedor = this.vendedores.listIterator();
+		while(iVendedor.hasNext()){
+			if (iVendedor.next().getNomeUsuario().equals(nomeUsuario) && iVendedor.next().getSenha().equals(senha)){
+				vendedor = iVendedor.next();
+				zeraContadorPosicao();
+				break;
 			}
-		} catch (NullPointerException e1) {
-		} 
+			incrementaContadorPosicao();
+		}
+
 		return vendedor;
-	} 
+	}
 
+	public Vendedor next(){
+		Vendedor vendedor = this.vendedores.get(posicao);
+		return vendedor;
+	}
 
+	public boolean hasNext(){
+		boolean temProximo = true;//posto true pois comumente será mais vezes true
+		if (posicao >= this.vendedores.size() || this.vendedores.get(posicao) == null) {
+			temProximo = false;
+			zeraContadorPosicao();
+		}
+		return temProximo;
+	}
+
+	public static void incrementaContadorPosicao(){
+		posicao++;
+	}
+
+	public static void zeraContadorPosicao(){
+		posicao = 0;
+	}
 }
 

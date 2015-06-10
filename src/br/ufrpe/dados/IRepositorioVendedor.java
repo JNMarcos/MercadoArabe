@@ -1,6 +1,6 @@
 package br.ufrpe.dados;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import br.ufrpe.negocio.classes_basicas.Vendedor;
 import br.ufrpe.negocio.exceptions_negocio.CpfJaCadastradoException;
@@ -12,13 +12,13 @@ public interface IRepositorioVendedor {
 	
 	public abstract void criarListaVendedores();
 
-	public abstract ArrayList<Vendedor> getVendedores();
-
-	public abstract int retornarIndiceVendedorPorCpf(String cpfVendedor);
-
-	public abstract int retornarIndiceVendedorPorNomeUsuario(String nomeUsuario);
-
-	public abstract int retornarIndicePorSenha(String senha);
+	public abstract List<Vendedor> getVendedores();
+	
+	public boolean verificarCpfJaExiste(String cpfVendedor);
+	
+	public boolean verificarNomeUsuarioJaExiste(String nomeUsuario);
+	
+	public boolean verificarSenha(String senha);
 
 	public abstract void cadastrarVendedor(Vendedor vendedor) throws CpfJaCadastradoException, NomeUsuarioJaCadastradoException;
 

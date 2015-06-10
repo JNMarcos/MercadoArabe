@@ -1,20 +1,24 @@
 package br.ufrpe.negocio.classes_basicas;
 
 import java.io.Serializable;
-import java.sql.Time;
-import java.util.Iterator;
-
+import java.time.LocalDate;
 import br.ufrpe.negocio.exceptions_negocio.QuantidadeMaximaItensUltrapassadaException;
 
 public class Produto implements Comparable<Produto>, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nome;
 	private String descricao;
 	private String categoria;
 	//adicionar um atributo para imagem do produto, senão pôr uma imagem padrão
 	private int quantidade;
+	private int itensNoEstoque;
 	private double preco;
 	private boolean estado;
-	private Time tempoVenda;
+	private LocalDate tempoCriacaoProduto;
+	private int pontos;//qtd de pontos que esse produto gerou ao Vendedor, facilita na hora de remoção
 	
 	private final static int NUMERO_MAXIMO_ITENS_POR_PRODUTO = 3;
 
@@ -44,10 +48,16 @@ public class Produto implements Comparable<Produto>, Serializable{
 		this.quantidade = quantidade;
 		} else throw new QuantidadeMaximaItensUltrapassadaException();
 	}
-	//indica quantos itens faltam a serem vendidos
+
+	public int getItensNoEstoque() {
+		return itensNoEstoque;
+	}
+	public void setItensNoEstoque(int itensNoEstoque) {
+		this.itensNoEstoque = itensNoEstoque;
+	}
+	//indica quantos itens faltam a serem vendidos. O chama toda vez que vender um produto
 	public void itensNoEstoque(){
-		if (this.quantidade > 0)
-		this.quantidade--;
+		if (this.itensNoEstoque > 0) this.itensNoEstoque--;
 	}
 	public double getPreco() {
 		return preco;
@@ -59,13 +69,22 @@ public class Produto implements Comparable<Produto>, Serializable{
 		return estado;
 	}
 	public void setEstado(boolean estado) {
+		if (this.estado != true)
 		this.estado = estado;
 	}
-	public Time getTempoVenda() {
-		return tempoVenda;
+	public LocalDate getTempoVenda() {
+		return tempoCriacaoProduto;
 	}
-	public void setTempoVenda(Time tempoVenda) {
-		this.tempoVenda = tempoVenda;
+	public void setTempoVenda(LocalDate tempoVenda) {
+		this.tempoCriacaoProduto = LocalDate.now();
+	}
+
+	public int getPontos() {
+		return pontos;
+	}
+
+	public void setPontos(int pontos) {
+		this.pontos = pontos;
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
@@ -125,11 +144,11 @@ public class Produto implements Comparable<Produto>, Serializable{
 		if (quantidade != other.quantidade) {
 			return false;
 		}
-		if (tempoVenda == null) {
-			if (other.tempoVenda != null) {
+		if (tempoCriacaoProduto == null) {
+			if (other.tempoCriacaoProduto != null) {
 				return false;
 			}
-		} else if (!tempoVenda.equals(other.tempoVenda)) {
+		} else if (!tempoCriacaoProduto.equals(other.tempoCriacaoProduto)) {
 			return false;
 		}
 		return true;

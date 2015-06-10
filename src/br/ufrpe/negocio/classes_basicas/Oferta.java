@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.sql.Time;
 
 public class Oferta implements Comparable<Oferta>, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Produto produto;
 	private int porcentagem;
 	private Time tempo;

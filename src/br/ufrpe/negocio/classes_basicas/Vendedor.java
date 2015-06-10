@@ -1,19 +1,25 @@
 package br.ufrpe.negocio.classes_basicas;
 
 import java.io.Serializable;
-import java.sql.Time;
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.time.Period;
+import java.time.Year;
+import java.util.List;
 
 public class Vendedor implements Comparable<Vendedor>, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nome;
 	private LocalDate dataNascimento;
 	private Contato contato;
 	private String cpf;
-	private ArrayList<Produto> produtos;
+	private List<Produto> produtos;
 	private Xp xp;
 	private String nomeUsuario;
 	private String senha;
+	private LocalDate dataCadastro;
 
 	public String getNome() {
 		return nome;
@@ -31,8 +37,8 @@ public class Vendedor implements Comparable<Vendedor>, Serializable{
 		for (int i = 1; i < nome.length(); i++){
 			if(nome.charAt(i) == ' ')
 				Character.toUpperCase(nome.charAt(i+1));
-			}
-		}			
+		}
+	}			
 	public String getNomeUsuario() {
 		return nomeUsuario;
 	}
@@ -46,8 +52,12 @@ public class Vendedor implements Comparable<Vendedor>, Serializable{
 	}
 
 	public void setDataNascimento(int dia, int mes, int ano) {
-		LocalDate dataNascimento = LocalDate.of(ano, mes, dia);
-		this.dataNascimento = dataNascimento;
+		Year anoAgora = Year.now();
+		int anoAgoraEmInteiro = anoAgora.getValue();
+		if (dia >= 1 && dia <= 31 && mes >= 1  && mes <= 12 && ano >= 1900 && ano <= anoAgoraEmInteiro){
+			LocalDate dataNascimento = LocalDate.of(ano, mes, dia);
+			this.dataNascimento = dataNascimento;
+		}
 	}
 
 	public Contato getContato() {
@@ -66,17 +76,36 @@ public class Vendedor implements Comparable<Vendedor>, Serializable{
 		this.cpf = cpf;
 	}
 
-	public ArrayList<Produto> getProdutos() {
+	public List<Produto> getProdutos() {
 		return produtos;
 	}
 
-	public void setProdutos(ArrayList<Produto> produtos) {
+	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
 	}
 
 	public String getSenha() {
 		return senha;
 	}
+
+	public LocalDate getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro() {
+		this.dataCadastro = LocalDate.now();
+	}
+
+	//método usado toda vez que fizer login numa conta de Vendedor
+	public boolean mesarioDataCadastroRemoverPontos(){//completo um mes para remover pontos
+		boolean ehParaRemoverPontos = false;
+		Period periodoDias = Period.between(dataCadastro, LocalDate.now());
+		if (periodoDias.getDays() == 30){
+			ehParaRemoverPontos = true;
+		}
+		return ehParaRemoverPontos;
+	}
+
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}

@@ -1,6 +1,6 @@
 package br.ufrpe.negocio;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import br.ufrpe.negocio.cadastros.CadastroProduto;
 import br.ufrpe.negocio.cadastros.CadastroVendedor;
@@ -33,7 +33,7 @@ public class Fachada {
 		cadastroProduto.salvarProduto();
 	}
 
-	public ArrayList<Produto> retornarListaProdutos() {
+	public List<Produto> retornarListaProdutos() {
 		return cadastroProduto.getProdutos();
 	}
 
@@ -54,7 +54,7 @@ public class Fachada {
 		cadastroVendedor.salvarVendedor();
 	}
 
-	public ArrayList<Vendedor> retornarListaVendedores() {
+	public List<Vendedor> retornarListaVendedores() {
 		return cadastroVendedor.getVendedores();
 	}
 

@@ -1,6 +1,6 @@
 package br.ufrpe.negocio.cadastros;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import br.ufrpe.dados.IRepositorioVendedor;
 import br.ufrpe.dados.RepositorioVendedor;
@@ -33,7 +33,7 @@ public class CadastroVendedor {
 
 	}
 
-	public ArrayList<Vendedor> getVendedores() {
+	public List<Vendedor> getVendedores() {
 		return repositorio.getVendedores();
 	}
 
