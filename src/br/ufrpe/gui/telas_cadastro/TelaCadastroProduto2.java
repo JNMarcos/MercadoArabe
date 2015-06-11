@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import java.awt.SystemColor;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.JButton;
 
 public class TelaCadastroProduto2 {
 
@@ -53,6 +54,17 @@ public class TelaCadastroProduto2 {
 		textField.setBounds(66, 43, 69, 20);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
+		
+		JLabel lblQuantidade = new JLabel("Imagens:");
+		lblQuantidade.setBounds(10, 96, 69, 14);
+		frame.getContentPane().add(lblQuantidade);
+		
+		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.setBounds(282, 227, 89, 23);
+		frame.getContentPane().add(btnCadastrar);
+		
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.setBounds(50, 227, 89, 23);
+		frame.getContentPane().add(btnVoltar);
 	}
-
 }
