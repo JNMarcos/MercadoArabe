@@ -7,12 +7,16 @@ import java.awt.SystemColor;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
+import javax.swing.JProgressBar;
+import javax.swing.UIManager;
+import javax.swing.JPanel;
 
 public class TelaCadastroProduto {
 
 	private JFrame frame;
 	private JTextField textField;
-	private JTextField textField_1;
 	private JTextField textField_2;
 
 	/**
@@ -53,23 +57,26 @@ public class TelaCadastroProduto {
 		frame.getContentPane().add(btnNewButton);
 		
 		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setBounds(24, 28, 46, 14);
+		lblNome.setBounds(22, 75, 46, 14);
 		frame.getContentPane().add(lblNome);
 		
 	
 		
-		JLabel lblDescrio = new JLabel("Descri\u00E7\u00E3o:");
-		lblDescrio.setBounds(10, 76, 77, 14);
-		frame.getContentPane().add(lblDescrio);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(77, 73, 295, 40);
-		frame.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		JLabel lblDescricao = new JLabel("Descri\u00E7\u00E3o:");
+		lblDescricao.setBounds(10, 130, 77, 14);
+		frame.getContentPane().add(lblDescricao);
 		
 		textField_2 = new JTextField();
-		textField_2.setBounds(80, 25, 292, 20);
+		textField_2.setBounds(77, 61, 292, 20);
 		frame.getContentPane().add(textField_2);
 		textField_2.setColumns(10);
+		
+		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane_1.setBounds(0, 0, 434, 23);
+		frame.getContentPane().add(tabbedPane_1);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(77, 130, 322, 79);
+		frame.getContentPane().add(textArea);
 	}
 }
