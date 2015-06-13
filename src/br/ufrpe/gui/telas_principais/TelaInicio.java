@@ -1,69 +1,67 @@
 package br.ufrpe.gui.telas_principais;
 
-import java.awt.Color;
-import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.EventQueue;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import java.awt.SystemColor;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+import javax.swing.JButton;
 
-public class TelaInicio extends JFrame {
-	private static TelaInicio frame;
-	private JPanel contentPane;
-	public static boolean instanciar;
-	private static TelaInicio instance;
+public class TelaInicio {
 
-	public static void main(String[] args){
-		frame = new TelaInicio();
+	private JFrame frame;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					TelaInicio window = new TelaInicio();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
-	public TelaInicio(){
-		setVisible(true);
-		setForeground(Color.YELLOW);
-		setBackground(SystemColor.desktop);
-		setTitle("Mercado Árabe - Do Brasil à Arábia, tudo num só lugar!");
-		//setIconImage(Toolkit.getDefaultToolkit().getImage("")); por uma imagem para o app
-		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 277, 306);
-		setLocationRelativeTo(null);	
-
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-
-		JButton btnEntrar = new JButton("Entre");
-		btnEntrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				TelaLogin login = new TelaLogin();
-			}
-		});
-		btnEntrar.setBounds(79, 69, 110, 23);//modificar valores depois
-		contentPane.add(btnEntrar);
-
-		JButton btnCadastrar = new JButton("Cadastre-se");
-		btnCadastrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				TelaLogin login = new TelaLogin();
-			}
-		});
-		btnCadastrar.setBounds(79, 103, 110, 23);//modificar valores depois
-		contentPane.add(btnCadastrar);
-
-		JButton btnQueroComprar = new JButton("Quero comprar!");
-		btnQueroComprar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				TelaPesquisaProdutos pesquisa = new TelaPesquisaProdutos();
-			}
-		});
-		btnQueroComprar.setBounds(79, 69, 110, 23);//modificar valores depois
-		contentPane.add(btnQueroComprar);
+	/**
+	 * Create the application.
+	 */
+	public TelaInicio() {
+		initialize();
 	}
 
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.getContentPane().setBackground(SystemColor.activeCaption);
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		JLabel lblMercadorabe = new JLabel("Mercado \u00C1rabe");
+		lblMercadorabe.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMercadorabe.setFont(new Font("Franklin Gothic Demi Cond", Font.PLAIN, 24));
+		lblMercadorabe.setBounds(125, 27, 164, 41);
+		frame.getContentPane().add(lblMercadorabe);
+		
+		JButton btnComprador = new JButton("Comprador");
+		btnComprador.setBounds(58, 121, 89, 23);
+		frame.getContentPane().add(btnComprador);
+		
+		JButton btnVendedor = new JButton("Vendedor");
+		btnVendedor.setBounds(263, 121, 89, 23);
+		frame.getContentPane().add(btnVendedor);
+		
+		JButton btnCadastrese = new JButton("Cadastre-se");
+		btnCadastrese.setBounds(157, 162, 97, 23);
+		frame.getContentPane().add(btnCadastrese);
+	}
 }
