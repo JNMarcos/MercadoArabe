@@ -95,6 +95,14 @@ public class Vendedor implements Comparable<Vendedor>, Serializable{
 	public void setDataCadastro() {
 		this.dataCadastro = LocalDate.now();
 	}
+	
+	public Xp getXp() {
+		return xp;
+	}
+	
+	public void setXp(Xp xp) {
+		this.xp = xp;
+	}
 
 	//método usado toda vez que fizer login numa conta de Vendedor
 	public boolean mesarioDataCadastroRemoverPontos(){//completo um mes para remover pontos
