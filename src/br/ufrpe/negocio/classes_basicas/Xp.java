@@ -15,7 +15,6 @@ public class Xp {
 	private static final int PONTOS_GANHOS_PELA_VENDA_TRES_ITENS_CADA = 20;
 
 	//REMOÇÃO DE PONTOS
-	private static final double NUMERO_DIAS_PARA_REMOVER_PONTOS = 2;
 	private static final double PORCENTAGEM_PARA_REMOVER_PONTOS_APOS_N_DIAS = 0.1;
 	private static final double PORCENTAGEM_PARA_INCREMENTAR_POR_PRECO = 0.1;
 
@@ -50,7 +49,7 @@ public class Xp {
 		return pontos;
 	}
 
-	private void adicionarPontosPorVender(Produto produto) {
+	public void adicionarPontosPorVender(Produto produto) {
 		int pontosIncrementarPorPreco;
 		if (produto.getItensNoEstoque() == 0){
 			if (produto.getQuantidade() == 1){
@@ -79,14 +78,14 @@ public class Xp {
 		produto.itensNoEstoque();
 
 	}
-	private void adicionarPontosPorCadastrarProduto(){
+	public void adicionarPontosPorCadastrarProduto(){
 		this.pontos = this.pontos + PONTOS_GANHOS_PELO_CADASTRO_PRODUTO ;
 	}
-	private void removerPontosPelaRetiradaProduto(Produto produto){
+	public void removerPontosPelaRetiradaProduto(Produto produto){
 		this.pontos = this.pontos - produto.getPontos();
 	}
 
-	private void removerPontosPorPassadoNDias(boolean ehParaRemoverPontos){
+	public void removerPontosPorPassadoNDias(boolean ehParaRemoverPontos){
 		int faixaDeCorrecao = corrigirPontuacaoAposPontosRemovidos();
 		if (ehParaRemoverPontos == true){
 			int quantidadePontosRemovidos = (int) (this.pontos*PORCENTAGEM_PARA_REMOVER_PONTOS_APOS_N_DIAS);
@@ -96,11 +95,11 @@ public class Xp {
 		}
 	}
 
-	public void zerarPontosAAdicionar(){
+	private void zerarPontosAAdicionar(){
 		this.pontosAAdicionar = 0;
 	}
 
-	public int corrigirPontuacaoAposPontosRemovidos(){
+	private int corrigirPontuacaoAposPontosRemovidos(){
 		int faixaDeCorrecao = 0;
 		if (this.pontos < 100) {
 			faixaDeCorrecao = FAIXA_CORRECAO_ATE_100;
@@ -122,7 +121,7 @@ public class Xp {
 		return faixaDeCorrecao;
 	}
 
-	public int pontosRecebidosPelaVenda(Produto produto){
+	private int pontosRecebidosPelaVenda(Produto produto){
 		int pontosRecebidosPelaVendaEm;
 		Period diferencaExposicaoVenda = Period.between(produto.getTempoVenda(), LocalDate.now());
 		int difAnoExpoVenda = diferencaExposicaoVenda.getYears();

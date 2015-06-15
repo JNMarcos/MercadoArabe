@@ -1,13 +1,21 @@
 package br.ufrpe.gui.telas_principais;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+
 import java.awt.SystemColor;
+
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
+import javax.swing.JPanel;
+
+import java.awt.Color;
 
 public class TelaInicio {
 
@@ -46,22 +54,38 @@ public class TelaInicio {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 434, 261);
+		frame.getContentPane().add(panel);
+		panel.setLayout(null);
+		
 		JLabel lblMercadorabe = new JLabel("Mercado \u00C1rabe");
+		lblMercadorabe.setBounds(77, 33, 282, 53);
+		panel.add(lblMercadorabe);
 		lblMercadorabe.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMercadorabe.setFont(new Font("Franklin Gothic Demi Cond", Font.PLAIN, 24));
-		lblMercadorabe.setBounds(125, 27, 164, 41);
-		frame.getContentPane().add(lblMercadorabe);
+		lblMercadorabe.setFont(new Font("Gisha", Font.BOLD, 34));
 		
 		JButton btnComprador = new JButton("Comprador");
-		btnComprador.setBounds(58, 121, 89, 23);
-		frame.getContentPane().add(btnComprador);
+		btnComprador.setBounds(77, 146, 101, 25);
+		panel.add(btnComprador);
+		btnComprador.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		JButton btnVendedor = new JButton("Vendedor");
-		btnVendedor.setBounds(263, 121, 89, 23);
-		frame.getContentPane().add(btnVendedor);
+		btnVendedor.setBounds(268, 146, 91, 25);
+		panel.add(btnVendedor);
+		btnVendedor.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		JButton btnCadastrese = new JButton("Cadastre-se");
-		btnCadastrese.setBounds(157, 162, 97, 23);
-		frame.getContentPane().add(btnCadastrese);
+		btnCadastrese.setBackground(null);
+		btnComprador.setLayout(new BorderLayout(0, 0));
+		btnCadastrese.setForeground(new Color(0, 0, 204));
+		btnCadastrese.setBounds(308, 225, 103, 25);
+		panel.add(btnCadastrese);
+		btnCadastrese.setFont(new Font("Gisha", Font.PLAIN, 13));
+		
+		JLabel lblEntre = new JLabel("Entrar como");
+		lblEntre.setFont(new Font("Gisha", Font.PLAIN, 13));
+		lblEntre.setBounds(32, 109, 83, 25);
+		panel.add(lblEntre);
 	}
 }
