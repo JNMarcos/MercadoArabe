@@ -9,6 +9,7 @@ import br.ufrpe.negocio.classes_basicas.Produto;
 import br.ufrpe.negocio.classes_basicas.Vendedor;
 import br.ufrpe.negocio.classes_basicas.Xp;
 import br.ufrpe.negocio.exceptions_negocio.CpfJaCadastradoException;
+import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoProdutoException;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoVendedorException;
 import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioJaCadastradoException;
 import br.ufrpe.negocio.exceptions_negocio.ProdutoJaCadastradoException;
@@ -48,7 +49,7 @@ public class Teste {
 			p1.setPreco(500.0);
 			p1.setQuantidade(1);
 			p1.setEstado(false);
-			p1.setItensNoEstoque(0);
+			p1.setItensNoEstoque(1);
 			arrP.add(p1);
 			p2.setNome("Dell series");
 			p2.setDescricao("Notebook dell");
@@ -56,33 +57,22 @@ public class Teste {
 			p2.setPreco(1500.0);
 			p2.setQuantidade(1);
 			p2.setEstado(false);
-			p2.setItensNoEstoque(0);
+			p2.setItensNoEstoque(1);
 			arrP.add(p2);
 		} catch(QuantidadeMaximaItensUltrapassadaException e) {
 			e.getMessage();
 		}
 		
-		v1.setXp(xp1); // senti nessecidade de criar esse metodo na classe vendedor.
 		v1.setProdutos(arrP); // vendedor com sua respectiva lista de produtos
-		
-		//Registrando produtos
-		CadastroProduto cad = new CadastroProduto();
-		
-		try {
-			cad.cadastrarProduto(p1);
-			cad.cadastrarProduto(p2);
-		} catch(ProdutoJaCadastradoException e) {
-			e.getMessage();
-		} finally {
-			cad.salvarProduto();
-		}
 		
 		//registando vendedor
 		CadastroVendedor cadV = new CadastroVendedor();
-		
+
 		try {
 			cadV.verificarLogin(v1.getNomeUsuario(), v1.getSenha());
 			cadV.cadastrarVendedor(v1);
+			v1.setXp(xp1);
+			v1.setDataCadastro();
 		} catch(NomeUsuarioJaCadastradoException e) {
 			e.getMessage();
 		} catch(SenhaIncorretaException e) {
@@ -93,8 +83,28 @@ public class Teste {
 			e.getMessage();
 		} finally {
 			cadV.salvarVendedor();
-			v1.setDataCadastro(); //fim cadastro
 		}
 		
+		//Registrando produtos
+		CadastroProduto cad = new CadastroProduto();
+		
+		try {
+			cad.cadastrarProduto(p1);
+			xp1.adicionarPontosPorCadastrarProduto();
+			cad.cadastrarProduto(p2);
+			xp1.adicionarPontosPorCadastrarProduto();
+			v1.setXp(xp1);
+		} catch(ProdutoJaCadastradoException e) {
+			e.getMessage();
+		} finally {
+			cad.salvarProduto();
+		}
+		
+		//vendendo produto
+		try {
+			cad.vendeuProduto(p1, v1); //atualiza pts(ganhos pela venda), muda estado(true) e remove do repositorio 
+		} catch(NaoEncontradoProdutoException e) {
+			e.getMessage();
+		}
 	}
 }
