@@ -7,10 +7,13 @@ import java.awt.SystemColor;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import java.awt.Color;
 
 public class TelaVendedor {
 
-	private JFrame frame;
+	private JFrame frmMeuPerfil;
 
 	/**
 	 * Launch the application.
@@ -20,7 +23,7 @@ public class TelaVendedor {
 			public void run() {
 				try {
 					TelaVendedor window = new TelaVendedor();
-					window.frame.setVisible(true);
+					window.frmMeuPerfil.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -39,75 +42,96 @@ public class TelaVendedor {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.getContentPane().setBackground(SystemColor.activeCaption);
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmMeuPerfil = new JFrame();
+		frmMeuPerfil.setTitle("Meu Perfil");
+		frmMeuPerfil.getContentPane().setBackground(SystemColor.activeCaption);
+		frmMeuPerfil.setBounds(100, 100, 450, 327);
+		frmMeuPerfil.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmMeuPerfil.getContentPane().setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 434, 288);
+		frmMeuPerfil.getContentPane().add(panel);
+		panel.setLayout(null);
 		
 		JLabel lblPerfil = new JLabel("Perfil");
+		lblPerfil.setBounds(14, 5, 63, 29);
+		panel.add(lblPerfil);
 		lblPerfil.setFont(new Font("Gisha", Font.BOLD, 24));
-		lblPerfil.setBounds(22, 21, 118, 35);
-		frame.getContentPane().add(lblPerfil);
 		
 		JLabel lblBemVindo = new JLabel("Bem-vindo,");
+		lblBemVindo.setBounds(14, 73, 65, 17);
+		panel.add(lblBemVindo);
 		lblBemVindo.setFont(new Font("Gisha", Font.PLAIN, 13));
-		lblBemVindo.setBounds(22, 74, 73, 15);
-		frame.getContentPane().add(lblBemVindo);
 		
 		JLabel lblUser = new JLabel("USER");
+		lblUser.setBounds(89, 73, 156, 17);
+		panel.add(lblUser);
 		lblUser.setFont(new Font("Gisha", Font.BOLD | Font.ITALIC, 14));
-		lblUser.setBounds(92, 75, 46, 14);
-		frame.getContentPane().add(lblUser);
 		
 		JButton btnSair = new JButton("Sair");
+		btnSair.setForeground(Color.BLUE);
+		btnSair.setBorder(null);
+		btnSair.setContentAreaFilled(false);
+		btnSair.setBackground(null);
+		btnSair.setBounds(369, 11, 55, 25);
+		panel.add(btnSair);
 		btnSair.setFont(new Font("Gisha", Font.PLAIN, 13));
-		btnSair.setBounds(353, 213, 60, 21);
-		frame.getContentPane().add(btnSair);
 		
 		JLabel lblVocTem = new JLabel("Voc\u00EA tem ");
+		lblVocTem.setBounds(14, 101, 59, 17);
+		panel.add(lblVocTem);
 		lblVocTem.setFont(new Font("Gisha", Font.PLAIN, 13));
-		lblVocTem.setBounds(22, 106, 60, 14);
-		frame.getContentPane().add(lblVocTem);
 		
 		JLabel lblVenda = new JLabel("produtos \u00E0 venda");
+		lblVenda.setBounds(121, 101, 104, 17);
+		panel.add(lblVenda);
 		lblVenda.setFont(new Font("Gisha", Font.PLAIN, 13));
-		lblVenda.setBounds(121, 106, 109, 15);
-		frame.getContentPane().add(lblVenda);
 		
-		JLabel lblXpDisponvel = new JLabel("XPs dispon\u00EDvel:");
+		JLabel lblXpDisponvel = new JLabel("Voc\u00EA tem");
+		lblXpDisponvel.setBounds(14, 132, 87, 17);
+		panel.add(lblXpDisponvel);
 		lblXpDisponvel.setFont(new Font("Gisha", Font.PLAIN, 13));
-		lblXpDisponvel.setBounds(22, 131, 98, 21);
-		frame.getContentPane().add(lblXpDisponvel);
-		
-		JButton btnCompreMais = new JButton("Compre mais!");
-		btnCompreMais.setFont(new Font("Gisha", Font.PLAIN, 13));
-		btnCompreMais.setBounds(32, 163, 140, 22);
-		frame.getContentPane().add(btnCompreMais);
 		
 		JButton btnAnunciar = new JButton("Anuncie");
+		btnAnunciar.setBounds(256, 252, 77, 25);
+		panel.add(btnAnunciar);
 		btnAnunciar.setFont(new Font("Gisha", Font.PLAIN, 13));
-		btnAnunciar.setBounds(303, 130, 89, 23);
-		frame.getContentPane().add(btnAnunciar);
 		
-		JLabel lblEditeSeusAnncios = new JLabel("        Seus an\u00FAncios");
+		JLabel lblEditeSeusAnncios = new JLabel("Seus an\u00FAncios");
+		lblEditeSeusAnncios.setBounds(144, 256, 114, 17);
+		panel.add(lblEditeSeusAnncios);
 		lblEditeSeusAnncios.setFont(new Font("Gisha", Font.PLAIN, 13));
-		lblEditeSeusAnncios.setBounds(275, 72, 134, 19);
-		frame.getContentPane().add(lblEditeSeusAnncios);
+		
+		JButton btnCompreMais = new JButton("Quero mais XPs!");
+		btnCompreMais.setBounds(14, 160, 145, 25);
+		panel.add(btnCompreMais);
+		btnCompreMais.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		JButton btnEditar = new JButton("Edite");
+		btnEditar.setBounds(343, 252, 77, 25);
+		panel.add(btnEditar);
 		btnEditar.setFont(new Font("Gisha", Font.PLAIN, 13));
-		btnEditar.setBounds(303, 102, 89, 23);
-		frame.getContentPane().add(btnEditar);
 		
 		JLabel lblQtd = new JLabel("qtd");
+		lblQtd.setBounds(83, 101, 21, 17);
+		panel.add(lblQtd);
 		lblQtd.setFont(new Font("Gisha", Font.BOLD, 13));
-		lblQtd.setBounds(88, 106, 32, 15);
-		frame.getContentPane().add(lblQtd);
 		
 		JLabel label = new JLabel("qtd");
+		label.setBounds(83, 132, 21, 17);
+		panel.add(label);
 		label.setFont(new Font("Gisha", Font.BOLD, 13));
-		label.setBounds(122, 132, 46, 14);
-		frame.getContentPane().add(label);
+		
+		JLabel lblXps = new JLabel("XPs");
+		lblXps.setForeground(Color.RED);
+		lblXps.setFont(new Font("Gisha", Font.BOLD, 13));
+		lblXps.setBounds(121, 126, 44, 29);
+		panel.add(lblXps);
+		
+		JButton btnMeusProdutos = new JButton("Meus produtos");
+		btnMeusProdutos.setFont(new Font("Gisha", Font.PLAIN, 13));
+		btnMeusProdutos.setBounds(250, 97, 145, 25);
+		panel.add(btnMeusProdutos);
 	}
 }

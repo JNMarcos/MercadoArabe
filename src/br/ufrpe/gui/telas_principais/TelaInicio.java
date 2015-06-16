@@ -67,8 +67,9 @@ public class TelaInicio {
 		
 		JButton btnComprador = new JButton("Comprador");
 		btnComprador.setBounds(77, 146, 101, 25);
-		panel.add(btnComprador);
+		btnComprador.setLayout(new BorderLayout(0, 0));
 		btnComprador.setFont(new Font("Gisha", Font.PLAIN, 13));
+		panel.add(btnComprador);
 		
 		JButton btnVendedor = new JButton("Vendedor");
 		btnVendedor.setBounds(268, 146, 91, 25);
@@ -77,11 +78,13 @@ public class TelaInicio {
 		
 		JButton btnCadastrese = new JButton("Cadastre-se");
 		btnCadastrese.setBackground(null);
-		btnComprador.setLayout(new BorderLayout(0, 0));
+		btnCadastrese.setBorder(null);
+		btnCadastrese.setContentAreaFilled(false);
 		btnCadastrese.setForeground(new Color(0, 0, 204));
 		btnCadastrese.setBounds(308, 225, 103, 25);
-		panel.add(btnCadastrese);
 		btnCadastrese.setFont(new Font("Gisha", Font.PLAIN, 13));
+		panel.add(btnCadastrese);
+
 		
 		JLabel lblEntre = new JLabel("Entrar como");
 		lblEntre.setFont(new Font("Gisha", Font.PLAIN, 13));
