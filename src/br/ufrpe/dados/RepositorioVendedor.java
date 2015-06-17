@@ -13,8 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-import br.ufrpe.negocio.cadastros.CadastroVendedor;
-import br.ufrpe.negocio.classes_basicas.Produto;
+import br.ufrpe.negocio.cadastros.ControladorVendedor;
 import br.ufrpe.negocio.classes_basicas.Vendedor;
 import br.ufrpe.negocio.exceptions_negocio.CpfJaCadastradoException;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoVendedorException;
@@ -23,14 +22,18 @@ import br.ufrpe.negocio.exceptions_negocio.SenhaIncorretaException;
 
 public class RepositorioVendedor implements IRepositorioVendedor, Serializable, Iterator<Vendedor>{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static int posicao = 0;
 	ArrayList<Vendedor> vendedores;
-	public static CadastroVendedor cadastroVendedor = new CadastroVendedor();
+	public static ControladorVendedor cadastroVendedor = new ControladorVendedor();
 	private static RepositorioVendedor instancia;
 
 	public static RepositorioVendedor getInstancia() {
 		if (instancia == null) {
-			instancia = lerDoArquivo();
+			instancia = new RepositorioVendedor();
 		}
 		return instancia;
 	}
@@ -236,6 +239,12 @@ public class RepositorioVendedor implements IRepositorioVendedor, Serializable, 
 
 	public static void zeraContadorPosicao(){
 		posicao = 0;
+	}
+
+	@Override
+	public void remove() {
+		// TODO Auto-generated method stub
+		
 	}
 }
 

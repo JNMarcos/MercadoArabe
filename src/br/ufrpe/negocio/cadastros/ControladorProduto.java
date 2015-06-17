@@ -10,10 +10,10 @@ import br.ufrpe.negocio.classes_basicas.Xp;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoProdutoException;
 import br.ufrpe.negocio.exceptions_negocio.ProdutoJaCadastradoException;
 
-public class CadastroProduto {
+public class ControladorProduto {
 	private IRepositorioProduto repositorio;
 
-	public CadastroProduto(){
+	public ControladorProduto(){
 		this.repositorio = RepositorioProduto.getInstancia();	
 	}
 

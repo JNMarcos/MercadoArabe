@@ -2,6 +2,7 @@ package br.ufrpe.teste;
 
 import java.util.ArrayList;
 
+import br.ufrpe.dados.RepositorioProduto;
 import br.ufrpe.negocio.cadastros.CadastroProduto;
 import br.ufrpe.negocio.cadastros.CadastroVendedor;
 import br.ufrpe.negocio.classes_basicas.Contato;
@@ -26,7 +27,9 @@ public class Teste {
 		Produto p1 = new Produto();
 		Produto p2 = new Produto();
 		Xp xp1 = new Xp();
-		ArrayList<Produto> arrP = new ArrayList<Produto>();
+		//ArrayList<Produto> arrP = new ArrayList<Produto>();
+		RepositorioProduto produto = new RepositorioProduto();
+		produto.criarListaProdutos();
 		
 		v1.setNome("Carlos olimpio");
 		v1.setDataNascimento(02, 04, 1994);
@@ -50,7 +53,12 @@ public class Teste {
 			p1.setQuantidade(1);
 			p1.setEstado(false);
 			p1.setItensNoEstoque(1);
-			arrP.add(p1);
+			try {
+				produto.cadastrarProduto(p1);
+			} catch (ProdutoJaCadastradoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			p2.setNome("Dell series");
 			p2.setDescricao("Notebook dell");
 			p2.setCategoria("Informática");
@@ -58,12 +66,17 @@ public class Teste {
 			p2.setQuantidade(1);
 			p2.setEstado(false);
 			p2.setItensNoEstoque(1);
-			arrP.add(p2);
+			try {
+				produto.cadastrarProduto(p2);
+			} catch (ProdutoJaCadastradoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch(QuantidadeMaximaItensUltrapassadaException e) {
 			e.getMessage();
 		}
 		
-		v1.setProdutos(arrP); // vendedor com sua respectiva lista de produtos
+		v1.setProdutos(produto.getProdutos()); // vendedor com sua respectiva lista de produtos
 		
 		//registando vendedor
 		CadastroVendedor cadV = new CadastroVendedor();

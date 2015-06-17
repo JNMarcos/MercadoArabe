@@ -19,6 +19,7 @@ public class Produto implements Comparable<Produto>, Serializable{
 	private boolean estado;
 	private LocalDate tempoCriacaoProduto;
 	private int pontos;//qtd de pontos que esse produto gerou ao Vendedor, facilita na hora de remoção
+	private Vendedor vendedor;
 	
 	private final static int NUMERO_MAXIMO_ITENS_POR_PRODUTO = 3;
 
@@ -85,6 +86,13 @@ public class Produto implements Comparable<Produto>, Serializable{
 
 	public void setPontos(int pontos) {
 		this.pontos = pontos;
+	}
+	
+	public Vendedor getVendedor() {
+		return vendedor;
+	}
+	public void setVendedor(Vendedor vendedor) {
+		this.vendedor = vendedor;
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()

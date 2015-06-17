@@ -39,12 +39,12 @@ public class TelaSobre extends JFrame{
 		lblNewLabel.setBounds(44, 11, 508, 32);
 		panel.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel(" de forma pr\u00E1tica e simples. Para quem desejar vender, basta se cadastrar em nosso app. ");
+		JLabel lblNewLabel_1 = new JLabel(" de forma pr\u00E1tica e simples. Para quem desejar vender, basta se cadastrar em nosso app e ter uma grande variedade de clientes.");
 		lblNewLabel_1.setFont(new Font("Gisha", Font.PLAIN, 13));
 		lblNewLabel_1.setBounds(35, 27, 532, 50);
 		panel.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("Para quem est\u00E1 \u00E0 procura de um produto, basta usar nossa barra de pesquisas para aproveitar!");
+		JLabel lblNewLabel_2 = new JLabel("Para quem est\u00E1 \u00E0 procura de um produto, basta fazer um cadastro e usar nossa barra de pesquisas para aproveitar!");
 		lblNewLabel_2.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblNewLabel_2.setFont(new Font("Gisha", Font.PLAIN, 13));
 		lblNewLabel_2.setBounds(20, 27, 586, 50);

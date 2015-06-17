@@ -10,11 +10,11 @@ import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoVendedorException;
 import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioJaCadastradoException;
 import br.ufrpe.negocio.exceptions_negocio.SenhaIncorretaException;
 
-public class CadastroVendedor {
+public class ControladorVendedor {
 
 	private IRepositorioVendedor repositorio;
 
-	public CadastroVendedor(){
+	public ControladorVendedor(){
 		this.repositorio = RepositorioVendedor.getInstancia();
 	}
 

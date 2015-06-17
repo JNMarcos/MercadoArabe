@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-import br.ufrpe.negocio.cadastros.CadastroProduto;
+import br.ufrpe.negocio.cadastros.ControladorProduto;
 import br.ufrpe.negocio.classes_basicas.Produto;
 import br.ufrpe.negocio.classes_basicas.Vendedor;
 import br.ufrpe.negocio.exceptions_negocio.FaixaPrecoForaLimitesException;
@@ -25,13 +25,13 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable, It
 
 	private static final long serialVersionUID = 1L;
 	ArrayList<Produto> produtos;
-	public static CadastroProduto cadastroProduto = new CadastroProduto();
+	public static ControladorProduto cadastroProduto = new ControladorProduto();
 	private static RepositorioProduto instancia;
 	public static int posicao = 0;
 
 	public static RepositorioProduto getInstancia() {
 		if (instancia == null) {
-			instancia = lerDoArquivo();
+			instancia = new RepositorioProduto();
 		}
 		return instancia;
 	}
@@ -195,7 +195,25 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable, It
 			}
 		} else new FaixaPrecoForaLimitesException();
 		return 	produtosEncontrados;//pode ser null
+	}
+	
+	//FAZER ESSE MÉTODO no dia 17-06-15
+	/*public List<Produto> procurarProdutoPorLocalVendedor (String localVendedor)
+			throws NaoEncontradoProdutoException {
+		List<Produto> produtosEncontrados = null;
+		if (!localVendedor){
+			ListIterator<Produto> iProduto = this.produtos.listIterator();
+			produtosEncontrados = new ArrayList<Produto>();
+			while (iProduto.hasNext()){
+				if (iProduto.next().getPreco() >= de && iProduto.next().getPreco() <= ate){
+					produtosEncontrados.add(this.produtos.get(posicao));
+				}
+				incrementaContadorPosicao();
+			}
+		} else new NaoEncontradoProdutoException();
+		return 	produtosEncontrados;//pode ser null
 	} 
+	*/
 
 	public Produto exibirInfoProduto(String nomeProduto){
 		Produto produto = null;
@@ -231,5 +249,12 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable, It
 	}
 	public static void zeraContadorPosicao(){
 		posicao = 0;
+	}
+
+	// fazer o remove depois
+	@Override
+	public void remove() {
+		// TODO Auto-generated method stub
+		
 	}
 }
