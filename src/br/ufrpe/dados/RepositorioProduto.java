@@ -11,14 +11,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
-import br.ufrpe.negocio.cadastros.ControladorProduto;
 import br.ufrpe.negocio.classes_basicas.Produto;
-import br.ufrpe.negocio.classes_basicas.Vendedor;
+import br.ufrpe.negocio.controladores.ControladorProduto;
 import br.ufrpe.negocio.exceptions_negocio.FaixaPrecoForaLimitesException;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoProdutoException;
-import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoVendedorException;
 import br.ufrpe.negocio.exceptions_negocio.ProdutoJaCadastradoException;
 
 public class RepositorioProduto implements IRepositorioProduto, Serializable, Iterator<Produto>{
@@ -115,23 +112,20 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable, It
 		if (this.produtos == null){
 			criarListaProdutos();
 		}
-		if (produto == null){
-			throw new NullPointerException();
-		} else{
-			boolean produtoJaExiste = verificarNomeProdutoJaExiste(produto.getNome());
-			if (produtoJaExiste == false){
-				produtos.add(produto);
-				salvarArquivo();
-			} else{
-				throw new ProdutoJaCadastradoException();//acho que está errado
-			}
-		}
-
+		produtos.add(produto);
+		salvarArquivo();
 	}
 
-	public void removerProduto(String nomeProduto) throws NaoEncontradoProdutoException{
+	public void removerProduto(String nomeProduto){
 		boolean removeu = false;
 		if (!nomeProduto.equals("") && !nomeProduto.equals(" ")){
+			for (Produto p: this.produtos){
+				if (p.getNome().equalsIgnoreCase(nomeProduto)){
+					this.produtos.remove(p);
+					break;
+				}
+			}
+			//VER O QUE FAZER COM ISSO
 			Iterator<Produto> iVendedor = this.produtos.listIterator();
 			while(iVendedor.hasNext()){
 				if (iVendedor.next().getNome().equals(nomeProduto)){
@@ -144,117 +138,153 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable, It
 				incrementaContadorPosicao();
 			}
 		}
-
-		if (removeu == false){
-			throw new NaoEncontradoProdutoException();
-		}
 	}
 
-	public List<Produto> procurarProdutoPorNome(String nomeProduto) throws NaoEncontradoProdutoException{
-		List<Produto> produtosEncontrados = null;
-		if (!nomeProduto.equals("") && !nomeProduto.equals(" ")){
-			ListIterator<Produto> iProduto = this.produtos.listIterator();
-			produtosEncontrados = new ArrayList<Produto>();
-			while (iProduto.hasNext()){
-				if (iProduto.next().equals(nomeProduto)){
-					produtosEncontrados.add(this.produtos.get(posicao));
+		public void removerProduto(Produto produto) throws NaoEncontradoProdutoException{
+			if (!produto.equals("")){
+				for (Produto p: this.produtos){
+					if (p.getNome().equals(produto)){
+						this.produtos.remove(p);
+						break;
+					}
 				}
-				incrementaContadorPosicao();
 			}
 		}
-		return 	produtosEncontrados;//pode ser null
-	}
 
-	public List<Produto> procurarProdutoPorCategoria(
-			String categoriaProduto) throws NaoEncontradoProdutoException {
-		List<Produto> produtosEncontrados = null;
-		if (!categoriaProduto.equals("") && !categoriaProduto.equals(" ")){
-			ListIterator<Produto> iProduto = this.produtos.listIterator();
-			produtosEncontrados = new ArrayList<Produto>();
-			while (iProduto.hasNext()){
-				if (iProduto.next().equals(categoriaProduto)){
-					produtosEncontrados.add(this.produtos.get(posicao));
-				}
-				incrementaContadorPosicao();
-			}
-		}
-		return 	produtosEncontrados;//pode ser null
-	}
+			public List<Produto> procurarProdutoPorNome(String nomeProduto, List<Produto> produtosASeremRefinados) throws NaoEncontradoProdutoException{
+				List<Produto> produtosEncontrados = null;
+				Iterator<Produto> iProduto;
+				if (!nomeProduto.equals("") && !nomeProduto.equals(" ")){
 
-	public List<Produto> procurarProdutoPorFaixaPreco (double de, double ate)
-			throws NaoEncontradoProdutoException, FaixaPrecoForaLimitesException{
-		List<Produto> produtosEncontrados = null;
-		if (de > 0.0 && ate > 0.0 && de != ate && de < ate){
-			ListIterator<Produto> iProduto = this.produtos.listIterator();
-			produtosEncontrados = new ArrayList<Produto>();
-			while (iProduto.hasNext()){
-				if (iProduto.next().getPreco() >= de && iProduto.next().getPreco() <= ate){
-					produtosEncontrados.add(this.produtos.get(posicao));
+					if (produtosASeremRefinados.equals("")){
+						iProduto = this.produtos.iterator();
+					} else {
+						iProduto = produtosASeremRefinados.listIterator();
+					} //iterator ou listIterator
+					produtosEncontrados = new ArrayList<Produto>();
+					while (iProduto.hasNext()){
+						if (iProduto.next().getNome().equals(nomeProduto)){
+							produtosEncontrados.add(iProduto.next());
+						}
+						incrementaContadorPosicao();
+					}
 				}
-				incrementaContadorPosicao();
+				return 	produtosEncontrados;//pode ser null
 			}
-		} else new FaixaPrecoForaLimitesException();
-		return 	produtosEncontrados;//pode ser null
-	}
-	
-	//FAZER ESSE MÉTODO no dia 17-06-15
-	/*public List<Produto> procurarProdutoPorLocalVendedor (String localVendedor)
-			throws NaoEncontradoProdutoException {
-		List<Produto> produtosEncontrados = null;
-		if (!localVendedor){
-			ListIterator<Produto> iProduto = this.produtos.listIterator();
-			produtosEncontrados = new ArrayList<Produto>();
-			while (iProduto.hasNext()){
-				if (iProduto.next().getPreco() >= de && iProduto.next().getPreco() <= ate){
-					produtosEncontrados.add(this.produtos.get(posicao));
-				}
-				incrementaContadorPosicao();
-			}
-		} else new NaoEncontradoProdutoException();
-		return 	produtosEncontrados;//pode ser null
-	} 
-	*/
 
-	public Produto exibirInfoProduto(String nomeProduto){
-		Produto produto = null;
-		if (!nomeProduto.equals("") && !nomeProduto.equals(" ")){
-			Iterator<Produto> iProduto = this.produtos.listIterator();
-			while(iProduto.hasNext()){
-				if (iProduto.next().getNome().equals(nomeProduto)){
-					produto = iProduto.next();
+			public List<Produto> procurarProdutoPorCategoria(
+					String categoriaProduto, List<Produto> produtosASeremRefinados) throws NaoEncontradoProdutoException {
+
+				List<Produto> produtosEncontrados = null;
+				Iterator<Produto> iProduto;
+
+				if (!categoriaProduto.equals("") && !categoriaProduto.equals(" ")){
+					if (produtosASeremRefinados.equals("")){
+						iProduto = this.produtos.listIterator();
+					} else {
+						iProduto = produtosASeremRefinados.listIterator();
+					} //iterator ou listIterator
+					produtosEncontrados = new ArrayList<Produto>();
+					while (iProduto.hasNext()){
+						if (iProduto.next().getCategoria().equals(categoriaProduto)){
+							produtosEncontrados.add(iProduto.next());
+						}
+						incrementaContadorPosicao();
+					}
+				}
+				return 	produtosEncontrados;//pode ser null
+			}
+
+			public List<Produto> procurarProdutoPorFaixaPreco (double de, double ate, List<Produto> produtosASeremRefinados)
+					throws NaoEncontradoProdutoException, FaixaPrecoForaLimitesException{
+				List<Produto> produtosEncontrados = null;
+				Iterator<Produto> iProduto;
+
+				if ((de > 0.0 || ate > 0.0) && de != ate && de < ate){//se receber um 'de' negativo e 'ate' positivo,
+					//veja que entra, mas nesse caso como os valores tem de ser maio que zero não interfere tanto
+					if (produtosASeremRefinados.equals("")){
+						iProduto = this.produtos.listIterator();
+					} else {
+						iProduto = produtosASeremRefinados.listIterator();
+					} //iterator ou listIterator
+					produtosEncontrados = new ArrayList<Produto>();
+					while (iProduto.hasNext()){
+						if (iProduto.next().getPreco() >= de && iProduto.next().getPreco() <= ate){
+							produtosEncontrados.add(iProduto.next());
+						}
+						incrementaContadorPosicao();
+					}
+				} else new FaixaPrecoForaLimitesException();
+				return 	produtosEncontrados;//pode ser null
+			} 
+
+			public Produto exibirInfoProduto(String nomeProduto, List<Produto> produtoASerEncontrado){
+				Produto produto = null;
+				Iterator<Produto> iProduto;
+				if (!nomeProduto.equals("") && !nomeProduto.equals(" ")){
+					if (produtoASerEncontrado.equals("")){
+						iProduto = this.produtos.listIterator();
+					} else {
+						iProduto = produtoASerEncontrado.listIterator();
+					} //iterator ou listIterator
+					while(iProduto.hasNext()){
+						if (iProduto.next().getNome().equals(nomeProduto)){
+							produto = iProduto.next();
+							zeraContadorPosicao();
+							break;//sai do while e não busca mais
+						}
+						incrementaContadorPosicao();
+					}	
+				}
+				return produto;//pode ser null
+			}
+
+			public List<Produto> procurarProdutoPorLocalVendedor(String localVendedor, List<Produto> produtosASeremRefinados)	throws NaoEncontradoProdutoException {
+				List<Produto> produtosEncontrados = null;
+				Iterator<Produto> iProduto;
+
+				if (!localVendedor.equals("") && !localVendedor.equals(" ")){
+					if (produtosASeremRefinados.equals("")){
+						iProduto = this.produtos.listIterator();
+					} else {
+						iProduto = produtosASeremRefinados.listIterator();
+					} //iterator ou listIterator
+					produtosEncontrados = new ArrayList<Produto>();
+					while (iProduto.hasNext()){
+						if (iProduto.next().getVendedor().getContato().getCidade().equals(localVendedor)){
+							produtosEncontrados.add(iProduto.next());
+						}
+						incrementaContadorPosicao();
+					}
+				}
+				return 	produtosEncontrados;//pode ser null
+			}
+
+			public Produto next(){
+				Produto produto = this.produtos.get(posicao);
+				return produto;
+			}
+
+			public boolean hasNext(){
+				boolean temProximo = true;//posto true pois comumente será mais vezes true
+				if (posicao >= this.produtos.size() || this.produtos.get(posicao) == null) {
+					temProximo = false;
 					zeraContadorPosicao();
-					break;
 				}
-				incrementaContadorPosicao();
-			}	
+				return temProximo;
+			}
+
+			public static void incrementaContadorPosicao(){
+				posicao++;
+			}
+			public static void zeraContadorPosicao(){
+				posicao = 0;
+			}
+
+			// fazer o remove depois
+			@Override
+			public void remove() {
+				// TODO Auto-generated method stub
+
+			}
 		}
-		return produto;
-	}
-	public Produto next(){
-		Produto produto = this.produtos.get(posicao);
-		return produto;
-	}
-
-	public boolean hasNext(){
-		boolean temProximo = true;//posto true pois comumente será mais vezes true
-		if (posicao >= this.produtos.size() || this.produtos.get(posicao) == null) {
-			temProximo = false;
-			zeraContadorPosicao();
-		}
-		return temProximo;
-	}
-
-	public static void incrementaContadorPosicao(){
-		posicao++;
-	}
-	public static void zeraContadorPosicao(){
-		posicao = 0;
-	}
-
-	// fazer o remove depois
-	@Override
-	public void remove() {
-		// TODO Auto-generated method stub
-		
-	}
-}

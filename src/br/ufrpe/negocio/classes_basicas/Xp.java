@@ -148,4 +148,6 @@ public class Xp {
 		}
 		return pontosRecebidosPelaVendaEm;
 	}
+	
+	
 }
