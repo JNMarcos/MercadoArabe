@@ -1,6 +1,5 @@
 package br.ufrpe.negocio.classes_basicas;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 

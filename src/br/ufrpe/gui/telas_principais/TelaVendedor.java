@@ -54,8 +54,8 @@ public class TelaVendedor {
 		frmMeuPerfil.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblPerfil = new JLabel("Perfil");
-		lblPerfil.setBounds(14, 5, 63, 29);
+		JLabel lblPerfil = new JLabel("PERFIL");
+		lblPerfil.setBounds(14, 33, 114, 29);
 		panel.add(lblPerfil);
 		lblPerfil.setFont(new Font("Gisha", Font.BOLD, 24));
 		

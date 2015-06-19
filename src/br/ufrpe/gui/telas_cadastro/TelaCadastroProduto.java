@@ -189,7 +189,7 @@ public class TelaCadastroProduto{
 		conteiner.setTitleAt(0, "Informa\u00E7\u00F5es");//ver o que é esse zero
 		conteiner.add(painel2);
 		
-		btnOk = new JButton("OK");
+		btnOk = new JButton("Cadastrar");
 		btnOk.setFont(new Font("Gisha", Font.PLAIN, 13));
 		btnOk.setBounds(386, 110, 89, 23);
 		painel2.add(btnOk);

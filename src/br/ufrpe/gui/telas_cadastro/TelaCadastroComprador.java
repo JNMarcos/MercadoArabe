@@ -10,10 +10,12 @@ import java.awt.SystemColor;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 public class TelaCadastroComprador {
 
-	private JFrame frame;
+	private JFrame frmCadastroComprador;
+	JPanel panel;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -27,7 +29,7 @@ public class TelaCadastroComprador {
 			public void run() {
 				try {
 					TelaCadastroComprador window = new TelaCadastroComprador();
-					window.frame.setVisible(true);
+					window.frmCadastroComprador.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -46,56 +48,65 @@ public class TelaCadastroComprador {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.getContentPane().setBackground(SystemColor.activeCaption);
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmCadastroComprador = new JFrame();
+		frmCadastroComprador.setTitle("Cadastro Comprador");
+		frmCadastroComprador.getContentPane().setBackground(SystemColor.activeCaption);
+		frmCadastroComprador.setBounds(100, 100, 450, 257);
+		frmCadastroComprador.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmCadastroComprador.getContentPane().setLayout(null);
 		
-		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setBounds(10, 37, 46, 14);
-		lblNome.setFont(new Font("Gisha", Font.PLAIN, 13));
-		frame.getContentPane().add(lblNome);
-		
-		textField = new JTextField();
-		textField.setBounds(66, 34, 266, 20);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
-		
-		JLabel lblEmail = new JLabel("E-mail:");
-		lblEmail.setBounds(10, 80, 46, 14);
-		lblEmail.setFont(new Font("Gisha", Font.PLAIN, 13));
-		frame.getContentPane().add(lblEmail);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(66, 77, 266, 20);
-		frame.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
-		
-		JLabel lblUsurio = new JLabel("Usu\u00E1rio:");
-		lblUsurio.setBounds(10, 127, 46, 14);
-		lblUsurio.setFont(new Font("Gisha", Font.PLAIN, 13));
-		frame.getContentPane().add(lblUsurio);
-		
-		textField_2 = new JTextField();
-		textField_2.setBounds(65, 124, 129, 20);
-		frame.getContentPane().add(textField_2);
-		textField_2.setColumns(10);
-		
-		JLabel lblSenha = new JLabel("Senha:");
-		lblSenha.setBounds(10, 165, 46, 14);
-		lblSenha.setFont(new Font("Gisha", Font.PLAIN, 13));
-		frame.getContentPane().add(lblSenha);
-		
-		textField_3 = new JTextField();
-		textField_3.setBounds(66, 162, 128, 20);
-		frame.getContentPane().add(textField_3);
-		textField_3.setColumns(10);
+		panel = new JPanel();
+		panel.setBounds(0, 0, 434, 218);
+		frmCadastroComprador.getContentPane().add(panel);
+		panel.setLayout(null);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setBounds(165, 227, 89, 23);
+		btnCadastrar.setBounds(169, 173, 89, 23);
+		panel.add(btnCadastrar);
 		btnCadastrar.setFont(new Font("Gisha", Font.PLAIN, 13));
-		frame.getContentPane().add(btnCadastrar);
+		
+		textField_3 = new JTextField();
+		textField_3.setFont(new Font("Gisha", Font.PLAIN, 13));
+		textField_3.setBounds(88, 63, 268, 20);
+		panel.add(textField_3);
+		textField_3.setColumns(10);
+		
+		JLabel lblSenha = new JLabel("Senha");
+		lblSenha.setBounds(22, 144, 46, 14);
+		panel.add(lblSenha);
+		lblSenha.setFont(new Font("Gisha", Font.PLAIN, 13));
+		
+		textField_2 = new JTextField();
+		textField_2.setFont(new Font("Gisha", Font.PLAIN, 13));
+		textField_2.setBounds(88, 141, 129, 20);
+		panel.add(textField_2);
+		textField_2.setColumns(10);
+		
+		JLabel lblUsurio = new JLabel("Usu\u00E1rio");
+		lblUsurio.setBounds(22, 104, 46, 14);
+		panel.add(lblUsurio);
+		lblUsurio.setFont(new Font("Gisha", Font.PLAIN, 13));
+		
+		textField_1 = new JTextField();
+		textField_1.setFont(new Font("Gisha", Font.PLAIN, 13));
+		textField_1.setBounds(88, 24, 269, 20);
+		panel.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JLabel lblEmail = new JLabel("E-mail");
+		lblEmail.setBounds(22, 66, 46, 14);
+		panel.add(lblEmail);
+		lblEmail.setFont(new Font("Gisha", Font.PLAIN, 13));
+		
+		textField = new JTextField();
+		textField.setFont(new Font("Gisha", Font.PLAIN, 13));
+		textField.setBounds(88, 101, 266, 20);
+		panel.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblNome = new JLabel("Nome");
+		lblNome.setBounds(22, 27, 46, 14);
+		panel.add(lblNome);
+		lblNome.setFont(new Font("Gisha", Font.PLAIN, 13));
 	}
-
 }

@@ -3,6 +3,7 @@ package br.ufrpe.negocio.classes_basicas;
 import java.util.List;
 
 public class Comprador extends Pessoa{
+	
 	/**
 	 * 
 	 */
