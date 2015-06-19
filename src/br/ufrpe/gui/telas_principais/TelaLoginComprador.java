@@ -56,18 +56,22 @@ public class TelaLoginComprador {
 		
 		JButton btnEntrar = new JButton(" Entrar");
 		btnEntrar.setBounds(250, 211, 89, 23);
+		btnEntrar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		frame.getContentPane().add(btnEntrar);
 		
 		JButton btnVoltar = new JButton("Voltar ");
 		btnVoltar.setBounds(87, 211, 89, 23);
+		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		frame.getContentPane().add(btnVoltar);
 		
 		JLabel lblUsurio = new JLabel("Usu\u00E1rio:");
 		lblUsurio.setBounds(87, 85, 46, 14);
+		lblUsurio.setFont(new Font("Gisha", Font.PLAIN, 13));
 		frame.getContentPane().add(lblUsurio);
 		
 		JLabel lblSenha = new JLabel("Senha:");
 		lblSenha.setBounds(87, 120, 46, 14);
+		lblSenha.setFont(new Font("Gisha", Font.PLAIN, 13));
 		frame.getContentPane().add(lblSenha);
 		
 		textField = new JTextField();

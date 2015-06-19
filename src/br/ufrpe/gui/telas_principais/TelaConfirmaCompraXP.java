@@ -56,14 +56,17 @@ public class TelaConfirmaCompraXP {
 		
 		JLabel lblCpf = new JLabel("CPF:");
 		lblCpf.setBounds(51, 76, 46, 14);
+		lblCpf.setFont(new Font("Gisha", Font.PLAIN, 13));
 		frame.getContentPane().add(lblCpf);
 		
 		JLabel lblUsurio = new JLabel("Usu\u00E1rio:");
 		lblUsurio.setBounds(51, 117, 46, 14);
+		lblUsurio.setFont(new Font("Gisha", Font.PLAIN, 13));
 		frame.getContentPane().add(lblUsurio);
 		
 		JLabel lblSenha = new JLabel("Senha:");
 		lblSenha.setBounds(51, 164, 46, 14);
+		lblSenha.setFont(new Font("Gisha", Font.PLAIN, 13));
 		frame.getContentPane().add(lblSenha);
 		
 		textField = new JTextField();
@@ -83,10 +86,12 @@ public class TelaConfirmaCompraXP {
 		
 		JButton btnVoltar = new JButton("Cancelar");
 		btnVoltar.setBounds(107, 227, 89, 23);
+		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		frame.getContentPane().add(btnVoltar);
 		
 		JButton btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.setBounds(211, 227, 89, 23);
+		btnConfirmar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		frame.getContentPane().add(btnConfirmar);
 	}
 }

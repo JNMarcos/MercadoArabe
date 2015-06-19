@@ -1,9 +1,12 @@
 package br.ufrpe.gui.telas_cadastro;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
+
 import java.awt.SystemColor;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -51,6 +54,7 @@ public class TelaCadastroComprador {
 		
 		JLabel lblNome = new JLabel("Nome:");
 		lblNome.setBounds(10, 37, 46, 14);
+		lblNome.setFont(new Font("Gisha", Font.PLAIN, 13));
 		frame.getContentPane().add(lblNome);
 		
 		textField = new JTextField();
@@ -60,6 +64,7 @@ public class TelaCadastroComprador {
 		
 		JLabel lblEmail = new JLabel("E-mail:");
 		lblEmail.setBounds(10, 80, 46, 14);
+		lblEmail.setFont(new Font("Gisha", Font.PLAIN, 13));
 		frame.getContentPane().add(lblEmail);
 		
 		textField_1 = new JTextField();
@@ -69,6 +74,7 @@ public class TelaCadastroComprador {
 		
 		JLabel lblUsurio = new JLabel("Usu\u00E1rio:");
 		lblUsurio.setBounds(10, 127, 46, 14);
+		lblUsurio.setFont(new Font("Gisha", Font.PLAIN, 13));
 		frame.getContentPane().add(lblUsurio);
 		
 		textField_2 = new JTextField();
@@ -78,6 +84,7 @@ public class TelaCadastroComprador {
 		
 		JLabel lblSenha = new JLabel("Senha:");
 		lblSenha.setBounds(10, 165, 46, 14);
+		lblSenha.setFont(new Font("Gisha", Font.PLAIN, 13));
 		frame.getContentPane().add(lblSenha);
 		
 		textField_3 = new JTextField();
@@ -87,6 +94,7 @@ public class TelaCadastroComprador {
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setBounds(165, 227, 89, 23);
+		btnCadastrar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		frame.getContentPane().add(btnCadastrar);
 	}
 

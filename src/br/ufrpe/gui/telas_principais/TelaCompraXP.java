@@ -53,10 +53,12 @@ public class TelaCompraXP {
 		
 		JButton btnVoltar = new JButton("voltar");
 		btnVoltar.setBounds(68, 227, 89, 23);
+		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		frame.getContentPane().add(btnVoltar);
 		
 		JButton btnContinuar = new JButton("Continuar");
 		btnContinuar.setBounds(266, 227, 89, 23);
+		btnContinuar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		frame.getContentPane().add(btnContinuar);
 		
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("500 XP");

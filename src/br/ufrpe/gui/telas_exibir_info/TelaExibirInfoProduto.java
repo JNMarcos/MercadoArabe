@@ -47,34 +47,41 @@ public class TelaExibirInfoProduto {
 		
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.setBounds(10, 227, 89, 23);
+		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		frame.getContentPane().add(btnVoltar);
 		
 		JLabel lblProduto = new JLabel("Produto:");
 		lblProduto.setBounds(10, 27, 46, 14);
+		lblProduto.setFont(new Font("Gisha", Font.PLAIN, 13));
 		frame.getContentPane().add(lblProduto);
 		
 		JLabel lblNomeDoProduto = new JLabel("NOME DO PRODUTO");
 		lblNomeDoProduto.setBounds(53, 27, 99, 14);
+		lblNomeDoProduto.setFont(new Font("Gisha", Font.PLAIN, 13));
 		frame.getContentPane().add(lblNomeDoProduto);
 		
 		JLabel lblPreo = new JLabel("Pre\u00E7o:");
 		lblPreo.setBounds(243, 27, 46, 14);
+		lblPreo.setFont(new Font("Gisha", Font.PLAIN, 13));
 		frame.getContentPane().add(lblPreo);
 		
 		JLabel lblPreo_1 = new JLabel("PRE\u00C7O");
 		lblPreo_1.setBounds(278, 27, 46, 14);
+		lblPreo_1.setFont(new Font("Gisha", Font.PLAIN, 13));
 		frame.getContentPane().add(lblPreo_1);
 		
 		JLabel lblInformaesDoProduto = new JLabel("Informa\u00E7\u00F5es do produto:");
 		lblInformaesDoProduto.setBounds(10, 85, 120, 14);
+		lblInformaesDoProduto.setFont(new Font("Gisha", Font.PLAIN, 13));
 		frame.getContentPane().add(lblInformaesDoProduto);
 		
 		JLabel lblDescrio = new JLabel("DESCRI\u00C7\u00C3O E IMAGENS");
 		lblDescrio.setBounds(140, 85, 126, 14);
+		lblDescrio.setFont(new Font("Gisha", Font.PLAIN, 13));
 		frame.getContentPane().add(lblDescrio);
 		
 		JButton btnInformaesDoVendedor = new JButton("Informa\u00E7\u00F5es do vendedor");
-		btnInformaesDoVendedor.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		btnInformaesDoVendedor.setFont(new Font("Gisha", Font.PLAIN, 13));
 		btnInformaesDoVendedor.setBounds(10, 52, 142, 23);
 		frame.getContentPane().add(btnInformaesDoVendedor);
 	}

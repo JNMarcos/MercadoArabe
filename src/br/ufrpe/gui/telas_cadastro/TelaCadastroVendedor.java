@@ -95,7 +95,7 @@ public class TelaCadastroVendedor extends JFrame {
 		frame.getContentPane().setLayout(null);
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setFont(new Font("Gisha", Font.PLAIN, 14));
+		tabbedPane.setFont(new Font("Gisha", Font.PLAIN, 13));
 		tabbedPane.setBounds(0, 0, 440, 270);
 		frame.getContentPane().add(tabbedPane);
 		
