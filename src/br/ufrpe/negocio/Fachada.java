@@ -18,13 +18,15 @@ import br.ufrpe.negocio.exceptions_negocio.SenhaIncorretaException;
 import br.ufrpe.negocio.filtro.Filtro;
 
 public class Fachada {
-	private ControladorProduto controladorProduto = new ControladorProduto();
-	private ControladorVendedor controladorVendedor = new ControladorVendedor();
-	private ControladorComprador controladorComprador = new ControladorComprador();
+	private ControladorProduto controladorProduto;
+	private ControladorVendedor controladorVendedor;
+	private ControladorComprador controladorComprador;
 	private Filtro filtro;
 
-	private Fachada() {
-		// Construtor privado para evitar instanciação fora da classe
+	public Fachada() {
+		controladorProduto = new ControladorProduto();
+		controladorVendedor = new ControladorVendedor();
+		controladorComprador = new ControladorComprador();
 	}
 
 	public void cadastrarProduto(Produto produto) throws ProdutoJaCadastradoException {
@@ -69,7 +71,7 @@ public class Fachada {
 		return controladorVendedor.getVendedores();
 	}
 
-	public Vendedor exibirInfoVendedor(String cpf) {
+	public Vendedor exibirInfoVendedor(String cpf) throws NaoEncontradoVendedorException {
 		return controladorVendedor.exibirInfoVendedor(cpf);
 	}
 
