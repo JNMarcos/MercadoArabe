@@ -53,8 +53,20 @@ public class ControladorVendedor {
 		return repositorio.getVendedores();
 	}
 
-	public Vendedor exibirInfoVendedor(String cpf) {
-		return repositorio.exibirInfoVendedor(cpf);
+	public Vendedor exibirInfoVendedor(String cpf) throws NaoEncontradoVendedorException {
+		boolean cpfJaExiste;
+		
+		if(cpf == null)
+			throw new IllegalArgumentException();
+		else {
+			cpfJaExiste = repositorio.verificarCpfJaExiste(cpf);
+			if(cpfJaExiste == true) {
+				return repositorio.exibirInfoVendedor(cpf);
+			}
+			else {
+				throw new NaoEncontradoVendedorException();
+			}
+		}
 	}
 
 	public Vendedor verificarLogin(String nomeUsuario, String senha) throws NaoEncontradoVendedorException, SenhaIncorretaException {
