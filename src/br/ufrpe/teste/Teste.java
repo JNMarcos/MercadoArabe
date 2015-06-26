@@ -1,123 +1,128 @@
 package br.ufrpe.teste;
 
-import java.util.ArrayList;
-
-import br.ufrpe.dados.RepositorioProduto;
-import br.ufrpe.negocio.cadastros.CadastroProduto;
-import br.ufrpe.negocio.cadastros.CadastroVendedor;
+import br.ufrpe.negocio.Fachada;
 import br.ufrpe.negocio.classes_basicas.Contato;
 import br.ufrpe.negocio.classes_basicas.Produto;
 import br.ufrpe.negocio.classes_basicas.Vendedor;
 import br.ufrpe.negocio.classes_basicas.Xp;
 import br.ufrpe.negocio.exceptions_negocio.CpfJaCadastradoException;
-import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoProdutoException;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoVendedorException;
 import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioJaCadastradoException;
 import br.ufrpe.negocio.exceptions_negocio.ProdutoJaCadastradoException;
 import br.ufrpe.negocio.exceptions_negocio.QuantidadeMaximaItensUltrapassadaException;
 import br.ufrpe.negocio.exceptions_negocio.SenhaIncorretaException;
 
+
 public class Teste {
 
 	public static void main(String[] args) {
+	
+		Fachada fachada = new Fachada();
+		Produto produto1 = new Produto();
+		Produto produto2 = new Produto();
+		Vendedor vendedor = new Vendedor();
+		Contato contato = new Contato();
+		Xp xp = new Xp();
 		
-		//vendedor 1
-		Vendedor v1 = new Vendedor();
-		Contato c1 = new Contato();
-		Produto p1 = new Produto();
-		Produto p2 = new Produto();
-		Xp xp1 = new Xp();
-		//ArrayList<Produto> arrP = new ArrayList<Produto>();
-		RepositorioProduto produto = new RepositorioProduto();
-		produto.criarListaProdutos();
+		//cadastrando vendedor
+		//dados da pessoa
+		vendedor.setNome("Michael Sipser");
+		vendedor.setDataNascimento(25, 06, 2015);
+		vendedor.setNomeUsuario("m.spsr");
+		vendedor.setSenha("s1ps3r");
 		
-		v1.setNome("Carlos olimpio");
-		v1.setDataNascimento(02, 04, 1994);
-		v1.setCpf("123.456.789-90");
-		v1.setNomeUsuario("olimpio123");
-		v1.setSenha("123olimpio");
-		c1.setEmail("123olimpio@gmail.com");
-		c1.setTelefone("99999-0000");
-		c1.setLogradouro("Rua rural");
-		c1.setBairro("dois irmão");
-		c1.setCidade("Recife");
-		c1.setEstado("Pernambuco");
+		//dados do vendedor em si
+		vendedor.setCpf("123.456.678-19");
+			contato.setEmail("m.sipser@gmail.com");
+			contato.setTelefone("81 1234-5678");
+			contato.setLogradouro("Rua tals");
+			contato.setBairro("Dois irmaos");
+			contato.setCidade("Recife");
+			contato.setEstado("Pernambuco");
+		vendedor.setContato(contato);
+		vendedor.setXp(xp);
+		vendedor.setDataCadastro();
 		
-		//produtos
-		
+		//salvando vendedor
 		try {
-			p1.setNome("Lumia 925");
-			p1.setDescricao("Celular da nokia. Fora de linha");
-			p1.setCategoria("Celulares");
-			p1.setPreco(500.0);
-			p1.setQuantidade(1);
-			p1.setEstado(false);
-			p1.setItensNoEstoque(1);
-			try {
-				produto.cadastrarProduto(p1);
-			} catch (ProdutoJaCadastradoException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			p2.setNome("Dell series");
-			p2.setDescricao("Notebook dell");
-			p2.setCategoria("Informática");
-			p2.setPreco(1500.0);
-			p2.setQuantidade(1);
-			p2.setEstado(false);
-			p2.setItensNoEstoque(1);
-			try {
-				produto.cadastrarProduto(p2);
-			} catch (ProdutoJaCadastradoException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			fachada.cadastrarVendedor(vendedor);
+			fachada.salvarVendedor();
+		} catch(CpfJaCadastradoException e) {
+			e.getMessage();
+		} catch(NomeUsuarioJaCadastradoException e) {
+			e.getMessage();
+		}
+		
+		//cadastrando produtos do vendedor
+		produto1.setNome("Introdução a teoria da computação");
+		produto1.setCategoria("Livros");
+		produto1.setDescricao("Livro sobre teoria da computação");
+		produto1.setPreco(50.10);
+		produto1.setEstado(false);
+		produto1.setVendedor(vendedor);
+		produto1.setItensNoEstoque(0);
+		try {
+			produto1.setQuantidade(1);
 		} catch(QuantidadeMaximaItensUltrapassadaException e) {
 			e.getMessage();
 		}
 		
-		v1.setProdutos(produto.getProdutos()); // vendedor com sua respectiva lista de produtos
-		
-		//registando vendedor
-		CadastroVendedor cadV = new CadastroVendedor();
-
+		//salvando produto
 		try {
-			cadV.verificarLogin(v1.getNomeUsuario(), v1.getSenha());
-			cadV.cadastrarVendedor(v1);
-			v1.setXp(xp1);
-			v1.setDataCadastro();
-		} catch(NomeUsuarioJaCadastradoException e) {
+			fachada.cadastrarProduto(produto1);
+			fachada.salvarProduto();
+			xp.adicionarPontosPorCadastrarProduto();
+		} catch(ProdutoJaCadastradoException e) {
+			e.getMessage();
+		}
+		
+		//cadastrando outro produto
+		produto2.setNome("Java, como programar");
+		produto2.setCategoria("Livros");
+		produto2.setDescricao("Livro JAVA");
+		produto2.setPreco(60.20);
+		produto2.setEstado(false);
+		produto2.setVendedor(vendedor);
+		produto2.setItensNoEstoque(0);
+		try {
+			produto2.setQuantidade(1);
+		} catch(QuantidadeMaximaItensUltrapassadaException e) {
+			e.getMessage();
+		}
+		
+		//salvando produto
+		try {
+			fachada.cadastrarProduto(produto2);
+			fachada.salvarProduto();
+			xp.adicionarPontosPorCadastrarProduto();
+		} catch(ProdutoJaCadastradoException e) {
+			e.getMessage();
+		}
+		
+		//checando log in do vendedor
+		try {
+			fachada.verificarLoginVendedor("qualquer", "123"); 		//errado
+		} catch(NaoEncontradoVendedorException e) {
 			e.getMessage();
 		} catch(SenhaIncorretaException e) {
 			e.getMessage();
-		} catch(CpfJaCadastradoException e) {
-			e.getMessage();
+		}
+		
+		try {
+			fachada.verificarLoginVendedor("m.spsr", "s1ps3r");		//certo
+			
+			//exibindo detalhes do vendedor
+			Vendedor v = fachada.exibirInfoVendedor("123.456.678-19");	//exemplo
+			v.getNome();
+			v.getNomeUsuario();
+			v.getCpf();
+			v.getContato().getEmail();
+			
 		} catch(NaoEncontradoVendedorException e) {
 			e.getMessage();
-		} finally {
-			cadV.salvarVendedor();
-		}
-		
-		//Registrando produtos
-		CadastroProduto cad = new CadastroProduto();
-		
-		try {
-			cad.cadastrarProduto(p1);
-			xp1.adicionarPontosPorCadastrarProduto();
-			cad.cadastrarProduto(p2);
-			xp1.adicionarPontosPorCadastrarProduto();
-			v1.setXp(xp1);
-		} catch(ProdutoJaCadastradoException e) {
-			e.getMessage();
-		} finally {
-			cad.salvarProduto();
-		}
-		
-		//vendendo produto
-		try {
-			cad.vendeuProduto(p1, v1); //atualiza pts(ganhos pela venda), muda estado(true) e remove do repositorio 
-		} catch(NaoEncontradoProdutoException e) {
+		} catch(SenhaIncorretaException e) {
 			e.getMessage();
 		}
+		
 	}
 }
