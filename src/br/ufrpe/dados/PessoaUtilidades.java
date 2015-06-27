@@ -5,6 +5,7 @@ public abstract class PessoaUtilidades {
 	private static final int N_MAXIMO_CARACTERES_SENHA = 24;
 	private static final int N_MINIMO_CARACTERES_NOME_USUARIO = 4;
 	private static final int N_MAXIMO_CARACTERES_NOME_USUARIO = 30;
+	//pra ver se comita
 
 		//põe nomes no formato "Pablo Alexandre do Arrocha" (primeiras letras de cada palavra em maiúscula e sem espaço no fim dos nomes)
 	public static String porNomesNoPadrao(String nome){
