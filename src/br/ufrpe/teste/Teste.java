@@ -7,9 +7,11 @@ import br.ufrpe.negocio.classes_basicas.Vendedor;
 import br.ufrpe.negocio.classes_basicas.Xp;
 import br.ufrpe.negocio.exceptions_negocio.CpfJaCadastradoException;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoVendedorException;
+import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioForaPadroesException;
 import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioJaCadastradoException;
 import br.ufrpe.negocio.exceptions_negocio.ProdutoJaCadastradoException;
 import br.ufrpe.negocio.exceptions_negocio.QuantidadeMaximaItensUltrapassadaException;
+import br.ufrpe.negocio.exceptions_negocio.SenhaForaPadroesException;
 import br.ufrpe.negocio.exceptions_negocio.SenhaIncorretaException;
 
 
@@ -47,6 +49,10 @@ public class Teste {
 		try {
 			fachada.cadastrarVendedor(vendedor);
 			fachada.salvarVendedor();
+		} catch(SenhaForaPadroesException e) {
+			e.getMessage();
+		} catch(NomeUsuarioForaPadroesException e) {
+			e.getMessage();
 		} catch(CpfJaCadastradoException e) {
 			e.getMessage();
 		} catch(NomeUsuarioJaCadastradoException e) {
@@ -69,7 +75,7 @@ public class Teste {
 		
 		//salvando produto
 		try {
-			fachada.cadastrarProduto(produto1);
+			fachada.cadastrarProduto(produto1, vendedor);
 			fachada.salvarProduto();
 			xp.adicionarPontosPorCadastrarProduto();
 		} catch(ProdutoJaCadastradoException e) {
@@ -92,7 +98,7 @@ public class Teste {
 		
 		//salvando produto
 		try {
-			fachada.cadastrarProduto(produto2);
+			fachada.cadastrarProduto(produto2, vendedor);
 			fachada.salvarProduto();
 			xp.adicionarPontosPorCadastrarProduto();
 		} catch(ProdutoJaCadastradoException e) {
@@ -108,21 +114,6 @@ public class Teste {
 			e.getMessage();
 		}
 		
-		try {
-			fachada.verificarLoginVendedor("m.spsr", "s1ps3r");		//certo
-			
-			//exibindo detalhes do vendedor
-			Vendedor v = fachada.exibirInfoVendedor("123.456.678-19");	//exemplo
-			v.getNome();
-			v.getNomeUsuario();
-			v.getCpf();
-			v.getContato().getEmail();
-			
-		} catch(NaoEncontradoVendedorException e) {
-			e.getMessage();
-		} catch(SenhaIncorretaException e) {
-			e.getMessage();
-		}
 		
 	}
 }
