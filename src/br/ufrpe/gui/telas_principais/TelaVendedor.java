@@ -10,6 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaVendedor {
 
@@ -70,6 +72,13 @@ public class TelaVendedor {
 		lblUser.setFont(new Font("Gisha", Font.BOLD | Font.ITALIC, 14));
 		
 		JButton btnSair = new JButton("Sair");
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaVendedor.dispose();
+				TelaVendedor TelaInicio = new TelaVendedor();
+				TelaInicio.setvisible(true);
+			}
+		});
 		btnSair.setForeground(Color.BLUE);
 		btnSair.setBorder(null);
 		btnSair.setContentAreaFilled(false);
@@ -94,6 +103,14 @@ public class TelaVendedor {
 		lblXpDisponvel.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		JButton btnAnunciar = new JButton("Anuncie");
+		btnAnunciar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaVendedor.dispose();
+				TelaVendedor TelaCadastroProduto = new TelaVendedor();
+				TelaCadastroProduto.setvisible(true);
+			}
+			
+		});
 		btnAnunciar.setBounds(256, 252, 77, 25);
 		panel.add(btnAnunciar);
 		btnAnunciar.setFont(new Font("Gisha", Font.PLAIN, 13));
@@ -104,11 +121,26 @@ public class TelaVendedor {
 		lblEditeSeusAnncios.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		JButton btnCompreMais = new JButton("Quero mais XPs!");
+		btnCompreMais.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaVendedor.dispose();
+				TelaVendedor TelaCompraXP = new TelaVendedor();
+				TelaCompraXP.setvisible(true);
+				
+			}
+		});
 		btnCompreMais.setBounds(14, 160, 145, 25);
 		panel.add(btnCompreMais);
 		btnCompreMais.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		JButton btnEditar = new JButton("Edite");
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaVendedor.dispose();
+				TelaVendedor TelaEditarProduto = new TelaVendedor();
+				TelaEditarProduto.setvisible(true);
+			}
+		});
 		btnEditar.setBounds(343, 252, 77, 25);
 		panel.add(btnEditar);
 		btnEditar.setFont(new Font("Gisha", Font.PLAIN, 13));
@@ -133,5 +165,15 @@ public class TelaVendedor {
 		btnMeusProdutos.setFont(new Font("Gisha", Font.PLAIN, 13));
 		btnMeusProdutos.setBounds(250, 97, 145, 25);
 		panel.add(btnMeusProdutos);
+	}
+
+	protected void setvisible(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected static void dispose() {
+		// TODO Auto-generated method stub
+		
 	}
 }
