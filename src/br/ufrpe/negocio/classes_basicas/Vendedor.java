@@ -1,7 +1,6 @@
 package br.ufrpe.negocio.classes_basicas;
 
 import java.time.LocalDate;
-import java.time.Period;
 
 public class Vendedor extends Pessoa implements Comparable<Vendedor>{
 	/**
@@ -12,20 +11,6 @@ public class Vendedor extends Pessoa implements Comparable<Vendedor>{
 	private Contato contato;
 	private Xp xp;
 	private LocalDate dataCadastro;
-
-	
-
-	//põe nomes no formato "Pablo Alexandre do Arrocha" (primeiras letras de cada palavra em maiúscula e sem espaço no fim dos nomes)
-	public void porNomesNoPadrao(String nome){
-		nome = nome.trim();
-		nome = nome.toLowerCase();
-		Character.toUpperCase(nome.charAt(0));
-		for (int i = 1; i < nome.length(); i++){
-			if(nome.charAt(i) == ' ')
-				Character.toUpperCase(nome.charAt(i+1));
-		}
-	}			
-	
 
 	public String getCpf() {
 		return cpf;
@@ -42,7 +27,7 @@ public class Vendedor extends Pessoa implements Comparable<Vendedor>{
 	public void setDataCadastro() {
 		this.dataCadastro = LocalDate.now();
 	}
-	
+
 	public Contato getContato() {
 		return contato;
 	}
@@ -50,24 +35,14 @@ public class Vendedor extends Pessoa implements Comparable<Vendedor>{
 	public void setContato(Contato contato) {
 		this.contato = contato;
 	}
-	
+
 	public Xp getXp() {
 		return xp;
 	}
-	
+
 	public void setXp(Xp xp) {
 		this.xp = xp;
 	}
-
-	//método usado toda vez que fizer login numa conta de Vendedor
-			public boolean mesarioDataCadastroRemoverPontos(){//completo um mes para remover pontos
-				boolean ehParaRemoverPontos = false;
-				Period periodoDias = Period.between(dataCadastro, LocalDate.now());
-				if (periodoDias.getDays() == 30){
-					ehParaRemoverPontos = true;
-				}
-				return ehParaRemoverPontos;
-			}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
@@ -102,7 +77,7 @@ public class Vendedor extends Pessoa implements Comparable<Vendedor>{
 	}
 
 	public int compareTo(Vendedor vendedor) {
-		return this.getNome().compareToIgnoreCase(vendedor.getNome());
+		return this.getCpf().compareToIgnoreCase(vendedor.getCpf());
 	}
 
 }

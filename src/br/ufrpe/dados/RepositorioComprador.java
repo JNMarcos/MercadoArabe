@@ -9,26 +9,16 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-
 import br.ufrpe.negocio.classes_basicas.Comprador;
-import br.ufrpe.negocio.classes_basicas.Vendedor;
 import br.ufrpe.negocio.controladores.ControladorComprador;
-import br.ufrpe.negocio.exceptions_negocio.CpfJaCadastradoException;
-import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoCompradorException;
-import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoVendedorException;
-import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioJaCadastradoException;
-import br.ufrpe.negocio.exceptions_negocio.SenhaIncorretaException;
 
-public class RepositorioComprador implements IRepositorioComprador, Iterator<Comprador>, Serializable {
+public class RepositorioComprador extends PessoaUtilidades implements IRepositorioComprador, Serializable {
 	private static final long serialVersionUID = 1L;
-	private static int posicao = 0;
-	List<Comprador> compradores;
+	List<Comprador> compradores = new ArrayList<Comprador>();
 	public static ControladorComprador controladorComprador = new ControladorComprador();
 	private static RepositorioComprador instancia;
-	
+
 	public static RepositorioComprador getInstancia() {
 		if (instancia == null) {
 			instancia = new RepositorioComprador();
@@ -86,144 +76,88 @@ public class RepositorioComprador implements IRepositorioComprador, Iterator<Com
 	}
 
 	@Override
-	public void criarListaCompradores() {
-		compradores = new ArrayList<Comprador>();
-		
-	}
-
-	@Override
 	public List<Comprador> getCompradores() {
 		if(this.compradores!=null)
 			Collections.sort(compradores);
 		return compradores;
 	}
 
+
+	@Override
+	public void cadastrarComprador(Comprador comprador) {
+		this.compradores.add(comprador);
+		salvarArquivo();
+	}
+
+	public void atualizarComprador(Comprador comprador, int posicao){
+		compradores.set(posicao, comprador);
+		salvarArquivo();
+	}
+	
+	public void removerComprador(Comprador comprador) {
+		compradores.remove(comprador);
+		salvarArquivo();
+	}
+
+	public int procurarIndice(Comprador comprador){
+		int retAux = -1;
+		for (int i = 0; i < compradores.size(); i++){
+			if (compradores.get(i).getNomeUsuario().equals(comprador.getNomeUsuario())){
+				retAux = i;
+				break;
+			}
+		}
+		return retAux;
+	}
+
+	public Comprador retornarComprador(String nomeUsuario){
+		Comprador comprador = null;
+		for (int i = 0; i < compradores.size(); i++){
+			if (compradores.get(i).getNomeUsuario().equals(nomeUsuario)) {		
+				comprador = compradores.get(i);
+				break;
+			}
+		}
+		return comprador;
+	}
+
 	@Override
 	public boolean verificarNomeUsuarioJaExiste(String nomeUsuario) {
 		boolean nomeUsuarioJaExiste = false;
 		if (!nomeUsuario.equals("") && !nomeUsuario.equals(" ")){
-			Iterator<Comprador> iComprador= this.compradores.listIterator();
-			while(iComprador.hasNext()){
-				if (iComprador.next().getNomeUsuario().equals(nomeUsuario)){
+			for (int i = 0; i < compradores.size(); i++){
+				if (compradores.get(i).getNomeUsuario().equals(nomeUsuario)){
 					nomeUsuarioJaExiste = true;
-					zerarContadorPosicao();
 					break;
 				}
-				incrementarContadorPosicao();
 			}
 		}
 		return nomeUsuarioJaExiste;
 	}
-
-	@Override
-	public boolean verificarSenha(String senha) {
-		boolean senhaNoRepositorio = true;
+	
+	public boolean verificarSenhaJaExiste(String senha) {
+		boolean senhaJaExiste = false;
 		if (!senha.equals("") && !senha.equals(" ")){
-			Iterator<Comprador> iComprador = this.compradores.listIterator();
-			while(iComprador.hasNext()){
-				if (iComprador.next().getSenha().equals(senhaNoRepositorio)){
-					senhaNoRepositorio = false;
-					zerarContadorPosicao();
+			for (int i = 0; i < compradores.size(); i++){
+				if (compradores.get(i).getSenha().equals(senha)){
+					senhaJaExiste = true;
 					break;
 				}
-				incrementarContadorPosicao();
 			}
 		}
-		return senhaNoRepositorio;
+		return senhaJaExiste;
 	}
 
 	@Override
-	public void cadastrarComprador(Comprador comprador)
-			throws NomeUsuarioJaCadastradoException {
-		if (this.compradores == null){
-			criarListaCompradores();
-		}
-			this.compradores.add(comprador);
-			salvarArquivo();
-	}
-
-	@Override
-	public void removerComprador(String nomeUsuario)
-			throws NaoEncontradoCompradorException {
-		boolean removeu = false;
-		if (!nomeUsuario.equals("") && !nomeUsuario.equals(" ")){
-			Iterator<Comprador> iComprador = this.compradores.listIterator();
-			while(iComprador.hasNext()){
-				if (iComprador.next().getNomeUsuario().equals(nomeUsuario)){
-					iComprador.remove();
-					removeu = true;
-					zerarContadorPosicao();
-					salvarArquivo();
-					break;
-				}
-				incrementarContadorPosicao();
-			}
-		}
-
-		if (removeu == false){
-			throw new NaoEncontradoCompradorException();
-		}
-		
-	}
-
-	@Override
-	public Comprador exibirInfoComprador(String nomeUsuario) {
+	public Comprador verificarLogin(String nomeUsuario, String senha) {
 		Comprador comprador = null;
-		if (!nomeUsuario.equals("") && !nomeUsuario.equals(" ")){
-			Iterator<Comprador> iComprador = this.compradores.listIterator();
-			while(iComprador.hasNext()){
-				if (iComprador.next().getNomeUsuario().equals(nomeUsuario)){
-					comprador = iComprador.next();
-					zerarContadorPosicao();
-					break;
-				}
-				incrementarContadorPosicao();
-			}	
-		}
-		return comprador;
-	}
-
-	@Override
-	public Comprador verificarLogin(String nomeUsuario, String senha)
-			throws NaoEncontradoCompradorException, SenhaIncorretaException {
-		Comprador comprador = null;
-		Iterator<Comprador> iComprador = this.compradores.listIterator();
-		while(iComprador.hasNext()){
-			if (iComprador.next().getNomeUsuario().equals(nomeUsuario) && iComprador.next().getSenha().equals(senha)){
-				comprador = iComprador.next();
-				zerarContadorPosicao();
+		for (int i = 0; i < compradores.size(); i++){
+			if (compradores.get(i).getNomeUsuario().equals(nomeUsuario) && compradores.get(i).getSenha().equals(senha)){
+				comprador = compradores.get(i);
 				break;
 			}
-			incrementarContadorPosicao();
 		}
 
 		return comprador;
-	}
-
-	public Comprador next(){
-		Comprador comprador = this.compradores.get(posicao);
-		return comprador;
-	}
-	public boolean hasNext(){
-		boolean temProximo = true;//posto true pois comumente será mais vezes true
-		if (posicao >= this.compradores.size() || this.compradores.get(posicao) == null) {
-			temProximo = false;
-			zerarContadorPosicao();
-		}
-		return temProximo;
-	}
-
-	public static void incrementarContadorPosicao(){
-		posicao++;
-	}
-
-	public static void zerarContadorPosicao(){
-		posicao = 0;
-	}
-
-	@Override
-	public void remove() {
-		// TODO Auto-generated method stub
-		
 	}
 }

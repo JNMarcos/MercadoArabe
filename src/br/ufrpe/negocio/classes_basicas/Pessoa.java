@@ -50,4 +50,60 @@ public abstract class Pessoa implements Serializable{
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result
+				+ ((nomeUsuario == null) ? 0 : nomeUsuario.hashCode());
+		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Pessoa)) {
+			return false;
+		}
+		Pessoa other = (Pessoa) obj;
+		if (dataNascimento == null) {
+			if (other.dataNascimento != null) {
+				return false;
+			}
+		} else if (!dataNascimento.equals(other.dataNascimento)) {
+			return false;
+		}
+		if (nome == null) {
+			if (other.nome != null) {
+				return false;
+			}
+		} else if (!nome.equals(other.nome)) {
+			return false;
+		}
+		if (nomeUsuario == null) {
+			if (other.nomeUsuario != null) {
+				return false;
+			}
+		} else if (!nomeUsuario.equals(other.nomeUsuario)) {
+			return false;
+		}
+		if (senha == null) {
+			if (other.senha != null) {
+				return false;
+			}
+		} else if (!senha.equals(other.senha)) {
+			return false;
+		}
+		return true;
+	}
+	
+	
 }

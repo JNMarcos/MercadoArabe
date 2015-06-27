@@ -5,7 +5,7 @@ import java.time.Period;
 
 public class Xp {
 	private int pontos;
-	private int pontosAAdicionar;
+
 
 	//GANHOS DE PONTOS
 	private static final int PONTOS_GANHOS_PELO_CADASTRO_VENDEDOR = 30;
@@ -42,7 +42,6 @@ public class Xp {
 
 	public Xp(){
 		this.pontos = PONTOS_GANHOS_PELO_CADASTRO_VENDEDOR;
-		this.pontosAAdicionar = 0;
 	}
 
 	public int getPontos() {
@@ -51,6 +50,7 @@ public class Xp {
 
 	public void adicionarPontosPorVender(Produto produto) {
 		int pontosIncrementarPorPreco;
+		int pontosAAdicionar = 0;
 		if (produto.getItensNoEstoque() == 0){
 			if (produto.getQuantidade() == 1){
 				pontosAAdicionar = pontosAAdicionar + produto.getQuantidade() * PONTOS_GANHOS_PELA_VENDA_UM_ITEM;
@@ -62,45 +62,38 @@ public class Xp {
 				//pontos adicinados pela venda de todos os itens
 				pontosAAdicionar = pontosAAdicionar + produto.getQuantidade() * PONTOS_GANHOS_PELA_VENDA_TRES_ITENS_CADA;
 			}
-			
+
 			//pontos recebidos pelo valor do produto unitariamente
 			pontosIncrementarPorPreco = (int) (produto.getPreco() * PORCENTAGEM_PARA_INCREMENTAR_POR_PRECO);
 			pontosAAdicionar = pontosAAdicionar + pontosIncrementarPorPreco;
-			
+
 			//pontos recebidos pelo tempo de exposição-venda do produto
 			//observe q apenas após o último item vendido que é computado
 			pontosAAdicionar = pontosAAdicionar + pontosRecebidosPelaVenda(produto);
 			this.pontos = this.pontos + pontosAAdicionar;
 			produto.setPontos(pontosAAdicionar);
-			produto.setEstado(true);//é considerado vendido e não pode mais ser alterado. veja mét setEstado
-			zerarPontosAAdicionar();
-		}
-		produto.itensNoEstoque();
-
+		} 
 	}
 	public void adicionarPontosPorCadastrarProduto(){
 		this.pontos = this.pontos + PONTOS_GANHOS_PELO_CADASTRO_PRODUTO ;
 	}
+
 	public void removerPontosPelaRetiradaProduto(Produto produto){
 		this.pontos = this.pontos - produto.getPontos();
 	}
 
-	public void removerPontosPorPassadoNDias(boolean ehParaRemoverPontos){
-		int faixaDeCorrecao = corrigirPontuacaoAposPontosRemovidos();
-		if (ehParaRemoverPontos == true){
-			int quantidadePontosRemovidos = (int) (this.pontos*PORCENTAGEM_PARA_REMOVER_PONTOS_APOS_N_DIAS);
-			int valorCorrecao = (int) (this.pontos/DIVISOR_PERCENTUAL_PARA_INCREMENTO);
-			int correcao = faixaDeCorrecao * valorCorrecao;
-			this.pontos = this.pontos - quantidadePontosRemovidos + correcao;
-		}
+	public void removerPontosPorPassadoNDias(){
+		int faixaDeCorrecao;
+		faixaDeCorrecao = corrigirPontuacaoAposPontosRemovidos();
+		int quantidadePontosRemovidos = (int) (this.pontos*PORCENTAGEM_PARA_REMOVER_PONTOS_APOS_N_DIAS);
+		int valorCorrecao = (int) (this.pontos/DIVISOR_PERCENTUAL_PARA_INCREMENTO);
+		int correcao = faixaDeCorrecao * valorCorrecao;
+		this.pontos = this.pontos - quantidadePontosRemovidos + correcao;
 	}
 
-	private void zerarPontosAAdicionar(){
-		this.pontosAAdicionar = 0;
-	}
 
 	private int corrigirPontuacaoAposPontosRemovidos(){
-		int faixaDeCorrecao = 0;
+		int faixaDeCorrecao;
 		if (this.pontos < 100) {
 			faixaDeCorrecao = FAIXA_CORRECAO_ATE_100;
 		} else if (this.pontos >= 100 && this.pontos < 250) {
@@ -123,7 +116,7 @@ public class Xp {
 
 	private int pontosRecebidosPelaVenda(Produto produto){
 		int pontosRecebidosPelaVendaEm;
-		Period diferencaExposicaoVenda = Period.between(produto.getTempoVenda(), LocalDate.now());
+		Period diferencaExposicaoVenda = Period.between(produto.getTempoCriacaoProduto(), LocalDate.now());
 		int difAnoExpoVenda = diferencaExposicaoVenda.getYears();
 		int difMesExpoVenda = diferencaExposicaoVenda.getMonths();
 		int difDiaExpoVenda = diferencaExposicaoVenda.getDays();
@@ -148,6 +141,5 @@ public class Xp {
 		}
 		return pontosRecebidosPelaVendaEm;
 	}
-	
-	
+
 }

@@ -4,11 +4,14 @@ import java.util.List;
 
 import br.ufrpe.dados.IRepositorioProduto;
 import br.ufrpe.dados.RepositorioProduto;
+import br.ufrpe.negocio.classes_basicas.Comprador;
 import br.ufrpe.negocio.classes_basicas.Produto;
 import br.ufrpe.negocio.classes_basicas.Vendedor;
-import br.ufrpe.negocio.classes_basicas.Xp;
+import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoCompradorException;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoProdutoException;
+import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoVendedorException;
 import br.ufrpe.negocio.exceptions_negocio.ProdutoJaCadastradoException;
+import br.ufrpe.negocio.filtro.Filtro;
 
 public class ControladorProduto {
 	private IRepositorioProduto repositorio;
@@ -17,21 +20,48 @@ public class ControladorProduto {
 		this.repositorio = RepositorioProduto.getInstancia();	
 	}
 
-	public void cadastrarProduto(Produto produto) throws ProdutoJaCadastradoException {
+	public void cadastrarProduto(Produto produto, Vendedor vendedor) throws ProdutoJaCadastradoException {
 		boolean produtoJaExiste;
 		if (produto == null){
-			throw new NullPointerException();
+			throw new IllegalArgumentException();
 		} else{
-			produtoJaExiste = repositorio.verificarNomeProdutoJaExiste(produto.getNome());
+			produtoJaExiste = repositorio.verificarNomeProdutoJaExiste(produto.getNome(), vendedor);
 			if (produtoJaExiste == false){
-			repositorio.cadastrarProduto(produto);
+				repositorio.cadastrarProduto(produto);
+				vendedor.getXp().adicionarPontosPorCadastrarProduto();
 			} else{
 				throw new ProdutoJaCadastradoException();
 			}
+		}
 	}
 
-	public void removerProduto(String nomeProduto) throws NaoEncontradoProdutoException {
-		repositorio.removerProduto(nomeProduto);
+	public void removerProduto(Produto produto) throws NaoEncontradoProdutoException {
+		if (produto != null){
+			int index = repositorio.procurarIndice(produto);
+			if (index != -1){
+				produto.getVendedor().getXp().removerPontosPelaRetiradaProduto(produto);
+				repositorio.removerProduto(produto);
+			}
+		} else {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	public void atualizarProduto(Produto produto, Vendedor vendedor) throws NaoEncontradoProdutoException {
+		Produto p;
+		int index;
+		if (produto != null && vendedor != null){
+			p  = repositorio.retornarProduto(produto.getNome(), vendedor, null);
+			index = repositorio.procurarIndice(produto);
+		} else {
+			throw new IllegalArgumentException();
+		}
+
+		if (index != -1 && p != null){
+			repositorio.atualizarProduto(p, index);
+		} else {
+			throw new NaoEncontradoProdutoException();
+		}
 	}
 
 	public void salvarProduto() {
@@ -43,19 +73,66 @@ public class ControladorProduto {
 		return repositorio.getProdutos();
 	}
 
-	public Produto exibirInfoProduto(String nomeProduto, List<Produto> produto) {
-		return repositorio.exibirInfoProduto(nomeProduto, produto);
+	public Produto retornarProduto(String nomeProduto, Vendedor vendedor, List<Produto> produtos) {
+		return repositorio.retornarProduto(nomeProduto, vendedor, produtos);
 	}
 
-	/*
-	public void vendeuProduto(Produto produto, Vendedor vendedor) throws NaoEncontradoProdutoException {
+	public List<Produto> buscarProdutos(Filtro filtro) throws NaoEncontradoProdutoException{
+		List<Produto> produtosParcialmenteRefinados = null; 
+		if (!filtro.getNomeProduto().equals("")){
+			produtosParcialmenteRefinados = repositorio.procurarProdutoPorNome(filtro.getNomeProduto(), produtosParcialmenteRefinados);
+		}
 
-		repositorio.procurarProdutoPorNome(produto.getNome(), null);
+		if (!filtro.getCategoria().equals("")){
+			produtosParcialmenteRefinados = repositorio.procurarProdutoPorCategoria(filtro.getCategoria(), produtosParcialmenteRefinados);
+		}
 
-		Xp xp = vendedor.getXp();
-		xp.adicionarPontosPorVender(produto); //atualiza pts e muda estado do produto p/ vendido(true)
-		vendedor.setXp(xp); 				  //atualizando o xp do vendedor
+		if(filtro.getFaixaPrecoDe() != 0.0 || filtro.getFaixaPrecoAte() != 0.0){
+			if (filtro.getFaixaPrecoDe() > filtro.getFaixaPrecoAte()){// se de for maior que ate, inverta os valores
+				double momentaneo = filtro.getFaixaPrecoDe();
+				filtro.setFaixaPrecoDe(filtro.getFaixaPrecoAte());
+				filtro.setFaixaPrecoAte(momentaneo);
+			}
+			produtosParcialmenteRefinados = repositorio.procurarProdutoPorFaixaPreco(filtro.getFaixaPrecoDe(), filtro.getFaixaPrecoAte(), produtosParcialmenteRefinados);
+		}
 
-		repositorio.removerProduto(produto.getNome()); //remove
-	}*/
+		if (!filtro.getLocalVendedor().equals("")){
+			produtosParcialmenteRefinados = repositorio.procurarProdutoPorLocalVendedor(filtro.getLocalVendedor(), produtosParcialmenteRefinados);
+
+		}
+
+		if (produtosParcialmenteRefinados == null){
+			throw new NaoEncontradoProdutoException();
+		}
+
+		return produtosParcialmenteRefinados;
+	}
+
+	public List<Produto> organizarProdutos (List<Produto> produtosASeremOrganizados) throws NaoEncontradoProdutoException{
+		List<Produto> retAux = null;
+		if (produtosASeremOrganizados != null){
+			retAux = repositorio.organizarProduto(produtosASeremOrganizados);
+		} else{
+			throw new NaoEncontradoProdutoException();
+		}
+		return retAux;
+	}
+
+	public void venderProduto(Produto produto, Vendedor vendedor, Comprador comprador) throws NaoEncontradoProdutoException,
+	NaoEncontradoVendedorException, NaoEncontradoCompradorException {
+		if (produto != null && comprador != null && vendedor != null){// todos devem existir senão não há transação
+			produto.decrementarItensNoEstoque();
+			comprador.setProdutosAdquiridos(produto);
+			vendedor.getXp().adicionarPontosPorVender(produto); 
+			if (produto.getItensNoEstoque() == 0){
+				produto.setEstado(true);//é considerado vendido (não aparece nas buscas) e não pode mais ser alterado. veja método setEstado
+			}
+		} else {
+			throw new IllegalArgumentException();
+		}
+
+		//decrementa o n° de itens, atualiza pts do vendedor e muda estado do produto p/ vendido(true) se todos os itens do produto for vendido
+
+
+	}
 }

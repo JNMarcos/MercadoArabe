@@ -2,6 +2,8 @@ package br.ufrpe.negocio.classes_basicas;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
+
 import br.ufrpe.negocio.exceptions_negocio.QuantidadeMaximaItensUltrapassadaException;
 
 public class Produto implements Comparable<Produto>, Serializable{
@@ -20,7 +22,12 @@ public class Produto implements Comparable<Produto>, Serializable{
 	private LocalDate tempoCriacaoProduto;
 	private int pontos;//qtd de pontos que esse produto gerou ao Vendedor, facilita na hora de remoção
 	private Vendedor vendedor;
+	private List<Comprador> compradoresInteressados;
 	
+	public Produto(){
+		setTempoCriacaoProduto();
+	}
+
 	private final static int NUMERO_MAXIMO_ITENS_POR_PRODUTO = 3;
 
 	public String getNome() {
@@ -57,7 +64,7 @@ public class Produto implements Comparable<Produto>, Serializable{
 		this.itensNoEstoque = itensNoEstoque;
 	}
 	//indica quantos itens faltam a serem vendidos. O chama toda vez que vender um produto
-	public void itensNoEstoque(){
+	public void decrementarItensNoEstoque(){
 		if (this.itensNoEstoque > 0) this.itensNoEstoque--;
 	}
 	public double getPreco() {
@@ -72,12 +79,6 @@ public class Produto implements Comparable<Produto>, Serializable{
 	public void setEstado(boolean estado) {
 		if (this.estado != true)
 		this.estado = estado;
-	}
-	public LocalDate getTempoVenda() {
-		return tempoCriacaoProduto;
-	}
-	public void setTempoVenda(LocalDate tempoVenda) {
-		this.tempoCriacaoProduto = LocalDate.now();
 	}
 
 	public int getPontos() {
@@ -94,21 +95,36 @@ public class Produto implements Comparable<Produto>, Serializable{
 	public void setVendedor(Vendedor vendedor) {
 		this.vendedor = vendedor;
 	}
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
+	
+	public LocalDate getTempoCriacaoProduto() {
+		return tempoCriacaoProduto;
+	}
+	private void setTempoCriacaoProduto() {
+		this.tempoCriacaoProduto = LocalDate.now();
+	}
+	public List<Comprador> getCompradoresInteressados() {
+		return compradoresInteressados;
+	}
+	public void setCompradoresInteressados(List<Comprador> compradoresInteressados) {
+		this.compradoresInteressados = compradoresInteressados;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((categoria == null) ? 0 : categoria.hashCode());
+		result = prime * result
+				+ ((categoria == null) ? 0 : categoria.hashCode());
+		result = prime * result + (estado ? 1231 : 1237);
+		result = prime * result + itensNoEstoque;
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(preco);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + quantidade;
+		result = prime * result
+				+ ((vendedor == null) ? 0 : vendedor.hashCode());
 		return result;
 	}
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -128,14 +144,10 @@ public class Produto implements Comparable<Produto>, Serializable{
 		} else if (!categoria.equals(other.categoria)) {
 			return false;
 		}
-		if (descricao == null) {
-			if (other.descricao != null) {
-				return false;
-			}
-		} else if (!descricao.equals(other.descricao)) {
+		if (estado != other.estado) {
 			return false;
 		}
-		if (estado != other.estado) {
+		if (itensNoEstoque != other.itensNoEstoque) {
 			return false;
 		}
 		if (nome == null) {
@@ -152,11 +164,11 @@ public class Produto implements Comparable<Produto>, Serializable{
 		if (quantidade != other.quantidade) {
 			return false;
 		}
-		if (tempoCriacaoProduto == null) {
-			if (other.tempoCriacaoProduto != null) {
+		if (vendedor == null) {
+			if (other.vendedor != null) {
 				return false;
 			}
-		} else if (!tempoCriacaoProduto.equals(other.tempoCriacaoProduto)) {
+		} else if (!vendedor.equals(other.vendedor)) {
 			return false;
 		}
 		return true;
