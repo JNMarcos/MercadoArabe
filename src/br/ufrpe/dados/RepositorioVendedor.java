@@ -18,6 +18,7 @@ import br.ufrpe.negocio.classes_basicas.Vendedor;
 import br.ufrpe.negocio.controladores.ControladorVendedor;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoVendedorException;
 import br.ufrpe.negocio.exceptions_negocio.SenhaIncorretaException;
+import br.ufrpe.negocio.utilidades.PessoaUtilidades;
 
 public class RepositorioVendedor extends PessoaUtilidades implements IRepositorioVendedor, Serializable{
 

@@ -10,8 +10,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import br.ufrpe.negocio.classes_basicas.Comprador;
 import br.ufrpe.negocio.controladores.ControladorComprador;
+import br.ufrpe.negocio.utilidades.PessoaUtilidades;
 
 public class RepositorioComprador extends PessoaUtilidades implements IRepositorioComprador, Serializable {
 	private static final long serialVersionUID = 1L;

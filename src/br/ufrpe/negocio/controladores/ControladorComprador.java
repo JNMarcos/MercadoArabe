@@ -3,7 +3,6 @@ package br.ufrpe.negocio.controladores;
 import java.util.List;
 
 import br.ufrpe.dados.IRepositorioComprador;
-import br.ufrpe.dados.PessoaUtilidades;
 import br.ufrpe.dados.RepositorioComprador;
 import br.ufrpe.negocio.classes_basicas.Comprador;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoCompradorException;
@@ -11,6 +10,7 @@ import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioForaPadroesException;
 import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioJaCadastradoException;
 import br.ufrpe.negocio.exceptions_negocio.SenhaForaPadroesException;
 import br.ufrpe.negocio.exceptions_negocio.SenhaIncorretaException;
+import br.ufrpe.negocio.utilidades.PessoaUtilidades;
 
 public class ControladorComprador {
 	private IRepositorioComprador repositorio;

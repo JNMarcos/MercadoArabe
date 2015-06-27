@@ -1,6 +1,6 @@
-package br.ufrpe.dados;
+package br.ufrpe.negocio.utilidades;
 
-public abstract class PessoaUtilidades {
+public class PessoaUtilidades {
 	private static final int N_MINIMO_CARACTERES_SENHA = 8;
 	private static final int N_MAXIMO_CARACTERES_SENHA = 24;
 	private static final int N_MINIMO_CARACTERES_NOME_USUARIO = 4;

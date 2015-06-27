@@ -6,7 +6,6 @@ import java.util.List;
 
 import br.ufrpe.dados.IRepositorioProduto;
 import br.ufrpe.dados.IRepositorioVendedor;
-import br.ufrpe.dados.PessoaUtilidades;
 import br.ufrpe.dados.RepositorioProduto;
 import br.ufrpe.dados.RepositorioVendedor;
 import br.ufrpe.negocio.classes_basicas.Produto;
@@ -17,6 +16,7 @@ import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioForaPadroesException;
 import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioJaCadastradoException;
 import br.ufrpe.negocio.exceptions_negocio.SenhaForaPadroesException;
 import br.ufrpe.negocio.exceptions_negocio.SenhaIncorretaException;
+import br.ufrpe.negocio.utilidades.PessoaUtilidades;
 
 public class ControladorVendedor {
 

@@ -1,17 +1,12 @@
 package br.ufrpe.gui;
 
-import javax.swing.JFrame;
-
 import java.awt.Font;
-import java.awt.Frame;
 import java.awt.SystemColor;
 
-import javax.swing.JTextPane;
 import javax.swing.JButton;
-import javax.swing.JPanel;
-
-import java.awt.BorderLayout;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 public class TelaSobre extends JFrame{

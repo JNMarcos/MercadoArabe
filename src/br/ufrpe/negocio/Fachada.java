@@ -20,16 +20,12 @@ import br.ufrpe.negocio.exceptions_negocio.SenhaIncorretaException;
 import br.ufrpe.negocio.filtro.Filtro;
 
 public class Fachada {
-<<<<<<< HEAD
-	private ControladorProduto controladorProduto = new ControladorProduto();
-	private ControladorVendedor controladorVendedor = new ControladorVendedor();
-	private ControladorComprador controladorComprador = new ControladorComprador();
-=======
+
 	private ControladorProduto controladorProduto;
 	private ControladorVendedor controladorVendedor;
 	private ControladorComprador controladorComprador;
 	private Filtro filtro;
->>>>>>> origin/master
+
 
 	public Fachada() {
 		controladorProduto = new ControladorProduto();
@@ -83,13 +79,6 @@ public class Fachada {
 		return controladorVendedor.getVendedores();
 	}
 
-<<<<<<< HEAD
-=======
-	public Vendedor exibirInfoVendedor(String cpf) throws NaoEncontradoVendedorException {
-		return controladorVendedor.exibirInfoVendedor(cpf);
-	}
-
->>>>>>> origin/master
 	public Vendedor verificarLoginVendedor(String nomeUsuario, String senha) 
 			throws NaoEncontradoVendedorException, SenhaIncorretaException {
 		return controladorVendedor.verificarLogin(nomeUsuario, senha);
