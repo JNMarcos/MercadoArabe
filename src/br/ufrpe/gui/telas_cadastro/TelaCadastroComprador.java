@@ -149,6 +149,9 @@ public class TelaCadastroComprador {
 				textField_User.setText("");
 				passwordField.setText("");
 				
+			} catch(NomeVazioException e) {
+				JOptionPane.showMessageDialog(null, "Informe um nome!");
+				passwordField.setText("");
 			} catch(NomeUsuarioForaPadroesException e) {
 				JOptionPane.showMessageDialog(null, "Usuário inválido! Tente novamente!\n "
 						+ "O Usuário deve conter no minimo 4 caracteres.");
@@ -162,10 +165,7 @@ public class TelaCadastroComprador {
 				JOptionPane.showMessageDialog(null, "Nome de usuário já cadastrado! Tente um diferente!");
 				textField_User.setText("");
 				passwordField.setText("");
-			} catch(NomeVazioException e) {
-				JOptionPane.showMessageDialog(null, "Informe um nome!");
-				passwordField.setText("");
-			}
+			} 
 		}
 	}
 }
