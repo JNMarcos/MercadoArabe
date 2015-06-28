@@ -8,6 +8,7 @@ import br.ufrpe.negocio.classes_basicas.Comprador;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoCompradorException;
 import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioForaPadroesException;
 import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioJaCadastradoException;
+import br.ufrpe.negocio.exceptions_negocio.NomeVazioException;
 import br.ufrpe.negocio.exceptions_negocio.SenhaForaPadroesException;
 import br.ufrpe.negocio.exceptions_negocio.SenhaIncorretaException;
 import br.ufrpe.negocio.utilidades.PessoaUtilidades;
@@ -23,7 +24,8 @@ public class ControladorComprador {
 		return repositorio.getCompradores();
 	}
 
-	public void cadastrarComprador(Comprador comprador) throws NomeUsuarioJaCadastradoException, NomeUsuarioForaPadroesException, SenhaForaPadroesException {
+	public void cadastrarComprador(Comprador comprador) throws NomeUsuarioJaCadastradoException, 
+		NomeUsuarioForaPadroesException, SenhaForaPadroesException, NomeVazioException {
 		boolean nomeUsuarioJaExiste;
 		if (comprador == null){
 			throw new IllegalArgumentException();
@@ -38,6 +40,12 @@ public class ControladorComprador {
 			} else{
 				throw new SenhaForaPadroesException();
 			}
+			if(PessoaUtilidades.nomeNosConformes(comprador.getNome())) {
+				
+			} else {
+				throw new NomeVazioException();
+			}
+				
 			nomeUsuarioJaExiste = repositorio.verificarNomeUsuarioJaExiste(comprador.getNomeUsuario());
 			if (nomeUsuarioJaExiste == false){
 				repositorio.cadastrarComprador(comprador);

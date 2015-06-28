@@ -14,6 +14,7 @@ import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoProdutoException;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoVendedorException;
 import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioForaPadroesException;
 import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioJaCadastradoException;
+import br.ufrpe.negocio.exceptions_negocio.NomeVazioException;
 import br.ufrpe.negocio.exceptions_negocio.ProdutoJaCadastradoException;
 import br.ufrpe.negocio.exceptions_negocio.SenhaForaPadroesException;
 import br.ufrpe.negocio.exceptions_negocio.SenhaIncorretaException;
@@ -89,7 +90,7 @@ public class Fachada {
 	}
 
 	//COMPRADOR
-	public void cadastrarComprador(Comprador comprador) throws NomeUsuarioJaCadastradoException, NomeUsuarioForaPadroesException, SenhaForaPadroesException {
+	public void cadastrarComprador(Comprador comprador) throws NomeUsuarioJaCadastradoException, NomeUsuarioForaPadroesException, SenhaForaPadroesException, NomeVazioException {
 		controladorComprador.cadastrarComprador(comprador);
 	}
 

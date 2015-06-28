@@ -61,15 +61,22 @@ public class PessoaUtilidades {
 		return senhaOK;
 	}
 
-		public static boolean nomeUsuarioNosConformes(String nomeUsuario){
-			boolean nomeUsuarioOK = false;
-			if (!nomeUsuario.isEmpty()){
-				if (nomeUsuario.length() >= N_MINIMO_CARACTERES_NOME_USUARIO && nomeUsuario.length() <= N_MAXIMO_CARACTERES_NOME_USUARIO){
-					nomeUsuarioOK = true;
-				}
+	public static boolean nomeUsuarioNosConformes(String nomeUsuario){
+		boolean nomeUsuarioOK = false;
+		if (!nomeUsuario.isEmpty()){
+			if (nomeUsuario.length() >= N_MINIMO_CARACTERES_NOME_USUARIO && nomeUsuario.length() <= N_MAXIMO_CARACTERES_NOME_USUARIO){
+				nomeUsuarioOK = true;
 			}
-			return nomeUsuarioOK;
 		}
-
+		return nomeUsuarioOK;
+	}
+	
+	public static boolean nomeNosConformes(String nome) {
+		boolean nomeOK = false;
+		if (!nome.isEmpty()) //força o usuario a informar seu nome
+			nomeOK = true;
+		
+		return nomeOK;
+	}
 
 }

@@ -2,24 +2,35 @@ package br.ufrpe.gui.telas_cadastro;
 
 import java.awt.EventQueue;
 import java.awt.Font;
-
-import javax.swing.JFrame;
-
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import br.ufrpe.negocio.Fachada;
+import br.ufrpe.negocio.classes_basicas.Comprador;
+import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioForaPadroesException;
+import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioJaCadastradoException;
+import br.ufrpe.negocio.exceptions_negocio.NomeVazioException;
+import br.ufrpe.negocio.exceptions_negocio.SenhaForaPadroesException;
 
 public class TelaCadastroComprador {
 
 	private JFrame frmCadastroComprador;
 	JPanel panel;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField textField_User;
+	private JTextField textField_Nome;
+	private JTextField textField_Email;
+	private JPasswordField passwordField;
+	private Comprador comprador;
+	private Fachada fachada;
 
 	/**
 	 * Launch the application.
@@ -61,52 +72,100 @@ public class TelaCadastroComprador {
 		panel.setLayout(null);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setBounds(169, 173, 89, 23);
+		btnCadastrar.setBounds(169, 173, 91, 23);
 		panel.add(btnCadastrar);
 		btnCadastrar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
-		textField_3 = new JTextField();
-		textField_3.setFont(new Font("Gisha", Font.PLAIN, 13));
-		textField_3.setBounds(88, 63, 268, 20);
-		panel.add(textField_3);
-		textField_3.setColumns(10);
+		//add acao ao botao cadastrar
+		fachada = new Fachada();
+		comprador = new Comprador();
+		EventoBotaoCadastrar acaoBtnCadastrar = new EventoBotaoCadastrar();
+		btnCadastrar.addActionListener(acaoBtnCadastrar);
 		
-		JLabel lblSenha = new JLabel("Senha");
-		lblSenha.setBounds(22, 144, 46, 14);
-		panel.add(lblSenha);
-		lblSenha.setFont(new Font("Gisha", Font.PLAIN, 13));
+		JLabel lblNome = new JLabel("Nome");
+		lblNome.setBounds(22, 27, 46, 14);
+		panel.add(lblNome);
+		lblNome.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
-		textField_2 = new JTextField();
-		textField_2.setFont(new Font("Gisha", Font.PLAIN, 13));
-		textField_2.setBounds(88, 141, 129, 20);
-		panel.add(textField_2);
-		textField_2.setColumns(10);
-		
-		JLabel lblUsurio = new JLabel("Usu\u00E1rio");
-		lblUsurio.setBounds(22, 104, 46, 14);
-		panel.add(lblUsurio);
-		lblUsurio.setFont(new Font("Gisha", Font.PLAIN, 13));
-		
-		textField_1 = new JTextField();
-		textField_1.setFont(new Font("Gisha", Font.PLAIN, 13));
-		textField_1.setBounds(88, 24, 269, 20);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
+		textField_Nome = new JTextField();
+		textField_Nome.setFont(new Font("Gisha", Font.PLAIN, 13));
+		textField_Nome.setBounds(88, 24, 269, 20);
+		panel.add(textField_Nome);
+		textField_Nome.setColumns(10);
 		
 		JLabel lblEmail = new JLabel("E-mail");
 		lblEmail.setBounds(22, 66, 46, 14);
 		panel.add(lblEmail);
 		lblEmail.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Gisha", Font.PLAIN, 13));
-		textField.setBounds(88, 101, 266, 20);
-		panel.add(textField);
-		textField.setColumns(10);
+		textField_Email = new JTextField();
+		textField_Email.setFont(new Font("Gisha", Font.PLAIN, 13));
+		textField_Email.setBounds(88, 63, 268, 20);
+		panel.add(textField_Email);
+		textField_Email.setColumns(10);
 		
-		JLabel lblNome = new JLabel("Nome");
-		lblNome.setBounds(22, 27, 46, 14);
-		panel.add(lblNome);
-		lblNome.setFont(new Font("Gisha", Font.PLAIN, 13));
+		JLabel lblUsurio = new JLabel("Usu\u00E1rio");
+		lblUsurio.setBounds(22, 104, 46, 14);
+		panel.add(lblUsurio);
+		lblUsurio.setFont(new Font("Gisha", Font.PLAIN, 13));
+		
+		textField_User = new JTextField();
+		textField_User.setFont(new Font("Gisha", Font.PLAIN, 13));
+		textField_User.setBounds(88, 101, 266, 20);
+		panel.add(textField_User);
+		textField_User.setColumns(10);
+		
+		JLabel lblSenha = new JLabel("Senha");
+		lblSenha.setBounds(22, 141, 46, 14);
+		panel.add(lblSenha);
+		lblSenha.setFont(new Font("Gisha", Font.PLAIN, 13));
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(88, 141, 129, 20);
+		panel.add(passwordField);
+
+	}
+	
+	//metodo 
+	private class EventoBotaoCadastrar implements ActionListener {
+		public void actionPerformed(ActionEvent evento) {
+			try {
+				comprador.setNome(textField_Nome.getText()); 			//nome
+				
+				String s = new String(passwordField.getPassword());		//senha
+				comprador.setSenha(s);
+				
+				comprador.setNomeUsuario(textField_User.getText());		//user
+				
+				//precisa-se fazer um campo email pro comprador ou retirar daqui. Campo data de Nascimento em branco.
+				
+				fachada.cadastrarComprador(comprador); //cadastra
+				fachada.salvarComprador(); 
+				
+				//mensagem boas vindas
+				JOptionPane.showMessageDialog(null, "Usuário Cadastrado com sucesso!\nBem vindo ao Mercado Árabe!");
+				textField_Email.setText("");
+				textField_Nome.setText("");
+				textField_User.setText("");
+				passwordField.setText("");
+				
+			} catch(NomeUsuarioForaPadroesException e) {
+				JOptionPane.showMessageDialog(null, "Usuário inválido! Tente novamente!\n "
+						+ "O Usuário deve conter no minimo 4 caracteres.");
+				textField_User.setText("");
+				passwordField.setText("");
+			} catch(SenhaForaPadroesException e) {
+				JOptionPane.showMessageDialog(null, "Senha inválida! Tente novamente!\n "
+						+ "A Senha deve conter no mínimo 8 caracteres, etc.."); //organizar aqui
+				passwordField.setText("");
+			} catch(NomeUsuarioJaCadastradoException e) {
+				JOptionPane.showMessageDialog(null, "Nome de usuário já cadastrado! Tente um diferente!");
+				textField_User.setText("");
+				passwordField.setText("");
+			} catch(NomeVazioException e) {
+				JOptionPane.showMessageDialog(null, "Informe um nome!");
+				passwordField.setText("");
+			}
+		}
 	}
 }
