@@ -1,6 +1,5 @@
 package br.ufrpe.gui.telas_cadastro;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
@@ -24,29 +23,29 @@ import br.ufrpe.negocio.exceptions_negocio.SenhaForaPadroesException;
 public class TelaCadastroComprador {
 
 	private JFrame frmCadastroComprador;
-	JPanel panel;
 	private JTextField textField_User;
 	private JTextField textField_Nome;
 	private JTextField textField_Email;
 	private JPasswordField passwordField;
+	private JButton btnCadastrar;
 	private Comprador comprador;
 	private Fachada fachada;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaCadastroComprador window = new TelaCadastroComprador();
-					window.frmCadastroComprador.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					TelaCadastroComprador window = new TelaCadastroComprador();
+//					window.frmCadastroComprador.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
@@ -63,24 +62,18 @@ public class TelaCadastroComprador {
 		frmCadastroComprador.setTitle("Cadastro Comprador");
 		frmCadastroComprador.getContentPane().setBackground(SystemColor.activeCaption);
 		frmCadastroComprador.setBounds(100, 100, 450, 257);
-		frmCadastroComprador.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmCadastroComprador.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmCadastroComprador.getContentPane().setLayout(null);
 		
-		panel = new JPanel();
+		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 434, 218);
 		frmCadastroComprador.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setBounds(169, 173, 91, 23);
-		panel.add(btnCadastrar);
 		btnCadastrar.setFont(new Font("Gisha", Font.PLAIN, 13));
-		
-		//add acao ao botao cadastrar
-		fachada = new Fachada();
-		comprador = new Comprador();
-		EventoBotaoCadastrar acaoBtnCadastrar = new EventoBotaoCadastrar();
-		btnCadastrar.addActionListener(acaoBtnCadastrar);
+		panel.add(btnCadastrar);
 		
 		JLabel lblNome = new JLabel("Nome");
 		lblNome.setBounds(22, 27, 46, 14);
@@ -124,23 +117,37 @@ public class TelaCadastroComprador {
 		passwordField.setBounds(88, 141, 129, 20);
 		panel.add(passwordField);
 
+		//add acao ao botao cadastrar
+		fachada = new Fachada();
+		comprador = new Comprador();
+		EventoBotaoCadastrar acaoBtnCadastrar = new EventoBotaoCadastrar();
+		btnCadastrar.addActionListener(acaoBtnCadastrar);
 	}
 	
-	//metodo 
+	public void setVisible(boolean opcao) {
+		if(opcao == true)
+			frmCadastroComprador.setVisible(true);
+		else
+			frmCadastroComprador.setVisible(false);
+	}
+	
 	private class EventoBotaoCadastrar implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 			try {
-				comprador.setNome(textField_Nome.getText()); 			//nome
+				//nome
+				comprador.setNome(textField_Nome.getText());
 				
-				String s = new String(passwordField.getPassword());		//senha
+				//senha
+				String s = new String(passwordField.getPassword());
 				comprador.setSenha(s);
 				
-				comprador.setNomeUsuario(textField_User.getText());		//user
+				//usuario
+				comprador.setNomeUsuario(textField_User.getText());
 				
 				//precisa-se fazer um campo email pro comprador ou retirar daqui. Campo data de Nascimento em branco.
 				
 				fachada.cadastrarComprador(comprador); //cadastra
-				fachada.salvarComprador(); 
+				fachada.salvarComprador();			   //salva
 				
 				//mensagem boas vindas
 				JOptionPane.showMessageDialog(null, "Usuário Cadastrado com sucesso!\nBem vindo ao Mercado Árabe!");
@@ -148,6 +155,8 @@ public class TelaCadastroComprador {
 				textField_Nome.setText("");
 				textField_User.setText("");
 				passwordField.setText("");
+				
+				frmCadastroComprador.dispose(); //volta p/ tela inicio
 				
 			} catch(NomeVazioException e) {
 				JOptionPane.showMessageDialog(null, "Informe um nome!");
@@ -165,7 +174,7 @@ public class TelaCadastroComprador {
 				JOptionPane.showMessageDialog(null, "Nome de usuário já cadastrado! Tente um diferente!");
 				textField_User.setText("");
 				passwordField.setText("");
-			} 
+			}
 		}
 	}
 }
