@@ -58,6 +58,7 @@ public class TelaInicio {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		//algo a mais
 		frame = new JFrame();
 		frame.setTitle("Mercado Árabe");
 		frame.getContentPane().setBackground(SystemColor.activeCaption);

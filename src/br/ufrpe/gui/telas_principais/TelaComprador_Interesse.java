@@ -16,8 +16,6 @@ public class TelaComprador_Interesse {
 	private JPanel panel;
 	private JButton btnNewButton_1;
 	private JButton btnNewButton;
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Create the application.
 	 */
