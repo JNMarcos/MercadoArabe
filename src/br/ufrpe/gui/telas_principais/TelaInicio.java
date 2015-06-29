@@ -15,14 +15,12 @@ import javax.swing.SwingConstants;
 
 import br.ufrpe.gui.telas_cadastro.TelaCadastroComprador;
 import br.ufrpe.gui.telas_cadastro.TelaCadastroVendedor;
-<<<<<<< HEAD
 import br.ufrpe.gui.telas_login.TelaLoginComprador;
 import br.ufrpe.gui.telas_login.TelaLoginVendedor;
-=======
->>>>>>> origin/master
+
 
 public class TelaInicio {
-	
+
 	private JFrame frame;
 	private JButton btnComprador;
 	private JButton btnVendedor;
@@ -85,44 +83,27 @@ public class TelaInicio {
 		panel.add(lblEntre);
 
 		//buttons
-		
+
 		//Logar Comprador
 		btnComprador = new JButton("Comprador");
 		btnComprador.setBounds(77, 146, 105, 25);
 		btnComprador.setFont(new Font("Gisha", Font.PLAIN, 13));
 		panel.add(btnComprador);
-<<<<<<< HEAD
 
 		EventoBotaoLoginComprador acaoLoginComprador = new EventoBotaoLoginComprador();
 		btnComprador.addActionListener(acaoLoginComprador);
 		telaLoginComprador = new TelaLoginComprador();
 
-=======
-		
-		EventoBotaoLoginComprador acaoLoginComprador = new EventoBotaoLoginComprador();
-		btnComprador.addActionListener(acaoLoginComprador);
-		telaLoginComprador = new TelaLoginComprador();
-		
->>>>>>> origin/master
 		//Logar vendedor
 		btnVendedor = new JButton("Vendedor");
 		btnVendedor.setBounds(268, 146, 105, 25);
 		btnVendedor.setFont(new Font("Gisha", Font.PLAIN, 13));
 		panel.add(btnVendedor);
-<<<<<<< HEAD
 
 		EventoBotaoLoginVendedor acaoLoginVendedor = new EventoBotaoLoginVendedor();
 		btnVendedor.addActionListener(acaoLoginVendedor);
 		telaLoginVendedor = new TelaLoginVendedor();
 
-=======
-		
-		EventoBotaoLoginVendedor acaoLoginVendedor = new EventoBotaoLoginVendedor();
-		btnVendedor.addActionListener(acaoLoginVendedor);
-		telaLoginVendedor = new TelaLoginVendedor();
-		
-		//Cadastrar Comprador
->>>>>>> origin/master
 		btnCadComprador = new JButton("Cadastre-se");
 		btnCadComprador.setBounds(77, 187, 101, 23);
 		btnCadComprador.setBackground(null);
@@ -130,8 +111,6 @@ public class TelaInicio {
 		btnCadComprador.setContentAreaFilled(false);
 		btnCadComprador.setForeground(new Color(0, 0, 204));
 		btnCadComprador.setFont(new Font("Gisha", Font.PLAIN, 13));
-		panel.add(btnCadComprador);
-<<<<<<< HEAD
 
 		//evento
 		EventoBotaoCadastrarComprador acaoBtnCadComprador = new EventoBotaoCadastrarComprador();
@@ -139,15 +118,7 @@ public class TelaInicio {
 		telaCadComprador = new TelaCadastroComprador();
 
 		btnCadVendedor = new JButton("Cadastre-se");
-=======
-		
-		EventoBotaoCadastrarComprador acaoBtnCadComprador = new EventoBotaoCadastrarComprador();
-		btnCadComprador.addActionListener(acaoBtnCadComprador);
-		telaCadComprador = new TelaCadastroComprador();
-		
-		//Cadastrar vendedor
-		btnCadVendedor = new JButton("Cadastre-se"); //falta
->>>>>>> origin/master
+
 		btnCadVendedor.setBackground(null);
 		btnCadVendedor.setBorder(null);
 		btnCadVendedor.setContentAreaFilled(false);
@@ -155,36 +126,11 @@ public class TelaInicio {
 		btnCadVendedor.setBounds(268, 185, 103, 25);
 		btnCadVendedor.setFont(new Font("Gisha", Font.PLAIN, 13));
 		panel.add(btnCadVendedor);
-<<<<<<< HEAD
 
-		//addEvento
-=======
-		
 		EventoBotaoCadastrarVendedor acaoBtnCadVendedor = new EventoBotaoCadastrarVendedor();
 		btnCadVendedor.addActionListener(acaoBtnCadVendedor);
 		telaCadVendedor = new TelaCadastroVendedor();
 	}
-	
-	private class EventoBotaoLoginVendedor implements ActionListener {
-		public void actionPerformed(ActionEvent evento) {
-			telaLoginVendedor.setVisible(true);
-		}
-	}
-	
-	private class EventoBotaoLoginComprador implements ActionListener { 
-		public void actionPerformed(ActionEvent evento) {
-			telaLoginComprador.setVisible(true);
-		}
->>>>>>> origin/master
-	}
-
-	private class EventoBotaoCadastrarComprador implements ActionListener {
-		public void actionPerformed(ActionEvent evento) {
-			telaCadComprador.setVisible(true);
-		}
-	}
-<<<<<<< HEAD
-
 
 	private class EventoBotaoLoginVendedor implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
@@ -203,10 +149,6 @@ public class TelaInicio {
 			telaCadComprador.setVisible(true);
 		}
 	}
-
-=======
-	
->>>>>>> origin/master
 	private class EventoBotaoCadastrarVendedor implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 			telaCadVendedor.setVisible(true);
