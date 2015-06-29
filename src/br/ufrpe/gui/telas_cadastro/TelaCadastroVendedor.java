@@ -1,19 +1,24 @@
 package br.ufrpe.gui.telas_cadastro;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import java.awt.SystemColor;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JTabbedPane;
 import java.awt.Font;
-import javax.swing.JPanel;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
+
+import br.ufrpe.negocio.Fachada;
+import br.ufrpe.negocio.classes_basicas.Contato;
+import br.ufrpe.negocio.classes_basicas.Vendedor;
 
 public class TelaCadastroVendedor extends JFrame {
 
@@ -55,11 +60,14 @@ public class TelaCadastroVendedor extends JFrame {
 	private JComboBox<String> comboBoxEstado;
 	private JFormattedTextField formattedTextFieldTelefone;
 	private JFormattedTextField formattedTextFieldEmail;
-	private JButton buttonCont;
+	private JButton buttonAvancar;
 	private JButton buttonContinuar;
 	private JButton buttonOK;
+	private JButton btnCancelar;
 
-
+	private Fachada fachada;
+	private Vendedor vendedor;
+	private Contato contato;
 
 	/**
 	 * Launch the application.
@@ -91,7 +99,7 @@ public class TelaCadastroVendedor extends JFrame {
 		frame = new JFrame("Cadastro Vendedor");
 		frame.getContentPane().setBackground(SystemColor.activeCaption);
 		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -99,57 +107,94 @@ public class TelaCadastroVendedor extends JFrame {
 		tabbedPane.setBounds(0, 0, 440, 270);
 		frame.getContentPane().add(tabbedPane);
 		
+		//Dados pessoais
 		panelDadosPessoais = new JPanel();
 		tabbedPane.addTab("Dados pessoais", null, panelDadosPessoais, null);
 		panelDadosPessoais.setLayout(null);
 		
 		lblNome = new JLabel("Nome");
 		lblNome.setFont(new Font("Gisha", Font.PLAIN, 13));
-		lblNome.setBounds(10, 11, 36, 23);
+		lblNome.setBounds(9, 42, 36, 23);
 		panelDadosPessoais.add(lblNome);
 		
 		textFieldNome = new JTextField();
 		textFieldNome.setFont(new Font("Gisha", Font.PLAIN, 13));
-		textFieldNome.setBounds(55, 10, 357, 23);
+		textFieldNome.setBounds(53, 42, 357, 23);
 		panelDadosPessoais.add(textFieldNome);
 		textFieldNome.setColumns(10);
 		
-		lblDataDeNascimento = new JLabel("Data de nascimento");
-		lblDataDeNascimento.setFont(new Font("Gisha", Font.PLAIN, 13));
-		lblDataDeNascimento.setBounds(10, 111, 125, 23);
-		panelDadosPessoais.add(lblDataDeNascimento);
-		
 		lblCpf = new JLabel("CPF");
 		lblCpf.setFont(new Font("Gisha", Font.PLAIN, 13));
-		lblCpf.setBounds(10, 66, 23, 23);
+		lblCpf.setBounds(10, 76, 23, 23);
 		panelDadosPessoais.add(lblCpf);
 		
 		formattedTextFieldCpf = new JFormattedTextField();
-		formattedTextFieldCpf.setBounds(55, 67, 169, 23);
+		formattedTextFieldCpf.setBounds(55, 76, 169, 23);
 		panelDadosPessoais.add(formattedTextFieldCpf);
 		
+		lblDataDeNascimento = new JLabel("Data de nascimento");
+		lblDataDeNascimento.setFont(new Font("Gisha", Font.PLAIN, 13));
+		lblDataDeNascimento.setBounds(9, 110, 125, 23);
+		panelDadosPessoais.add(lblDataDeNascimento);
+		
+		//dia
 		comboBoxDia = new JComboBox<>();
-		comboBoxDia.setBounds(185, 112, 28, 20);
-		String[] arrayDia = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11","12", "13", "14","15", "16", "17", "18",
+		comboBoxDia.setFont(new Font("Gisha", Font.PLAIN, 13));
+		comboBoxDia.setBounds(144, 112, 41, 20);
+		String[] arrayDia = {"", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11","12", "13", "14","15", "16", "17", "18",
 				"19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
-		for (int i = 0; i < 31; i++){
-		comboBoxDia.addItem(arrayDia[i]);
-		}
+		for(int i = 0; i < 32; i++)
+			comboBoxDia.addItem(arrayDia[i]);
 		panelDadosPessoais.add(comboBoxDia);
 		
+		//mes
 		comboBoxMes = new JComboBox<>();
-		comboBoxMes.setBounds(290, 112, 28, 20);
+		comboBoxMes.setFont(new Font("Gisha", Font.PLAIN, 13));
+		comboBoxMes.setBounds(194, 111, 91, 20);
+		String[] arrayMes = {"", "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro",
+				"Outubro", "Novembro", "Dezembro"};
+		for(int i=0; i<13; i++)
+			comboBoxMes.addItem(arrayMes[i]);
 		panelDadosPessoais.add(comboBoxMes);
 		
+		//ano
 		comboBoxAno = new JComboBox<>();
-		comboBoxAno.setBounds(368, 112, 28, 20);
+		comboBoxAno.setFont(new Font("Gisha", Font.PLAIN, 13));
+		comboBoxAno.setBounds(294, 111, 57, 20);
+		String[] arrayAno = new String[84];
+		Integer ano = 1998;											//menores de 18 n podem cadastrar
+		for(int i=0; i<84; i++, ano--) {
+			if(i != 0) {
+				arrayAno[i] = ano.toString();						//idade maxima 100 anos
+				comboBoxAno.addItem(arrayAno[i]);
+			}
+			else {
+				arrayAno[i] = "";
+				comboBoxAno.addItem(arrayAno[i]);
+			}		
+		}
 		panelDadosPessoais.add(comboBoxAno);
 		
-		buttonCont = new JButton("Continuar");
-		buttonCont.setFont(new Font("Gisha", Font.PLAIN, 13));
-		buttonCont.setBounds(176, 183, 89, 23);
-		panelDadosPessoais.add(buttonCont);
+		//botoes
+		buttonAvancar = new JButton("Avan\u00E7ar >");
+		buttonAvancar.setFont(new Font("Gisha", Font.PLAIN, 13));
+		buttonAvancar.setBounds(312, 193, 95, 23);
+		panelDadosPessoais.add(buttonAvancar);
 		
+		//fachada = new Fachada();
+		vendedor = new Vendedor();
+		EventoBotaoAvancar_DadosPessoais acaoBtnAvancar_DadosPessoais = new EventoBotaoAvancar_DadosPessoais();
+		buttonAvancar.addActionListener(acaoBtnAvancar_DadosPessoais);
+		
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setFont(new Font("Gisha", Font.PLAIN, 13));
+		btnCancelar.setBounds(20, 193, 90, 23);
+		panelDadosPessoais.add(btnCancelar);
+		
+		EventoBotaoCancelar_DadosPessoais acaoBtnCancelar_DadosPessoais = new EventoBotaoCancelar_DadosPessoais();
+		btnCancelar.addActionListener(acaoBtnCancelar_DadosPessoais);
+		
+		//Contato
 		panelContato = new JPanel();
 		tabbedPane.addTab("Contato", null, panelContato, null);
 		panelContato.setLayout(null);
@@ -273,5 +318,44 @@ public class TelaCadastroVendedor extends JFrame {
 		buttonOK.setBounds(176, 183, 89, 23);
 		panelAcesso.add(buttonOK);
 		buttonOK.setFont(new Font("Gisha", Font.PLAIN, 13));
+	}
+	
+	public void setVisible(boolean opcao) {
+		if(opcao == true)
+			frame.setVisible(opcao);
+		else
+			frame.setVisible(opcao);
+	}
+	
+	private class EventoBotaoAvancar_DadosPessoais implements ActionListener {
+		public void actionPerformed(ActionEvent evento) {
+
+			vendedor.setNome(textFieldNome.getText());
+			vendedor.setCpf(formattedTextFieldCpf.getText());
+			
+			//esse bloco serve p/ converter o incice do comboBox em ano
+			int ano = 1998;
+			for(int i=1; i<=84; i++) {
+				if(comboBoxAno.getSelectedIndex() == i) {
+					ano = ano - i;
+				}
+			}
+			
+			vendedor.setDataNascimento(comboBoxDia.getSelectedIndex(), comboBoxMes.getSelectedIndex(), ano);
+			
+			//vai pra proxima aba se n houver nenhum espaço em braco
+			if(vendedor.getNome().equals("") || vendedor.getCpf().equals("") || (comboBoxDia.getSelectedIndex() == 0 ||
+					comboBoxMes.getSelectedIndex() == 0 || comboBoxAno.getSelectedIndex() == 0)) {
+				JOptionPane.showMessageDialog(null, "Preencha todos os campos para prosseguir!");
+			}
+			else
+				tabbedPane.setSelectedIndex(1); //vai pra proxima aba
+		}
+	}
+	
+	private class EventoBotaoCancelar_DadosPessoais implements ActionListener {
+		public void actionPerformed(ActionEvent evento) {
+			frame.setVisible(false);
+		}
 	}
 }
