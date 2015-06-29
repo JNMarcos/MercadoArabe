@@ -48,9 +48,10 @@ public class TelaLoginVendedor {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setResizable(false);
+		frame.setTitle("Vendedor");
 		frame.getContentPane().setBackground(SystemColor.activeCaption);
 		frame.setBounds(100, 100, 450, 226);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		panel = new JPanel();
@@ -60,41 +61,39 @@ public class TelaLoginVendedor {
 		
 		JLabel lblVendedor = new JLabel("Vendedor");
 		lblVendedor.setHorizontalAlignment(SwingConstants.CENTER);
-		lblVendedor.setBounds(160, 46, 121, 21);
+		lblVendedor.setBounds(164, 24, 121, 21);
 		panel.add(lblVendedor);
 		lblVendedor.setFont(new Font("Gisha", Font.BOLD, 18));
 		
+		JLabel lblUsurio = new JLabel("Usu\u00E1rio");
+		lblUsurio.setBounds(81, 75, 48, 17);
+		panel.add(lblUsurio);
+		lblUsurio.setFont(new Font("Gisha", Font.PLAIN, 13));
+		
+		textField_User = new JTextField();
+		textField_User.setBounds(139, 74, 182, 20);
+		panel.add(textField_User);
+		textField_User.setColumns(10);
+		
+		JLabel lblSenha = new JLabel("Senha");
+		lblSenha.setBounds(81, 103, 38, 17);
+		panel.add(lblSenha);
+		lblSenha.setFont(new Font("Gisha", Font.PLAIN, 13));
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(139, 105, 182, 20);
+		panel.add(passwordField);
+		
+		//botoes
 		btnEntrar = new JButton("Entrar");
-		btnEntrar.setBounds(239, 158, 71, 25);
+		btnEntrar.setBounds(235, 146, 75, 25);
 		panel.add(btnEntrar);
 		btnEntrar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		btnVoltar = new JButton("Voltar ");
-		btnVoltar.setBounds(122, 158, 71, 25);
+		btnVoltar.setBounds(150, 146, 75, 25);
 		panel.add(btnVoltar);
 		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
-		
-		JLabel lblUsurio = new JLabel("Usu\u00E1rio");
-		lblUsurio.setBounds(74, 88, 48, 17);
-		panel.add(lblUsurio);
-		lblUsurio.setFont(new Font("Gisha", Font.PLAIN, 13));
-				
-		
-		JLabel lblSenha = new JLabel("Senha");
-		lblSenha.setBounds(74, 116, 38, 17);
-		panel.add(lblSenha);
-		lblSenha.setFont(new Font("Gisha", Font.PLAIN, 13));
-		
-		textField_User = new JTextField();
-		textField_User.setBounds(150, 87, 182, 20);
-		panel.add(textField_User);
-		textField_User.setColumns(10);
-		
-		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(150, 115, 182, 20);
-		panel.add(passwordField);
-		
 		
 		//liga botao entrar
 		fachada = new Fachada();
@@ -102,7 +101,6 @@ public class TelaLoginVendedor {
 		EventoBotaoEntrar acaoBtnEntrar = new EventoBotaoEntrar();
 		btnEntrar.addActionListener(acaoBtnEntrar);
 		telaVendedor = new TelaVendedor();
-		
 
 		//liga botao voltar
 		EventoBotaoVoltar acaoBtnVoltar = new EventoBotaoVoltar();
