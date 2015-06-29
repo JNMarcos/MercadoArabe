@@ -1,7 +1,6 @@
 package br.ufrpe.gui.telas_principais;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
@@ -12,32 +11,21 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 
-public class TelaVendedor {
-
+public class TelaComprador_Principal extends JFrame{
 	private JFrame frmMeuPerfil;
 	private JTable table;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaVendedor window = new TelaVendedor();
-					window.frmMeuPerfil.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private JPanel panel;
+	private JButton btnSair;
+	private JButton btnNewButton_1;
+	private JButton btnNewButton;
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Create the application.
 	 */
-	public TelaVendedor() {
+	public TelaComprador_Principal() {
 		initialize();
 	}
 
@@ -48,14 +36,19 @@ public class TelaVendedor {
 		frmMeuPerfil = new JFrame();
 		frmMeuPerfil.setTitle("Meu Perfil");
 		frmMeuPerfil.getContentPane().setBackground(SystemColor.activeCaption);
-		frmMeuPerfil.setBounds(100, 100, 696, 426);
+		frmMeuPerfil.setBounds(100, 100, 696, 487);
 		frmMeuPerfil.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmMeuPerfil.getContentPane().setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 680, 387);
+		panel = new JPanel();
+		panel.setBounds(0, 0, 680, 448);
 		frmMeuPerfil.getContentPane().add(panel);
 		panel.setLayout(null);
+		
+		btnNewButton = new JButton("Ver favoritos");
+		btnNewButton.setFont(new Font("Gisha", Font.PLAIN, 13));
+		btnNewButton.setBounds(89, 402, 163, 23);
+		panel.add(btnNewButton);
 		
 		table = new JTable();
 		table.setFont(new Font("Gisha", Font.PLAIN, 13));
@@ -83,7 +76,7 @@ public class TelaVendedor {
 		panel.add(lblUser);
 		lblUser.setFont(new Font("Gisha", Font.BOLD | Font.ITALIC, 14));
 		
-		JButton btnSair = new JButton("Sair");
+		btnSair = new JButton("Sair");
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaVendedor.dispose();
@@ -99,58 +92,41 @@ public class TelaVendedor {
 		panel.add(btnSair);
 		btnSair.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
-		JLabel lblVocTem = new JLabel("Voc\u00EA tem ");
-		lblVocTem.setBounds(14, 101, 59, 17);
+		JLabel lblVocTem = new JLabel("Voc\u00EA comprou");
+		lblVocTem.setBounds(14, 101, 97, 17);
 		panel.add(lblVocTem);
 		lblVocTem.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
-		JLabel lblVenda = new JLabel("produtos \u00E0 venda");
-		lblVenda.setBounds(121, 101, 104, 17);
+		JLabel lblVenda = new JLabel("produto(s)");
+		lblVenda.setBounds(176, 101, 104, 17);
 		panel.add(lblVenda);
 		lblVenda.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
-		JLabel lblXpDisponvel = new JLabel("Voc\u00EA tem");
-		lblXpDisponvel.setBounds(14, 132, 87, 17);
+		JLabel lblXpDisponvel = new JLabel("Voc\u00EA est\u00E1 interessado na compra de");
+		lblXpDisponvel.setBounds(14, 129, 215, 17);
 		panel.add(lblXpDisponvel);
 		lblXpDisponvel.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
-		JButton btnCompreMais = new JButton("Quero mais XPs!");
-		btnCompreMais.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				TelaVendedor.dispose();
-				TelaVendedor TelaCompraXP = new TelaVendedor();
-				TelaCompraXP.setvisible(true);
-				
-			}
-		});
-		btnCompreMais.setBounds(174, 129, 145, 25);
-		panel.add(btnCompreMais);
-		btnCompreMais.setFont(new Font("Gisha", Font.PLAIN, 13));
-		
 		JLabel lblQtd = new JLabel("qtd");
-		lblQtd.setBounds(83, 101, 21, 17);
+		lblQtd.setHorizontalAlignment(SwingConstants.CENTER);
+		lblQtd.setBounds(99, 101, 67, 17);
 		panel.add(lblQtd);
 		lblQtd.setFont(new Font("Gisha", Font.BOLD, 13));
 		
 		JLabel label = new JLabel("qtd");
-		label.setBounds(83, 132, 21, 17);
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setBounds(242, 129, 48, 17);
 		panel.add(label);
 		label.setFont(new Font("Gisha", Font.BOLD, 13));
 		
-		JLabel lblXps = new JLabel("XPs");
-		lblXps.setForeground(Color.RED);
-		lblXps.setFont(new Font("Gisha", Font.BOLD, 13));
-		lblXps.setBounds(121, 126, 44, 29);
-		panel.add(lblXps);
-	}
-
-	protected void setvisible(boolean b) {
-		// TODO Auto-generated method stub
+		JLabel lblProdutos = new JLabel("produto(s)");
+		lblProdutos.setFont(new Font("Gisha", Font.PLAIN, 13));
+		lblProdutos.setBounds(300, 129, 74, 17);
+		panel.add(lblProdutos);
 		
-	}
-
-	protected static void dispose() {
-		// TODO Auto-generated method stub
-		
+		btnNewButton_1 = new JButton("Ver produtos de interesse");
+		btnNewButton_1.setFont(new Font("Gisha", Font.PLAIN, 13));
+		btnNewButton_1.setBounds(391, 402, 210, 23);
+		panel.add(btnNewButton_1);
 	}
 }

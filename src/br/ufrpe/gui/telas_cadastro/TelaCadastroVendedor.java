@@ -125,7 +125,7 @@ public class TelaCadastroVendedor extends JFrame {
 		panelDadosPessoais.add(lblCpf);
 		
 		formattedTextFieldCpf = new JFormattedTextField();
-		formattedTextFieldCpf.setBounds(43, 63, 169, 23);
+		formattedTextFieldCpf.setBounds(55, 67, 169, 23);
 		panelDadosPessoais.add(formattedTextFieldCpf);
 		
 		comboBoxDia = new JComboBox<>();
@@ -186,14 +186,14 @@ public class TelaCadastroVendedor extends JFrame {
 		
 		textFieldRua = new JTextField();
 		textFieldRua.setFont(new Font("Gisha", Font.PLAIN, 13));
-		textFieldRua.setBounds(42, 11, 370, 23);
+		textFieldRua.setBounds(63, 11, 349, 23);
 		panelContato.add(textFieldRua);
 		textFieldRua.setColumns(10);
 		
 		textFieldBairro = new JTextField();
 		textFieldBairro.setFont(new Font("Gisha", Font.PLAIN, 13));
 		textFieldBairro.setColumns(10);
-		textFieldBairro.setBounds(55, 54, 358, 23);
+		textFieldBairro.setBounds(64, 54, 349, 23);
 		panelContato.add(textFieldBairro);
 		
 		textFieldCidade = new JTextField();
@@ -214,7 +214,7 @@ public class TelaCadastroVendedor extends JFrame {
 		
 		formattedTextFieldEmail = new JFormattedTextField();
 		formattedTextFieldEmail.setFont(new Font("Gisha", Font.PLAIN, 13));
-		formattedTextFieldEmail.setBounds(65, 164, 347, 23);
+		formattedTextFieldEmail.setBounds(63, 164, 349, 23);
 		panelContato.add(formattedTextFieldEmail);
 		
 		buttonContinuar = new JButton("Continuar");

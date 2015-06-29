@@ -150,7 +150,7 @@ public class TelaCadastroComprador {
 				fachada.salvarComprador();			   //salva
 				
 				//mensagem boas vindas
-				JOptionPane.showMessageDialog(null, "Usuário Cadastrado com sucesso!\nBem vindo ao Mercado Árabe!");
+				JOptionPane.showMessageDialog(null, "Usuário Cadastrado com sucesso!\nBem-vindo ao Mercado Árabe!");
 				textField_Email.setText("");
 				textField_Nome.setText("");
 				textField_User.setText("");
@@ -163,12 +163,12 @@ public class TelaCadastroComprador {
 				passwordField.setText("");
 			} catch(NomeUsuarioForaPadroesException e) {
 				JOptionPane.showMessageDialog(null, "Usuário inválido! Tente novamente!\n "
-						+ "O Usuário deve conter no minimo 4 caracteres.");
+						+ "O Usuário deve conter no mínimo 4 caracteres.");
 				textField_User.setText("");
 				passwordField.setText("");
 			} catch(SenhaForaPadroesException e) {
 				JOptionPane.showMessageDialog(null, "Senha inválida! Tente novamente!\n "
-						+ "A Senha deve conter no mínimo 8 caracteres, etc.."); //organizar aqui
+						+ "A Senha deve conter no mínimo 8 caracteres e presença de números ou caracteres especiais"); //organizar aqui
 				passwordField.setText("");
 			} catch(NomeUsuarioJaCadastradoException e) {
 				JOptionPane.showMessageDialog(null, "Nome de usuário já cadastrado! Tente um diferente!");

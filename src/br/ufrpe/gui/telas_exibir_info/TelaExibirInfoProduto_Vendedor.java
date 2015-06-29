@@ -1,43 +1,26 @@
 package br.ufrpe.gui.telas_exibir_info;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import java.awt.SystemColor;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JPanel;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.SystemColor;
 
-public class TelaExibirInfoProduto extends JFrame{
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
 
-	/**
-	 * 
-	 */
+public class TelaExibirInfoProduto_Vendedor {
 	private static final long serialVersionUID = 1L;
 	private JFrame frmVejaMelhorO;
+	private JButton btnVoltar;
+	private JTable table;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaExibirInfoProduto window = new TelaExibirInfoProduto();
-					window.frmVejaMelhorO.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
 	 */
-	public TelaExibirInfoProduto() {
+	public TelaExibirInfoProduto_Vendedor() {
 		initialize();
 	}
 
@@ -46,19 +29,19 @@ public class TelaExibirInfoProduto extends JFrame{
 	 */
 	private void initialize() {
 		frmVejaMelhorO = new JFrame();
-		frmVejaMelhorO.setTitle("Conhe\u00E7a melhor o produto");
+		frmVejaMelhorO.setTitle("Descri\u00E7\u00E3o produto");
 		frmVejaMelhorO.getContentPane().setBackground(SystemColor.activeCaption);
-		frmVejaMelhorO.setBounds(100, 100, 450, 397);
+		frmVejaMelhorO.setBounds(100, 100, 517, 446);
 		frmVejaMelhorO.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmVejaMelhorO.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 434, 358);
+		panel.setBounds(0, 0, 502, 407);
 		frmVejaMelhorO.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JButton btnVoltar = new JButton("Voltar");
-		btnVoltar.setBounds(189, 313, 89, 23);
+		btnVoltar = new JButton("Voltar");
+		btnVoltar.setBounds(113, 370, 89, 23);
 		panel.add(btnVoltar);
 		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
@@ -69,13 +52,13 @@ public class TelaExibirInfoProduto extends JFrame{
 		
 		JLabel lblPreo = new JLabel("R$");
 		lblPreo.setForeground(new Color(0, 128, 0));
-		lblPreo.setBounds(302, 235, 46, 14);
+		lblPreo.setBounds(355, 201, 46, 14);
 		panel.add(lblPreo);
 		lblPreo.setFont(new Font("Gisha", Font.PLAIN, 17));
 		
 		JLabel lblPreo_1 = new JLabel("PRE\u00C7O");
 		lblPreo_1.setForeground(Color.RED);
-		lblPreo_1.setBounds(335, 229, 89, 24);
+		lblPreo_1.setBounds(413, 195, 89, 24);
 		panel.add(lblPreo_1);
 		lblPreo_1.setFont(new Font("Gisha", Font.BOLD | Font.ITALIC, 20));
 		
@@ -89,19 +72,44 @@ public class TelaExibirInfoProduto extends JFrame{
 		panel.add(lblDescrio);
 		lblDescrio.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
-		JButton btnInformaesDoVendedor = new JButton("Informa\u00E7\u00F5es do vendedor");
-		btnInformaesDoVendedor.setBounds(102, 279, 246, 23);
-		panel.add(btnInformaesDoVendedor);
-		btnInformaesDoVendedor.setFont(new Font("Gisha", Font.PLAIN, 13));
+		table = new JTable();
+		table.setBounds(20, 230, 449, 129);
+		panel.add(table);
 		
-		JLabel lblQuantidade = new JLabel("QUANTIDADE");
+		JLabel lblQuantidade = new JLabel("QUAN");
 		lblQuantidade.setFont(new Font("Gisha", Font.PLAIN, 13));
-		lblQuantidade.setBounds(10, 110, 171, 14);
+		lblQuantidade.setBounds(10, 110, 80, 29);
 		panel.add(lblQuantidade);
 		
 		JLabel lblImagem = new JLabel("IMAGEM");
 		lblImagem.setFont(new Font("Gisha", Font.PLAIN, 13));
-		lblImagem.setBounds(293, 110, 108, 14);
+		lblImagem.setBounds(338, 99, 108, 14);
 		panel.add(lblImagem);
+		
+		JLabel lblNewLabel = new JLabel("item(ns),");
+		lblNewLabel.setFont(new Font("Gisha", Font.PLAIN, 13));
+		lblNewLabel.setBounds(61, 105, 53, 39);
+		panel.add(lblNewLabel);
+		
+		JLabel lblQtd = new JLabel("qtd");
+		lblQtd.setFont(new Font("Gisha", Font.PLAIN, 13));
+		lblQtd.setBounds(124, 99, 32, 50);
+		panel.add(lblQtd);
+		
+		JLabel lblVendidos = new JLabel("vendidos");
+		lblVendidos.setFont(new Font("Gisha", Font.PLAIN, 13));
+		lblVendidos.setBounds(152, 99, 89, 50);
+		panel.add(lblVendidos);
+		
+		JButton btnNewButton = new JButton("Editar");
+		btnNewButton.setFont(new Font("Gisha", Font.PLAIN, 13));
+		btnNewButton.setBounds(212, 370, 89, 23);
+		panel.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Vender");
+		btnNewButton_1.setFont(new Font("Gisha", Font.PLAIN, 13));
+		btnNewButton_1.setBounds(314, 370, 89, 23);
+		panel.add(btnNewButton_1);
 	}
+
 }

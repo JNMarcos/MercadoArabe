@@ -14,6 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import br.ufrpe.gui.telas_cadastro.TelaCadastroComprador;
+import br.ufrpe.gui.telas_cadastro.TelaCadastroVendedor;
+import br.ufrpe.gui.telas_login.TelaLoginComprador;
+import br.ufrpe.gui.telas_login.TelaLoginVendedor;
 
 public class TelaInicio {
 
@@ -23,6 +26,9 @@ public class TelaInicio {
 	private JButton btnCadComprador;
 	private JButton btnCadVendedor;
 	private TelaCadastroComprador telaCadComprador;
+	private TelaCadastroVendedor telaCadVendedor;
+	private TelaLoginVendedor telaLoginVendedor;
+	private TelaLoginComprador telaLoginComprador;
 
 	/**
 	 * Launch the application.
@@ -57,39 +63,44 @@ public class TelaInicio {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 434, 261);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
-		
+
 		//labels
 		JLabel lblMercadorabe = new JLabel("Mercado \u00C1rabe");
 		lblMercadorabe.setBounds(77, 33, 282, 53);
 		panel.add(lblMercadorabe);
 		lblMercadorabe.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMercadorabe.setFont(new Font("Gisha", Font.BOLD, 34));
-		
+
 		JLabel lblEntre = new JLabel("Entrar como");
 		lblEntre.setFont(new Font("Gisha", Font.PLAIN, 13));
 		lblEntre.setBounds(32, 109, 83, 25);
 		panel.add(lblEntre);
-		
+
 		//buttons
 		btnComprador = new JButton("Comprador");
 		btnComprador.setBounds(77, 146, 105, 25);
 		btnComprador.setFont(new Font("Gisha", Font.PLAIN, 13));
 		panel.add(btnComprador);
-		
-		//addEvento
-		
+
+		EventoBotaoLoginComprador acaoLoginComprador = new EventoBotaoLoginComprador();
+		btnComprador.addActionListener(acaoLoginComprador);
+		telaLoginComprador = new TelaLoginComprador();
+
+		//Logar vendedor
 		btnVendedor = new JButton("Vendedor");
 		btnVendedor.setBounds(268, 146, 105, 25);
 		btnVendedor.setFont(new Font("Gisha", Font.PLAIN, 13));
 		panel.add(btnVendedor);
-		
-		//addEvento
-		
+
+		EventoBotaoLoginVendedor acaoLoginVendedor = new EventoBotaoLoginVendedor();
+		btnVendedor.addActionListener(acaoLoginVendedor);
+		telaLoginVendedor = new TelaLoginVendedor();
+
 		btnCadComprador = new JButton("Cadastre-se");
 		btnCadComprador.setBounds(77, 187, 101, 23);
 		btnCadComprador.setBackground(null);
@@ -98,12 +109,12 @@ public class TelaInicio {
 		btnCadComprador.setForeground(new Color(0, 0, 204));
 		btnCadComprador.setFont(new Font("Gisha", Font.PLAIN, 13));
 		panel.add(btnCadComprador);
-		
+
 		//evento
 		EventoBotaoCadastrarComprador acaoBtnCadComprador = new EventoBotaoCadastrarComprador();
 		btnCadComprador.addActionListener(acaoBtnCadComprador);
 		telaCadComprador = new TelaCadastroComprador();
-		
+
 		btnCadVendedor = new JButton("Cadastre-se");
 		btnCadVendedor.setBackground(null);
 		btnCadVendedor.setBorder(null);
@@ -112,13 +123,38 @@ public class TelaInicio {
 		btnCadVendedor.setBounds(268, 185, 103, 25);
 		btnCadVendedor.setFont(new Font("Gisha", Font.PLAIN, 13));
 		panel.add(btnCadVendedor);
-		
+
 		//addEvento
 	}
-	
+
 	private class EventoBotaoCadastrarComprador implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 			telaCadComprador.setVisible(true);
+		}
+	}
+
+
+	private class EventoBotaoLoginVendedor implements ActionListener {
+		public void actionPerformed(ActionEvent evento) {
+			telaLoginVendedor.setVisible(true);
+		}
+	}
+
+	private class EventoBotaoLoginComprador implements ActionListener { 
+		public void actionPerformed(ActionEvent evento) {
+			telaLoginComprador.setVisible(true);
+		}
+	}
+
+	private class EventoBotaoCadastrarComprador implements ActionListener {
+		public void actionPerformed(ActionEvent evento) {
+			telaCadComprador.setVisible(true);
+		}
+	}
+
+	private class EventoBotaoCadastrarVendedor implements ActionListener {
+		public void actionPerformed(ActionEvent evento) {
+			telaCadVendedor.setVisible(true);
 		}
 	}
 }
