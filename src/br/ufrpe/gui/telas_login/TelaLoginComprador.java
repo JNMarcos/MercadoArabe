@@ -95,6 +95,7 @@ public class TelaLoginComprador {
 		
 		//liga btn entrar
 		comprador = new Comprador();
+		telaComprador = new TelaComprador_Principal();
 		EventoBotaoEntrar acaoBtnEntrar = new EventoBotaoEntrar();
 		btnEntrar.addActionListener(acaoBtnEntrar);
 		
