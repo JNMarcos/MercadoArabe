@@ -186,6 +186,11 @@ public class TelaCadastroComprador {
 	private class EventoBotaoCancelar implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 			frmCadastroComprador.setVisible(false);
+			textField_Nome.setText("");
+			textField_Email.setText("");
+			textField_User.setText("");
+			passwordField.setText("");
+			passwordField_Confirma.setText("");
 		}
 	}
 }

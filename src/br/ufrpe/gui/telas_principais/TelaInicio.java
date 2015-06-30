@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -131,7 +132,12 @@ public class TelaInicio {
 		
 		EventoBotaoCadastrarVendedor acaoBtnCadVendedor = new EventoBotaoCadastrarVendedor();
 		btnCadVendedor.addActionListener(acaoBtnCadVendedor);
-		telaCadVendedor = new TelaCadastroVendedor();
+		try {
+			telaCadVendedor = new TelaCadastroVendedor();
+		} catch(ParseException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	private class EventoBotaoLoginVendedor implements ActionListener {

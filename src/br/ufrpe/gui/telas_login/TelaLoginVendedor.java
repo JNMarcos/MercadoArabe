@@ -142,6 +142,8 @@ public class TelaLoginVendedor {
 	private class EventoBotaoVoltar implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 			frame.setVisible(false);
+			textField_User.setText("");
+			passwordField.setText("");
 		}
 	}
 }

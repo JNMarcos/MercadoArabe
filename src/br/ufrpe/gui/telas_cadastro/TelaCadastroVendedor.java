@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -15,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 
 import br.ufrpe.negocio.Fachada;
 import br.ufrpe.negocio.classes_basicas.Contato;
@@ -48,6 +50,7 @@ public class TelaCadastroVendedor {
 	private JLabel lblSenha;
 	private JLabel lblConfirmarSenha;
 	private JFormattedTextField formattedTextFieldCpf;
+	private MaskFormatter maskCpf;
 	private JTextField textFieldNome;
 	private JTextField textFieldRua;
 	private JTextField textFieldBairro;
@@ -58,7 +61,8 @@ public class TelaCadastroVendedor {
 	private JComboBox<String> comboBoxAno;
 	private JComboBox<String> comboBoxEstado;
 	private JFormattedTextField formattedTextFieldTelefone;
-	private JFormattedTextField formattedTextFieldEmail;
+	private MaskFormatter maskTelefone;
+	private JTextField textFieldEmail;
 	private JButton buttonAvancar;
 	private JButton buttonAvancarContato;
 	private JButton buttonCadastrar;
@@ -76,14 +80,14 @@ public class TelaCadastroVendedor {
 	/**
 	 * Create the application.
 	 */
-	public TelaCadastroVendedor() {
+	public TelaCadastroVendedor() throws ParseException {
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize() throws ParseException {
 		vendedor = new Vendedor();
 		fachada = new Fachada();
 		contato = new Contato();
@@ -105,6 +109,10 @@ public class TelaCadastroVendedor {
 		tabbedPane.addTab("Dados pessoais", null, panelDadosPessoais, null);
 		panelDadosPessoais.setLayout(null);
 		
+		maskCpf = new MaskFormatter("###.###.###-##");
+		maskCpf.setValidCharacters("1234567890");
+		maskCpf.install(formattedTextFieldCpf);
+		
 		lblNome = new JLabel("Nome");
 		lblNome.setFont(new Font("Gisha", Font.PLAIN, 13));
 		lblNome.setBounds(9, 42, 36, 23);
@@ -121,7 +129,8 @@ public class TelaCadastroVendedor {
 		lblCpf.setBounds(10, 76, 23, 23);
 		panelDadosPessoais.add(lblCpf);
 		
-		formattedTextFieldCpf = new JFormattedTextField();
+		formattedTextFieldCpf = new JFormattedTextField(maskCpf);
+		formattedTextFieldCpf.setFont(new Font("Gisha", Font.PLAIN, 13));
 		formattedTextFieldCpf.setBounds(53, 76, 169, 23);
 		panelDadosPessoais.add(formattedTextFieldCpf);
 		
@@ -245,7 +254,10 @@ public class TelaCadastroVendedor {
 		
 		formattedTextFieldTelefone = new JFormattedTextField();
 		formattedTextFieldTelefone.setFont(new Font("Gisha", Font.PLAIN, 13));
-		formattedTextFieldTelefone.setBounds(63, 113, 200, 23);
+		formattedTextFieldTelefone.setBounds(63, 113, 130, 23);
+		maskTelefone = new MaskFormatter("(##) ####-####");
+		maskTelefone.setValidCharacters("1234567890");
+		maskTelefone.install(formattedTextFieldTelefone);
 		panelContato.add(formattedTextFieldTelefone);
 		
 		lblEmail = new JLabel("E-mail");
@@ -253,10 +265,10 @@ public class TelaCadastroVendedor {
 		lblEmail.setFont(new Font("Gisha", Font.PLAIN, 13));
 		panelContato.add(lblEmail);
 		
-		formattedTextFieldEmail = new JFormattedTextField();
-		formattedTextFieldEmail.setFont(new Font("Gisha", Font.PLAIN, 13));
-		formattedTextFieldEmail.setBounds(63, 147, 349, 23);
-		panelContato.add(formattedTextFieldEmail);
+		textFieldEmail = new JTextField();
+		textFieldEmail.setFont(new Font("Gisha", Font.PLAIN, 13));
+		textFieldEmail.setBounds(63, 147, 349, 23);
+		panelContato.add(textFieldEmail);
 		
 		//botoes aba contato
 		buttonAvancarContato = new JButton("Avan\u00E7ar >");
@@ -363,6 +375,19 @@ public class TelaCadastroVendedor {
 	private class EventoBotaoCancelar_DadosPessoais implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 			frame.setVisible(false);
+			textFieldNome.setText("");
+			formattedTextFieldCpf.setText("");
+			comboBoxDia.setSelectedIndex(0);
+			comboBoxMes.setSelectedIndex(0);
+			comboBoxAno.setSelectedIndex(0);
+			textFieldEmail.setText("");
+			comboBoxEstado.setSelectedIndex(0);
+			textFieldBairro.setText("");
+			textFieldRua.setText("");
+			textFieldNomeUsuario.setText("");
+			formattedTextFieldTelefone.setText("");
+			passwordField.setText("");
+			passwordField_Confirmar.setText("");
 		}
 	}
 	
@@ -374,7 +399,7 @@ public class TelaCadastroVendedor {
 			contato.setCidade(textFieldCidade.getText());
 			contato.setEstado(comboBoxEstado.getSelectedItem().toString());
 			contato.setTelefone(formattedTextFieldTelefone.getText());
-			contato.setEmail(formattedTextFieldEmail.getText());
+			contato.setEmail(textFieldEmail.getText());
 			vendedor.setContato(contato);
 			
 			//vai pra proxima aba se n houver nenhum espaço em braco
