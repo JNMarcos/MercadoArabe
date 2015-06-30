@@ -25,12 +25,8 @@ import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioForaPadroesException;
 import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioJaCadastradoException;
 import br.ufrpe.negocio.exceptions_negocio.SenhaForaPadroesException;
 
-public class TelaCadastroVendedor extends JFrame {
+public class TelaCadastroVendedor {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	private JTabbedPane tabbedPane;
 	private JPanel panelDadosPessoais;

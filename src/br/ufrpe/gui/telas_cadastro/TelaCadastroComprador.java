@@ -33,22 +33,6 @@ public class TelaCadastroComprador {
 	private JPasswordField passwordField_Confirma;
 
 	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					TelaCadastroComprador window = new TelaCadastroComprador();
-//					window.frmCadastroComprador.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
 	 * Create the application.
 	 */
 	public TelaCadastroComprador() {
@@ -127,17 +111,20 @@ public class TelaCadastroComprador {
 		passwordField_Confirma.setFont(new Font("Gisha", Font.PLAIN, 13));
 		passwordField_Confirma.setBounds(137, 154, 129, 23);
 		panel.add(passwordField_Confirma);
-		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setFont(new Font("Gisha", Font.PLAIN, 13));
-		btnCancelar.setBounds(232, 184, 91, 23);
-		panel.add(btnCancelar);
 
 		//add acao ao botao cadastrar
 		fachada = new Fachada();
 		comprador = new Comprador();
 		EventoBotaoCadastrar acaoBtnCadastrar = new EventoBotaoCadastrar();
 		btnCadastrar.addActionListener(acaoBtnCadastrar);
+		
+		//botao cancelar
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setFont(new Font("Gisha", Font.PLAIN, 13));
+		btnCancelar.setBounds(232, 184, 91, 23);
+		panel.add(btnCancelar);
+		EventoBotaoCancelar acaoBtnCancelar = new EventoBotaoCancelar();
+		btnCancelar.addActionListener(acaoBtnCancelar);
 	}
 	
 	public void setVisible(boolean opcao) {
@@ -150,29 +137,28 @@ public class TelaCadastroComprador {
 	private class EventoBotaoCadastrar implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 			try {
-				//nome
-				comprador.setNome(textField_Nome.getText());
+				String senha = new String(passwordField.getPassword());
+				String senhaConfirma = new String(passwordField_Confirma.getPassword());
 				
-				//senha
-				String s = new String(passwordField.getPassword());
-				comprador.setSenha(s);
-				
-				//usuario
-				comprador.setNomeUsuario(textField_User.getText());
-				
-				//precisa-se fazer um campo email pro comprador ou retirar daqui. Campo data de Nascimento em branco.
-				
-				fachada.cadastrarComprador(comprador); //cadastra
-				fachada.salvarComprador();			   //salva
-				
-				//mensagem boas vindas
-				JOptionPane.showMessageDialog(null, "Usuário Cadastrado com sucesso!\nBem-vindo ao Mercado Árabe!");
-				textField_Email.setText("");
-				textField_Nome.setText("");
-				textField_User.setText("");
-				passwordField.setText("");
-				
-				frmCadastroComprador.dispose(); //volta p/ tela inicio
+				if(senha.equals(senhaConfirma)) {
+					comprador.setNome(textField_Nome.getText());
+					comprador.setNomeUsuario(textField_User.getText());
+					comprador.setSenha(senha);
+					
+					//precisa-se fazer um campo email pro comprador ou retirar daqui. Campo data de Nascimento em branco.
+					
+					fachada.cadastrarComprador(comprador);
+					fachada.salvarComprador();
+					
+					//mensagem boas vindas
+					JOptionPane.showMessageDialog(null, "Usuário Cadastrado com sucesso!\nBem-vindo ao Mercado Árabe!");
+					textField_Email.setText("");
+					textField_Nome.setText("");
+					textField_User.setText("");
+					passwordField.setText("");
+					
+					frmCadastroComprador.dispose(); //volta p/ tela inicio
+				}	
 				
 			} catch(NomeVazioException e) {
 				JOptionPane.showMessageDialog(null, "Informe um nome!");
@@ -194,6 +180,12 @@ public class TelaCadastroComprador {
 				textField_User.setText("");
 				passwordField.setText("");
 			}
+		}
+	}
+	
+	private class EventoBotaoCancelar implements ActionListener {
+		public void actionPerformed(ActionEvent evento) {
+			frmCadastroComprador.setVisible(false);
 		}
 	}
 }
