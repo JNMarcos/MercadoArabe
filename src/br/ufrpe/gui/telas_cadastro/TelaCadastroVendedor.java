@@ -1,6 +1,5 @@
 package br.ufrpe.gui.telas_cadastro;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
@@ -77,22 +76,6 @@ public class TelaCadastroVendedor extends JFrame {
 	private Vendedor vendedor;
 	private Contato contato;
 	private Xp xp;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaCadastroVendedor window = new TelaCadastroVendedor();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
