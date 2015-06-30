@@ -30,6 +30,7 @@ public class TelaCadastroComprador {
 	private JButton btnCadastrar;
 	private Comprador comprador;
 	private Fachada fachada;
+	private JPasswordField passwordField_Confirma;
 
 	/**
 	 * Launch the application.
@@ -71,51 +72,66 @@ public class TelaCadastroComprador {
 		panel.setLayout(null);
 		
 		btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setBounds(169, 173, 91, 23);
+		btnCadastrar.setBounds(333, 184, 91, 23);
 		btnCadastrar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		panel.add(btnCadastrar);
 		
 		JLabel lblNome = new JLabel("Nome");
-		lblNome.setBounds(22, 27, 46, 14);
+		lblNome.setBounds(81, 22, 46, 14);
 		panel.add(lblNome);
 		lblNome.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		textField_Nome = new JTextField();
 		textField_Nome.setFont(new Font("Gisha", Font.PLAIN, 13));
-		textField_Nome.setBounds(88, 24, 269, 20);
+		textField_Nome.setBounds(137, 18, 269, 23);
 		panel.add(textField_Nome);
 		textField_Nome.setColumns(10);
 		
 		JLabel lblEmail = new JLabel("E-mail");
-		lblEmail.setBounds(22, 66, 46, 14);
+		lblEmail.setBounds(81, 55, 46, 14);
 		panel.add(lblEmail);
 		lblEmail.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		textField_Email = new JTextField();
 		textField_Email.setFont(new Font("Gisha", Font.PLAIN, 13));
-		textField_Email.setBounds(88, 63, 268, 20);
+		textField_Email.setBounds(137, 52, 268, 23);
 		panel.add(textField_Email);
 		textField_Email.setColumns(10);
 		
 		JLabel lblUsurio = new JLabel("Usu\u00E1rio");
-		lblUsurio.setBounds(22, 104, 46, 14);
+		lblUsurio.setBounds(81, 90, 46, 14);
 		panel.add(lblUsurio);
 		lblUsurio.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		textField_User = new JTextField();
 		textField_User.setFont(new Font("Gisha", Font.PLAIN, 13));
-		textField_User.setBounds(88, 101, 266, 20);
+		textField_User.setBounds(137, 86, 202, 23);
 		panel.add(textField_User);
 		textField_User.setColumns(10);
 		
 		JLabel lblSenha = new JLabel("Senha");
-		lblSenha.setBounds(22, 141, 46, 14);
+		lblSenha.setBounds(81, 123, 46, 14);
 		panel.add(lblSenha);
 		lblSenha.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(88, 141, 129, 20);
+		passwordField.setBounds(137, 120, 129, 23);
 		panel.add(passwordField);
+		
+		JLabel lblNewLabel = new JLabel("Confirmar Senha");
+		lblNewLabel.setFont(new Font("Gisha", Font.PLAIN, 13));
+		lblNewLabel.setBounds(22, 154, 105, 23);
+		panel.add(lblNewLabel);
+		
+		passwordField_Confirma = new JPasswordField();
+		passwordField_Confirma.setFont(new Font("Gisha", Font.PLAIN, 13));
+		passwordField_Confirma.setBounds(137, 154, 129, 23);
+		panel.add(passwordField_Confirma);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setFont(new Font("Gisha", Font.PLAIN, 13));
+		btnCancelar.setBounds(232, 184, 91, 23);
+		panel.add(btnCancelar);
 
 		//add acao ao botao cadastrar
 		fachada = new Fachada();
@@ -161,15 +177,18 @@ public class TelaCadastroComprador {
 			} catch(NomeVazioException e) {
 				JOptionPane.showMessageDialog(null, "Informe um nome!");
 				passwordField.setText("");
+				
 			} catch(NomeUsuarioForaPadroesException e) {
 				JOptionPane.showMessageDialog(null, "Usuário inválido! Tente novamente!\n "
 						+ "O Usuário deve conter no mínimo 4 caracteres.");
 				textField_User.setText("");
 				passwordField.setText("");
+				
 			} catch(SenhaForaPadroesException e) {
 				JOptionPane.showMessageDialog(null, "Senha inválida! Tente novamente!\n "
 						+ "A Senha deve conter no mínimo 8 caracteres e presença de números ou caracteres especiais"); //organizar aqui
 				passwordField.setText("");
+				
 			} catch(NomeUsuarioJaCadastradoException e) {
 				JOptionPane.showMessageDialog(null, "Nome de usuário já cadastrado! Tente um diferente!");
 				textField_User.setText("");
