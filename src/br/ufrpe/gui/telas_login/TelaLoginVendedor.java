@@ -30,9 +30,9 @@ public class TelaLoginVendedor {
 	private JButton btnEntrar;
 	
 	private JPasswordField passwordField;
-	private Fachada fachada;
+	private static Fachada fachada = Fachada.getInstance();
 	private Vendedor vendedor;
-	private TelaVendedor telaVendedor;
+	private TelaVendedor telaVendedor = new TelaVendedor();;
 
 
 	/**
@@ -96,11 +96,9 @@ public class TelaLoginVendedor {
 		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		//liga botao entrar
-		fachada = new Fachada();
 		vendedor = new Vendedor();
 		EventoBotaoEntrar acaoBtnEntrar = new EventoBotaoEntrar();
 		btnEntrar.addActionListener(acaoBtnEntrar);
-		telaVendedor = new TelaVendedor();
 
 		//liga botao voltar
 		EventoBotaoVoltar acaoBtnVoltar = new EventoBotaoVoltar();

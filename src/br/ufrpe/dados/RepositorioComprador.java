@@ -13,9 +13,8 @@ import java.util.List;
 
 import br.ufrpe.negocio.classes_basicas.Comprador;
 import br.ufrpe.negocio.controladores.ControladorComprador;
-import br.ufrpe.negocio.utilidades.PessoaUtilidades;
 
-public class RepositorioComprador extends PessoaUtilidades implements IRepositorioComprador, Serializable {
+public class RepositorioComprador implements IRepositorioComprador, Serializable {
 	private static final long serialVersionUID = 1L;
 	List<Comprador> compradores = new ArrayList<Comprador>();
 	public static ControladorComprador controladorComprador = new ControladorComprador();
@@ -95,7 +94,7 @@ public class RepositorioComprador extends PessoaUtilidades implements IRepositor
 		compradores.set(posicao, comprador);
 		salvarArquivo();
 	}
-	
+
 	public void removerComprador(Comprador comprador) {
 		compradores.remove(comprador);
 		salvarArquivo();
@@ -126,20 +125,22 @@ public class RepositorioComprador extends PessoaUtilidades implements IRepositor
 	@Override
 	public boolean verificarNomeUsuarioJaExiste(String nomeUsuario) {
 		boolean nomeUsuarioJaExiste = false;
-		if (!nomeUsuario.equals("") && !nomeUsuario.equals(" ")){
-			for (int i = 0; i < compradores.size(); i++){
-				if (compradores.get(i).getNomeUsuario().equals(nomeUsuario)){
-					nomeUsuarioJaExiste = true;
-					break;
+		if (nomeUsuario != null){
+			if (compradores.size() > 0){
+				for (int i = 0; i < compradores.size(); i++){
+					if (compradores.get(i).getNomeUsuario().equals(nomeUsuario)){
+						nomeUsuarioJaExiste = true;
+						break;
+					}
 				}
 			}
 		}
 		return nomeUsuarioJaExiste;
 	}
-	
+
 	public boolean verificarSenhaJaExiste(String senha) {
 		boolean senhaJaExiste = false;
-		if (!senha.equals("") && !senha.equals(" ")){
+		if (senha != null){
 			for (int i = 0; i < compradores.size(); i++){
 				if (compradores.get(i).getSenha().equals(senha)){
 					senhaJaExiste = true;

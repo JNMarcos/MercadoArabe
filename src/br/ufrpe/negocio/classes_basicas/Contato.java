@@ -9,6 +9,14 @@ public class Contato {
 	private String email;
 	private String telefone;
 	
+	public Contato (String logradouro, String bairro, String cidade, String estado, String email, String telefone){
+		setBairro(bairro);
+		setCidade(cidade);
+		setEmail(email);
+		setEstado(estado);
+		setLogradouro(logradouro);
+		setTelefone(telefone);
+	}
 	public String getLogradouro() {
 		return logradouro;
 	}

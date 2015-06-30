@@ -14,7 +14,6 @@ import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoProdutoException;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoVendedorException;
 import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioForaPadroesException;
 import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioJaCadastradoException;
-import br.ufrpe.negocio.exceptions_negocio.NomeVazioException;
 import br.ufrpe.negocio.exceptions_negocio.ProdutoJaCadastradoException;
 import br.ufrpe.negocio.exceptions_negocio.SenhaForaPadroesException;
 import br.ufrpe.negocio.exceptions_negocio.SenhaIncorretaException;
@@ -22,18 +21,22 @@ import br.ufrpe.negocio.filtro.Filtro;
 
 public class Fachada {
 
-	private ControladorProduto controladorProduto;
-	private ControladorVendedor controladorVendedor;
-	private ControladorComprador controladorComprador;
-	private Filtro filtro;
+	private ControladorProduto controladorProduto = new ControladorProduto();
+	private ControladorVendedor controladorVendedor  = new ControladorVendedor();
+	private ControladorComprador controladorComprador = new ControladorComprador();
+	private static Fachada instancia;
 
+	private Fachada() {
 
-	public Fachada() {
-		controladorProduto = new ControladorProduto();
-		controladorVendedor = new ControladorVendedor();
-		controladorComprador = new ControladorComprador();
 	}
 
+	public static Fachada getInstance() {
+		if (instancia == null) {
+			instancia = new Fachada();
+		}
+		return instancia;
+	}
+	
 	public void cadastrarProduto(Produto produto, Vendedor vendedor) throws ProdutoJaCadastradoException {
 		controladorProduto.cadastrarProduto(produto, vendedor);
 	}
@@ -84,13 +87,13 @@ public class Fachada {
 			throws NaoEncontradoVendedorException, SenhaIncorretaException {
 		return controladorVendedor.verificarLogin(nomeUsuario, senha);
 	}
-	
+
 	public void removerPontosAposNDias(){
 		controladorVendedor.mesarioDataCadastroRemoverPontos(controladorVendedor.getVendedores());
 	}
 
 	//COMPRADOR
-	public void cadastrarComprador(Comprador comprador) throws NomeUsuarioJaCadastradoException, NomeUsuarioForaPadroesException, SenhaForaPadroesException, NomeVazioException {
+	public void cadastrarComprador(Comprador comprador) throws NomeUsuarioJaCadastradoException, NomeUsuarioForaPadroesException, SenhaForaPadroesException{
 		controladorComprador.cadastrarComprador(comprador);
 	}
 

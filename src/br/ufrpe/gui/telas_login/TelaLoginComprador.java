@@ -29,7 +29,7 @@ public class TelaLoginComprador {
 	private JTextField textField_User;
 	private JPasswordField passwordField;
 	private TelaComprador_Principal telaComprador;
-	private Fachada fachada;
+	private static Fachada fachada = Fachada.getInstance();
 	private Comprador comprador;
 
 	/**
@@ -94,7 +94,6 @@ public class TelaLoginComprador {
 		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		//liga btn entrar
-		fachada = new Fachada();
 		comprador = new Comprador();
 		EventoBotaoEntrar acaoBtnEntrar = new EventoBotaoEntrar();
 		btnEntrar.addActionListener(acaoBtnEntrar);

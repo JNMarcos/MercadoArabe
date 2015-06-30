@@ -54,6 +54,8 @@ public class ControladorVendedor {
 			} else{
 				throw new SenhaForaPadroesException();
 			}
+			
+			PessoaUtilidades.nomeNosConformes(vendedor.getNome());
 			//chamar método nomeUsuarioNosConforme e senha tb.		
 			cpfJaExiste = repositorioVendedor.verificarCpfJaExiste(vendedor.getCpf());
 			nomeUsuarioJaExiste = repositorioVendedor.verificarNomeUsuarioJaExiste(vendedor.getNomeUsuario());

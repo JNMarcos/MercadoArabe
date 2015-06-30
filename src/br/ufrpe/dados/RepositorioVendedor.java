@@ -9,18 +9,12 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
-import br.ufrpe.negocio.classes_basicas.Comprador;
 import br.ufrpe.negocio.classes_basicas.Vendedor;
 import br.ufrpe.negocio.controladores.ControladorVendedor;
-import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoVendedorException;
-import br.ufrpe.negocio.exceptions_negocio.SenhaIncorretaException;
-import br.ufrpe.negocio.utilidades.PessoaUtilidades;
 
-public class RepositorioVendedor extends PessoaUtilidades implements IRepositorioVendedor, Serializable{
+public class RepositorioVendedor implements IRepositorioVendedor, Serializable{
 
 	/**
 	 * 
