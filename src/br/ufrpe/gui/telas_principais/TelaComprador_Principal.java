@@ -175,8 +175,8 @@ public class TelaComprador_Principal {
 	
 	private class EventoBotaoVerFavoritos implements ActionListener {//adicionar evento
 		public void actionPerformed(ActionEvent evento) {
-			TelaComprador_Principal.dispose();
-			TelaComprador_Principal TelaComprador_Favoritos = new TelaComprador_Principal();
+			frmMeuPerfil.dispose();
+			TelaComprador_Favoritos TelaComprador_Favoritos = new TelaComprador_Favoritos();
 			TelaComprador_Favoritos.setVisible(true);
 		}
 	}
@@ -184,7 +184,7 @@ public class TelaComprador_Principal {
 	private class EventoBotaoProdutosInteresse implements ActionListener {//adicionar evento
 		public void actionPerformed(ActionEvent evento) {
 			TelaComprador_Principal.dispose();
-			TelaComprador_Principal TelaComprador_Interesse = new TelaComprador_Principal();
+			TelaComprador_Interesse TelaComprador_Interesse = new TelaComprador_Interesse();
 			TelaComprador_Interesse.setVisible(true);
 		}
 	}
@@ -192,7 +192,7 @@ public class TelaComprador_Principal {
 	private class EventoBotaoPesquisar implements ActionListener{
 		public void actionPerformed(ActionEvent evento){
 			TelaComprador_Principal.dispose();
-			TelaComprador_Principal TelaPesquisarProdutos = new TelaComprador_Principal();
+			TelaPesquisarProdutos TelaPesquisarProdutos = new TelaPesquisarProdutos();
 			TelaPesquisarProdutos.setVisible(true);
 		}
 	}
