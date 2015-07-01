@@ -118,7 +118,7 @@ public class TelaLoginVendedor {
 				String senha = new String(passwordField.getPassword());
 				
 				vendedor = fachada.verificarLoginVendedor(textField_User.getText(), senha); //obs aqui
-				telaVendedor.setVisible(true);
+				telaVendedor.setvisible(true);
 				
 				//mensagem boas vindas
 				JOptionPane.showMessageDialog(null, "Bem vindo, " + textField_User.getText() + "!");
@@ -139,9 +139,10 @@ public class TelaLoginVendedor {
 	
 	private class EventoBotaoVoltar implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
-			frame.setVisible(false);
-			textField_User.setText("");
-			passwordField.setText("");
+			frame.dispose();
+			TelaLoginVendedor TelaInicio = new TelaLoginVendedor();
+			TelaInicio.setVisible(true);
+
 		}
 	}
 }

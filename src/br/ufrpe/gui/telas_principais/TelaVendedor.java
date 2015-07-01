@@ -144,7 +144,7 @@ public class TelaVendedor {
 		panel.add(lblXps);
 	}
 
-	protected void setvisible(boolean b) {
+	public void setvisible(boolean b) {
 		// TODO Auto-generated method stub
 		
 	}
