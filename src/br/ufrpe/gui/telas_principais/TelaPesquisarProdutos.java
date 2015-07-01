@@ -53,7 +53,7 @@ public class TelaPesquisarProdutos extends JFrame {
 	private JButton btnVoltar;
 	private JButton btnVer;
 	private JButton btnFavoritar;
-	
+
 	/**
 	 * Create the frame.
 	 */
