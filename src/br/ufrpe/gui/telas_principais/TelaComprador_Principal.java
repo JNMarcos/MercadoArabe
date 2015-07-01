@@ -23,7 +23,6 @@ public class TelaComprador_Principal {
 	private JButton btnProdutosInteresse;
 	private JButton btnVerFavoritos;
 	private JButton btnPesquisar;
-	private Comprador comprador;
 	private TelaComprador_Favoritos telaComprFav;
 	private TelaComprador_Interesse telaComprInt;
 	private TelaPesquisarProdutos telaPesqProd;
@@ -44,14 +43,14 @@ public class TelaComprador_Principal {
 	/**
 	 * Create the application.
 	 */
-	public TelaComprador_Principal() {
-		initialize();
+	public TelaComprador_Principal(Comprador c) {
+		initialize(c);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(Comprador c) {
 		frmMeuPerfil = new JFrame();
 		frmMeuPerfil.setTitle("Meu Perfil");
 		frmMeuPerfil.getContentPane().setBackground(SystemColor.activeCaption);
@@ -59,7 +58,7 @@ public class TelaComprador_Principal {
 		frmMeuPerfil.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmMeuPerfil.getContentPane().setLayout(null);
 		
-		telaPesqProd = new TelaPesquisarProdutos();
+		telaPesqProd = new TelaPesquisarProdutos(c);
 		
 		panel = new JPanel();
 		panel.setBounds(0, 0, 680, 448);
@@ -98,6 +97,7 @@ public class TelaComprador_Principal {
 		lblUser.setBounds(89, 73, 156, 17);
 		panel.add(lblUser);
 		lblUser.setFont(new Font("Gisha", Font.BOLD | Font.ITALIC, 14));
+		
 		
 		JLabel lblVocTem = new JLabel("Voc\u00EA comprou");
 		lblVocTem.setBounds(14, 101, 97, 17);

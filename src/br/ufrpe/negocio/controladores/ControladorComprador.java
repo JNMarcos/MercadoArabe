@@ -5,6 +5,7 @@ import java.util.List;
 import br.ufrpe.dados.IRepositorioComprador;
 import br.ufrpe.dados.RepositorioComprador;
 import br.ufrpe.negocio.classes_basicas.Comprador;
+import br.ufrpe.negocio.classes_basicas.Produto;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoCompradorException;
 import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioForaPadroesException;
 import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioJaCadastradoException;
@@ -105,6 +106,14 @@ public class ControladorComprador {
 		if (retNomeUsuario && comprador == null) throw new SenhaIncorretaException();
 		return comprador;
 
+	}
+	
+	public void adicionarAosFavoritos(Comprador c, Produto p){
+		repositorio.adicionarAosFavoritos(c, p);
+	}
+	
+	public void adicionarAosInteresses(Comprador c, Produto p){
+		repositorio.adicionarAosInteresses(c, p);
 	}
 
 }

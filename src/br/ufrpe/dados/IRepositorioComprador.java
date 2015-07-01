@@ -3,6 +3,7 @@ package br.ufrpe.dados;
 import java.util.List;
 
 import br.ufrpe.negocio.classes_basicas.Comprador;
+import br.ufrpe.negocio.classes_basicas.Produto;
 
 public interface IRepositorioComprador{
 
@@ -23,5 +24,9 @@ public interface IRepositorioComprador{
 	public abstract Comprador retornarComprador(String nomeUsuario);
 
 	public abstract int procurarIndice(Comprador comprador);
+	
+	public abstract void adicionarAosFavoritos (Comprador c, Produto p);
+	
+	public abstract void adicionarAosInteresses (Comprador c, Produto p);
 
 }

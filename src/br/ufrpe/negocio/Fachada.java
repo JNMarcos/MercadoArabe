@@ -121,4 +121,12 @@ public class Fachada {
 			throws NaoEncontradoCompradorException, SenhaIncorretaException {
 		return controladorComprador.verificarLogin(nomeUsuario, senha);
 	}
+	
+	public void adicionarAosFavoritos(Comprador c, Produto p){
+		controladorComprador.adicionarAosFavoritos(c, p);
+	}
+	
+	public void adicionarAosInteresses(Comprador c, Produto p){
+		controladorComprador.adicionarAosInteresses(c, p);
+	}
 }

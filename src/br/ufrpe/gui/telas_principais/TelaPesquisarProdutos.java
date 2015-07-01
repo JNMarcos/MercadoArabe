@@ -23,6 +23,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
 import br.ufrpe.negocio.Fachada;
+import br.ufrpe.negocio.classes_basicas.Comprador;
 import br.ufrpe.negocio.classes_basicas.Produto;
 import br.ufrpe.negocio.classes_basicas.Vendedor;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoProdutoException;
@@ -55,13 +56,15 @@ public class TelaPesquisarProdutos extends JFrame {
 	private JButton btnVoltar;
 	private JButton btnVer;
 	private JButton btnFavoritar;
+	private Comprador c;
 
-	private TelaComprador_Principal telaComprPrincipal = new TelaComprador_Principal();
+	private TelaComprador_Principal telaComprPrincipal;
 
 	/**
 	 * Create the frame.
 	 */
-	public TelaPesquisarProdutos() {
+	public TelaPesquisarProdutos(Comprador c) {
+		setComprador(c);
 		setTitle("Pesquisa de Produtos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 623, 610);
@@ -201,6 +204,9 @@ public class TelaPesquisarProdutos extends JFrame {
 		panel.add(btnVer);
 
 	}
+	public void setComprador(Comprador c) {
+		this.c = c;
+	}
 	private class EventoBotaoPesquisar implements ActionListener{
 		public void actionPerformed(ActionEvent evento) {
 			List<Produto> produtos = new ArrayList<>();
@@ -260,13 +266,40 @@ public class TelaPesquisarProdutos extends JFrame {
 				}
 					//como faço para passar o produto para o comprador correto, como pegar a instancia do comprador
 				//que esta pesquisando?
+				fachada.adicionarAosFavoritos(c, p);
 			}
 		}
 	}
 
 	private class EventoBotaoVer implements ActionListener{
 		public void actionPerformed(ActionEvent evento){
-
+			int linhaSelecionada = table.getSelectedRow();
+			Produto p = null;
+			Vendedor v = null;
+			String nomeProduto;
+			String nomeVendedor;
+			
+			if (table.getSelectedRow() < 0) {
+				JOptionPane.showMessageDialog(null,
+						"Nenhum produto selecionado! Selecione um para favoritar.");
+			} else {
+				nomeProduto = (String) table.getValueAt(linhaSelecionada,0);
+				nomeVendedor = (String) table.getValueAt(linhaSelecionada, 4);
+				try {
+					v = fachada.retornarVendedor(nomeVendedor);
+				} catch (NaoEncontradoVendedorException e1) {
+					JOptionPane.showMessageDialog(null,
+							"Nenhum vendedor encontrado!");
+				}
+				try {
+					p = fachada.retornarProduto(nomeProduto, v, null);
+				} catch (NaoEncontradoProdutoException e) {
+					JOptionPane.showMessageDialog(null,
+							"Nenhum produto encontrado, sorry!");
+				}
+				
+				
+			}
 		}
 	}
 

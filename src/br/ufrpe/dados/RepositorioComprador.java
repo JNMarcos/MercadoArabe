@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 import br.ufrpe.negocio.classes_basicas.Comprador;
+import br.ufrpe.negocio.classes_basicas.Produto;
 import br.ufrpe.negocio.controladores.ControladorComprador;
 
 public class RepositorioComprador implements IRepositorioComprador, Serializable {
@@ -162,5 +163,13 @@ public class RepositorioComprador implements IRepositorioComprador, Serializable
 		}
 
 		return comprador;
+	}
+	
+	public void adicionarAosFavoritos (Comprador c, Produto p){
+		c.setFavoritos(p);
+	}
+	
+	public void adicionarAosInteresses (Comprador c, Produto p){
+		c.setProdutosInteressantes(p);
 	}
 }

@@ -16,8 +16,8 @@ public class Comprador extends Pessoa implements Comparable<Comprador>{
 		return produtosInteressantes;
 	}
 
-	public void setProdutosInteressantes(List<Produto> produtosInteressantes) {
-		this.produtosInteressantes = produtosInteressantes;
+	public void setProdutosInteressantes(Produto produtoInteressante) {
+		this.produtosInteressantes.add(produtoInteressante);
 	}
 
 	public List<Produto> getProdutosAdquiridos() {
@@ -32,8 +32,8 @@ public class Comprador extends Pessoa implements Comparable<Comprador>{
 		return favoritos;
 	}
 
-	public void setFavoritos(List<Produto> favoritos) {
-		this.favoritos = favoritos;
+	public void setFavoritos(Produto favorito) {
+		this.favoritos.add(favorito);
 	}
 	
 	
