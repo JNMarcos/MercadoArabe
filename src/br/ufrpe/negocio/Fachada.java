@@ -52,6 +52,10 @@ public class Fachada {
 	public List<Produto> retornarListaProdutos() {
 		return controladorProduto.getProdutos();
 	}
+	
+	public Produto retornarProduto(String nomeProduto, Vendedor vendedor, List<Produto> produtos) throws NaoEncontradoProdutoException{
+		return controladorProduto.retornarProduto(nomeProduto, vendedor, produtos);
+	}
 
 	public void venderProduto(Produto produto, Vendedor vendedor, Comprador comprador) throws NaoEncontradoProdutoException, 
 	NaoEncontradoVendedorException, NaoEncontradoCompradorException{
@@ -90,6 +94,10 @@ public class Fachada {
 
 	public void removerPontosAposNDias(){
 		controladorVendedor.mesarioDataCadastroRemoverPontos(controladorVendedor.getVendedores());
+	}
+	
+	public Vendedor retornarVendedor(String nomeUsuario) throws NaoEncontradoVendedorException{
+		return controladorVendedor.retornarVendedor(nomeUsuario);
 	}
 
 	//COMPRADOR

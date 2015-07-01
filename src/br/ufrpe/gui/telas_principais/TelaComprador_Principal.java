@@ -1,7 +1,6 @@
 package br.ufrpe.gui.telas_principais;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
@@ -23,7 +22,11 @@ public class TelaComprador_Principal {
 	private JButton btnSair;
 	private JButton btnProdutosInteresse;
 	private JButton btnVerFavoritos;
+	private JButton btnPesquisar;
 	private Comprador comprador;
+	private TelaComprador_Favoritos telaComprFav;
+	private TelaComprador_Interesse telaComprInt;
+	private TelaPesquisarProdutos telaPesqProd;
 	
 //	public static void main(String[] args) {
 //		EventQueue.invokeLater(new Runnable() {
@@ -56,6 +59,8 @@ public class TelaComprador_Principal {
 		frmMeuPerfil.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmMeuPerfil.getContentPane().setLayout(null);
 		
+		telaPesqProd = new TelaPesquisarProdutos();
+		
 		panel = new JPanel();
 		panel.setBounds(0, 0, 680, 448);
 		frmMeuPerfil.getContentPane().add(panel);
@@ -63,7 +68,6 @@ public class TelaComprador_Principal {
 		
 		table = new JTable();
 		table.setFont(new Font("Gisha", Font.PLAIN, 13));
-		table.setCellSelectionEnabled(true);
 		table.setBounds(25, 216, 630, 160);
 		panel.add(table);
 		
@@ -71,6 +75,14 @@ public class TelaComprador_Principal {
 		lblPerfil.setBounds(14, 33, 114, 29);
 		panel.add(lblPerfil);
 		lblPerfil.setFont(new Font("Gisha", Font.BOLD, 24));
+		
+		btnPesquisar = new JButton("Pesquisar!");
+		btnPesquisar.setFont(new Font("Gisha", Font.PLAIN, 13));
+		btnPesquisar.setBounds(510, 176, 128, 29);
+		panel.add(btnPesquisar);
+		
+		EventoBotaoPesquisar acaoBtnPesquisar = new EventoBotaoPesquisar();
+		btnPesquisar.addActionListener(acaoBtnPesquisar);
 		
 		JLabel lblBemVindo = new JLabel("Bem-vindo,");
 		lblBemVindo.setBounds(14, 73, 65, 17);
@@ -132,6 +144,7 @@ public class TelaComprador_Principal {
 		EventoBotaoSair acaoBtnSair = new EventoBotaoSair();
 		btnSair.addActionListener(acaoBtnSair);
 		
+	
 		btnVerFavoritos = new JButton("Ver favoritos");
 		btnVerFavoritos.setFont(new Font("Gisha", Font.PLAIN, 13));
 		btnVerFavoritos.setBounds(89, 402, 163, 23);
@@ -160,15 +173,21 @@ public class TelaComprador_Principal {
 			frmMeuPerfil.setVisible(b);
 	}
 	
-	private class EventoBotaoVerFavoritos implements ActionListener {
+	private class EventoBotaoVerFavoritos implements ActionListener {//adicionar evento
 		public void actionPerformed(ActionEvent evento) {
-			
+			telaComprFav.setVisible(true);
 		}
 	}
 	
-	private class EventoBotaoProdutosInteresse implements ActionListener {
+	private class EventoBotaoProdutosInteresse implements ActionListener {//adicionar evento
 		public void actionPerformed(ActionEvent evento) {
-			
+			telaComprInt.setVisible(true);
+		}
+	}
+	
+	private class EventoBotaoPesquisar implements ActionListener{
+		public void actionPerformed(ActionEvent evento){
+			telaPesqProd.setVisible(true);
 		}
 	}
 	

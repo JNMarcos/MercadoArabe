@@ -73,7 +73,7 @@ public class ControladorProduto {
 		return repositorio.getProdutos();
 	}
 
-	public Produto retornarProduto(String nomeProduto, Vendedor vendedor, List<Produto> produtos) {
+	public Produto retornarProduto(String nomeProduto, Vendedor vendedor, List<Produto> produtos) throws NaoEncontradoProdutoException {
 		return repositorio.retornarProduto(nomeProduto, vendedor, produtos);
 	}
 

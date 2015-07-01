@@ -1,17 +1,33 @@
 package br.ufrpe.gui.telas_principais;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextField;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+
+import br.ufrpe.negocio.Fachada;
+import br.ufrpe.negocio.classes_basicas.Produto;
+import br.ufrpe.negocio.classes_basicas.Vendedor;
+import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoProdutoException;
+import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoVendedorException;
+import br.ufrpe.negocio.filtro.Filtro;
 
 public class TelaPesquisarProdutos extends JFrame {
 
@@ -19,22 +35,28 @@ public class TelaPesquisarProdutos extends JFrame {
 	 * verificar se deu algo
 	 */
 	private static final long serialVersionUID = 1L;
+	private Filtro filtro;
+	private Fachada fachada;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JComboBox comboBox;
+	private JPanel panel;
+	private JTextField textFieldNome;
+	private JComboBox<String> comboBox;
 	private JLabel lblNomeDoProduto;
 	private JLabel lblCategoria;
 	private JLabel lblCidadeDoVendedor;
-	private JTextField textField_1;
+	private JTextField textFieldCidade;
 	private JLabel lblDe;
-	private JTextField textField_2;
+	private JTextField textFieldDe;
 	private JLabel lblA;
-	private JTextField textField_3;
+	private JTextField textFieldAte;
 	private JLabel lblNoNecessrio;
+	private DefaultTableModel modelo;
 	private JTable table;
-	private JButton btnNewButton;
-	private JButton btnNewButton_1;
-	private JButton btnNewButton_2;
+	private JButton btnVoltar;
+	private JButton btnVer;
+	private JButton btnFavoritar;
+
+	private TelaComprador_Principal telaComprPrincipal = new TelaComprador_Principal();
 
 	/**
 	 * Create the frame.
@@ -47,95 +69,216 @@ public class TelaPesquisarProdutos extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JPanel panel = new JPanel();
+
+		fachada = Fachada.getInstance();
+
+		modelo.setRowCount(0);
+		modelo = new DefaultTableModel();
+		modelo.addColumn("Nome");
+		modelo.addColumn("Categoria");
+		modelo.addColumn("Quantidade");
+		modelo.addColumn("Preço");
+		modelo.addColumn("Vendedor");
+
+
+
+		panel = new JPanel();
 		panel.setBounds(5, 5, 597, 600);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
-		textField = new JTextField();
-		textField.setBounds(163, 20, 406, 23);
-		panel.add(textField);
-		textField.setFont(new Font("Gisha", Font.PLAIN, 13));
-		textField.setColumns(10);
-		
+
+
+		textFieldNome = new JTextField();
+		textFieldNome.setBounds(130, 20, 439, 23);
+		panel.add(textFieldNome);
+		textFieldNome.setFont(new Font("Gisha", Font.PLAIN, 13));
+		textFieldNome.setColumns(10);
+
 		JButton btnPesquisar = new JButton("Pesquisar!");
 		btnPesquisar.setBounds(361, 101, 208, 23);
 		panel.add(btnPesquisar);
 		btnPesquisar.setFont(new Font("Gisha", Font.PLAIN, 13));
-		
-		comboBox = new JComboBox();
+
+		EventoBotaoPesquisar acaoBtnPesquisar = new EventoBotaoPesquisar();
+		btnPesquisar.addActionListener(acaoBtnPesquisar);
+
+		comboBox = new JComboBox<>();
 		comboBox.setBounds(106, 61, 200, 23);
 		comboBox.setFont(new Font("Gisha", Font.PLAIN, 13));
+		comboBox.addItem("Auto");
+		comboBox.addItem("Roupas");
+		comboBox.addItem("Celulares");
+		comboBox.addItem("Móveis");
+		comboBox.addItem("Livros e Mídias Digitais");
+		comboBox.addItem("Eletrodoméstico");
+		comboBox.addItem("Eletroportáteis");
+		comboBox.addItem("Eletroeletrônico");
+		comboBox.addItem("Info");
+		comboBox.addItem("Games e Consoles");
+		comboBox.addItem("Cama, Mesa e Banho");
+		comboBox.addItem("Casa e Jardim");
+		comboBox.addItem("TV e Áudio");
+		comboBox.addItem("Instrumentos Musicais");
+		comboBox.addItem("Brinquedos");
+		comboBox.addItem("Beleza e Saúde");
+
 		panel.add(comboBox);
-		
+
 		lblNomeDoProduto = new JLabel("Nome do produto");
 		lblNomeDoProduto.setFont(new Font("Gisha", Font.PLAIN, 13));
 		lblNomeDoProduto.setBounds(10, 13, 143, 37);
 		panel.add(lblNomeDoProduto);
-		
+
 		lblCategoria = new JLabel("Categoria");
 		lblCategoria.setFont(new Font("Gisha", Font.PLAIN, 13));
 		lblCategoria.setBounds(10, 55, 86, 35);
 		panel.add(lblCategoria);
-		
-		textField_2 = new JTextField();
-		textField_2.setFont(new Font("Gisha", Font.PLAIN, 13));
-		textField_2.setBounds(361, 60, 86, 23);
-		panel.add(textField_2);
-		textField_2.setColumns(10);
-		
-		btnNewButton = new JButton("Voltar");
-		btnNewButton.setFont(new Font("Gisha", Font.PLAIN, 13));
-		btnNewButton.setBounds(145, 510, 89, 23);
-		panel.add(btnNewButton);
-		
+
+		textFieldDe = new JTextField();
+		textFieldDe.setFont(new Font("Gisha", Font.PLAIN, 13));
+		textFieldDe.setBounds(361, 60, 86, 23);
+		panel.add(textFieldDe);
+		textFieldDe.setColumns(10);
+
+		btnVoltar = new JButton("Voltar");
+		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
+		btnVoltar.setBounds(145, 510, 89, 23);
+		panel.add(btnVoltar);
+
+		EventoBotaoVoltar acaoBotaoVoltar = new EventoBotaoVoltar();
+		btnVoltar.addActionListener(acaoBotaoVoltar);
+
 		lblCidadeDoVendedor = new JLabel("Cidade do vendedor");
 		lblCidadeDoVendedor.setFont(new Font("Gisha", Font.PLAIN, 13));
 		lblCidadeDoVendedor.setBounds(10, 94, 125, 37);
 		panel.add(lblCidadeDoVendedor);
-		
-		textField_1 = new JTextField();
-		textField_1.setFont(new Font("Gisha", Font.PLAIN, 13));
-		textField_1.setBounds(145, 101, 206, 23);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
-		
-		btnNewButton_2 = new JButton("Favoritar");
-		btnNewButton_2.setFont(new Font("Gisha", Font.PLAIN, 13));
-		btnNewButton_2.setBounds(378, 510, 89, 23);
-		panel.add(btnNewButton_2);
-		
-		textField_3 = new JTextField();
-		textField_3.setFont(new Font("Gisha", Font.PLAIN, 13));
-		textField_3.setBounds(483, 60, 86, 23);
-		panel.add(textField_3);
-		textField_3.setColumns(10);
-		
-		table = new JTable();
+
+		textFieldCidade = new JTextField();
+		textFieldCidade.setFont(new Font("Gisha", Font.PLAIN, 13));
+		textFieldCidade.setBounds(145, 101, 206, 23);
+		panel.add(textFieldCidade);
+		textFieldCidade.setColumns(10);
+
+		btnFavoritar = new JButton("Favoritar");
+		btnFavoritar.setFont(new Font("Gisha", Font.PLAIN, 13));
+		btnFavoritar.setBounds(378, 510, 89, 23);
+		panel.add(btnFavoritar);
+
+		textFieldAte = new JTextField();
+		textFieldAte.setFont(new Font("Gisha", Font.PLAIN, 13));
+		textFieldAte.setBounds(483, 60, 86, 23);
+		panel.add(textFieldAte);
+		textFieldAte.setColumns(10);
+
+		table = new JTable(modelo);
 		table.setFont(new Font("Gisha", Font.PLAIN, 13));
 		table.setBounds(40, 179, 529, 304);
-		panel.add(table);
-		
+		carregarTabela(modelo, null);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(30, 169, 539, 330);
+		panel.add(scrollPane);
+		scrollPane.setViewportView(table);
+
 		lblDe = new JLabel("De");
 		lblDe.setFont(new Font("Gisha", Font.PLAIN, 13));
 		lblDe.setBounds(327, 55, 24, 36);
 		panel.add(lblDe);
-		
-		lblA = new JLabel("a");
+
+		lblA = new JLabel("até");
 		lblA.setFont(new Font("Gisha", Font.PLAIN, 13));
 		lblA.setBounds(458, 53, 22, 37);
 		panel.add(lblA);
-		
+
 		lblNoNecessrio = new JLabel("N\u00E3o \u00E9 necess\u00E1rio a inclus\u00E3o de todos os dados para a realiza\u00E7\u00E3o da pesquisa.");
 		lblNoNecessrio.setFont(new Font("Gisha", Font.PLAIN, 11));
 		lblNoNecessrio.setBounds(20, 135, 406, 23);
 		panel.add(lblNoNecessrio);
-		
-		btnNewButton_1 = new JButton("Ver");
-		btnNewButton_1.setFont(new Font("Gisha", Font.PLAIN, 13));
-		btnNewButton_1.setBounds(262, 510, 89, 23);
-		panel.add(btnNewButton_1);
-		
+
+		btnVer = new JButton("Ver");
+		btnVer.setFont(new Font("Gisha", Font.PLAIN, 13));
+		btnVer.setBounds(262, 510, 89, 23);
+		panel.add(btnVer);
+
+	}
+	private class EventoBotaoPesquisar implements ActionListener{
+		public void actionPerformed(ActionEvent evento) {
+			List<Produto> produtos = new ArrayList<>();
+			double de;
+			if (textFieldDe.equals("") == false){
+				de = Double.parseDouble(textFieldDe.getSelectedText());
+			} else de = 0.0;
+			double ate; 
+			if (textFieldAte.equals("") == false){
+				ate = Double.parseDouble(textFieldAte.getSelectedText());
+			} else ate = 0.0;
+			filtro = new Filtro(textFieldNome.getSelectedText(), (String) comboBox.getSelectedItem(), de, ate, textFieldCidade.getSelectedText());		
+			try {
+				produtos = fachada.buscarProdutos(filtro);
+				produtos = fachada.organizarProdutos(produtos);
+				carregarTabela(modelo, produtos);
+			} catch (NaoEncontradoProdutoException e) {
+				JOptionPane.showMessageDialog(null, "Não encontrado nenhum produto com esses atributos! Tente com outras palavras-chave.");
+			}
+
+		}
+	}
+
+	private class EventoBotaoVoltar implements ActionListener{
+		public void actionPerformed(ActionEvent evento){
+			telaComprPrincipal.setVisible(true);
+		}
+	}
+
+	private class EventoBotaoFavoritar implements ActionListener{
+		public void actionPerformed(ActionEvent evento){
+			int linhaSelecionada = table.getSelectedRow();
+			String nomeProduto;
+			String nomeVendedor; //nome usuario
+			Vendedor v = null;
+			Produto p = null;
+
+			if (table.getSelectedRow() < 0) {
+				JOptionPane.showMessageDialog(null,
+						"Nenhum produto selecionado! Selecione um para favoritar.");
+			} else {
+				nomeProduto = (String) table.getValueAt(linhaSelecionada, 0);
+				nomeVendedor = (String) table.getValueAt(linhaSelecionada, 4);
+				if (!nomeVendedor.equals("") && !nomeProduto.equals("")){
+					try {
+						v = fachada.retornarVendedor(nomeVendedor);
+					} catch (NaoEncontradoVendedorException e) {
+						JOptionPane.showMessageDialog(null,
+								"Nenhum vendedor encontrado!");
+					}
+					try {
+						p = fachada.retornarProduto(nomeProduto, v, null);
+					} catch (NaoEncontradoProdutoException e) {
+						JOptionPane.showMessageDialog(null,
+								"Nenhum produto encontrado, sorry!");
+					}
+				}
+					//como faço para passar o produto para o comprador correto, como pegar a instancia do comprador
+				//que esta pesquisando?
+			}
+		}
+	}
+
+	private class EventoBotaoVer implements ActionListener{
+		public void actionPerformed(ActionEvent evento){
+
+		}
+	}
+
+	public static void carregarTabela(DefaultTableModel modelo, List<Produto> produtos) {
+		if (produtos != null) {
+			for (Produto p : produtos) {
+				modelo.addRow(new String[] {
+						p.getNome(),  p.getCategoria(), "" + p.getItensNoEstoque(), "" + p.getPreco(),
+						p.getVendedor().getNomeUsuario()});
+			}
+
+		}
+
 	}
 }

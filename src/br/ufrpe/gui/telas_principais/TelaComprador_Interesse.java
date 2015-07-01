@@ -82,4 +82,11 @@ public class TelaComprador_Interesse {
 		lblNewLabel_1.setBounds(26, 23, 200, 38);
 		panel.add(lblNewLabel_1);
 	}
+	
+	public void setVisible(boolean b) {
+		if(b == true)
+			frmMeuPerfil.setVisible(b);
+		else
+			frmMeuPerfil.setVisible(b);
+	}
 }

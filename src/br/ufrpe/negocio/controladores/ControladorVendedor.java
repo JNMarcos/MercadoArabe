@@ -154,4 +154,16 @@ public class ControladorVendedor {
 		return vendedor;
 
 	}
+	
+	public Vendedor retornarVendedor(String nomeUsuario) throws NaoEncontradoVendedorException{
+		Vendedor vendedor = null;
+		if (!nomeUsuario.equals("")){
+			vendedor = repositorioVendedor.retornarVendedor(nomeUsuario);
+			if (vendedor.equals("")) throw new NaoEncontradoVendedorException();
+		} else {
+			throw new IllegalArgumentException();
+		}
+		
+		return vendedor;
+	}
 }
