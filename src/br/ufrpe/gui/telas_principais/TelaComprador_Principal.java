@@ -175,19 +175,25 @@ public class TelaComprador_Principal {
 	
 	private class EventoBotaoVerFavoritos implements ActionListener {//adicionar evento
 		public void actionPerformed(ActionEvent evento) {
-			telaComprFav.setVisible(true);
+			frmMeuPerfil.dispose();
+			TelaComprador_Favoritos TelaComprador_Favoritos = new TelaComprador_Favoritos();
+			TelaComprador_Favoritos.setVisible(true);
 		}
 	}
 	
 	private class EventoBotaoProdutosInteresse implements ActionListener {//adicionar evento
 		public void actionPerformed(ActionEvent evento) {
-			telaComprInt.setVisible(true);
+			TelaComprador_Principal.dispose();
+			TelaComprador_Interesse TelaComprador_Interesse = new TelaComprador_Interesse();
+			TelaComprador_Interesse.setVisible(true);
 		}
 	}
 	
 	private class EventoBotaoPesquisar implements ActionListener{
 		public void actionPerformed(ActionEvent evento){
-			telaPesqProd.setVisible(true);
+			TelaComprador_Principal.dispose();
+			TelaPesquisarProdutos TelaPesquisarProdutos = new TelaPesquisarProdutos();
+			TelaPesquisarProdutos.setVisible(true);
 		}
 	}
 	
@@ -195,5 +201,10 @@ public class TelaComprador_Principal {
 		public void actionPerformed(ActionEvent evento) {
 			frmMeuPerfil.dispose();
 		}
+	}
+
+	public static void dispose() {
+		// TODO Auto-generated method stub
+		
 	}
 }
