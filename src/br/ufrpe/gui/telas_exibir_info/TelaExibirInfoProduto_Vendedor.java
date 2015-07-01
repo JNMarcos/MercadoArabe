@@ -10,6 +10,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
+import br.ufrpe.gui.telas_principais.TelaVendedor;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class TelaExibirInfoProduto_Vendedor {
 	private static final long serialVersionUID = 1L;
 	private JFrame frmVejaMelhorO;
@@ -41,6 +46,13 @@ public class TelaExibirInfoProduto_Vendedor {
 		panel.setLayout(null);
 		
 		btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaExibirInfoProduto_Vendedor.dispose();
+				TelaExibirInfoProduto_Vendedor TelaVendedor = new TelaExibirInfoProduto_Vendedor();
+				TelaVendedor.setvisible(true);
+			}
+		});
 		btnVoltar.setBounds(113, 370, 89, 23);
 		panel.add(btnVoltar);
 		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
@@ -110,6 +122,16 @@ public class TelaExibirInfoProduto_Vendedor {
 		btnNewButton_1.setFont(new Font("Gisha", Font.PLAIN, 13));
 		btnNewButton_1.setBounds(314, 370, 89, 23);
 		panel.add(btnNewButton_1);
+	}
+
+	protected static void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void setvisible(boolean b) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
