@@ -10,6 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class TelaVendedorConfirmarVenda {
 	private JFrame frmConfirmarInteresseNo;
 	private JPanel panel;
@@ -68,6 +71,13 @@ public class TelaVendedorConfirmarVenda {
 		btnConfirmar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		btnVoltar = new JButton("Voltar ");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaVendedorConfirmarVenda.dispose();
+				TelaVendedorConfirmarVenda TelaExibirInfoProduto_Vendedor = new TelaVendedorConfirmarVenda();
+				TelaExibirInfoProduto_Vendedor.setvisible(true);
+			}
+		});
 		btnVoltar.setBounds(182, 73, 71, 25);
 		panel.add(btnVoltar);
 		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
@@ -76,6 +86,16 @@ public class TelaVendedorConfirmarVenda {
 		spinner.setFont(new Font("Gisha", Font.PLAIN, 13));
 		spinner.setBounds(426, 26, 77, 20);
 		panel.add(spinner);
+	}
+
+	protected void setvisible(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected static void dispose() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

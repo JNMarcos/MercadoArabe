@@ -44,7 +44,9 @@ public class TelaComprador_Favoritos {
 		btnNewButton = new JButton("Voltar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				TelaComprador_Favoritos.dispose();
+				TelaComprador_Favoritos TelaComprador_Principal = new TelaComprador_Favoritos();
+				TelaComprador_Principal.setVisible(true);
 			}
 		});
 		btnNewButton.setFont(new Font("Gisha", Font.PLAIN, 13));
@@ -79,6 +81,10 @@ public class TelaComprador_Favoritos {
 		panel.add(lblProdutos);
 		
 		btnNewButton_1 = new JButton("Remover dos favoritos");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton_1.setFont(new Font("Gisha", Font.PLAIN, 13));
 		btnNewButton_1.setBounds(384, 317, 210, 23);
 		panel.add(btnNewButton_1);
@@ -90,6 +96,11 @@ public class TelaComprador_Favoritos {
 		panel.add(lblNewLabel_1);
 	}
 	
+	protected static void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public void setVisible(boolean b) {
 		if(b == true)
 			frmMeuPerfil.setVisible(b);
