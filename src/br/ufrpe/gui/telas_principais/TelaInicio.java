@@ -142,25 +142,43 @@ public class TelaInicio {
 	
 	private class EventoBotaoLoginVendedor implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
+			TelaInicio.dispose();
+			TelaInicio telaLoginVendedor = new TelaInicio();
 			telaLoginVendedor.setVisible(true);
 		}
 	}
 	
 	private class EventoBotaoLoginComprador implements ActionListener { 
 		public void actionPerformed(ActionEvent evento) {
+			TelaInicio.dispose();
+			TelaInicio telaLoginComprador = new TelaInicio();
 			telaLoginComprador.setVisible(true);
 		}
 	}
 	
 	private class EventoBotaoCadastrarComprador implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
+			TelaInicio.dispose();
+			TelaInicio telaCadComprador = new TelaInicio();
 			telaCadComprador.setVisible(true);
 		}
 	}
 	
 	private class EventoBotaoCadastrarVendedor implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
+			TelaInicio.dispose();
+			TelaInicio telaCadVendedor = new TelaInicio();
 			telaCadVendedor.setVisible(true);
 		}
+	}
+
+	public static void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setVisible(boolean b) {
+		// TODO Auto-generated method stub
+		
 	}
 }

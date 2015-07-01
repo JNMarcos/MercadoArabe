@@ -42,6 +42,11 @@ public class TelaComprador_Favoritos {
 		panel.setLayout(null);
 		
 		btnNewButton = new JButton("Voltar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		btnNewButton.setFont(new Font("Gisha", Font.PLAIN, 13));
 		btnNewButton.setBounds(77, 317, 163, 23);
 		panel.add(btnNewButton);
