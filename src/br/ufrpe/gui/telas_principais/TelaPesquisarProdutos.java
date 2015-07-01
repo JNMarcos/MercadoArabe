@@ -1,13 +1,6 @@
 package br.ufrpe.gui.telas_principais;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JTextField;
-
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,11 +9,16 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import br.ufrpe.negocio.Fachada;
 import br.ufrpe.negocio.classes_basicas.Produto;
@@ -30,7 +28,7 @@ import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoVendedorException;
 import br.ufrpe.negocio.filtro.Filtro;
 
 public class TelaPesquisarProdutos extends JFrame {
-
+	
 	/**
 	 * verificar se deu algo
 	 */
@@ -55,9 +53,7 @@ public class TelaPesquisarProdutos extends JFrame {
 	private JButton btnVoltar;
 	private JButton btnVer;
 	private JButton btnFavoritar;
-
-	private TelaComprador_Principal telaComprPrincipal = new TelaComprador_Principal();
-
+	
 	/**
 	 * Create the frame.
 	 */
@@ -72,15 +68,13 @@ public class TelaPesquisarProdutos extends JFrame {
 
 		fachada = Fachada.getInstance();
 
-		modelo.setRowCount(0);
 		modelo = new DefaultTableModel();
+		modelo.setRowCount(0);
 		modelo.addColumn("Nome");
 		modelo.addColumn("Categoria");
 		modelo.addColumn("Quantidade");
 		modelo.addColumn("Preço");
 		modelo.addColumn("Vendedor");
-
-
 
 		panel = new JPanel();
 		panel.setBounds(5, 5, 597, 600);
@@ -226,7 +220,7 @@ public class TelaPesquisarProdutos extends JFrame {
 
 	private class EventoBotaoVoltar implements ActionListener{
 		public void actionPerformed(ActionEvent evento){
-			telaComprPrincipal.setVisible(true);
+			dispose();
 		}
 	}
 
