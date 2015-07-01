@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import br.ufrpe.negocio.classes_basicas.Produto;
+
 public class TelaExibirInfoProduto_Comprador extends JFrame{
 
 	/**
@@ -18,19 +20,22 @@ public class TelaExibirInfoProduto_Comprador extends JFrame{
 	private JFrame frmVejaMelhorO;
 	private JButton btnVoltar;
 	private JButton btnInformaesDoVendedor;
+	
+	Produto p;
 
 
 	/**
 	 * Create the application.
 	 */
-	public TelaExibirInfoProduto_Comprador() {
-		initialize();
+	public TelaExibirInfoProduto_Comprador(Produto p) {
+		initialize(p);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(Produto p) {
+		setProduto(p);
 		frmVejaMelhorO = new JFrame();
 		frmVejaMelhorO.setTitle("Conhe\u00E7a melhor o produto");
 		frmVejaMelhorO.getContentPane().setBackground(SystemColor.activeCaption);
@@ -89,5 +94,10 @@ public class TelaExibirInfoProduto_Comprador extends JFrame{
 		lblImagem.setFont(new Font("Gisha", Font.PLAIN, 13));
 		lblImagem.setBounds(293, 110, 108, 14);
 		panel.add(lblImagem);
+	}
+
+	private void setProduto(Produto p) {
+		this.p = p;
+		
 	}
 }

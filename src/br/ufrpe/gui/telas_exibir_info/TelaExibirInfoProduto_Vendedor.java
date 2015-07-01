@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
-import br.ufrpe.gui.telas_principais.TelaVendedor;
+import br.ufrpe.negocio.classes_basicas.Produto;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -20,19 +20,22 @@ public class TelaExibirInfoProduto_Vendedor {
 	private JFrame frmVejaMelhorO;
 	private JButton btnVoltar;
 	private JTable table;
+	
+	Produto p;
 
 
 	/**
 	 * Create the application.
 	 */
-	public TelaExibirInfoProduto_Vendedor() {
-		initialize();
+	public TelaExibirInfoProduto_Vendedor(Produto p) {
+		initialize(p);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(Produto p) {
+		setProduto(p);
 		frmVejaMelhorO = new JFrame();
 		frmVejaMelhorO.setTitle("Descri\u00E7\u00E3o produto");
 		frmVejaMelhorO.getContentPane().setBackground(SystemColor.activeCaption);
@@ -49,7 +52,7 @@ public class TelaExibirInfoProduto_Vendedor {
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaExibirInfoProduto_Vendedor.dispose();
-				TelaExibirInfoProduto_Vendedor TelaVendedor = new TelaExibirInfoProduto_Vendedor();
+				TelaExibirInfoProduto_Vendedor TelaVendedor = new TelaExibirInfoProduto_Vendedor(p);
 				TelaVendedor.setvisible(true);
 			}
 		});
@@ -123,6 +126,11 @@ public class TelaExibirInfoProduto_Vendedor {
 		btnNewButton_1.setBounds(314, 370, 89, 23);
 		panel.add(btnNewButton_1);
 	}
+
+	private void setProduto(Produto p) {
+		this.p = p;
+	}
+	
 
 	protected static void dispose() {
 		// TODO Auto-generated method stub

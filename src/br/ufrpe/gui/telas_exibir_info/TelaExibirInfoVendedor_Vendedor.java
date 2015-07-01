@@ -9,21 +9,24 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import br.ufrpe.negocio.classes_basicas.Vendedor;
+
 public class TelaExibirInfoVendedor_Vendedor {
 	private JFrame frmConheaOVendedor;
-
+	Vendedor v;
 
 	/**
 	 * Create the application.
 	 */
-	public TelaExibirInfoVendedor_Vendedor() {
-		initialize();
+	public TelaExibirInfoVendedor_Vendedor(Vendedor v) {
+		initialize(v);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(Vendedor v) {
+		setVendedor(v);
 		frmConheaOVendedor = new JFrame();
 		frmConheaOVendedor.setTitle("Veja seus dados cadastrais");
 		frmConheaOVendedor.getContentPane().setBackground(SystemColor.activeCaption);
@@ -101,6 +104,11 @@ public class TelaExibirInfoVendedor_Vendedor {
 		lblNewLabel_3.setFont(new Font("Gisha", Font.PLAIN, 13));
 		lblNewLabel_3.setBounds(31, 217, 122, 20);
 		panel.add(lblNewLabel_3);
+	}
+
+	private void setVendedor(Vendedor v) {
+		this.v = v;
+		
 	}
 
 }

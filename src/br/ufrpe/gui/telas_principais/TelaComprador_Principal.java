@@ -27,18 +27,8 @@ public class TelaComprador_Principal {
 	private TelaComprador_Interesse telaComprInt;
 	private TelaPesquisarProdutos telaPesqProd;
 	
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					TelaComprador_Principal window = new TelaComprador_Principal();
-//					window.frmMeuPerfil.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+	private Comprador comprador;
+	
 	
 	/**
 	 * Create the application.
@@ -176,7 +166,7 @@ public class TelaComprador_Principal {
 	private class EventoBotaoVerFavoritos implements ActionListener {//adicionar evento
 		public void actionPerformed(ActionEvent evento) {
 			frmMeuPerfil.dispose();
-			TelaComprador_Favoritos TelaComprador_Favoritos = new TelaComprador_Favoritos();
+			TelaComprador_Favoritos TelaComprador_Favoritos = new TelaComprador_Favoritos(comprador);
 			TelaComprador_Favoritos.setVisible(true);
 		}
 	}
@@ -184,7 +174,7 @@ public class TelaComprador_Principal {
 	private class EventoBotaoProdutosInteresse implements ActionListener {//adicionar evento
 		public void actionPerformed(ActionEvent evento) {
 			TelaComprador_Principal.dispose();
-			TelaComprador_Interesse TelaComprador_Interesse = new TelaComprador_Interesse();
+			TelaComprador_Interesse TelaComprador_Interesse = new TelaComprador_Interesse(comprador);
 			TelaComprador_Interesse.setVisible(true);
 		}
 	}
@@ -192,7 +182,7 @@ public class TelaComprador_Principal {
 	private class EventoBotaoPesquisar implements ActionListener{
 		public void actionPerformed(ActionEvent evento){
 			TelaComprador_Principal.dispose();
-			TelaPesquisarProdutos TelaPesquisarProdutos = new TelaPesquisarProdutos();
+			TelaPesquisarProdutos TelaPesquisarProdutos = new TelaPesquisarProdutos(comprador);
 			TelaPesquisarProdutos.setVisible(true);
 		}
 	}

@@ -3,12 +3,18 @@ package br.ufrpe.gui.telas_exibir_info;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+
 import java.awt.SystemColor;
+
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.JPanel;
+
+import br.ufrpe.negocio.classes_basicas.Vendedor;
 
 public class TelaExibirInfoVendedor_Comprador extends JFrame {
 
@@ -17,19 +23,22 @@ public class TelaExibirInfoVendedor_Comprador extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JFrame frmConheaOVendedor;
+	
+	Vendedor v;
 
 
 	/**
 	 * Create the application.
 	 */
-	public TelaExibirInfoVendedor_Comprador() {
-		initialize();
+	public TelaExibirInfoVendedor_Comprador(Vendedor v) {
+		initialize(v);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(Vendedor v) {
+		setVendedor(v);
 		frmConheaOVendedor = new JFrame();
 		frmConheaOVendedor.setTitle("Conhe\u00E7a o vendedor");
 		frmConheaOVendedor.getContentPane().setBackground(SystemColor.activeCaption);
@@ -77,6 +86,11 @@ public class TelaExibirInfoVendedor_Comprador extends JFrame {
 		btnContinuoInteressado.setFont(new Font("Gisha", Font.PLAIN, 13));
 		btnContinuoInteressado.setBounds(212, 227, 172, 23);
 		panel.add(btnContinuoInteressado);
+	}
+
+	private void setVendedor(Vendedor v) {
+			this.v = v;
+		
 	}
 
 }

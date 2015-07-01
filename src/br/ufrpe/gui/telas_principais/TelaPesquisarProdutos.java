@@ -20,6 +20,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import br.ufrpe.gui.telas_exibir_info.TelaExibirInfoProduto_Comprador;
 import br.ufrpe.negocio.Fachada;
 import br.ufrpe.negocio.classes_basicas.Comprador;
 import br.ufrpe.negocio.classes_basicas.Produto;
@@ -56,11 +57,9 @@ public class TelaPesquisarProdutos extends JFrame {
 	private JButton btnFavoritar;
 	private Comprador c;
 
-<<<<<<< HEAD
 	private TelaComprador_Principal telaComprPrincipal;
+	private TelaExibirInfoProduto_Comprador telaExibirProduto;
 
-=======
->>>>>>> origin/master
 	/**
 	 * Create the frame.
 	 */
@@ -165,6 +164,9 @@ public class TelaPesquisarProdutos extends JFrame {
 		btnFavoritar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		btnFavoritar.setBounds(378, 510, 89, 23);
 		panel.add(btnFavoritar);
+		
+		EventoBotaoFavoritar acaoBtnFavoritar = new EventoBotaoFavoritar();
+		btnFavoritar.addActionListener(acaoBtnFavoritar);
 
 		textFieldAte = new JTextField();
 		textFieldAte.setFont(new Font("Gisha", Font.PLAIN, 13));
@@ -201,6 +203,9 @@ public class TelaPesquisarProdutos extends JFrame {
 		btnVer.setFont(new Font("Gisha", Font.PLAIN, 13));
 		btnVer.setBounds(262, 510, 89, 23);
 		panel.add(btnVer);
+		
+		EventoBotaoVer acaoBotaoVer = new EventoBotaoVer();
+		btnVer.addActionListener(acaoBotaoVer);
 
 	}
 	public void setComprador(Comprador c) {
@@ -266,6 +271,8 @@ public class TelaPesquisarProdutos extends JFrame {
 					//como faço para passar o produto para o comprador correto, como pegar a instancia do comprador
 				//que esta pesquisando?
 				fachada.adicionarAosFavoritos(c, p);
+				JOptionPane.showMessageDialog(null,
+						"Produto adicionado com sucesso em seus favoritos!");
 			}
 		}
 	}
@@ -280,7 +287,7 @@ public class TelaPesquisarProdutos extends JFrame {
 			
 			if (table.getSelectedRow() < 0) {
 				JOptionPane.showMessageDialog(null,
-						"Nenhum produto selecionado! Selecione um para favoritar.");
+						"Nenhum produto selecionado! Selecione um produto para favoritar.");
 			} else {
 				nomeProduto = (String) table.getValueAt(linhaSelecionada,0);
 				nomeVendedor = (String) table.getValueAt(linhaSelecionada, 4);
@@ -296,7 +303,14 @@ public class TelaPesquisarProdutos extends JFrame {
 					JOptionPane.showMessageDialog(null,
 							"Nenhum produto encontrado, sorry!");
 				}
-				
+				Produto prod = null;
+				try {
+					prod = fachada.retornarProduto(p.getNome(), v, null);
+				} catch (NaoEncontradoProdutoException e) {
+					JOptionPane.showMessageDialog(null,
+							"Nenhum produto encontrado!");
+				}
+				telaExibirProduto = new TelaExibirInfoProduto_Comprador(prod);
 				
 			}
 		}

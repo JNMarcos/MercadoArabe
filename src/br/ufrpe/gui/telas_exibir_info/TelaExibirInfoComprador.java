@@ -9,17 +9,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import br.ufrpe.negocio.classes_basicas.Comprador;
+
 public class TelaExibirInfoComprador {
+	Comprador c;
 	
 	private JFrame frmConheaOVendedor;
-	public TelaExibirInfoComprador() {
-		initialize();
+	public TelaExibirInfoComprador(Comprador c) {
+		initialize(c);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(Comprador c) {
+		setComprador(c);
 		frmConheaOVendedor = new JFrame();
 		frmConheaOVendedor.setTitle("Veja seus dados cadastrais");
 		frmConheaOVendedor.getContentPane().setBackground(SystemColor.activeCaption);
@@ -62,5 +66,9 @@ public class TelaExibirInfoComprador {
 		lblNewLabel_4.setBounds(91, 32, 288, 29);
 		panel.add(lblNewLabel_4);
 		lblNewLabel_4.setFont(new Font("Gisha", Font.BOLD, 22));
+	}
+	
+	public void setComprador(Comprador c){
+		this.c = c;
 	}
 }

@@ -12,23 +12,27 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
+import br.ufrpe.negocio.classes_basicas.Comprador;
+
 public class TelaComprador_Favoritos {
 	private JFrame frmMeuPerfil;
 	private JTable table;
 	private JPanel panel;
 	private JButton btnNewButton_1;
 	private JButton btnNewButton;
+	private Comprador c;
 	/**
 	 * Create the application.
 	 */
-	public TelaComprador_Favoritos() {
-		initialize();
+	public TelaComprador_Favoritos(Comprador c) {
+		initialize(c);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(Comprador c) {
+		setComprador(c);
 		frmMeuPerfil = new JFrame();
 		frmMeuPerfil.setTitle("Meu Perfil");
 		frmMeuPerfil.getContentPane().setBackground(SystemColor.activeCaption);
@@ -45,8 +49,8 @@ public class TelaComprador_Favoritos {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				TelaComprador_Favoritos.dispose();
-				TelaComprador_Favoritos TelaComprador_Principal = new TelaComprador_Favoritos();
-				TelaComprador_Principal.setVisible(true);
+				TelaComprador_Favoritos TelaComprador_Favoritos = new TelaComprador_Favoritos(c);
+				TelaComprador_Favoritos.setVisible(true);
 			}
 		});
 		btnNewButton.setFont(new Font("Gisha", Font.PLAIN, 13));
@@ -96,6 +100,11 @@ public class TelaComprador_Favoritos {
 		panel.add(lblNewLabel_1);
 	}
 	
+	private void setComprador(Comprador c) {
+		this.c = c;
+		
+	}
+
 	protected static void dispose() {
 		// TODO Auto-generated method stub
 		
