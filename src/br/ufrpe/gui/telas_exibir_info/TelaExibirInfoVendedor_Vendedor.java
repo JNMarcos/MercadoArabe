@@ -9,7 +9,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import br.ufrpe.gui.telas_editar.TelaEditarVendedor;
+import br.ufrpe.gui.telas_principais.TelaVendedor;
 import br.ufrpe.negocio.classes_basicas.Vendedor;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaExibirInfoVendedor_Vendedor {
 	private JFrame frmConheaOVendedor;
@@ -65,6 +70,13 @@ public class TelaExibirInfoVendedor_Vendedor {
 		lblNomeDoVendedor.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaExibirInfoVendedor_Vendedor.dispose();
+				TelaVendedor telaVendedor = new TelaVendedor(null);
+				telaVendedor.setvisible(true);
+			}
+		});
 		btnVoltar.setBounds(45, 345, 152, 23);
 		panel.add(btnVoltar);
 		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
@@ -88,6 +100,13 @@ public class TelaExibirInfoVendedor_Vendedor {
 		lblCidadeDoVendedor.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		JButton btnContinuoInteressado = new JButton("Editar informa\u00E7\u00F5es");
+		btnContinuoInteressado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaExibirInfoVendedor_Vendedor.dispose();
+				TelaEditarVendedor telaEditarVendedor = new TelaEditarVendedor();
+				telaEditarVendedor.setVisible(true);
+			}
+		});
 		btnContinuoInteressado.setFont(new Font("Gisha", Font.PLAIN, 13));
 		btnContinuoInteressado.setBounds(223, 345, 172, 23);
 		panel.add(btnContinuoInteressado);
@@ -115,6 +134,11 @@ public class TelaExibirInfoVendedor_Vendedor {
 		lblNewLabel_3.setBounds(31, 217, 122, 20);
 		lblNewLabel_3.setText(v.getContato().getEstado());
 		panel.add(lblNewLabel_3);
+	}
+
+	protected static void dispose() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private void setVendedor(Vendedor v) {

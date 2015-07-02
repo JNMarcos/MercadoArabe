@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import br.ufrpe.gui.telas_principais.TelaComprador_Principal;
+import br.ufrpe.gui.telas_principais.TelaInicio;
 import br.ufrpe.negocio.Fachada;
 import br.ufrpe.negocio.classes_basicas.Comprador;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoCompradorException;
@@ -134,9 +135,14 @@ public class TelaLoginComprador {
 	
 	private class EventoBotaoVoltar implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
-			frame.setVisible(false);
-			textField_User.setText("");
-			passwordField.setText("");
+			TelaLoginComprador.dispose();
+			TelaInicio telaInicio = new TelaInicio();
+			telaInicio.setVisible(true);
 		}
+	}
+
+	public static void dispose() {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -86,7 +86,15 @@ public class TelaCompraXP {
 	
 	private class EventoBtnCancelar implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
+			TelaCompraXP.dispose();
+			TelaVendedor telaVendedor = new TelaVendedor(null);
+			telaVendedor.setvisible(true);
 			
 		}
+	}
+
+	public static void dispose() {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
+import br.ufrpe.gui.telas_principais.TelaVendedor;
 import br.ufrpe.negocio.classes_basicas.Produto;
 
 import java.awt.event.ActionListener;
@@ -53,8 +54,8 @@ public class TelaExibirInfoProduto_Vendedor {
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaExibirInfoProduto_Vendedor.dispose();
-				TelaExibirInfoProduto_Vendedor TelaVendedor = new TelaExibirInfoProduto_Vendedor(p);
-				TelaVendedor.setvisible(true);
+				TelaVendedor telaVendedor = new TelaVendedor(null);
+				telaVendedor.setvisible(true);
 			}
 		});
 		btnVoltar.setBounds(113, 370, 89, 23);
@@ -124,6 +125,11 @@ public class TelaExibirInfoProduto_Vendedor {
 		panel.add(lblVendidos);
 		
 		JButton btnNewButton = new JButton("Editar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnNewButton.setFont(new Font("Gisha", Font.PLAIN, 13));
 		btnNewButton.setBounds(212, 370, 89, 23);
 		panel.add(btnNewButton);

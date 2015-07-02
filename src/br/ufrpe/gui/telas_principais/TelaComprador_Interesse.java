@@ -11,6 +11,8 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
 import br.ufrpe.negocio.classes_basicas.Comprador;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaComprador_Interesse {
 	private JFrame frmMeuPerfil;
@@ -45,6 +47,13 @@ public class TelaComprador_Interesse {
 		panel.setLayout(null);
 
 		btnNewButton = new JButton("Voltar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaComprador_Interesse.dispose();
+				TelaComprador_Principal telaComprador_Principal = new TelaComprador_Principal(null);
+				telaComprador_Principal.setVisible(true);
+			}
+		});
 		btnNewButton.setFont(new Font("Gisha", Font.PLAIN, 13));
 		btnNewButton.setBounds(77, 317, 163, 23);
 		panel.add(btnNewButton);
@@ -88,6 +97,11 @@ public class TelaComprador_Interesse {
 		lblUser.setBounds(26, 23, 200, 38);
 		lblUser.setText(c.getNomeUsuario());
 		panel.add(lblUser);
+	}
+
+	protected static void dispose() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private void setComprador(Comprador c) {
