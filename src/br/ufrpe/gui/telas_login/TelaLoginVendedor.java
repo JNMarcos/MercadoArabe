@@ -12,7 +12,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
 import br.ufrpe.gui.telas_principais.TelaInicio;
 import br.ufrpe.gui.telas_principais.TelaVendedor;
@@ -34,7 +33,7 @@ public class TelaLoginVendedor {
 	private static Fachada fachada = Fachada.getInstance();
 	private Vendedor vendedor;
 	private TelaVendedor telaVendedor;
-
+	private TelaInicio telaInicio;
 
 	/**
 	 * Create the application.
@@ -112,16 +111,15 @@ public class TelaLoginVendedor {
 			try {
 				
 				String senha = new String(passwordField.getPassword());
-				
-				vendedor = fachada.verificarLoginVendedor(textField_User.getText(), senha); //obs aqui
+				vendedor = fachada.verificarLoginVendedor(textField_User.getText(), senha);
 				telaVendedor = new TelaVendedor(vendedor);
-				telaVendedor.setvisible(true);
+				telaVendedor.setVisible(true);
 				
 				//mensagem boas vindas
 				JOptionPane.showMessageDialog(null, "Bem vindo, " + textField_User.getText() + "!");
 				textField_User.setText("");
 				passwordField.setText("");
-				frame.dispose(); //volta p/ tela inicio
+				frame.dispose();
 				
 			} catch(NaoEncontradoVendedorException e) {
 				JOptionPane.showMessageDialog(null, "Vendedor não encontrado! Tente novamente.");
@@ -137,8 +135,8 @@ public class TelaLoginVendedor {
 	private class EventoBotaoVoltar implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 			frame.dispose();
-			TelaInicio telaInicio = new TelaInicio();
-			telaInicio.setVisible(true);
+			telaInicio = new TelaInicio();
+			telaInicio.setVisible(true);;
 
 		}
 	}

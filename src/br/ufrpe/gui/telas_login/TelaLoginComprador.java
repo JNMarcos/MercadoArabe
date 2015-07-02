@@ -12,7 +12,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
 import br.ufrpe.gui.telas_principais.TelaComprador_Principal;
 import br.ufrpe.gui.telas_principais.TelaInicio;
@@ -111,7 +110,6 @@ public class TelaLoginComprador {
 			try {
 				String senha = new String(passwordField.getPassword());
 				
-				//obs aqui
 				comprador = fachada.verificarLoginComprador(textField_User.getText(), senha);
 				telaComprador = new TelaComprador_Principal(comprador);
 				telaComprador.setVisible(true);
@@ -139,10 +137,5 @@ public class TelaLoginComprador {
 			TelaInicio telaInicio = new TelaInicio();
 			telaInicio.setVisible(true);
 		}
-	}
-
-	public static void dispose() {
-		// TODO Auto-generated method stub
-		
 	}
 }
