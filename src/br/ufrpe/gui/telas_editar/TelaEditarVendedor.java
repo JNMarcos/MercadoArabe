@@ -10,10 +10,13 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaEditarVendedor extends JFrame{
 	public TelaEditarVendedor() {
 		setResizable(false);
+		setSize(530,340);
 		setTitle("Atualiza\u00E7\u00E3o de informa\u00E7\u00F5es cadastrais");
 		getContentPane().setBackground(SystemColor.activeCaption);
 		getContentPane().setLayout(null);
@@ -99,6 +102,10 @@ public class TelaEditarVendedor extends JFrame{
 		panel.add(comboBox);
 		
 		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnVoltar.setBounds(152, 268, 108, 23);
 		panel.add(btnVoltar);
 		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
