@@ -49,16 +49,16 @@ public class Comprador extends Pessoa implements Comparable<Comprador>{
 		return favoritos;
 	}
 	
-	public int getProdInteresses() {
-		return prodInteresses;
+	public List<Produto> getProdInteresses() {
+		return produtosInteressantes;
 	}
 
-	public int getProdAdquiridos() {
-		return prodAdquiridos;
+	public List<Produto> getProdAdquiridos() {
+		return produtosAdquiridos;
 	}
 
-	public int getProdFavoritos() {
-		return prodFavoritos;
+	public List<Produto> getProdFavoritos() {
+		return favoritos;
 	}
 	
 	@Override

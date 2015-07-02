@@ -156,7 +156,7 @@ public class TelaComprador_Principal {
 		JButton btnMeusDados = new JButton("Meus dados");
 		btnMeusDados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaComprador_Principal.dispose();
+				frmMeuPerfil.dispose();
 				TelaExibirInfoComprador telaExibirInfoComprador = new TelaExibirInfoComprador(comprador);
 				telaExibirInfoComprador.setVisible(true);
 			}
@@ -183,24 +183,24 @@ public class TelaComprador_Principal {
 	private class EventoBotaoVerFavoritos implements ActionListener {//adicionar evento
 		public void actionPerformed(ActionEvent evento) {
 			frmMeuPerfil.dispose();
-			TelaComprador_Favoritos TelaComprador_Favoritos = new TelaComprador_Favoritos(comprador);
-			TelaComprador_Favoritos.setVisible(true);
+			telaComprFav = new TelaComprador_Favoritos(comprador);
+			telaComprFav.setVisible(true);
 		}
 	}
 	
 	private class EventoBotaoProdutosInteresse implements ActionListener {//adicionar evento
 		public void actionPerformed(ActionEvent evento) {
-			TelaComprador_Principal.dispose();
-			TelaComprador_Interesse TelaComprador_Interesse = new TelaComprador_Interesse(comprador);
-			TelaComprador_Interesse.setVisible(true);
+			frmMeuPerfil.dispose();
+			telaComprInt = new TelaComprador_Interesse(comprador);
+			telaComprInt.setVisible(true);
 		}
 	}
 	
 	private class EventoBotaoPesquisar implements ActionListener{
 		public void actionPerformed(ActionEvent evento){
-			TelaComprador_Principal.dispose();
-			TelaPesquisarProdutos TelaPesquisarProdutos = new TelaPesquisarProdutos(comprador);
-			TelaPesquisarProdutos.setVisible(true);
+			frmMeuPerfil.dispose();
+			telaPesqProd = new TelaPesquisarProdutos(comprador);
+			telaPesqProd.setVisible(true);
 		}
 	}
 	
@@ -208,10 +208,5 @@ public class TelaComprador_Principal {
 		public void actionPerformed(ActionEvent evento) {
 			frmMeuPerfil.dispose();
 		}
-	}
-
-	public static void dispose() {
-		// TODO Auto-generated method stub
-		
 	}
 }

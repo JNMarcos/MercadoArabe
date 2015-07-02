@@ -37,6 +37,8 @@ public class TelaCadastroComprador {
 	private static Fachada fachada = Fachada.getInstance();
 	private JPasswordField passwordFieldConfirmar;
 
+	private TelaInicio telaInicio;
+	
 	private static final int anoInicio = 1914;
 	private static final int mesDiaInicio = 1;
 	private static final int mesFim = 12;
@@ -205,8 +207,10 @@ public class TelaCadastroComprador {
 						textField_Nome.setText("");
 						textField_User.setText("");
 						passwordField.setText("");
-
-						frmCadastroComprador.dispose(); //volta p/ tela inicio
+						frmCadastroComprador.dispose();
+						
+						TelaInicio telaInicio = new TelaInicio();
+						telaInicio.setVisible(true);
 					} else {
 						JOptionPane.showMessageDialog(null, "As senhas precisam ser iguais!");
 						passwordField.setText("");
@@ -240,6 +244,7 @@ public class TelaCadastroComprador {
 			passwordField.setText("");
 			passwordFieldConfirmar.setText("");
 			frmCadastroComprador.dispose();
+			
 			TelaInicio telaInicio = new TelaInicio();
 			telaInicio.setVisible(true);
 		}

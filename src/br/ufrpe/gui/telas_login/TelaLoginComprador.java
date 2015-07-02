@@ -120,7 +120,7 @@ public class TelaLoginComprador {
 				JOptionPane.showMessageDialog(null, "Bem vindo, " + textField_User.getText() + "!");
 				textField_User.setText("");
 				passwordField.setText("");
-				frame.dispose(); //volta p/ tela inicio
+				frame.dispose();
 				
 			} catch(NaoEncontradoCompradorException e) {
 				JOptionPane.showMessageDialog(null, "Comprador não encontrado! Tente novamente.");

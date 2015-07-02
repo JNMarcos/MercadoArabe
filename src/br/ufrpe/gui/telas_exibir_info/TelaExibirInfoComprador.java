@@ -65,7 +65,7 @@ public class TelaExibirInfoComprador {
 		JButton btnContinuoInteressado = new JButton("Editar informa\u00E7\u00F5es");
 		btnContinuoInteressado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaExibirInfoComprador.dispose();
+				frmConheaOVendedor.dispose();
 				TelaEditarComprador telaEditarComprador = new TelaEditarComprador();
 				telaEditarComprador.setVisible(true);
 			}
@@ -87,9 +87,11 @@ public class TelaExibirInfoComprador {
 		lblUser.setFont(new Font("Gisha", Font.BOLD | Font.ITALIC, 22));
 	}
 	
-	protected static void dispose() {
-		// TODO Auto-generated method stub
-		
+	public void setVisible(boolean b) {
+		if(b == true)
+			frmConheaOVendedor.setVisible(b);
+		else
+			frmConheaOVendedor.setVisible(b);
 	}
 
 	public void setComprador(Comprador c){
