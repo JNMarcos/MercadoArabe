@@ -144,7 +144,7 @@ public class TelaInicio {
 	private class EventoBotaoLoginVendedor implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 			TelaInicio.dispose();
-			TelaInicio telaLoginVendedor = new TelaInicio();
+			TelaLoginVendedor telaLoginVendedor = new TelaLoginVendedor();
 			telaLoginVendedor.setVisible(true);
 		}
 	}
@@ -152,7 +152,7 @@ public class TelaInicio {
 	private class EventoBotaoLoginComprador implements ActionListener { 
 		public void actionPerformed(ActionEvent evento) {
 			TelaInicio.dispose();
-			TelaInicio telaLoginComprador = new TelaInicio();
+			TelaLoginComprador telaLoginComprador = new TelaLoginComprador();
 			telaLoginComprador.setVisible(true);
 		}
 	}
@@ -160,7 +160,7 @@ public class TelaInicio {
 	private class EventoBotaoCadastrarComprador implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 			TelaInicio.dispose();
-			TelaInicio telaCadComprador = new TelaInicio();
+			TelaCadastroComprador telaCadComprador = new TelaCadastroComprador();
 			telaCadComprador.setVisible(true);
 		}
 	}
@@ -168,8 +168,8 @@ public class TelaInicio {
 	private class EventoBotaoCadastrarVendedor implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 			TelaInicio.dispose();
-			TelaInicio telaInicio = new TelaInicio();
-			telaInicio.setVisible(true);
+			TelaCadastroVendedor telaCadastroVendedor = new TelaCadastroVendedor();
+			telaCadastroVendedor.setVisible(true);
 		}
 	}
 
