@@ -27,6 +27,7 @@ public class TelaComprador_Principal {
 	private TelaComprador_Favoritos telaComprFav;
 	private TelaComprador_Interesse telaComprInt;
 	private TelaPesquisarProdutos telaPesqProd;
+	private TelaExibirInfoComprador telaExibirInfoComprador;
 	
 	private Comprador comprador;
 	
@@ -91,11 +92,20 @@ public class TelaComprador_Principal {
 		panel.add(lblUser);
 		lblUser.setFont(new Font("Gisha", Font.BOLD | Font.ITALIC, 14));
 		
-		
 		JLabel lblVocTem = new JLabel("Voc\u00EA comprou");
 		lblVocTem.setBounds(14, 101, 97, 17);
 		panel.add(lblVocTem);
 		lblVocTem.setFont(new Font("Gisha", Font.PLAIN, 13));
+		
+		JLabel lblQtd = new JLabel("qtd");
+		lblQtd.setHorizontalAlignment(SwingConstants.CENTER);
+		lblQtd.setBounds(99, 101, 67, 17);
+		if(c.getProdAdquiridos() == null)
+			lblQtd.setText("00");
+		else
+			lblQtd.setText("" + c.getProdAdquiridos());
+		lblQtd.setFont(new Font("Gisha", Font.BOLD, 13));
+		panel.add(lblQtd);
 		
 		JLabel lblVenda = new JLabel("produto(s)");
 		lblVenda.setBounds(176, 101, 104, 17);
@@ -107,17 +117,13 @@ public class TelaComprador_Principal {
 		panel.add(lblXpDisponvel);
 		lblXpDisponvel.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
-		JLabel lblQtd = new JLabel("qtd");
-		lblQtd.setHorizontalAlignment(SwingConstants.CENTER);
-		lblQtd.setBounds(99, 101, 67, 17);
-		lblQtd.setText("" + c.getProdAdquiridos());
-		lblQtd.setFont(new Font("Gisha", Font.BOLD, 13));
-		panel.add(lblQtd);
-		
 		JLabel label = new JLabel("qtd");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setBounds(242, 129, 48, 17);
-		label.setText("" + c.getProdInteresses());
+		if(c.getProdInteresses() == null)
+			label.setText("00");
+		else
+			label.setText("" + c.getProdInteresses());
 		panel.add(label);
 		label.setFont(new Font("Gisha", Font.BOLD, 13));
 		
@@ -138,7 +144,6 @@ public class TelaComprador_Principal {
 		
 		EventoBotaoSair acaoBtnSair = new EventoBotaoSair();
 		btnSair.addActionListener(acaoBtnSair);
-		
 	
 		btnVerFavoritos = new JButton("Ver favoritos");
 		btnVerFavoritos.setFont(new Font("Gisha", Font.PLAIN, 13));
@@ -157,7 +162,7 @@ public class TelaComprador_Principal {
 		btnMeusDados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmMeuPerfil.dispose();
-				TelaExibirInfoComprador telaExibirInfoComprador = new TelaExibirInfoComprador(comprador);
+				telaExibirInfoComprador = new TelaExibirInfoComprador(comprador);
 				telaExibirInfoComprador.setVisible(true);
 			}
 		});
@@ -167,6 +172,7 @@ public class TelaComprador_Principal {
 		
 		EventoBotaoProdutosInteresse acaoBtnProdutosInteresse = new EventoBotaoProdutosInteresse();
 		btnProdutosInteresse.addActionListener(acaoBtnProdutosInteresse);
+		
 	}
 	
 	public void setComprador(Comprador comprador) {
@@ -180,7 +186,7 @@ public class TelaComprador_Principal {
 			frmMeuPerfil.setVisible(b);
 	}
 	
-	private class EventoBotaoVerFavoritos implements ActionListener {//adicionar evento
+	private class EventoBotaoVerFavoritos implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 			frmMeuPerfil.dispose();
 			telaComprFav = new TelaComprador_Favoritos(comprador);
@@ -188,7 +194,7 @@ public class TelaComprador_Principal {
 		}
 	}
 	
-	private class EventoBotaoProdutosInteresse implements ActionListener {//adicionar evento
+	private class EventoBotaoProdutosInteresse implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 			frmMeuPerfil.dispose();
 			telaComprInt = new TelaComprador_Interesse(comprador);

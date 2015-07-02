@@ -31,7 +31,7 @@ public class TelaComprador_Favoritos {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(final Comprador c) {
+	private void initialize(Comprador c) {
 		setComprador(c);
 		frmMeuPerfil = new JFrame();
 		frmMeuPerfil.setResizable(false);
@@ -78,7 +78,10 @@ public class TelaComprador_Favoritos {
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setBounds(83, 69, 44, 17);
 		panel.add(label);
-		label.setText("" + c.getProdFavoritos());
+		if(c.getProdFavoritos().isEmpty())
+			label.setText("00");
+		else
+			label.setText("" + c.getProdFavoritos());
 		label.setFont(new Font("Gisha", Font.BOLD, 13));
 		
 		JLabel lblProdutos = new JLabel("produto(s) favorito(s)");
@@ -105,7 +108,6 @@ public class TelaComprador_Favoritos {
 	
 	private void setComprador(Comprador c) {
 		this.c = c;
-		
 	}
 
 	protected static void dispose() {
