@@ -104,7 +104,14 @@ public class TelaConfirmaCompraXP {
 	
 	private class EventoBtnVoltar implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
-			
+			TelaConfirmaCompraXP.dispose();	
+			TelaCompraXP telaCompraXP = new TelaCompraXP();
+			//telaCompraXP.setVisible(true);
 		}
+	}
+
+	public static void dispose() {
+		// TODO Auto-generated method stub
+		
 	}
 }

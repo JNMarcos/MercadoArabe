@@ -31,7 +31,7 @@ public class TelaComprador_Favoritos {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(Comprador c) {
+	private void initialize(final Comprador c) {
 		setComprador(c);
 		frmMeuPerfil = new JFrame();
 		frmMeuPerfil.setResizable(false);

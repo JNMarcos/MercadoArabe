@@ -237,7 +237,10 @@ public class TelaPesquisarProdutos extends JFrame {
 
 	private class EventoBotaoVoltar implements ActionListener{
 		public void actionPerformed(ActionEvent evento){
-			dispose();
+			setVisible(false);
+			TelaComprador_Principal telaComprador_Principal = new TelaComprador_Principal(c);
+			telaComprador_Principal.setVisible(true);
+			
 		}
 	}
 
