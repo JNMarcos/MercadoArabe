@@ -2,6 +2,8 @@ package br.ufrpe.gui.telas_editar;
 
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,6 +15,7 @@ public class TelaEditarComprador extends JFrame{
 	public TelaEditarComprador() {
 		setTitle("Alterar senha");
 		setResizable(false);
+		setSize(450,140);
 		getContentPane().setBackground(SystemColor.activeCaption);
 		getContentPane().setLayout(null);
 		
@@ -32,7 +35,7 @@ public class TelaEditarComprador extends JFrame{
 		lblNovaSenha.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		JButton btnConfirmar = new JButton("Confirmar");
-		btnConfirmar.setBounds(344, 47, 91, 25);
+		btnConfirmar.setBounds(344, 30, 91, 25);
 		panel.add(btnConfirmar);
 		btnConfirmar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
@@ -45,7 +48,18 @@ public class TelaEditarComprador extends JFrame{
 		passwordField_1.setFont(new Font("Gisha", Font.PLAIN, 13));
 		passwordField_1.setBounds(136, 66, 200, 20);
 		panel.add(passwordField_1);
-	}
+		
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
+		btnVoltar.setBounds(346, 67, 89, 23);
+		panel.add(btnVoltar);
+		
+		}
 
 	/**
 	 * 
@@ -53,4 +67,5 @@ public class TelaEditarComprador extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private JPasswordField passwordField;
 	private JPasswordField passwordField_1;
+
 }
