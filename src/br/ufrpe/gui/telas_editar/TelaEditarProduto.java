@@ -13,6 +13,7 @@ import javax.swing.JSpinner;
 
 public class TelaEditarProduto extends JFrame{
 	public TelaEditarProduto() {
+		setResizable(false);
 		setTitle("Atualiza\u00E7\u00E3o de informa\u00E7\u00F5es sobre o produto");
 		getContentPane().setBackground(SystemColor.activeCaption);
 		getContentPane().setLayout(null);

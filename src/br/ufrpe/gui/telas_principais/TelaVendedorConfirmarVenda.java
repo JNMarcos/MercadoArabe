@@ -21,22 +21,6 @@ public class TelaVendedorConfirmarVenda {
 	private JButton btnVoltar;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaVendedorConfirmarVenda window = new TelaVendedorConfirmarVenda();
-					window.frmConfirmarInteresseNo.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the application.
 	 */
 	public TelaVendedorConfirmarVenda() {
@@ -48,8 +32,8 @@ public class TelaVendedorConfirmarVenda {
 	 */
 	private void initialize() {
 		frmConfirmarInteresseNo = new JFrame();
-		frmConfirmarInteresseNo.setTitle("Confirmar venda do produto");
 		frmConfirmarInteresseNo.setResizable(false);
+		frmConfirmarInteresseNo.setTitle("Confirmar venda do produto");
 		frmConfirmarInteresseNo.getContentPane().setBackground(SystemColor.activeCaption);
 		frmConfirmarInteresseNo.setBounds(100, 100, 538, 149);
 		frmConfirmarInteresseNo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

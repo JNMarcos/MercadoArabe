@@ -47,49 +47,43 @@ public class TelaLoginComprador {
 		frame.setResizable(false);
 		frame.setTitle("Comprador");
 		frame.getContentPane().setBackground(SystemColor.activeCaption);
-		frame.setBounds(100, 100, 450, 226);
+		frame.setBounds(100, 100, 438, 201);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		panel = new JPanel();
-		panel.setBounds(0, 0, 444, 199);
+		panel.setBounds(0, 0, 434, 175);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblComprador = new JLabel("Comprador");
-		lblComprador.setHorizontalAlignment(SwingConstants.CENTER);
-		lblComprador.setBounds(164, 24, 121, 21);
-		panel.add(lblComprador);
-		lblComprador.setFont(new Font("Gisha", Font.BOLD, 18));
-		
 		JLabel lblUsurio = new JLabel("Usu\u00E1rio");
-		lblUsurio.setBounds(81, 75, 48, 17);
+		lblUsurio.setBounds(79, 42, 48, 17);
 		panel.add(lblUsurio);
 		lblUsurio.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		textField_User = new JTextField();
-		textField_User.setBounds(139, 74, 182, 20);
+		textField_User.setBounds(139, 41, 182, 20);
 		panel.add(textField_User);
 		textField_User.setColumns(10);
 		
 		JLabel lblSenha = new JLabel("Senha");
-		lblSenha.setBounds(81, 103, 38, 17);
+		lblSenha.setBounds(79, 80, 38, 17);
 		panel.add(lblSenha);
 		lblSenha.setFont(new Font("Gisha", Font.PLAIN, 13));
 		panel.add(lblSenha);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(139, 105, 182, 20);
+		passwordField.setBounds(139, 79, 182, 20);
 		panel.add(passwordField);
 		
 		//botoes
 		btnEntrar = new JButton("Entrar");
-		btnEntrar.setBounds(235, 146, 75, 25);
+		btnEntrar.setBounds(235, 122, 75, 25);
 		panel.add(btnEntrar);
 		btnEntrar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		btnVoltar = new JButton("Voltar");
-		btnVoltar.setBounds(150, 146, 75, 25);
+		btnVoltar.setBounds(139, 122, 75, 25);
 		panel.add(btnVoltar);
 		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		

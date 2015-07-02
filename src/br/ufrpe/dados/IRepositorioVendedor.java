@@ -25,5 +25,9 @@ public interface IRepositorioVendedor {
 	public abstract int procurarIndice(Vendedor vendedor);
 	
 	public abstract Vendedor retornarVendedor(String nomeUsuario);
+	
+	public abstract void incrementarQtdProdutosAVenda(Vendedor v);
+	
+	public abstract void decrementarQtdProdutosAVenda(Vendedor v);
 
 }

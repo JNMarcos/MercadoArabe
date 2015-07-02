@@ -53,9 +53,10 @@ public class TelaCadastroComprador {
 	 */
 	private void initialize() {
 		frmCadastroComprador = new JFrame();
+		frmCadastroComprador.setResizable(false);
 		frmCadastroComprador.setTitle("Cadastro Comprador");
 		frmCadastroComprador.getContentPane().setBackground(SystemColor.activeCaption);
-		frmCadastroComprador.setBounds(100, 100, 526, 298);
+		frmCadastroComprador.setBounds(100, 100, 514, 287);
 		frmCadastroComprador.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmCadastroComprador.getContentPane().setLayout(null);
 

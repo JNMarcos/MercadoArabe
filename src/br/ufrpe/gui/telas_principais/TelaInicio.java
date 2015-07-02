@@ -61,6 +61,7 @@ public class TelaInicio {
 	private void initialize() {
 		//algo a mais
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setTitle("Mercado Árabe");
 		frame.getContentPane().setBackground(SystemColor.activeCaption);
 		frame.setBounds(100, 100, 450, 300);
@@ -68,7 +69,7 @@ public class TelaInicio {
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 434, 261);
+		panel.setBounds(0, 0, 444, 271);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -167,8 +168,8 @@ public class TelaInicio {
 	private class EventoBotaoCadastrarVendedor implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 			TelaInicio.dispose();
-			TelaInicio telaCadVendedor = new TelaInicio();
-			telaCadVendedor.setVisible(true);
+			TelaInicio telaInicio = new TelaInicio();
+			telaInicio.setVisible(true);
 		}
 	}
 
@@ -178,7 +179,11 @@ public class TelaInicio {
 	}
 
 	public void setVisible(boolean b) {
-		// TODO Auto-generated method stub
+			if(b == true)
+				frame.setVisible(b);
+			else
+				frame.setVisible(b);
+		}
 		
 	}
 }

@@ -64,6 +64,7 @@ public class TelaPesquisarProdutos extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaPesquisarProdutos(Comprador c) {
+		setResizable(false);
 		setComprador(c);
 		setTitle("Pesquisa de Produtos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

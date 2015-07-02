@@ -37,9 +37,10 @@ public class TelaExibirInfoProduto_Vendedor {
 	private void initialize(Produto p) {
 		setProduto(p);
 		frmVejaMelhorO = new JFrame();
+		frmVejaMelhorO.setResizable(false);
 		frmVejaMelhorO.setTitle("Descri\u00E7\u00E3o produto");
 		frmVejaMelhorO.getContentPane().setBackground(SystemColor.activeCaption);
-		frmVejaMelhorO.setBounds(100, 100, 517, 446);
+		frmVejaMelhorO.setBounds(100, 100, 506, 435);
 		frmVejaMelhorO.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmVejaMelhorO.getContentPane().setLayout(null);
 		
@@ -62,6 +63,7 @@ public class TelaExibirInfoProduto_Vendedor {
 		
 		JLabel lblNomeDoProduto = new JLabel("NOME DO PRODUTO");
 		lblNomeDoProduto.setBounds(10, 25, 268, 29);
+		lblNomeDoProduto.setText(p.getNome());
 		panel.add(lblNomeDoProduto);
 		lblNomeDoProduto.setFont(new Font("Gisha", Font.BOLD, 22));
 		
@@ -73,17 +75,20 @@ public class TelaExibirInfoProduto_Vendedor {
 		
 		JLabel lblPreo_1 = new JLabel("PRE\u00C7O");
 		lblPreo_1.setForeground(Color.RED);
-		lblPreo_1.setBounds(413, 195, 89, 24);
+		lblPreo_1.setBounds(384, 195, 118, 24);
+		lblPreo_1.setText("" + p.getPreco());
 		panel.add(lblPreo_1);
 		lblPreo_1.setFont(new Font("Gisha", Font.BOLD | Font.ITALIC, 20));
 		
 		JLabel lblInformaesDoProduto = new JLabel("CATEGORIA");
 		lblInformaesDoProduto.setBounds(10, 75, 171, 14);
 		panel.add(lblInformaesDoProduto);
+		lblInformaesDoProduto.setText(p.getCategoria());
 		lblInformaesDoProduto.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		JLabel lblDescrio = new JLabel("DESCRI\u00C7\u00C3O");
 		lblDescrio.setBounds(10, 150, 149, 14);
+		lblDescrio.setText(p.getDescricao());
 		panel.add(lblDescrio);
 		lblDescrio.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
@@ -94,12 +99,13 @@ public class TelaExibirInfoProduto_Vendedor {
 		JLabel lblQuantidade = new JLabel("QUAN");
 		lblQuantidade.setFont(new Font("Gisha", Font.PLAIN, 13));
 		lblQuantidade.setBounds(10, 110, 80, 29);
+		lblQuantidade.setText("" + p.getQuantidade());
 		panel.add(lblQuantidade);
 		
-		JLabel lblImagem = new JLabel("IMAGEM");
-		lblImagem.setFont(new Font("Gisha", Font.PLAIN, 13));
-		lblImagem.setBounds(338, 99, 108, 14);
-		panel.add(lblImagem);
+		JLabel lblNewLabel_1 = new JLabel("Compradores Interessados");
+		lblNewLabel_1.setFont(new Font("Gisha", Font.BOLD, 16));
+		lblNewLabel_1.setBounds(10, 197, 231, 23);
+		panel.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel = new JLabel("item(ns),");
 		lblNewLabel.setFont(new Font("Gisha", Font.PLAIN, 13));
@@ -109,6 +115,7 @@ public class TelaExibirInfoProduto_Vendedor {
 		JLabel lblQtd = new JLabel("qtd");
 		lblQtd.setFont(new Font("Gisha", Font.PLAIN, 13));
 		lblQtd.setBounds(124, 99, 32, 50);
+		lblQtd.setText("" + p.getItensNoEstoque());
 		panel.add(lblQtd);
 		
 		JLabel lblVendidos = new JLabel("vendidos");

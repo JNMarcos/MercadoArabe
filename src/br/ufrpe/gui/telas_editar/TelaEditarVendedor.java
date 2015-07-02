@@ -13,6 +13,7 @@ import javax.swing.JComboBox;
 
 public class TelaEditarVendedor extends JFrame{
 	public TelaEditarVendedor() {
+		setResizable(false);
 		setTitle("Atualiza\u00E7\u00E3o de informa\u00E7\u00F5es cadastrais");
 		getContentPane().setBackground(SystemColor.activeCaption);
 		getContentPane().setLayout(null);
@@ -69,7 +70,7 @@ public class TelaEditarVendedor extends JFrame{
 		textField_2.setFont(new Font("Gisha", Font.PLAIN, 13));
 		textField_2.setColumns(10);
 		
-		JLabel lblNewLabel_3 = new JLabel("N\u00E3o \u00E9 necess\u00E1rio a inclus\u00E3o de todos os dados para a conclus\u00E3o da atualiza\u00E7\u00E3o.");
+		JLabel lblNewLabel_3 = new JLabel("Apenas \u00E9 necess\u00E1rio preencher os dados que foram alterado.");
 		lblNewLabel_3.setFont(new Font("Gisha", Font.PLAIN, 11));
 		lblNewLabel_3.setBounds(30, 222, 486, 35);
 		panel.add(lblNewLabel_3);

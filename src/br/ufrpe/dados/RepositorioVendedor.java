@@ -173,6 +173,13 @@ public class RepositorioVendedor implements IRepositorioVendedor, Serializable{
 
 		return vendedor;
 	}
-
+	
+	public void incrementarQtdProdutosAVenda(Vendedor v){
+		v.incrementarQtdProdutosAVenda();
+	}
+	
+	public void decrementarQtdProdutosAVenda(Vendedor v){
+		v.decrementarQtdProdutosAVenda();
+	}
 }
 

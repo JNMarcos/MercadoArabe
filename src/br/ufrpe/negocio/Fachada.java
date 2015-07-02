@@ -99,6 +99,14 @@ public class Fachada {
 	public Vendedor retornarVendedor(String nomeUsuario) throws NaoEncontradoVendedorException{
 		return controladorVendedor.retornarVendedor(nomeUsuario);
 	}
+	
+	public void incrementarQtdProdutosAVenda(Vendedor v){
+		controladorVendedor.incrementarQtdProdutosAVenda(v);
+	}
+	
+	public void decrementarQtdProdutosAVenda(Vendedor v){
+		controladorVendedor.decrementarQtdProdutosAVenda(v);
+	}
 
 	//COMPRADOR
 	public void cadastrarComprador(Comprador comprador) throws NomeUsuarioJaCadastradoException, NomeUsuarioForaPadroesException, SenhaForaPadroesException{

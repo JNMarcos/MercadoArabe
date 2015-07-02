@@ -25,9 +25,10 @@ public class TelaExibirInfoComprador {
 	private void initialize(Comprador c) {
 		setComprador(c);
 		frmConheaOVendedor = new JFrame();
+		frmConheaOVendedor.setResizable(false);
 		frmConheaOVendedor.setTitle("Veja seus dados cadastrais");
 		frmConheaOVendedor.getContentPane().setBackground(SystemColor.activeCaption);
-		frmConheaOVendedor.setBounds(100, 100, 450, 219);
+		frmConheaOVendedor.setBounds(100, 100, 438, 210);
 		frmConheaOVendedor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmConheaOVendedor.getContentPane().setLayout(null);;
 		
@@ -45,6 +46,7 @@ public class TelaExibirInfoComprador {
 		JLabel lblNomeDoVendedor = new JLabel("NOME");
 		lblNomeDoVendedor.setBounds(31, 82, 323, 20);
 		panel.add(lblNomeDoVendedor);
+		lblNomeDoVendedor.setText(c.getNome());
 		lblNomeDoVendedor.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		JButton btnVoltar = new JButton("Voltar");
@@ -57,15 +59,17 @@ public class TelaExibirInfoComprador {
 		btnContinuoInteressado.setBounds(223, 141, 172, 23);
 		panel.add(btnContinuoInteressado);
 		
-		JLabel lblNewLabel_5 = new JLabel("SENHA");
-		lblNewLabel_5.setFont(new Font("Gisha", Font.PLAIN, 13));
-		lblNewLabel_5.setBounds(31, 103, 200, 27);
-		panel.add(lblNewLabel_5);
+		JLabel lblSenha = new JLabel("SENHA");
+		lblSenha.setFont(new Font("Gisha", Font.PLAIN, 13));
+		lblSenha.setBounds(31, 103, 200, 27);
+		lblSenha.setText(c.getSenha());
+		panel.add(lblSenha);
 		
-		JLabel lblNewLabel_4 = new JLabel("USERNAME");
-		lblNewLabel_4.setBounds(91, 32, 288, 29);
-		panel.add(lblNewLabel_4);
-		lblNewLabel_4.setFont(new Font("Gisha", Font.BOLD, 22));
+		JLabel lblUser = new JLabel("USERNAME");
+		lblUser.setBounds(91, 32, 288, 29);
+		panel.add(lblUser);
+		lblUser.setText(c.getNomeUsuario());
+		lblUser.setFont(new Font("Gisha", Font.BOLD | Font.ITALIC, 22));
 	}
 	
 	public void setComprador(Comprador c){

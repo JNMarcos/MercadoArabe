@@ -166,4 +166,12 @@ public class ControladorVendedor {
 		
 		return vendedor;
 	}
+	
+	public void incrementarQtdProdutosAVenda(Vendedor v){
+		repositorioVendedor.incrementarQtdProdutosAVenda(v);
+	}
+	
+	public void decrementarQtdProdutosAVenda(Vendedor v){
+		repositorioVendedor.decrementarQtdProdutosAVenda(v);
+	}
 }

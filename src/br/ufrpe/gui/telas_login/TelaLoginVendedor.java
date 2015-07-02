@@ -14,6 +14,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import br.ufrpe.gui.telas_principais.TelaInicio;
 import br.ufrpe.gui.telas_principais.TelaVendedor;
 import br.ufrpe.negocio.Fachada;
 import br.ufrpe.negocio.classes_basicas.Vendedor;
@@ -32,7 +33,7 @@ public class TelaLoginVendedor {
 	private JPasswordField passwordField;
 	private static Fachada fachada = Fachada.getInstance();
 	private Vendedor vendedor;
-	private TelaVendedor telaVendedor = new TelaVendedor();;
+	private TelaVendedor telaVendedor;
 
 
 	/**
@@ -50,48 +51,42 @@ public class TelaLoginVendedor {
 		frame.setResizable(false);
 		frame.setTitle("Vendedor");
 		frame.getContentPane().setBackground(SystemColor.activeCaption);
-		frame.setBounds(100, 100, 450, 226);
+		frame.setBounds(100, 100, 437, 195);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		panel = new JPanel();
-		panel.setBounds(0, 0, 444, 199);
+		panel.setBounds(0, 0, 434, 166);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblVendedor = new JLabel("Vendedor");
-		lblVendedor.setHorizontalAlignment(SwingConstants.CENTER);
-		lblVendedor.setBounds(164, 24, 121, 21);
-		panel.add(lblVendedor);
-		lblVendedor.setFont(new Font("Gisha", Font.BOLD, 18));
-		
 		JLabel lblUsurio = new JLabel("Usu\u00E1rio");
-		lblUsurio.setBounds(81, 75, 48, 17);
+		lblUsurio.setBounds(81, 38, 48, 17);
 		panel.add(lblUsurio);
 		lblUsurio.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		textField_User = new JTextField();
-		textField_User.setBounds(139, 74, 182, 20);
+		textField_User.setBounds(139, 37, 182, 20);
 		panel.add(textField_User);
 		textField_User.setColumns(10);
 		
 		JLabel lblSenha = new JLabel("Senha");
-		lblSenha.setBounds(81, 103, 38, 17);
+		lblSenha.setBounds(81, 79, 38, 17);
 		panel.add(lblSenha);
 		lblSenha.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(139, 105, 182, 20);
+		passwordField.setBounds(139, 78, 182, 20);
 		panel.add(passwordField);
 		
 		//botoes
 		btnEntrar = new JButton("Entrar");
-		btnEntrar.setBounds(235, 146, 75, 25);
+		btnEntrar.setBounds(235, 121, 75, 25);
 		panel.add(btnEntrar);
 		btnEntrar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		btnVoltar = new JButton("Voltar ");
-		btnVoltar.setBounds(150, 146, 75, 25);
+		btnVoltar.setBounds(139, 121, 75, 25);
 		panel.add(btnVoltar);
 		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
@@ -115,9 +110,11 @@ public class TelaLoginVendedor {
 	private class EventoBotaoEntrar implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 			try {
+				
 				String senha = new String(passwordField.getPassword());
 				
 				vendedor = fachada.verificarLoginVendedor(textField_User.getText(), senha); //obs aqui
+				telaVendedor = new TelaVendedor(vendedor);
 				telaVendedor.setvisible(true);
 				
 				//mensagem boas vindas
@@ -140,8 +137,8 @@ public class TelaLoginVendedor {
 	private class EventoBotaoVoltar implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 			frame.dispose();
-			TelaLoginVendedor TelaInicio = new TelaLoginVendedor();
-			TelaInicio.setVisible(true);
+			TelaInicio telaInicio = new TelaInicio();
+			telaInicio.setVisible(true);
 
 		}
 	}

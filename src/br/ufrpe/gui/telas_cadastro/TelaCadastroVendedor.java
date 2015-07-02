@@ -93,8 +93,9 @@ public class TelaCadastroVendedor {
 		xp = new Xp();
 
 		frame = new JFrame("Cadastro Vendedor");
+		frame.setResizable(false);
 		frame.getContentPane().setBackground(SystemColor.activeCaption);
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 443, 297);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 

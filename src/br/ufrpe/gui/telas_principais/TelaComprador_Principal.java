@@ -42,6 +42,7 @@ public class TelaComprador_Principal {
 	 */
 	private void initialize(Comprador c) {
 		frmMeuPerfil = new JFrame();
+		frmMeuPerfil.setResizable(false);
 		frmMeuPerfil.setTitle("Meu Perfil");
 		frmMeuPerfil.getContentPane().setBackground(SystemColor.activeCaption);
 		frmMeuPerfil.setBounds(100, 100, 696, 487);
@@ -51,7 +52,7 @@ public class TelaComprador_Principal {
 		telaPesqProd = new TelaPesquisarProdutos(c);
 		
 		panel = new JPanel();
-		panel.setBounds(0, 0, 680, 448);
+		panel.setBounds(0, 0, 690, 458);
 		frmMeuPerfil.getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -85,6 +86,7 @@ public class TelaComprador_Principal {
 		
 		JLabel lblUser = new JLabel("USER");
 		lblUser.setBounds(89, 73, 156, 17);
+		lblUser.setText(c.getNomeUsuario());
 		panel.add(lblUser);
 		lblUser.setFont(new Font("Gisha", Font.BOLD | Font.ITALIC, 14));
 		
@@ -107,12 +109,14 @@ public class TelaComprador_Principal {
 		JLabel lblQtd = new JLabel("qtd");
 		lblQtd.setHorizontalAlignment(SwingConstants.CENTER);
 		lblQtd.setBounds(99, 101, 67, 17);
-		panel.add(lblQtd);
+		lblQtd.setText("" + c.getProdAdquiridos());
 		lblQtd.setFont(new Font("Gisha", Font.BOLD, 13));
+		panel.add(lblQtd);
 		
 		JLabel label = new JLabel("qtd");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setBounds(242, 129, 48, 17);
+		label.setText("" + c.getProdInteresses());
 		panel.add(label);
 		label.setFont(new Font("Gisha", Font.BOLD, 13));
 		

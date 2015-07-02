@@ -34,6 +34,7 @@ public class TelaComprador_Favoritos {
 	private void initialize(Comprador c) {
 		setComprador(c);
 		frmMeuPerfil = new JFrame();
+		frmMeuPerfil.setResizable(false);
 		frmMeuPerfil.setTitle("Meu Perfil");
 		frmMeuPerfil.getContentPane().setBackground(SystemColor.activeCaption);
 		frmMeuPerfil.setBounds(100, 100, 696, 398);
@@ -41,7 +42,7 @@ public class TelaComprador_Favoritos {
 		frmMeuPerfil.getContentPane().setLayout(null);
 		
 		panel = new JPanel();
-		panel.setBounds(0, 0, 680, 364);
+		panel.setBounds(0, 0, 690, 369);
 		frmMeuPerfil.getContentPane().add(panel);
 		panel.setLayout(null);
 		

@@ -10,6 +10,7 @@ public class Vendedor extends Pessoa implements Comparable<Vendedor>{
 	private String cpf;
 	private Contato contato;
 	private Xp xp;
+	private int qtdProdutosAVenda = 0;
 	private LocalDate dataCadastro;
 
 	public String getCpf() {
@@ -78,6 +79,18 @@ public class Vendedor extends Pessoa implements Comparable<Vendedor>{
 
 	public int compareTo(Vendedor vendedor) {
 		return this.getCpf().compareToIgnoreCase(vendedor.getCpf());
+	}
+
+	public int getQtdProdutosAVenda() {
+		return qtdProdutosAVenda;
+	}
+	
+	public void incrementarQtdProdutosAVenda(){
+		qtdProdutosAVenda++;
+	}
+	
+	public void decrementarQtdProdutosAVenda(){
+		qtdProdutosAVenda--;
 	}
 
 }
