@@ -72,7 +72,7 @@ public class TelaCadastroVendedor {
 	private JPasswordField passwordField;
 	private JPasswordField passwordField_Confirmar;
 	private JButton btnVoltarCredenciais;
-
+	private TelaInicio telaInicio;
 	private Fachada fachada;
 	private Vendedor vendedor;
 	private Contato contato;
@@ -199,7 +199,7 @@ public class TelaCadastroVendedor {
 		panelContato = new JPanel();
 		tabbedPane.addTab("Contato", null, panelContato, null);
 		panelContato.setLayout(null);
-
+		
 		lblRua = new JLabel("Rua");
 		lblRua.setBounds(10, 11, 22, 23);
 		lblRua.setFont(new Font("Gisha", Font.PLAIN, 13));
@@ -270,7 +270,7 @@ public class TelaCadastroVendedor {
 		textFieldEmail.setFont(new Font("Gisha", Font.PLAIN, 13));
 		textFieldEmail.setBounds(63, 147, 349, 23);
 		panelContato.add(textFieldEmail);
-
+		
 		//botoes aba contato
 		buttonAvancarContato = new JButton("Avan\u00E7ar >");
 		buttonAvancarContato.setFont(new Font("Gisha", Font.PLAIN, 13));
@@ -353,7 +353,7 @@ public class TelaCadastroVendedor {
 			vendedor.setNome(textFieldNome.getText());
 			vendedor.setCpf(formattedTextFieldCpf.getText());
 
-			//esse bloco serve p/ converter o incice do comboBox em ano
+			//Converte o incice do comboBox em ano
 			int ano = 1998;
 			for(int i=1; i<=84; i++) {
 				if(comboBoxAno.getSelectedIndex() == i) {
@@ -389,7 +389,7 @@ public class TelaCadastroVendedor {
 			passwordField.setText("");
 			passwordField_Confirmar.setText("");
 			frame.dispose();
-			TelaInicio telaInicio = new TelaInicio();
+			telaInicio = new TelaInicio();
 			telaInicio.setVisible(true);
 			
 		}
@@ -398,12 +398,9 @@ public class TelaCadastroVendedor {
 	private class EventoBotaoAvancar_Contato implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 
-			contato.setLogradouro(textFieldRua.getText());
-			contato.setBairro(textFieldBairro.getText());
-			contato.setCidade(textFieldCidade.getText());
-			contato.setEstado(comboBoxEstado.getSelectedItem().toString());
-			contato.setTelefone(formattedTextFieldTelefone.getText());
-			contato.setEmail(textFieldEmail.getText());
+			contato = new Contato(textFieldRua.getText(), textFieldBairro.getText(), textFieldCidade.getText(),
+					comboBoxEstado.getSelectedItem().toString(), textFieldEmail.getText(), formattedTextFieldTelefone.getText());
+			
 			vendedor.setContato(contato);
 
 			//vai pra proxima aba se n houver nenhum espaço em braco
@@ -469,36 +466,26 @@ public class TelaCadastroVendedor {
 				} else if (passwordField_Confirmar.equals("")){
 					JOptionPane.showMessageDialog(null, "O campo 'Confirmar senha' se encontra vazio! ", "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
 				} else{
-				String senha = new String(passwordField.getPassword());
-				String senhaConfirma = new String(passwordField_Confirmar.getPassword());
-				if(senha.equals(senhaConfirma)) {
-					vendedor.setNome(textFieldNome.getText());
-					vendedor.setNomeUsuario(textFieldNomeUsuario.getText());
-					vendedor.setCpf(maskCpf.getMask());
-					vendedor.setSenha(senha);
-					vendedor.setXp(xp);
-					int dia = Integer.parseInt((String) comboBoxDia.getSelectedItem());
-					int mes = Integer.parseInt((String) comboBoxMes.getSelectedItem());
-					int ano = Integer.parseInt((String) comboBoxAno.getSelectedItem());
-					vendedor.setDataNascimento(dia, mes, ano);
-					vendedor.setDataCadastro();
-					
-					//adição de contato
-					contato = new Contato(textFieldRua.getText(), textFieldBairro.getText(), textFieldCidade.getText()
-							, (String) comboBoxEstado.getSelectedItem(), textFieldEmail.getText(), maskTelefone.getMask());
-					vendedor.setContato(contato);
-					
-					
-					fachada.cadastrarVendedor(vendedor);
-					fachada.salvarVendedor();
+					String senha = new String(passwordField.getPassword());
+					String senhaConfirma = new String(passwordField_Confirmar.getPassword());
 
-					//mensagem boas vindas
-					JOptionPane.showMessageDialog(null, "Usuário Cadastrado com sucesso!\nBem-vindo ao Mercado Árabe");
-					textFieldNomeUsuario.setText("");
-					passwordField.setText("");
-					passwordField_Confirmar.setText("");
+					if(senha.equals(senhaConfirma)) {
 
-					frame.dispose(); //volta p/ tela inicio
+						vendedor.setNomeUsuario(textFieldNomeUsuario.getText());
+						vendedor.setSenha(senha);
+						vendedor.setXp(xp);
+						vendedor.setDataCadastro();
+						fachada.cadastrarVendedor(vendedor);
+						fachada.salvarVendedor();
+
+						//mensagem boas vindas
+						JOptionPane.showMessageDialog(null, "Usuário Cadastrado com sucesso!\nBem-vindo ao Mercado Árabe");
+						textFieldNomeUsuario.setText("");
+						passwordField.setText("");
+						passwordField_Confirmar.setText("");
+						telaInicio = new TelaInicio();
+						telaInicio.setVisible(true);
+						frame.dispose();
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "As senhas precisam ser iguais!");
