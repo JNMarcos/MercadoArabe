@@ -9,7 +9,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import br.ufrpe.gui.telas_editar.TelaEditarComprador;
 import br.ufrpe.negocio.classes_basicas.Comprador;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaExibirInfoComprador {
 	Comprador c;
@@ -50,11 +54,22 @@ public class TelaExibirInfoComprador {
 		lblNomeDoVendedor.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnVoltar.setBounds(51, 141, 152, 23);
 		panel.add(btnVoltar);
 		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		JButton btnContinuoInteressado = new JButton("Editar informa\u00E7\u00F5es");
+		btnContinuoInteressado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaExibirInfoComprador.dispose();
+				TelaEditarComprador telaEditarComprador = new TelaEditarComprador();
+				telaEditarComprador.setVisible(true);
+			}
+		});
 		btnContinuoInteressado.setFont(new Font("Gisha", Font.PLAIN, 13));
 		btnContinuoInteressado.setBounds(223, 141, 172, 23);
 		panel.add(btnContinuoInteressado);
@@ -72,6 +87,11 @@ public class TelaExibirInfoComprador {
 		lblUser.setFont(new Font("Gisha", Font.BOLD | Font.ITALIC, 22));
 	}
 	
+	protected static void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public void setComprador(Comprador c){
 		this.c = c;
 	}

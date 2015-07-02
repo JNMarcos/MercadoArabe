@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
+import br.ufrpe.gui.telas_exibir_info.TelaExibirInfoComprador;
 import br.ufrpe.negocio.classes_basicas.Comprador;
 
 public class TelaComprador_Principal {
@@ -141,7 +142,7 @@ public class TelaComprador_Principal {
 	
 		btnVerFavoritos = new JButton("Ver favoritos");
 		btnVerFavoritos.setFont(new Font("Gisha", Font.PLAIN, 13));
-		btnVerFavoritos.setBounds(89, 402, 163, 23);
+		btnVerFavoritos.setBounds(56, 402, 163, 23);
 		panel.add(btnVerFavoritos);
 		
 		EventoBotaoVerFavoritos acaoBtnVerFavoritos = new EventoBotaoVerFavoritos();
@@ -149,8 +150,20 @@ public class TelaComprador_Principal {
 		
 		btnProdutosInteresse = new JButton("Ver produtos de interesse");
 		btnProdutosInteresse.setFont(new Font("Gisha", Font.PLAIN, 13));
-		btnProdutosInteresse.setBounds(391, 402, 210, 23);
+		btnProdutosInteresse.setBounds(415, 402, 210, 23);
 		panel.add(btnProdutosInteresse);
+		
+		JButton btnMeusDados = new JButton("Meus dados");
+		btnMeusDados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaComprador_Principal.dispose();
+				TelaExibirInfoComprador telaExibirInfoComprador = new TelaExibirInfoComprador(comprador);
+				telaExibirInfoComprador.setVisible(true);
+			}
+		});
+		btnMeusDados.setFont(new Font("Gisha", Font.PLAIN, 13));
+		btnMeusDados.setBounds(259, 403, 115, 23);
+		panel.add(btnMeusDados);
 		
 		EventoBotaoProdutosInteresse acaoBtnProdutosInteresse = new EventoBotaoProdutosInteresse();
 		btnProdutosInteresse.addActionListener(acaoBtnProdutosInteresse);
