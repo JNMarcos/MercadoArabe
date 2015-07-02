@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import br.ufrpe.gui.telas_principais.TelaInicio;
 import br.ufrpe.negocio.Fachada;
 import br.ufrpe.negocio.classes_basicas.Comprador;
 import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioForaPadroesException;
@@ -234,11 +235,18 @@ public class TelaCadastroComprador {
 
 	private class EventoBotaoCancelar implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
-			frmCadastroComprador.setVisible(false);
 			textField_Nome.setText("");
 			textField_User.setText("");
 			passwordField.setText("");
 			passwordFieldConfirmar.setText("");
+			TelaCadastroComprador.dispose();
+			TelaInicio telaInicio = new TelaInicio();
+			telaInicio.setVisible(true);
 		}
+	}
+
+	public static void dispose() {
+		// TODO Auto-generated method stub
+		
 	}
 }

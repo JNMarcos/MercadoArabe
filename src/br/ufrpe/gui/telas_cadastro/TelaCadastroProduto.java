@@ -20,6 +20,11 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import javax.swing.text.MaskFormatter;
 
+import br.ufrpe.gui.telas_principais.TelaVendedor;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class TelaCadastroProduto{
 
 	private JFrame frame;
@@ -188,9 +193,25 @@ public class TelaCadastroProduto{
 		painel1.add(formattedTextField);
 		
 		JButton btnContinuar = new JButton("Continuar");
+		btnContinuar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnContinuar.setFont(new Font("Gisha", Font.PLAIN, 13));
-		btnContinuar.setBounds(208, 160, 89, 23);
+		btnContinuar.setBounds(297, 159, 89, 23);
 		painel1.add(btnContinuar);
+		
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaCadastroProduto.dispose();
+				TelaVendedor telaVendedor = new TelaVendedor(null);
+				telaVendedor.setvisible(true);
+			}
+		});
+		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
+		btnVoltar.setBounds(126, 160, 89, 23);
+		painel1.add(btnVoltar);
 		conteiner.setTitleAt(0, "Informa\u00E7\u00F5es");//ver o que é esse zero
 		conteiner.add(painel2);
 		
@@ -207,5 +228,10 @@ public class TelaCadastroProduto{
 		frame.getContentPane().add(conteiner);
 		
 	
+	}
+
+	protected static void dispose() {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -18,6 +18,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
+import br.ufrpe.gui.telas_principais.TelaInicio;
 import br.ufrpe.negocio.Fachada;
 import br.ufrpe.negocio.classes_basicas.Contato;
 import br.ufrpe.negocio.classes_basicas.Vendedor;
@@ -374,7 +375,6 @@ public class TelaCadastroVendedor {
 
 	private class EventoBotaoCancelar_DadosPessoais implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
-			frame.setVisible(false);
 			textFieldNome.setText("");
 			formattedTextFieldCpf.setText("");
 			comboBoxDia.setSelectedIndex(0);
@@ -388,6 +388,10 @@ public class TelaCadastroVendedor {
 			formattedTextFieldTelefone.setText("");
 			passwordField.setText("");
 			passwordField_Confirmar.setText("");
+			TelaCadastroVendedor.dispose();
+			TelaInicio telaInicio = new TelaInicio();
+			telaInicio.setVisible(true);
+			
 		}
 	}
 
@@ -535,5 +539,10 @@ private class EventoBotaoVoltar_Credenciais implements ActionListener {
 	public void actionPerformed(ActionEvent evento) {
 		tabbedPane.setSelectedIndex(1);
 	}
+}
+
+public static void dispose() {
+	// TODO Auto-generated method stub
+	
 }
 }
