@@ -135,7 +135,7 @@ public class TelaLoginComprador {
 	
 	private class EventoBotaoVoltar implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
-			TelaLoginComprador.dispose();
+			frame.dispose();
 			TelaInicio telaInicio = new TelaInicio();
 			telaInicio.setVisible(true);
 		}

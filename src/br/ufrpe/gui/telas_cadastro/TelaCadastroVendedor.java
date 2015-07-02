@@ -388,7 +388,7 @@ public class TelaCadastroVendedor {
 			formattedTextFieldTelefone.setText("");
 			passwordField.setText("");
 			passwordField_Confirmar.setText("");
-			TelaCadastroVendedor.dispose();
+			frame.dispose();
 			TelaInicio telaInicio = new TelaInicio();
 			telaInicio.setVisible(true);
 			
@@ -535,14 +535,9 @@ public class TelaCadastroVendedor {
 	}
 }
 
-private class EventoBotaoVoltar_Credenciais implements ActionListener {
-	public void actionPerformed(ActionEvent evento) {
-		tabbedPane.setSelectedIndex(1);
+	private class EventoBotaoVoltar_Credenciais implements ActionListener {
+		public void actionPerformed(ActionEvent evento) {
+			tabbedPane.setSelectedIndex(1);
+		}
 	}
-}
-
-public static void dispose() {
-	// TODO Auto-generated method stub
-	
-}
 }

@@ -239,14 +239,9 @@ public class TelaCadastroComprador {
 			textField_User.setText("");
 			passwordField.setText("");
 			passwordFieldConfirmar.setText("");
-			TelaCadastroComprador.dispose();
+			frmCadastroComprador.dispose();
 			TelaInicio telaInicio = new TelaInicio();
 			telaInicio.setVisible(true);
 		}
-	}
-
-	public static void dispose() {
-		// TODO Auto-generated method stub
-		
 	}
 }
