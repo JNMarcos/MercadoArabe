@@ -25,8 +25,14 @@ public interface IRepositorioComprador{
 
 	public abstract int procurarIndice(Comprador comprador);
 	
+	public abstract void adicionarAosAdquiridos (Comprador c, Produto p);
+	
 	public abstract void adicionarAosFavoritos (Comprador c, Produto p);
 	
 	public abstract void adicionarAosInteresses (Comprador c, Produto p);
+	
+	public abstract void removerDosFavoritos (Comprador c, Produto p);
+	
+	public abstract void removerDosInteresses (Comprador c, Produto p);
 
 }

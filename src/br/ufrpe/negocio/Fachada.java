@@ -122,11 +122,23 @@ public class Fachada {
 		return controladorComprador.verificarLogin(nomeUsuario, senha);
 	}
 	
+	public void adicionarAosAdquiridos(Comprador c, Produto p){
+		controladorComprador.adicionarAosAdquiridos(c, p);
+	}
+	
 	public void adicionarAosFavoritos(Comprador c, Produto p){
 		controladorComprador.adicionarAosFavoritos(c, p);
 	}
 	
 	public void adicionarAosInteresses(Comprador c, Produto p){
 		controladorComprador.adicionarAosInteresses(c, p);
+	}
+	
+	public void removerDosFavoritos(Comprador c, Produto p){
+		controladorComprador.removerDosFavoritos(c, p);
+	}
+	
+	public void removerDosInteresses(Comprador c, Produto p){
+		controladorComprador.removerDosInteresses(c, p);
 	}
 }

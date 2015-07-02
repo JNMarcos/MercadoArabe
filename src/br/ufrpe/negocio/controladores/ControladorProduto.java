@@ -2,7 +2,9 @@ package br.ufrpe.negocio.controladores;
 
 import java.util.List;
 
+import br.ufrpe.dados.IRepositorioComprador;
 import br.ufrpe.dados.IRepositorioProduto;
+import br.ufrpe.dados.RepositorioComprador;
 import br.ufrpe.dados.RepositorioProduto;
 import br.ufrpe.negocio.classes_basicas.Comprador;
 import br.ufrpe.negocio.classes_basicas.Produto;
@@ -15,9 +17,11 @@ import br.ufrpe.negocio.filtro.Filtro;
 
 public class ControladorProduto {
 	private IRepositorioProduto repositorio;
+	private IRepositorioComprador repositorioComprador;
 
 	public ControladorProduto(){
 		this.repositorio = RepositorioProduto.getInstancia();	
+		this.repositorioComprador = RepositorioComprador.getInstancia();
 	}
 
 	public void cadastrarProduto(Produto produto, Vendedor vendedor) throws ProdutoJaCadastradoException {
@@ -122,7 +126,7 @@ public class ControladorProduto {
 	NaoEncontradoVendedorException, NaoEncontradoCompradorException {
 		if (produto != null && comprador != null && vendedor != null){// todos devem existir senão não há transação
 			produto.decrementarItensNoEstoque();
-			comprador.setProdutosAdquiridos(produto);
+			repositorioComprador.adicionarAosAdquiridos(comprador, produto);
 			vendedor.getXp().adicionarPontosPorVender(produto); 
 			if (produto.getItensNoEstoque() == 0){
 				produto.setEstado(true);//é considerado vendido (não aparece nas buscas) e não pode mais ser alterado. veja método setEstado

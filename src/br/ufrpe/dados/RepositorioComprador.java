@@ -165,11 +165,28 @@ public class RepositorioComprador implements IRepositorioComprador, Serializable
 		return comprador;
 	}
 	
+	public void adicionarAosAdquiridos (Comprador c, Produto p){
+		c.getProdutosAdquiridos().add(p);
+		c.incrementarProdAdquiridos();
+	}
+	
 	public void adicionarAosFavoritos (Comprador c, Produto p){
-		c.setFavoritos(p);
+		c.getFavoritos().add(p);
+		c.incrementarProdFavoritos();
 	}
 	
 	public void adicionarAosInteresses (Comprador c, Produto p){
-		c.setProdutosInteressantes(p);
+		c.getProdutosInteressantes().add(p);
+		c.incrementarProdInteresses();
+	}
+	
+	public void removerDosFavoritos (Comprador c, Produto p){
+		c.getFavoritos().remove(p);
+		c.decrementarProdFavoritos();
+	}
+	
+	public void removerDosInteresses (Comprador c, Produto p){
+		c.getProdutosInteressantes().remove(p);
+		c.decrementarProdInteresses();
 	}
 }

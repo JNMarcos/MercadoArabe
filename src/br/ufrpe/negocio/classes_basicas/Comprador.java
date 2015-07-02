@@ -11,31 +11,55 @@ public class Comprador extends Pessoa implements Comparable<Comprador>{
 	List<Produto> produtosInteressantes;
 	List<Produto> produtosAdquiridos;
 	List<Produto> favoritos;
+	
+	int quantProdInteresses = 0;
+	int quantProdAdquiridos = 0;
+	int quantProdFavoritos = 0;
+	
+	public void incrementarProdInteresses (){
+		quantProdInteresses++;
+	}
+	
+	public void incrementarProdAdquiridos (){
+		quantProdAdquiridos++;
+	}
+	
+	public void incrementarProdFavoritos(){
+		quantProdFavoritos++;
+	}
+	
+	public void decrementarProdInteresses (){
+		quantProdInteresses--;
+	}
+	
+	public void decrementarProdFavoritos(){
+		quantProdFavoritos--;
+	}
 
 	public List<Produto> getProdutosInteressantes() {
 		return produtosInteressantes;
-	}
-
-	public void setProdutosInteressantes(Produto produtoInteressante) {
-		this.produtosInteressantes.add(produtoInteressante);
 	}
 
 	public List<Produto> getProdutosAdquiridos() {
 		return produtosAdquiridos;
 	}
 
-	public void setProdutosAdquiridos(Produto produtoAdquirido) {
-		this.produtosAdquiridos.add(produtoAdquirido);
-	}
 
 	public List<Produto> getFavoritos() {
 		return favoritos;
 	}
-
-	public void setFavoritos(Produto favorito) {
-		this.favoritos.add(favorito);
-	}
 	
+	public int getProdInteresses() {
+		return prodInteresses;
+	}
+
+	public int getProdAdquiridos() {
+		return prodAdquiridos;
+	}
+
+	public int getProdFavoritos() {
+		return prodFavoritos;
+	}
 	
 	@Override
 	public int hashCode() {

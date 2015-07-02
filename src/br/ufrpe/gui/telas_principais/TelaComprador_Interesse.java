@@ -59,15 +59,16 @@ public class TelaComprador_Interesse {
 		lblNewLabel.setBounds(10, 91, 200, 29);
 		panel.add(lblNewLabel);
 
-		JLabel lblXpDisponvel = new JLabel("Voc\u00EA está interessado em");
-		lblXpDisponvel.setBounds(20, 69, 168, 17);
-		panel.add(lblXpDisponvel);
-		lblXpDisponvel.setFont(new Font("Gisha", Font.PLAIN, 13));
+		JLabel lblVoceEsta = new JLabel("Voc\u00EA está interessado em");
+		lblVoceEsta.setBounds(20, 69, 168, 17);
+		panel.add(lblVoceEsta);
+		lblVoceEsta.setFont(new Font("Gisha", Font.PLAIN, 13));
 
 		JLabel label = new JLabel("qtd");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setBounds(185, 69, 44, 17);
 		panel.add(label);
+		label.setText("" + c.getProdInteresses());
 		label.setFont(new Font("Gisha", Font.BOLD, 13));
 
 		JLabel lblProdutos = new JLabel("produto(s)");
@@ -80,11 +81,12 @@ public class TelaComprador_Interesse {
 		btnNewButton_1.setBounds(384, 317, 210, 23);
 		panel.add(btnNewButton_1);
 
-		JLabel lblNewLabel_1 = new JLabel("User");
-		lblNewLabel_1.setFont(new Font("Gisha", Font.BOLD | Font.ITALIC, 18));
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_1.setBounds(26, 23, 200, 38);
-		panel.add(lblNewLabel_1);
+		JLabel lblUser = new JLabel("User");
+		lblUser.setFont(new Font("Gisha", Font.BOLD | Font.ITALIC, 18));
+		lblUser.setHorizontalAlignment(SwingConstants.LEFT);
+		lblUser.setBounds(26, 23, 200, 38);
+		lblUser.setText(c.getNomeUsuario());
+		panel.add(lblUser);
 	}
 
 	private void setComprador(Comprador c) {

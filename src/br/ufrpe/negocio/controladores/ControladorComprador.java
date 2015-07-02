@@ -108,12 +108,24 @@ public class ControladorComprador {
 
 	}
 	
+	public void adicionarAosAdquiridos(Comprador c, Produto p){
+		repositorio.adicionarAosAdquiridos(c, p);
+	}
+	
 	public void adicionarAosFavoritos(Comprador c, Produto p){
 		repositorio.adicionarAosFavoritos(c, p);
 	}
 	
 	public void adicionarAosInteresses(Comprador c, Produto p){
 		repositorio.adicionarAosInteresses(c, p);
+	}
+	
+	public void removerDosFavoritos (Comprador c, Produto p){
+		repositorio.removerDosFavoritos(c, p);
+	}
+	
+	public void removerDosInteresses (Comprador c, Produto p){
+		repositorio.removerDosInteresses(c, p);
 	}
 
 }

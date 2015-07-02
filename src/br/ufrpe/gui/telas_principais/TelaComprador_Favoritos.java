@@ -77,6 +77,7 @@ public class TelaComprador_Favoritos {
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setBounds(83, 69, 44, 17);
 		panel.add(label);
+		label.setText("" + c.getProdFavoritos());
 		label.setFont(new Font("Gisha", Font.BOLD, 13));
 		
 		JLabel lblProdutos = new JLabel("produto(s) favorito(s)");
@@ -97,6 +98,7 @@ public class TelaComprador_Favoritos {
 		lblNewLabel_1.setFont(new Font("Gisha", Font.BOLD | Font.ITALIC, 18));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1.setBounds(26, 23, 200, 38);
+		lblNewLabel_1.setText(c.getNomeUsuario());
 		panel.add(lblNewLabel_1);
 	}
 	
