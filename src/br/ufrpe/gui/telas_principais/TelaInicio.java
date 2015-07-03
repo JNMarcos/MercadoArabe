@@ -13,7 +13,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
+import br.ufrpe.gui.TelaSobre;
 import br.ufrpe.gui.telas_cadastro.TelaCadastroComprador;
 import br.ufrpe.gui.telas_cadastro.TelaCadastroVendedor;
 import br.ufrpe.gui.telas_login.TelaLoginComprador;
@@ -31,7 +33,8 @@ public class TelaInicio {
 	private TelaCadastroVendedor telaCadVendedor;
 	private TelaLoginVendedor telaLoginVendedor;
 	private TelaLoginComprador telaLoginComprador;
-
+	private TelaSobre telaSobre;
+		
 	/**
 	 * Launch the application.
 	 */
@@ -59,7 +62,12 @@ public class TelaInicio {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		//algo a mais
+	
+		try { //aparencia do SO
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch(Exception e) {
+			e.getStackTrace();
+		}
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setTitle("Mercado Árabe");
@@ -139,6 +147,18 @@ public class TelaInicio {
 			e.printStackTrace();
 		}
 		
+		JButton btnSobre = new JButton("Sobre");
+		btnSobre.setFont(new Font("Gisha", Font.PLAIN, 13));
+		btnSobre.setBackground(null);
+		btnSobre.setBorder(null);
+		btnSobre.setContentAreaFilled(false);
+		btnSobre.setForeground(new Color(0, 0, 204));
+		btnSobre.setBounds(386, 243, 48, 17);
+		panel.add(btnSobre);
+		
+		EventoBtnSobre acaoSobre = new EventoBtnSobre();
+		btnSobre.addActionListener(acaoSobre);
+		
 	}
 	
 	private class EventoBotaoLoginVendedor implements ActionListener {
@@ -169,11 +189,18 @@ public class TelaInicio {
 		}
 	}
 	
+	private class EventoBtnSobre implements ActionListener {
+		public void actionPerformed(ActionEvent evento) {
+			frame.dispose();
+			telaSobre = new TelaSobre();
+			telaSobre.setVisible(true);
+		}
+	}
+	
 	public void setVisible(boolean b) {
 		if(b == true)
 			frame.setVisible(b);
 		else
 			frame.setVisible(b);
 	}
-		
 }
