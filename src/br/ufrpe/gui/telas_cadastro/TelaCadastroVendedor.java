@@ -482,7 +482,6 @@ public class TelaCadastroVendedor {
 						vendedor.setXp(xp);
 						vendedor.setDataCadastro();
 						fachada.cadastrarVendedor(vendedor);
-						fachada.salvarVendedor();
 
 						//mensagem boas vindas
 						JOptionPane.showMessageDialog(null, "Usuário Cadastrado com sucesso!\nBem-vindo ao Mercado Árabe");

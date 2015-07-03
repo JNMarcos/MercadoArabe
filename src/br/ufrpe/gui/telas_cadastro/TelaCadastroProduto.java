@@ -113,6 +113,7 @@ public class TelaCadastroProduto{
 		comboBoxCategoria.setMaximumRowCount(14);
 		comboBoxCategoria.setBounds(83, 62, 187, 23);
 		comboBoxCategoria.setFont(new Font("Gisha", Font.PLAIN, 13));
+		comboBoxCategoria.addItem("");
 		comboBoxCategoria.addItem("Auto");
 		comboBoxCategoria.addItem("Roupas");
 		comboBoxCategoria.addItem("Celulares");
@@ -152,7 +153,8 @@ public class TelaCadastroProduto{
 		lblQuantidade.setBounds(327, 53, 70, 41);
 		lblQuantidade.setFont(new Font("Gisha", Font.PLAIN, 13));
 		painel1.add(lblQuantidade);
-
+		
+		comboBoxQuant.addItem("");
 		comboBoxQuant.addItem("1");
 		comboBoxQuant.addItem("2");
 		comboBoxQuant.addItem("3");
@@ -268,5 +270,10 @@ public class TelaCadastroProduto{
 	protected static void dispose() {
 		// TODO Auto-generated method stub
 
+	}
+
+	public void setVisible(boolean b) {
+	 if(b == true) frame.setVisible(b);
+	 else frame.setVisible(b);
 	}
 }

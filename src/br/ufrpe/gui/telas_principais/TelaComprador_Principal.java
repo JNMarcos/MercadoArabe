@@ -232,6 +232,8 @@ public class TelaComprador_Principal {
 	private class EventoBotaoSair implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 			frmMeuPerfil.dispose();
+			TelaInicio telaIncio = new TelaInicio();
+			telaIncio.setVisible(true);
 		}
 	}
 

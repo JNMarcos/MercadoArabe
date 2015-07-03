@@ -73,7 +73,7 @@ public class PessoaUtilidades {
 	
 	public static boolean nomeNosConformes(String nome) {
 		boolean nomeOK = false;
-		if (!nome.isEmpty()) //força o usuario a informar seu nome
+		if (nome != null) //força o usuario a informar seu nome
 			nomeOK = true;
 		
 		return nomeOK;
