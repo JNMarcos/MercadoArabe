@@ -66,7 +66,7 @@ public class TelaExibirInfoComprador {
 		btnContinuoInteressado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmConheaOVendedor.dispose();
-				TelaEditarComprador telaEditarComprador = new TelaEditarComprador();
+				TelaEditarComprador telaEditarComprador = new TelaEditarComprador(c);
 				telaEditarComprador.setVisible(true);
 			}
 		});

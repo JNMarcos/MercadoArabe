@@ -133,7 +133,7 @@ public class RepositorioVendedor implements IRepositorioVendedor, Serializable{
 					}
 				}
 			}
-		}
+		} else nomeUsuarioJaExiste = true;
 		return nomeUsuarioJaExiste;
 	}
 	
@@ -146,7 +146,7 @@ public class RepositorioVendedor implements IRepositorioVendedor, Serializable{
 					break;
 				}
 			}
-		}
+		} else senhaJaExiste = true;
 		return senhaJaExiste;
 	}
 	
@@ -174,7 +174,7 @@ public class RepositorioVendedor implements IRepositorioVendedor, Serializable{
 					}
 				}
 			}
-		}
+		} else cpfJaExiste = true;
 		return cpfJaExiste;
 	}
 	

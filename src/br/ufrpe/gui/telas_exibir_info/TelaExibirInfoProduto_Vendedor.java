@@ -12,6 +12,7 @@ import javax.swing.JTable;
 
 import br.ufrpe.gui.telas_principais.TelaVendedor;
 import br.ufrpe.negocio.classes_basicas.Produto;
+import br.ufrpe.negocio.classes_basicas.Vendedor;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -22,21 +23,23 @@ public class TelaExibirInfoProduto_Vendedor {
 	private JButton btnVoltar;
 	private JTable table;
 	
-	Produto p;
+	private Produto p;
+	private Vendedor v;
 
 
 	/**
 	 * Create the application.
 	 */
-	public TelaExibirInfoProduto_Vendedor(Produto p) {
-		initialize(p);
+	public TelaExibirInfoProduto_Vendedor(Produto p, Vendedor v) {
+		initialize(p, v);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(Produto p) {
+	private void initialize(Produto p, Vendedor v) {
 		setProduto(p);
+		setVendedor(v);
 		frmVejaMelhorO = new JFrame();
 		frmVejaMelhorO.setResizable(false);
 		frmVejaMelhorO.setTitle("Descri\u00E7\u00E3o produto");
@@ -54,8 +57,8 @@ public class TelaExibirInfoProduto_Vendedor {
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaExibirInfoProduto_Vendedor.dispose();
-				TelaVendedor telaVendedor = new TelaVendedor(null);
-				telaVendedor.setvisible(true);
+				TelaVendedor telaVendedor = new TelaVendedor(v);
+				telaVendedor.setVisible(true);
 			}
 		});
 		btnVoltar.setBounds(113, 370, 89, 23);

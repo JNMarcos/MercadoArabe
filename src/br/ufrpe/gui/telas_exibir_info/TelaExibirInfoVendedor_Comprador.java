@@ -24,7 +24,8 @@ public class TelaExibirInfoVendedor_Comprador extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JFrame frmConheaOVendedor;
 	
-	Vendedor v;
+	private Vendedor v;
+
 
 
 	/**

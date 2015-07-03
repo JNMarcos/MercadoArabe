@@ -135,7 +135,7 @@ public class RepositorioComprador implements IRepositorioComprador, Serializable
 					}
 				}
 			}
-		}
+		} else nomeUsuarioJaExiste = true;
 		return nomeUsuarioJaExiste;
 	}
 
@@ -148,7 +148,7 @@ public class RepositorioComprador implements IRepositorioComprador, Serializable
 					break;
 				}
 			}
-		}
+		} else senhaJaExiste = true;
 		return senhaJaExiste;
 	}
 
