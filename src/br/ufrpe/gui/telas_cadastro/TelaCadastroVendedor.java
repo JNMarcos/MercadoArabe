@@ -400,16 +400,16 @@ public class TelaCadastroVendedor {
 
 			contato = new Contato(textFieldRua.getText(), textFieldBairro.getText(), textFieldCidade.getText(),
 					(String) comboBoxEstado.getSelectedItem(), textFieldEmail.getText(), formattedTextFieldTelefone.getText());
-			
+			vendedor.setContato(contato);
 
 			//vai pra proxima aba se n houver nenhum espaço em braco
-			if(contato.getLogradouro().equals("") || contato.getBairro().equals("") || 
-					contato.getCidade().equals("") || contato.getEstado().equals("") || 
-					contato.getTelefone().equals("") || contato.getEmail().equals("")) {
+			if(vendedor.getContato().getLogradouro().equals("") || vendedor.getContato().getBairro().equals("") || 
+					vendedor.getContato().getCidade().equals("") || vendedor.getContato().getEstado().equals("") || 
+					vendedor.getContato().getTelefone().equals("") || vendedor.getContato().getEmail().equals("")) {
 				JOptionPane.showMessageDialog(null, "Preencha todos os campos para prosseguir!");
 			}
 			else{
-				vendedor.setContato(contato);
+				
 				tabbedPane.setSelectedIndex(2); //vai para aba Credenciais
 			}
 		}
@@ -471,8 +471,7 @@ public class TelaCadastroVendedor {
 					String senhaConfirma = new String(passwordField_Confirmar.getPassword());
 
 					if(senha.equals(senhaConfirma)) {
-						vendedor.setNome(textFieldNome.getSelectedText());
-						vendedor.setNomeUsuario(textFieldNomeUsuario.getSelectedText());
+						vendedor.setNomeUsuario(textFieldNomeUsuario.getText());
 						//setContato já feito
 						
 						int dia = Integer.parseInt((String) comboBoxDia.getSelectedItem());
@@ -524,7 +523,7 @@ public class TelaCadastroVendedor {
 			formattedTextFieldCpf.setText("");
 			passwordField.setText("");
 			passwordField_Confirmar.setText("");
-		} catch (IllegalArgumentException e){
+		} catch (IllegalArgumentException | NullPointerException e){
 			JOptionPane.showMessageDialog(null, "Argumento inválido");
 		}	
 	}

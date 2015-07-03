@@ -256,6 +256,11 @@ public class TelaCadastroProduto{
 					fachada.cadastrarProduto(p, v);
 				} catch (ProdutoJaCadastradoException e) {
 					JOptionPane.showMessageDialog(null, e.getMessage(), "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
+				} catch (IllegalArgumentException e){
+					JOptionPane.showMessageDialog(null, "Argumento inválido", "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
+				} catch (NullPointerException e){
+					JOptionPane.showMessageDialog(null, "Argumento inválido", "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
+
 				}
 			}
 		}
