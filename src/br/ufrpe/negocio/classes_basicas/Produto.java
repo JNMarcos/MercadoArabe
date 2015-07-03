@@ -70,8 +70,8 @@ public class Produto implements Comparable<Produto>, Serializable{
 	public double getPreco() {
 		return preco;
 	}
-	public void setPreco(double preco) {
-		this.preco = preco;
+	public void setPreco(String string) {
+		this.preco = string;
 	}
 	public boolean isEstado() {
 		return estado;

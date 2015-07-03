@@ -9,16 +9,22 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import br.ufrpe.gui.telas_principais.TelaVendedor;
+import br.ufrpe.negocio.Fachada;
+import br.ufrpe.negocio.classes_basicas.Produto;
 import br.ufrpe.negocio.classes_basicas.Vendedor;
+import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoProdutoException;
 
 public class TelaEditarProduto extends JFrame{
 	Vendedor v;
+	Produto p;
+	Fachada f;
 	public TelaEditarProduto() {
 		setResizable(false);
 		setSize(490,355);
@@ -32,6 +38,49 @@ public class TelaEditarProduto extends JFrame{
 		panel.setLayout(null);
 		
 		JButton btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				p = new Produto();
+				try{
+					if (!textField.getText().equals("")){
+						p.setNome(new String (textField.getText()));
+					}
+					f.atualizarProduto(p, v);
+				}catch (NullPointerException e1){
+					JOptionPane.showMessageDialog(null, "Argumento inválido");
+				} catch (IllegalArgumentException e1) {
+					JOptionPane.showMessageDialog(null, "Argumento inválido");
+				} catch (NaoEncontradoProdutoException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+				} 				
+			
+				try{
+					if(!textField_2.getText().equals("")){
+						p.setPreco(textField_2.getText());
+					}
+					f.atualizarProduto(p, v);
+				} catch(NullPointerException e1){
+					JOptionPane.showMessageDialog(null, "Argumento inválido");
+				} catch (IllegalArgumentException e1) {
+					JOptionPane.showMessageDialog(null, "Argumento inválido");
+				} catch (NaoEncontradoProdutoException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+				}
+				
+				try{
+					if(!textArea.getText().equals("")){
+						p.setDescricao(textArea.getText());
+					}
+					f.atualizarProduto(p, v);
+				} catch(NullPointerException e1){
+					JOptionPane.showMessageDialog(null, "Argumento inválido");
+				} catch (IllegalArgumentException e1) {
+					JOptionPane.showMessageDialog(null, "Argumento inválido");
+				} catch (NaoEncontradoProdutoException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+				} 
+			}
+		});
 		btnConfirmar.setBounds(261, 272, 95, 25);
 		panel.add(btnConfirmar);
 		btnConfirmar.setFont(new Font("Gisha", Font.PLAIN, 13));
