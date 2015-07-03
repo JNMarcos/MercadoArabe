@@ -45,7 +45,7 @@ public class TelaEditarProduto extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				try{
 					if (!textField.getText().equals("")){
-						p.setNome(new String (textField.getText()));
+						p.setNome(textField.getText());
 					}
 					
 					if(!textField_2.getText().equals("")){
