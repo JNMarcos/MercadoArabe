@@ -25,9 +25,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class TelaEditarVendedor extends JFrame{
-	Vendedor v;
-	Contato c;
-	Fachada fachada;
+	private Vendedor v;
+	private Contato c;
+	private Fachada fachada;
 	public TelaEditarVendedor(Vendedor v) {
 		setVendedor(v);
 		fachada = Fachada.getInstance();

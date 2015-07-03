@@ -19,8 +19,8 @@ import br.ufrpe.negocio.classes_basicas.Comprador;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoCompradorException;
 
 public class TelaEditarComprador extends JFrame{
-		Comprador c;
-		Fachada f;
+		private Comprador c;
+		private Fachada f;
 	public TelaEditarComprador(Comprador c) {
 		setTitle("Alterar senha");
 		setComprador(c);
