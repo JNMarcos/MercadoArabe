@@ -1,20 +1,36 @@
 package br.ufrpe.gui.telas_editar;
 
 import javax.swing.JFrame;
+
 import java.awt.SystemColor;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
 import java.awt.Font;
+
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
+
+import br.ufrpe.negocio.Fachada;
+import br.ufrpe.negocio.classes_basicas.Contato;
+import br.ufrpe.negocio.classes_basicas.Vendedor;
+import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoVendedorException;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class TelaEditarVendedor extends JFrame{
-	public TelaEditarVendedor() {
+	Vendedor v;
+	Contato c;
+	Fachada fachada;
+	public TelaEditarVendedor(Vendedor v) {
+		setVendedor(v);
+		fachada = Fachada.getInstance();
 		setResizable(false);
 		setSize(530,340);
 		setTitle("Atualiza\u00E7\u00E3o de informa\u00E7\u00F5es cadastrais");
@@ -46,16 +62,19 @@ public class TelaEditarVendedor extends JFrame{
 		panel.add(lblConfirmeASenha);
 		lblConfirmeASenha.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(331, 51, 185, 20);
-		panel.add(textField_1);
-		textField_1.setFont(new Font("Gisha", Font.PLAIN, 13));
-		textField_1.setColumns(10);
+		email = new JTextField();
+		email.setBounds(331, 51, 185, 20);
+		panel.add(email);
+		email.setFont(new Font("Gisha", Font.PLAIN, 13));
+		email.setColumns(10);
 		
 		JButton btnConfirmar = new JButton(" Confirmar");
 		btnConfirmar.setBounds(296, 268, 104, 23);
 		panel.add(btnConfirmar);
 		btnConfirmar.setFont(new Font("Gisha", Font.PLAIN, 13));
+		
+		EventoAtualizarComprador btnConfirmarEdicao = new EventoAtualizarComprador();
+		btnConfirmar.addActionListener(btnConfirmarEdicao);
 		
 		JLabel lblEmail = new JLabel("E-mail");
 		lblEmail.setBounds(275, 54, 46, 14);
@@ -67,22 +86,22 @@ public class TelaEditarVendedor extends JFrame{
 		panel.add(lblConfSenha);
 		lblConfSenha.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(101, 51, 146, 20);
-		panel.add(textField_2);
-		textField_2.setFont(new Font("Gisha", Font.PLAIN, 13));
-		textField_2.setColumns(10);
+		telefone = new JTextField();
+		telefone.setBounds(101, 51, 146, 20);
+		panel.add(telefone);
+		telefone.setFont(new Font("Gisha", Font.PLAIN, 13));
+		telefone.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("Apenas \u00E9 necess\u00E1rio preencher os dados que foram alterado.");
 		lblNewLabel_3.setFont(new Font("Gisha", Font.PLAIN, 11));
 		lblNewLabel_3.setBounds(30, 222, 486, 35);
 		panel.add(lblNewLabel_3);
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Gisha", Font.PLAIN, 13));
-		textField.setBounds(101, 115, 127, 23);
-		panel.add(textField);
-		textField.setColumns(10);
+		cidade = new JTextField();
+		cidade.setFont(new Font("Gisha", Font.PLAIN, 13));
+		cidade.setBounds(101, 116, 127, 22);
+		panel.add(cidade);
+		cidade.setColumns(10);
 		
 		JLabel lblAtualizeSuasInforme = new JLabel("Atualize suas informa\u00E7\u00F5es de contato e credenciais");
 		lblAtualizeSuasInforme.setHorizontalAlignment(SwingConstants.CENTER);
@@ -90,11 +109,11 @@ public class TelaEditarVendedor extends JFrame{
 		panel.add(lblAtualizeSuasInforme);
 		lblAtualizeSuasInforme.setFont(new Font("Gisha", Font.PLAIN, 18));
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(284, 116, 116, 22);
-		panel.add(textField_3);
-		textField_3.setFont(new Font("Gisha", Font.PLAIN, 13));
-		textField_3.setColumns(10);
+		bairro = new JTextField();
+		bairro.setBounds(284, 116, 116, 22);
+		panel.add(bairro);
+		bairro.setFont(new Font("Gisha", Font.PLAIN, 13));
+		bairro.setColumns(10);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setFont(new Font("Gisha", Font.PLAIN, 13));
@@ -110,15 +129,15 @@ public class TelaEditarVendedor extends JFrame{
 		panel.add(btnVoltar);
 		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
-		passwordField = new JPasswordField("");
-		passwordField.setFont(new Font("Gisha", Font.PLAIN, 13));
-		passwordField.setBounds(137, 193, 146, 23);
-		panel.add(passwordField);
+		novaSenhaConfirmar = new JPasswordField("");
+		novaSenhaConfirmar.setFont(new Font("Gisha", Font.PLAIN, 13));
+		novaSenhaConfirmar.setBounds(137, 193, 146, 23);
+		panel.add(novaSenhaConfirmar);
 		
-		passwordField_1 = new JPasswordField();
-		passwordField_1.setFont(new Font("Gisha", Font.PLAIN, 13));
-		passwordField_1.setBounds(136, 158, 148, 20);
-		panel.add(passwordField_1);
+		novaSenha = new JPasswordField();
+		novaSenha.setFont(new Font("Gisha", Font.PLAIN, 13));
+		novaSenha.setBounds(136, 158, 148, 20);
+		panel.add(novaSenha);
 		
 		JLabel lblNewLabel = new JLabel("Cidade");
 		lblNewLabel.setFont(new Font("Gisha", Font.PLAIN, 13));
@@ -130,22 +149,60 @@ public class TelaEditarVendedor extends JFrame{
 		lblNewLabel_2.setBounds(410, 98, 29, 50);
 		panel.add(lblNewLabel_2);
 		
-		textField_4 = new JTextField();
-		textField_4.setFont(new Font("Gisha", Font.PLAIN, 13));
-		textField_4.setBounds(111, 82, 405, 20);
-		panel.add(textField_4);
-		textField_4.setColumns(10);
+		logradouro = new JTextField();
+		logradouro.setFont(new Font("Gisha", Font.PLAIN, 13));
+		logradouro.setBounds(111, 82, 405, 20);
+		panel.add(logradouro);
+		logradouro.setColumns(10);
+	}
+
+	private void setVendedor(Vendedor v) {
+		this.v = v;
 	}
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JPasswordField passwordField;
-	private JPasswordField passwordField_1;
-	private JTextField textField;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField email;
+	private JTextField telefone;
+	private JPasswordField novaSenhaConfirmar;
+	private JPasswordField novaSenha;
+	private JTextField cidade;
+	private JTextField bairro;
+	private JTextField logradouro;
+	
+	public class EventoAtualizarComprador implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			c = new Contato();
+			try{
+			if(!email.getText().equals(""))	c.setEmail(email.getText());
+			else c.setEmail(v.getContato().getEmail());
+			if (!telefone.getText().equals("")) c.setTelefone(telefone.getText());
+			else c.setTelefone(v.getContato().getTelefone());
+			if (!cidade.getText().equals("")) c.setCidade(cidade.getText());
+			else c.setCidade(v.getContato().getCidade());
+			if (!bairro.getText().equals("")) c.setBairro(bairro.getText());
+			else c.setBairro(v.getContato().getBairro());
+			if (!logradouro.getText().equals("")) c.setLogradouro(logradouro.getText());
+			else c.setLogradouro(v.getContato().getLogradouro());
+			if (!novaSenha.getPassword().equals("") && !novaSenhaConfirmar.getPassword().equals("") 
+					&& novaSenha.equals(novaSenhaConfirmar)){
+				v.setSenha(new String (novaSenha.getPassword()));
+			}
+			v.setContato(c);
+			} catch (NullPointerException e1){
+				JOptionPane.showMessageDialog(null, "Argumento inválido");
+			}
+			try {
+				fachada.atualizarVendedor(v);
+			} catch (IllegalArgumentException e1) {
+				JOptionPane.showMessageDialog(null, "Argumento inválido");
+			} catch (NaoEncontradoVendedorException e1) {
+				JOptionPane.showMessageDialog(null, e1.getMessage());
+			}
+			
+		}
+		
+	}
 }

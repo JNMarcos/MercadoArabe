@@ -44,6 +44,10 @@ public class Fachada {
 	public void removerProduto(Produto produto) throws NaoEncontradoProdutoException {
 		controladorProduto.removerProduto(produto);
 	}
+	
+	public void atualizarProduto(Produto p, Vendedor v) throws NaoEncontradoProdutoException, IllegalArgumentException{
+		controladorProduto.atualizarProduto(p, v);
+	}
 
 	public void salvarProduto() {
 		controladorProduto.salvarProduto();
@@ -108,6 +112,9 @@ public class Fachada {
 		controladorVendedor.decrementarQtdProdutosAVenda(v);
 	}
 
+	public void atualizarVendedor (Vendedor v) throws NaoEncontradoVendedorException, IllegalArgumentException{
+		controladorVendedor.atualizarVendedor(v);
+	}
 	//COMPRADOR
 	public void cadastrarComprador(Comprador comprador) throws NomeUsuarioJaCadastradoException, NomeUsuarioForaPadroesException, SenhaForaPadroesException{
 		controladorComprador.cadastrarComprador(comprador);
@@ -117,6 +124,10 @@ public class Fachada {
 		controladorComprador.removerComprador(comprador);
 	}
 
+	public void atualizarComprador(Comprador c) throws NaoEncontradoCompradorException, IllegalArgumentException{
+		controladorComprador.atualizarComprador(c);
+	}
+	
 	public void salvarComprador() {
 		controladorComprador.salvarComprador();
 	}

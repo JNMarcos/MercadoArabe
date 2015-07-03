@@ -470,8 +470,10 @@ public class TelaCadastroVendedor {
 					String senhaConfirma = new String(passwordField_Confirmar.getPassword());
 
 					if(senha.equals(senhaConfirma)) {
-
-						vendedor.setNomeUsuario(textFieldNomeUsuario.getText());
+						vendedor.setNome(textFieldNome.getSelectedText());
+						vendedor.setNomeUsuario(textFieldNomeUsuario.getSelectedText());
+						vendedor.setCpf(maskCpf.getMask());
+						//setContato já feito
 						vendedor.setSenha(senha);
 						vendedor.setXp(xp);
 						vendedor.setDataCadastro();
@@ -495,30 +497,30 @@ public class TelaCadastroVendedor {
 			}
 
 		} catch(NomeUsuarioForaPadroesException e) {
-			JOptionPane.showMessageDialog(null, "Usuário inválido! Tente novamente!\n "
-					+ "O Usuário deve conter no mínimo 4 caracteres.");
+			JOptionPane.showMessageDialog(null, e.getMessage());
 			textFieldNomeUsuario.setText("");
 			passwordField.setText("");
 			passwordField_Confirmar.setText("");
 
 		} catch(NomeUsuarioJaCadastradoException e) {
-			JOptionPane.showMessageDialog(null, "Nome de usuário já cadastrado! Tente um diferente!");
+			JOptionPane.showMessageDialog(null, e.getMessage());
 			textFieldNomeUsuario.setText("");
 			passwordField.setText("");
 			passwordField_Confirmar.setText("");
 
 		} catch(SenhaForaPadroesException e) {
-			JOptionPane.showMessageDialog(null, "Senha inválida! Tente novamente!\n "
-					+ "A Senha deve conter no mínimo 8 caracteres e presença de números ou caracteres especiais"); //organizar aqui
+			JOptionPane.showMessageDialog(null, e.getMessage()); //organizar aqui
 			passwordField.setText("");
 			passwordField_Confirmar.setText("");
 
 		} catch(CpfJaCadastradoException e) {
-			JOptionPane.showMessageDialog(null, "CPF já cadastrado! Tente um diferente!");
+			JOptionPane.showMessageDialog(null, e.getMessage());
 			formattedTextFieldCpf.setText("");
 			passwordField.setText("");
 			passwordField_Confirmar.setText("");
-		}		
+		} catch (IllegalArgumentException e){
+			JOptionPane.showMessageDialog(null, "Argumento inválido");
+		}	
 	}
 }
 

@@ -37,7 +37,7 @@ public class ControladorVendedor {
 		this.dia = dia;
 	}
 
-	public void cadastrarVendedor(Vendedor vendedor) throws CpfJaCadastradoException, NomeUsuarioJaCadastradoException, NomeUsuarioForaPadroesException, SenhaForaPadroesException{
+	public void cadastrarVendedor(Vendedor vendedor) throws CpfJaCadastradoException, NomeUsuarioJaCadastradoException, IllegalArgumentException, NomeUsuarioForaPadroesException, SenhaForaPadroesException{
 		boolean cpfJaExiste;
 		boolean nomeUsuarioJaExiste;
 
@@ -88,7 +88,7 @@ public class ControladorVendedor {
 		}
 	}
 
-	public void atualizarVendedor(Vendedor vendedor) throws NaoEncontradoVendedorException{
+	public void atualizarVendedor(Vendedor vendedor) throws NaoEncontradoVendedorException, IllegalArgumentException{
 		Vendedor v = null;
 		int index = -1;
 		if (vendedor != null){
