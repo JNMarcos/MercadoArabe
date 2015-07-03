@@ -4,7 +4,6 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -14,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 import br.ufrpe.gui.telas_principais.TelaInicio;
 import br.ufrpe.negocio.Fachada;
@@ -38,11 +38,6 @@ public class TelaCadastroComprador {
 	private JPasswordField passwordFieldConfirmar;
 
 	private TelaInicio telaInicio;
-	
-	private static final int anoInicio = 1914;
-	private static final int mesDiaInicio = 1;
-	private static final int mesFim = 12;
-	private static final int diaFim = 31;
 
 	/**
 	 * Create the application.
@@ -67,92 +62,102 @@ public class TelaCadastroComprador {
 		frmCadastroComprador.getContentPane().add(panel);
 		panel.setLayout(null);
 
-		comboBoxAno = new JComboBox<String>();
-		comboBoxAno.setFont(new Font("Gisha", Font.PLAIN, 13));
-		comboBoxAno.setBounds(292, 58, 91, 20);
-		for (int i = anoInicio; i <= LocalDate.now().getYear(); i++){
-			comboBoxAno.addItem("" + i);
-		}
-		panel.add(comboBoxAno);
-
-		comboBoxMes = new JComboBox<String>();
-		comboBoxMes.setFont(new Font("Gisha", Font.PLAIN, 13));
-		comboBoxMes.setBounds(210, 58, 56, 20);
-		for (int i = mesDiaInicio; i <= mesFim; i++){
-			comboBoxMes.addItem("" + i);
-		}
-		panel.add(comboBoxMes);
-
-		comboBoxDia = new JComboBox<String>();
-		comboBoxDia.setFont(new Font("Gisha", Font.PLAIN, 13));
-		comboBoxDia.setBounds(137, 58, 56, 20);
-		for (int i = mesDiaInicio; i <= diaFim; i++){
-			comboBoxDia.addItem("" + i);
-		}
-		panel.add(comboBoxDia);
-
-		btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setBounds(266, 225, 91, 23);
-		btnCadastrar.setFont(new Font("Gisha", Font.PLAIN, 13));
-		panel.add(btnCadastrar);
-
-
 		JLabel lblNome = new JLabel("Nome");
-		lblNome.setBounds(81, 22, 46, 14);
+		lblNome.setBounds(81, 28, 46, 14);
 		panel.add(lblNome);
 		lblNome.setFont(new Font("Gisha", Font.PLAIN, 13));
 
 		textField_Nome = new JTextField();
 		textField_Nome.setFont(new Font("Gisha", Font.PLAIN, 13));
-		textField_Nome.setBounds(137, 18, 269, 23);
+		textField_Nome.setBounds(137, 24, 269, 23);
 		panel.add(textField_Nome);
 		textField_Nome.setColumns(10);
+		
+		JLabel lblNewLabel_1 = new JLabel("Data de Nascimento");
+		lblNewLabel_1.setBounds(10, 59, 129, 23);
+		panel.add(lblNewLabel_1);
+		lblNewLabel_1.setFont(new Font("Gisha", Font.PLAIN, 13));
+
+		comboBoxDia = new JComboBox<String>();
+		comboBoxDia.setFont(new Font("Gisha", Font.PLAIN, 13));
+		comboBoxDia.setBounds(137, 58, 41, 23);
+		String[] arrayDia = {"", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11","12", "13", "14","15", "16", "17", "18",
+				"19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
+		for(int i = 0; i < 32; i++)
+			comboBoxDia.addItem(arrayDia[i]);
+		panel.add(comboBoxDia);
+
+		comboBoxMes = new JComboBox<String>();
+		comboBoxMes.setFont(new Font("Gisha", Font.PLAIN, 13));
+		comboBoxMes.setBounds(188, 57, 91, 23);
+		String[] arrayMes = {"", "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro",
+				"Outubro", "Novembro", "Dezembro"};
+		for(int i=0; i<13; i++)
+			comboBoxMes.addItem(arrayMes[i]);
+		panel.add(comboBoxMes);
+
+		comboBoxAno = new JComboBox<String>();
+		comboBoxAno.setFont(new Font("Gisha", Font.PLAIN, 13));
+		comboBoxAno.setBounds(292, 58, 57, 23);
+		String[] arrayAno = new String[84];
+		Integer ano = 1998;
+		for(int i=0; i<84; i++, ano--) {
+			if(i != 0) {
+				arrayAno[i] = ano.toString();
+				comboBoxAno.addItem(arrayAno[i]);
+			}
+			else {
+				arrayAno[i] = "";
+				comboBoxAno.addItem(arrayAno[i]);
+			}		
+		}
+		panel.add(comboBoxAno);
 
 		JLabel lblUsurio = new JLabel("Usu\u00E1rio");
-		lblUsurio.setBounds(70, 103, 46, 14);
+		lblUsurio.setBounds(70, 109, 46, 14);
 		panel.add(lblUsurio);
 		lblUsurio.setFont(new Font("Gisha", Font.PLAIN, 13));
 
 		textField_User = new JTextField();
 		textField_User.setFont(new Font("Gisha", Font.PLAIN, 13));
-		textField_User.setBounds(137, 99, 269, 23);
+		textField_User.setBounds(137, 105, 269, 23);
 		panel.add(textField_User);
 		textField_User.setColumns(10);
 
 		JLabel lblSenha = new JLabel("Senha");
-		lblSenha.setBounds(70, 142, 46, 14);
+		lblSenha.setBounds(80, 143, 46, 14);
 		panel.add(lblSenha);
 		lblSenha.setFont(new Font("Gisha", Font.PLAIN, 13));
 
 		passwordField = new JPasswordField();
 		passwordField.setBounds(137, 139, 155, 23);
-		passwordField.setFont(new Font("Gisha", Font.PLAIN, 13));
+		passwordField.setFont(UIManager.getFont("PasswordField.font"));
 		panel.add(passwordField);
 
 		JLabel lblNewLabel = new JLabel("Confirmar Senha");
 		lblNewLabel.setFont(new Font("Gisha", Font.PLAIN, 13));
-		lblNewLabel.setBounds(21, 178, 105, 23);
+		lblNewLabel.setBounds(20, 172, 105, 23);
 		panel.add(lblNewLabel);
 
 		passwordFieldConfirmar = new JPasswordField();
-		passwordFieldConfirmar.setFont(new Font("Gisha", Font.PLAIN, 13));
+		passwordFieldConfirmar.setFont(UIManager.getFont("PasswordField.font"));
 		passwordFieldConfirmar.setBounds(137, 173, 155, 23);
 		panel.add(passwordFieldConfirmar);
 
 		//add acao ao botao cadastrar
 		comprador = new Comprador();
 		EventoBotaoCadastrar acaoBtnCadastrar = new EventoBotaoCadastrar();
+		
+		btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.setBounds(253, 219, 91, 23);
+		btnCadastrar.setFont(new Font("Gisha", Font.PLAIN, 13));
+		panel.add(btnCadastrar);
 		btnCadastrar.addActionListener(acaoBtnCadastrar);
-
-		JLabel lblNewLabel_1 = new JLabel("Data de Nascimento");
-		lblNewLabel_1.setBounds(10, 59, 129, 23);
-		panel.add(lblNewLabel_1);
-		lblNewLabel_1.setFont(new Font("Gisha", Font.PLAIN, 13));
 
 		//botao cancelar
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setFont(new Font("Gisha", Font.PLAIN, 13));
-		btnCancelar.setBounds(137, 225, 91, 23);
+		btnCancelar.setBounds(152, 219, 91, 23);
 		panel.add(btnCancelar);
 		EventoBotaoCancelar acaoBtnCancelar = new EventoBotaoCancelar();
 		btnCancelar.addActionListener(acaoBtnCancelar);
@@ -163,6 +168,16 @@ public class TelaCadastroComprador {
 			frmCadastroComprador.setVisible(true);
 		else
 			frmCadastroComprador.setVisible(false);
+	}
+	
+	public int getAno() { //calcula ano
+		int ano = 1998;
+		for(int i=1; i<=84; i++) {
+			if(comboBoxAno.getSelectedIndex() == i) {
+				ano = ano - i;
+			}
+		}
+		return ano;
 	}
 
 	private class EventoBotaoCadastrar implements ActionListener {
@@ -177,13 +192,13 @@ public class TelaCadastroComprador {
 
 				} else if (passwordFieldConfirmar.equals("")){
 					JOptionPane.showMessageDialog(null, "O campo 'Confirmar senha' se encontra vazio! ", "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
-				} else if (comboBoxDia.getSelectedItem().equals("")){
+				} else if (comboBoxDia.getSelectedIndex() == 0){
 					JOptionPane.showMessageDialog(null, "O campo dia de 'Data de nascimento' se encontra vazio! ", "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
 
-				} else if (comboBoxMes.getSelectedItem().equals("")){
+				} else if (comboBoxMes.getSelectedIndex() == 0){
 					JOptionPane.showMessageDialog(null, "O campo mês de 'Data de nascimento' se encontra vazio! ", "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
 
-				} else if (comboBoxAno.getSelectedItem().equals("")){
+				} else if (comboBoxAno.getSelectedIndex() == 0){
 					JOptionPane.showMessageDialog(null, "O campo ano de 'Data de nascimento' se encontra vazio! ", "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
 
 				} else{
@@ -193,11 +208,7 @@ public class TelaCadastroComprador {
 						comprador.setNome(textField_Nome.getText());
 						comprador.setNomeUsuario(textField_User.getText());
 						comprador.setSenha(senha);
-						int dia = Integer.parseInt((String) comboBoxDia.getSelectedItem());
-						int mes = Integer.parseInt((String) comboBoxMes.getSelectedItem());
-						int ano = Integer.parseInt((String) comboBoxAno.getSelectedItem());
-
-						comprador.setDataNascimento(dia, mes, ano);
+						comprador.setDataNascimento(comboBoxDia.getSelectedIndex(), comboBoxMes.getSelectedIndex(), getAno());
 
 						fachada.cadastrarComprador(comprador);
 						fachada.salvarComprador();
@@ -208,8 +219,7 @@ public class TelaCadastroComprador {
 						textField_User.setText("");
 						passwordField.setText("");
 						frmCadastroComprador.dispose();
-						
-						TelaInicio telaInicio = new TelaInicio();
+						telaInicio = new TelaInicio();
 						telaInicio.setVisible(true);
 					} else {
 						JOptionPane.showMessageDialog(null, "As senhas precisam ser iguais!");
@@ -244,8 +254,7 @@ public class TelaCadastroComprador {
 			passwordField.setText("");
 			passwordFieldConfirmar.setText("");
 			frmCadastroComprador.dispose();
-			
-			TelaInicio telaInicio = new TelaInicio();
+			telaInicio = new TelaInicio();
 			telaInicio.setVisible(true);
 		}
 	}
