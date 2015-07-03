@@ -17,8 +17,8 @@ import br.ufrpe.negocio.Fachada;
 import br.ufrpe.negocio.classes_basicas.Comprador;
 
 public class TelaExibirInfoComprador {
-	Comprador c;
-	Fachada f;
+	private Comprador c;
+	private Fachada f;
 	
 	private JFrame frmConheaOVendedor;
 	private TelaComprador_Principal telaCompradorPrincipal;
@@ -59,25 +59,15 @@ public class TelaExibirInfoComprador {
 		lblNomeDoVendedor.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		JButton btnVoltar = new JButton("Voltar");
-		btnVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frmConheaOVendedor.dispose();
-				telaCompradorPrincipal = new TelaComprador_Principal(c);
-				telaCompradorPrincipal.setVisible(true);
-			}
-		});
+		EventoEditar e1 = new EventoEditar();
+		btnVoltar.addActionListener(e1);
 		btnVoltar.setBounds(51, 141, 152, 23);
 		panel.add(btnVoltar);
 		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		JButton btnContinuoInteressado = new JButton("Editar informa\u00E7\u00F5es");
-		btnContinuoInteressado.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frmConheaOVendedor.dispose();
-				TelaEditarComprador telaEditarComprador = new TelaEditarComprador(c);
-				telaEditarComprador.setVisible(true);
-			}
-		});
+		EventoEditar e = new EventoEditar();
+		btnContinuoInteressado.addActionListener(e);
 		btnContinuoInteressado.setFont(new Font("Gisha", Font.PLAIN, 13));
 		btnContinuoInteressado.setBounds(223, 141, 172, 23);
 		panel.add(btnContinuoInteressado);
@@ -104,5 +94,21 @@ public class TelaExibirInfoComprador {
 
 	public void setComprador(Comprador c){
 		this.c = c;
+	}
+	
+	public class EventoEditar implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			frmConheaOVendedor.dispose();
+			TelaEditarComprador telaEditarComprador = new TelaEditarComprador(c);
+			telaEditarComprador.setVisible(true);
+		}
+	}
+	
+	public class EventoVoltar implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			frmConheaOVendedor.dispose();
+			telaCompradorPrincipal = new TelaComprador_Principal(c);
+			telaCompradorPrincipal.setVisible(true);
+		}
 	}
 }

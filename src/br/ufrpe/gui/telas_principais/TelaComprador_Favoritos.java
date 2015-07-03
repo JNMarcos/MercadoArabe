@@ -61,13 +61,8 @@ public class TelaComprador_Favoritos {
 		panel.setLayout(null);
 		
 		btnNewButton = new JButton("Voltar");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				TelaComprador_Favoritos.dispose();
-				TelaComprador_Principal TelaComprador_Principal = new TelaComprador_Principal(c);
-				TelaComprador_Principal.setVisible(true);
-			}
-		});
+		EventoVoltar e = new EventoVoltar();
+		btnNewButton.addActionListener(e);
 		btnNewButton.setFont(new Font("Gisha", Font.PLAIN, 13));
 		btnNewButton.setBounds(77, 317, 163, 23);
 		panel.add(btnNewButton);
@@ -115,10 +110,8 @@ public class TelaComprador_Favoritos {
 		panel.add(lblProdutos);
 		
 		btnNewButton_1 = new JButton("Remover dos favoritos");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		EventoDesfavoritar e1 = new EventoDesfavoritar();
+		btnNewButton_1.addActionListener(e1);
 		btnNewButton_1.setFont(new Font("Gisha", Font.PLAIN, 13));
 		btnNewButton_1.setBounds(384, 317, 210, 23);
 		panel.add(btnNewButton_1);
@@ -190,6 +183,15 @@ public class TelaComprador_Favoritos {
              }
 		}
 	}
+	
+	public class EventoVoltar implements ActionListener{
+		public void actionPerformed(ActionEvent arg0) {
+			TelaComprador_Favoritos.dispose();
+			TelaComprador_Principal TelaComprador_Principal = new TelaComprador_Principal(c);
+			TelaComprador_Principal.setVisible(true);
+		}
+	}
+	
 	public static void carregarTabela(DefaultTableModel modelo, List<Produto> produtos){
 		modelo.setRowCount(0);
 

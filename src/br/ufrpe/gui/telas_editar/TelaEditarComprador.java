@@ -19,8 +19,8 @@ import br.ufrpe.negocio.classes_basicas.Comprador;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoCompradorException;
 
 public class TelaEditarComprador extends JFrame{
-		Comprador c;
-		Fachada f;
+		private Comprador c;
+		private Fachada f;
 	public TelaEditarComprador(Comprador c) {
 		setTitle("Alterar senha");
 		setComprador(c);
@@ -55,36 +55,17 @@ public class TelaEditarComprador extends JFrame{
 		passwordField_1.setBounds(136, 66, 200, 20);
 		panel.add(passwordField_1);
 		
-		JButton btnConfirmar = new JButton("Confirmar");
-		btnConfirmar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try{
-					if (!passwordField.getPassword().equals("") && !passwordField_1.getPassword().equals("") 
-							&& passwordField.equals(passwordField_1)){
-						c.setSenha(new String (passwordField.getPassword()));
-					}
-					f.atualizarComprador(c);
-					JOptionPane.showMessageDialog(null, "Senha alterada com sucesso!");
-					dispose();
-					TelaComprador_Principal telaComprador_Principal = new TelaComprador_Principal(c);
-					telaComprador_Principal.setVisible(true);
-				} catch (NaoEncontradoCompradorException e) {
-					JOptionPane.showMessageDialog(null, e.getMessage());
-				}
-			}
-		});
+		btnConfirmar = new JButton("Confirmar");
+		EventoEditarComprador e = new EventoEditarComprador();
+		btnConfirmar.addActionListener(e);
+		
 		btnConfirmar.setBounds(344, 30, 91, 25);
 		panel.add(btnConfirmar);
 		btnConfirmar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
-		JButton btnVoltar = new JButton("Voltar");
-		btnVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				dispose();
-				TelaComprador_Principal telaComprador_Principal = new TelaComprador_Principal(c);
-				telaComprador_Principal.setVisible(true);
-			}
-		});
+		btnVoltar = new JButton("Voltar");
+		EventoVoltar e1 = new EventoVoltar();
+		btnVoltar.addActionListener(e1);
 		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		btnVoltar.setBounds(346, 67, 89, 23);
 		panel.add(btnVoltar);
@@ -93,13 +74,41 @@ public class TelaEditarComprador extends JFrame{
 
 	void setComprador(Comprador c) {
 		this.c = c;
+	}
+	
+	
+	public class EventoVoltar implements ActionListener{
+		public void actionPerformed(ActionEvent arg0) {
+			dispose();
+			TelaComprador_Principal telaComprador_Principal = new TelaComprador_Principal(c);
+			telaComprador_Principal.setVisible(true);
 		}
+	}
 
+	public class EventoEditarComprador implements ActionListener{
+		public void actionPerformed(ActionEvent arg0) {
+			try{
+				if (!passwordField.getPassword().equals("") && !passwordField_1.getPassword().equals("") 
+						&& passwordField.equals(passwordField_1)){
+					c.setSenha(new String (passwordField.getPassword()));
+				}
+				f.atualizarComprador(c);
+				JOptionPane.showMessageDialog(null, "Senha alterada com sucesso!");
+				dispose();
+				TelaComprador_Principal telaComprador_Principal = new TelaComprador_Principal(c);
+				telaComprador_Principal.setVisible(true);
+			} catch (NaoEncontradoCompradorException e) {
+				JOptionPane.showMessageDialog(null, e.getMessage());
+			}
+		}
+	}
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPasswordField passwordField;
+	private JButton btnVoltar;
 	private JPasswordField passwordField_1;
+	private JButton btnConfirmar;
 
 }

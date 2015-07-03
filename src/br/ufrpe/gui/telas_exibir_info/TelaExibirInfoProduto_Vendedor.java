@@ -3,6 +3,9 @@ package br.ufrpe.gui.telas_exibir_info;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,7 +18,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import br.ufrpe.gui.telas_editar.TelaEditarProduto;
-import br.ufrpe.gui.telas_principais.TelaComprador_Principal;
 import br.ufrpe.gui.telas_principais.TelaVendedor;
 import br.ufrpe.gui.telas_principais.TelaVendedorConfirmarVenda;
 import br.ufrpe.negocio.Fachada;
@@ -23,10 +25,6 @@ import br.ufrpe.negocio.classes_basicas.Comprador;
 import br.ufrpe.negocio.classes_basicas.Produto;
 import br.ufrpe.negocio.classes_basicas.Vendedor;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoCompradorException;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.util.List;
 
 public class TelaExibirInfoProduto_Vendedor {
 	private JFrame frmVejaMelhorO;
@@ -67,13 +65,8 @@ public class TelaExibirInfoProduto_Vendedor {
 		panel.setLayout(null);
 
 		btnVoltar = new JButton("Voltar");
-		btnVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frmVejaMelhorO.dispose();
-				TelaVendedor telaVendedor = new TelaVendedor(v);
-				telaVendedor.setVisible(true);
-			}
-		});
+		EventoVoltar e2 = new EventoVoltar();
+		btnVoltar.addActionListener(e2);
 		btnVoltar.setBounds(113, 370, 89, 23);
 		panel.add(btnVoltar);
 		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
@@ -149,75 +142,90 @@ public class TelaExibirInfoProduto_Vendedor {
 		panel.add(lblVendidos);
 
 		JButton btnNewButton = new JButton("Editar");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frmVejaMelhorO.dispose();
-				TelaEditarProduto t = new TelaEditarProduto(p, v);
-				t.setVisible(true);
-			}});
+		EventoEditar e = new EventoEditar();
+		btnNewButton.addActionListener(e);
 
 		btnNewButton.setFont(new Font("Gisha", Font.PLAIN, 13));
 		btnNewButton.setBounds(212, 370, 89, 23);
 		panel.add(btnNewButton);
 
 		JButton btnNewButton_1 = new JButton("Vender");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		EventoVender e1 = new EventoVender();
+		btnNewButton_1.addActionListener(e1);
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				int linha_selecionada = table.getSelectedRow();
-				String nomeComp = null;
-				Comprador comp = null;
-
-				if (table.getSelectedRow() < 0) {
-					JOptionPane.showMessageDialog(null,
-							"Nenhum produto selecionado!");
-				} else {
-					nomeComp = (String) table.getValueAt(linha_selecionada, 0);
-					try {
-						comp = f.retornarComprador(nomeComp);
-					} catch (IllegalArgumentException e1) {
-						JOptionPane.showMessageDialog(null,
-								"Argumento inválido");
-					} catch (NaoEncontradoCompradorException e1) {
-						JOptionPane.showMessageDialog(null,
-								e1.getMessage());
-					}
-					frmVejaMelhorO.dispose();
-					TelaVendedorConfirmarVenda t = new TelaVendedorConfirmarVenda(v, comp, p);
-					t.setVisible(true);
-				}
-			}});
-		
 		btnNewButton_1.setFont(new Font("Gisha", Font.PLAIN, 13));
 		btnNewButton_1.setBounds(314, 370, 89, 23);
 		panel.add(btnNewButton_1);
-		}
+	}
 
-		private void setVendedor(Vendedor v) {
-			this.v = v;
+	private void setVendedor(Vendedor v) {
+		this.v = v;
 
-		}
+	}
 
-		private void setProduto(Produto p) {
-			this.p = p;
-		}
+	private void setProduto(Produto p) {
+		this.p = p;
+	}
 
-		public void setVisible(boolean b) {
-			if(b == true)
-				frmVejaMelhorO.setVisible(b);
-			else
-				frmVejaMelhorO.setVisible(b);
-		}
+	public void setVisible(boolean b) {
+		if(b == true)
+			frmVejaMelhorO.setVisible(b);
+		else
+			frmVejaMelhorO.setVisible(b);
+	}
 
-		public static void carregarTabela(DefaultTableModel modelo, List<Comprador> compradores) {
-			if (compradores != null) {
-				for (Comprador c : compradores) {
-					modelo.addRow(new String[] {
-							c.getNome()});
-				}
-
+	public static void carregarTabela(DefaultTableModel modelo, List<Comprador> compradores) {
+		if (compradores != null) {
+			for (Comprador c : compradores) {
+				modelo.addRow(new String[] {
+						c.getNome()});
 			}
 
 		}
+
 	}
+
+	public class EventoVoltar implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			frmVejaMelhorO.dispose();
+			TelaVendedor telaVendedor = new TelaVendedor(v);
+			telaVendedor.setVisible(true);
+		}
+	}
+
+	public class EventoEditar implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			frmVejaMelhorO.dispose();
+			TelaEditarProduto t = new TelaEditarProduto(p, v);
+			t.setVisible(true);
+		}
+	}
+
+	public class EventoVender implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			int linha_selecionada = table.getSelectedRow();
+			String nomeComp = null;
+			Comprador comp = null;
+
+			if (table.getSelectedRow() < 0) {
+				JOptionPane.showMessageDialog(null,
+						"Nenhum produto selecionado!");
+			} else {
+				nomeComp = (String) table.getValueAt(linha_selecionada, 0);
+				try {
+					comp = f.retornarComprador(nomeComp);
+				} catch (IllegalArgumentException e1) {
+					JOptionPane.showMessageDialog(null,
+							"Argumento inválido");
+				} catch (NaoEncontradoCompradorException e1) {
+					JOptionPane.showMessageDialog(null,
+							e1.getMessage());
+				}
+				frmVejaMelhorO.dispose();
+				TelaVendedorConfirmarVenda t = new TelaVendedorConfirmarVenda(v, comp, p);
+				t.setVisible(true);
+			}
+		}
+	}
+}
+

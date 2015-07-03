@@ -2,6 +2,8 @@ package br.ufrpe.gui.telas_exibir_info;
 
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,12 +15,9 @@ import br.ufrpe.gui.telas_editar.TelaEditarVendedor;
 import br.ufrpe.gui.telas_principais.TelaVendedor;
 import br.ufrpe.negocio.classes_basicas.Vendedor;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 public class TelaExibirInfoVendedor_Vendedor {
 	private JFrame frmConheaOVendedor;
-	Vendedor v;
+	private Vendedor v;
 
 	/**
 	 * Create the application.
@@ -70,13 +69,9 @@ public class TelaExibirInfoVendedor_Vendedor {
 		lblNomeDoVendedor.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		JButton btnVoltar = new JButton("Voltar");
-		btnVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				TelaExibirInfoVendedor_Vendedor.dispose();
-				TelaVendedor telaVendedor = new TelaVendedor(v);
-				telaVendedor.setVisible(true);
-			}
-		});
+		EventoVoltar e = new EventoVoltar();
+		btnVoltar.addActionListener(e);
+		
 		btnVoltar.setBounds(45, 345, 152, 23);
 		panel.add(btnVoltar);
 		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
@@ -100,13 +95,8 @@ public class TelaExibirInfoVendedor_Vendedor {
 		lblCidadeDoVendedor.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		JButton btnContinuoInteressado = new JButton("Editar informa\u00E7\u00F5es");
-		btnContinuoInteressado.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				TelaExibirInfoVendedor_Vendedor.dispose();
-				TelaEditarVendedor telaEditarVendedor = new TelaEditarVendedor(v);
-				telaEditarVendedor.setVisible(true);
-			}
-		});
+		EventoEditar e1 = new EventoEditar();
+		btnContinuoInteressado.addActionListener(e1);
 		btnContinuoInteressado.setFont(new Font("Gisha", Font.PLAIN, 13));
 		btnContinuoInteressado.setBounds(223, 345, 172, 23);
 		panel.add(btnContinuoInteressado);
@@ -144,6 +134,22 @@ public class TelaExibirInfoVendedor_Vendedor {
 	private void setVendedor(Vendedor v) {
 		this.v = v;
 		
+	}
+	
+	public class EventoVoltar implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			TelaExibirInfoVendedor_Vendedor.dispose();
+			TelaVendedor telaVendedor = new TelaVendedor(v);
+			telaVendedor.setVisible(true);
+		}
+	}
+	
+	public class EventoEditar implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			TelaExibirInfoVendedor_Vendedor.dispose();
+			TelaEditarVendedor telaEditarVendedor = new TelaEditarVendedor(v);
+			telaEditarVendedor.setVisible(true);
+		}
 	}
 
 }

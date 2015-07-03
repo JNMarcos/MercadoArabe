@@ -24,7 +24,8 @@ import br.ufrpe.negocio.exceptions_negocio.QuantidadeMaximaItensUltrapassadaExce
 
 import javax.swing.SpinnerNumberModel;
 
-public class TelaEditarProduto extends JFrame{
+public class TelaEditarProduto{
+	private JFrame frame;
 	private Vendedor v;
 	private Produto p;
 	private Fachada f;
@@ -32,62 +33,21 @@ public class TelaEditarProduto extends JFrame{
 		setProduto(p);
 		setVendedor(v);
 		f = Fachada.getInstance();
-		setResizable(false);
-		setSize(490,355);
-		setTitle("Atualiza\u00E7\u00E3o de informa\u00E7\u00F5es sobre o produto");
-		getContentPane().setBackground(SystemColor.activeCaption);
-		getContentPane().setLayout(null);
+		frame.setResizable(false);
+		frame.setSize(490,355);
+		frame.setTitle("Atualiza\u00E7\u00E3o de informa\u00E7\u00F5es sobre o produto");
+		frame.getContentPane().setBackground(SystemColor.activeCaption);
+		frame.getContentPane().setLayout(null);
 
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setBounds(0, 0, 486, 328);
-		getContentPane().add(panel);
+		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 
-		JButton btnConfirmar = new JButton("Confirmar");
-		btnConfirmar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try{
-					if (p.getItensNoEstoque() == p.getQuantidade()){
-						if (!textField.getText().equals("")){
-							p.setNome(textField.getText());
-						}
-
-						if(!textField_2.getText().equals("")){
-							p.setPreco(Double.parseDouble(textField_2.getText()));
-						}
-
-						if(!textArea.getText().equals("")){
-							p.setDescricao(textArea.getText());
-						}
-
-						if (!comboBox.getSelectedItem().equals("")){
-							p.setCategoria((String)comboBox.getSelectedItem());
-						}
-						if (!spinner.getValue().equals("")){
-							try {
-								p.setQuantidade((Integer) spinner.getValue());
-							} catch (QuantidadeMaximaItensUltrapassadaException e1) {
-								JOptionPane.showMessageDialog(null, e1.getMessage());
-							}
-						}
-						f.atualizarProduto(p, v);
-						JOptionPane.showMessageDialog(null, "Atualização efita com sucesso!");
-					} else {
-						JOptionPane.showMessageDialog(null, "Você já vendeu um produto, infelizmente não pode mais alterar mais nada quanto ao produto.");
-
-					}
-						
-					} catch (NullPointerException e1){
-						JOptionPane.showMessageDialog(null, "Argumento inválido");
-					} catch (IllegalArgumentException e1) {
-						JOptionPane.showMessageDialog(null, "Argumento inválido");
-					} catch (NaoEncontradoProdutoException e1) {
-						JOptionPane.showMessageDialog(null, e1.getMessage());
-					} 		
-
-
-				}
-			});
+		btnConfirmar = new JButton("Confirmar");
+		EventoEditar e1 = new EventoEditar();
+		btnConfirmar.addActionListener(e1);
+		
 		btnConfirmar.setBounds(261, 272, 95, 25);
 		panel.add(btnConfirmar);
 		btnConfirmar.setFont(new Font("Gisha", Font.PLAIN, 13));
@@ -98,18 +58,10 @@ public class TelaEditarProduto extends JFrame{
 		panel.add(comboBox);
 
 		JButton btnVoltar = new JButton("Voltar");
-		btnVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				this.dispose();
-				TelaVendedor telaVendedor = new TelaVendedor(v);
-				telaVendedor.setVisible(true);
-			}
-
-			private void dispose() {
-				// TODO Auto-generated method stub
-
-			}
-		});
+		EventoVoltar e = new EventoVoltar();
+		btnVoltar.addActionListener(e);
+		
+		
 		btnVoltar.setBounds(127, 272, 67, 25);
 		panel.add(btnVoltar);
 		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
@@ -180,6 +132,60 @@ public class TelaEditarProduto extends JFrame{
 		private void setProduto(Produto p) {
 			this.p = p;
 		}
+		
+		
+		public class EventoVoltar implements ActionListener{
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				TelaVendedor telaVendedor = new TelaVendedor(v);
+				telaVendedor.setVisible(true);
+			}
+		}
+		
+		public class EventoEditar implements ActionListener{
+			public void actionPerformed(ActionEvent e) {
+				try{
+					if (p.getItensNoEstoque() == p.getQuantidade()){
+						if (!textField.getText().equals("")){
+							p.setNome(textField.getText());
+						}
+
+						if(!textField_2.getText().equals("")){
+							p.setPreco(Double.parseDouble(textField_2.getText()));
+						}
+
+						if(!textArea.getText().equals("")){
+							p.setDescricao(textArea.getText());
+						}
+
+						if (!comboBox.getSelectedItem().equals("")){
+							p.setCategoria((String)comboBox.getSelectedItem());
+						}
+						if (!spinner.getValue().equals("")){
+							try {
+								p.setQuantidade((Integer) spinner.getValue());
+							} catch (QuantidadeMaximaItensUltrapassadaException e1) {
+								JOptionPane.showMessageDialog(null, e1.getMessage());
+							}
+						}
+						f.atualizarProduto(p, v);
+						JOptionPane.showMessageDialog(null, "Atualização efita com sucesso!");
+					} else {
+						JOptionPane.showMessageDialog(null, "Você já vendeu um produto, infelizmente não pode mais alterar mais nada quanto ao produto.");
+
+					}
+						
+					} catch (NullPointerException e1){
+						JOptionPane.showMessageDialog(null, "Argumento inválido");
+					} catch (IllegalArgumentException e1) {
+						JOptionPane.showMessageDialog(null, "Argumento inválido");
+					} catch (NaoEncontradoProdutoException e1) {
+						JOptionPane.showMessageDialog(null, e1.getMessage());
+					} 		
+
+
+				}
+		}
 
 		/**
 		 * 
@@ -188,6 +194,13 @@ public class TelaEditarProduto extends JFrame{
 		private JTextField textField;
 		private JTextArea textArea;
 		private JTextField textField_2;
+		private JButton btnConfirmar;
+		private JPanel panel;
 		private JSpinner spinner;
 		private JComboBox<String> comboBox;
+		
+		public void setVisible(boolean b) {
+			if (b == true) frame.setVisible(b);
+			else frame.setVisible(b);
+		}
 	}

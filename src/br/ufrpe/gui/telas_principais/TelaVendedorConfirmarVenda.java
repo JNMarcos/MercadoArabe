@@ -28,7 +28,7 @@ public class TelaVendedorConfirmarVenda {
 	private Vendedor v;
 	private Comprador c;
 	private Produto p;
-	Fachada fachada;
+	private Fachada fachada;
 	
 	/**
 	 * Create the application.
@@ -72,13 +72,8 @@ public class TelaVendedorConfirmarVenda {
 		btnConfirmar.addActionListener(evento);
 		
 		btnVoltar = new JButton("Voltar ");
-		btnVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				TelaVendedorConfirmarVenda.dispose();
-				TelaExibirInfoProduto_Vendedor TelaExibirInfoProduto_Vendedor = new TelaExibirInfoProduto_Vendedor(p, v);
-				TelaExibirInfoProduto_Vendedor.setVisible(true);
-			}
-		});
+		EventoVoltar e = new EventoVoltar();
+		btnVoltar.addActionListener(e);
 		btnVoltar.setBounds(182, 73, 71, 25);
 		panel.add(btnVoltar);
 		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
@@ -121,7 +116,14 @@ public class TelaVendedorConfirmarVenda {
 		}
 		
 	}
-
+	
+	public class EventoVoltar implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			TelaVendedorConfirmarVenda.dispose();
+			TelaExibirInfoProduto_Vendedor TelaExibirInfoProduto_Vendedor = new TelaExibirInfoProduto_Vendedor(p, v);
+			TelaExibirInfoProduto_Vendedor.setVisible(true);
+		}
+	}
 	protected static void dispose() {
 		// TODO Auto-generated method stub
 		

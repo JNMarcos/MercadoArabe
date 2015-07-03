@@ -105,9 +105,6 @@ public class TelaCadastroProduto{
 		comboBoxQuant.setMaximumRowCount(4);
 		comboBoxQuant.setFont(new Font("Gisha", Font.PLAIN, 13));
 		comboBoxQuant.setBounds(409, 64, 63, 20);
-		comboBoxQuant.addItem("1");
-		comboBoxQuant.addItem("2");
-		comboBoxQuant.addItem("3");
 
 		comboBoxCategoria = new JComboBox<String>();
 		comboBoxCategoria.setMaximumRowCount(14);
