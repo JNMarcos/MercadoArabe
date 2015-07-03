@@ -171,6 +171,21 @@ public class TelaCadastroProduto{
 		JButton btnContinuar = new JButton("Continuar");
 		btnContinuar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				//vai pra proxima aba se n houver nenhum espaço em braco
+				if(textFieldNome.getText().equals("") || preco.getText().equals("") || (comboBoxCategoria.getSelectedIndex() == 0 ||
+						comboBoxQuant.getSelectedIndex() == 0)) {
+					
+					
+					JOptionPane.showMessageDialog(null, "Preencha todos os campos para prosseguir!");
+				}
+				else {
+					p.setNome(textFieldNome.getText());
+					p.setPreco(Double.parseDouble(preco.getText()));
+					p.setCategoria((String) comboBoxCategoria.getSelectedItem());
+					conteiner.setSelectedIndex(1);
+				}
+					
 			}
 		});
 		btnContinuar.setFont(new Font("Gisha", Font.PLAIN, 13));
