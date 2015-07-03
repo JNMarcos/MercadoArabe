@@ -78,10 +78,7 @@ public class TelaComprador_Favoritos {
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setBounds(83, 69, 44, 17);
 		panel.add(label);
-		if(c.getProdFavoritos().isEmpty())
-			label.setText("00");
-		else
-			label.setText("" + c.getProdFavoritos());
+		label.setText("" + c.getQuantProdFavoritos());
 		label.setFont(new Font("Gisha", Font.BOLD, 13));
 		
 		JLabel lblProdutos = new JLabel("produto(s) favorito(s)");

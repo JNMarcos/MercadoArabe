@@ -7,8 +7,18 @@ import java.awt.SystemColor;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
+
+import br.ufrpe.gui.telas_exibir_info.TelaExibirInfoProduto_Vendedor;
+import br.ufrpe.negocio.Fachada;
+import br.ufrpe.negocio.classes_basicas.Comprador;
+import br.ufrpe.negocio.classes_basicas.Produto;
+import br.ufrpe.negocio.classes_basicas.Vendedor;
+import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoCompradorException;
+import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoProdutoException;
+import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoVendedorException;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -16,21 +26,27 @@ import java.awt.event.ActionEvent;
 public class TelaVendedorConfirmarVenda {
 	private JFrame frmConfirmarInteresseNo;
 	private JPanel panel;
-	private JSpinner spinner;
 	private JButton btnConfirmar;
 	private JButton btnVoltar;
-
+	private Vendedor v;
+	private Comprador c;
+	private Produto p;
+	Fachada fachada;
 	/**
 	 * Create the application.
 	 */
-	public TelaVendedorConfirmarVenda() {
-		initialize();
+	public TelaVendedorConfirmarVenda(Vendedor v, Comprador c, Produto p) {
+		initialize(v, c, p);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(Vendedor v, Comprador c, Produto p) {
+		setVendedor(v);
+		setComprador(c);
+		setProduto(p);
+		fachada = Fachada.getInstance();
 		frmConfirmarInteresseNo = new JFrame();
 		frmConfirmarInteresseNo.setResizable(false);
 		frmConfirmarInteresseNo.setTitle("Confirmar venda do produto");
@@ -44,7 +60,7 @@ public class TelaVendedorConfirmarVenda {
 		frmConfirmarInteresseNo.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblUsurio = new JLabel("Quantos itens desse produto voc\u00EA deseja vender ao comprador?");
+		JLabel lblUsurio = new JLabel("Voc\u00EA deseja confirmar a venda?");
 		lblUsurio.setBounds(26, 28, 382, 17);
 		panel.add(lblUsurio);
 		lblUsurio.setFont(new Font("Gisha", Font.PLAIN, 13));
@@ -58,20 +74,45 @@ public class TelaVendedorConfirmarVenda {
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaVendedorConfirmarVenda.dispose();
-				TelaVendedorConfirmarVenda TelaExibirInfoProduto_Vendedor = new TelaVendedorConfirmarVenda();
+				TelaExibirInfoProduto_Vendedor TelaExibirInfoProduto_Vendedor = new TelaExibirInfoProduto_Vendedor(p, v);
 				TelaExibirInfoProduto_Vendedor.setvisible(true);
 			}
 		});
 		btnVoltar.setBounds(182, 73, 71, 25);
 		panel.add(btnVoltar);
 		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
-		
-		spinner = new JSpinner();
-		spinner.setFont(new Font("Gisha", Font.PLAIN, 13));
-		spinner.setBounds(426, 26, 77, 20);
-		panel.add(spinner);
 	}
 
+	private void setProduto(Produto p) {
+		this.p = p;	
+	}
+
+	private void setComprador(Comprador c) {
+		this.c = c;			
+	}
+
+	private void setVendedor(Vendedor v) {
+		this.v = v;
+	}
+
+	public class EventoConfirmarInteresse implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			try {
+				fachada.venderProduto(p, v, c);
+			} catch (NaoEncontradoProdutoException e1) {
+				JOptionPane.showMessageDialog(null, e1.getMessage(), "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
+			} catch (NaoEncontradoVendedorException e1) {
+				JOptionPane.showMessageDialog(null, e1.getMessage(), "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
+			} catch (NaoEncontradoCompradorException e1) {
+				JOptionPane.showMessageDialog(null, e1.getMessage(), "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
+			}
+			frmConfirmarInteresseNo.dispose();
+		}
+		
+	}
+	
 	protected void setvisible(boolean b) {
 		// TODO Auto-generated method stub
 		

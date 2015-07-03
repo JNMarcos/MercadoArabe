@@ -143,6 +143,11 @@ public class TelaExibirInfoProduto_Vendedor {
 		panel.add(btnNewButton_1);
 	}
 
+	private void setVendedor(Vendedor v) {
+		this.v = v;
+		
+	}
+
 	private void setProduto(Produto p) {
 		this.p = p;
 	}

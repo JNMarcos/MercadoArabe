@@ -43,6 +43,7 @@ public class TelaComprador_Principal {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(Comprador c) {
+		setComprador(c);
 		frmMeuPerfil = new JFrame();
 		frmMeuPerfil.setResizable(false);
 		frmMeuPerfil.setTitle("Meu Perfil");
@@ -100,10 +101,7 @@ public class TelaComprador_Principal {
 		JLabel lblQtd = new JLabel("qtd");
 		lblQtd.setHorizontalAlignment(SwingConstants.CENTER);
 		lblQtd.setBounds(99, 101, 67, 17);
-		if(c.getProdAdquiridos() == null)
-			lblQtd.setText("00");
-		else
-			lblQtd.setText("" + c.getProdAdquiridos());
+		lblQtd.setText("" + c.getQuantProdAdquiridos());
 		lblQtd.setFont(new Font("Gisha", Font.BOLD, 13));
 		panel.add(lblQtd);
 		
@@ -120,10 +118,7 @@ public class TelaComprador_Principal {
 		JLabel label = new JLabel("qtd");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setBounds(242, 129, 48, 17);
-		if(c.getProdInteresses() == null)
-			label.setText("00");
-		else
-			label.setText("" + c.getProdInteresses());
+		label.setText("" + c.getQuantProdInteresses());
 		panel.add(label);
 		label.setFont(new Font("Gisha", Font.BOLD, 13));
 		

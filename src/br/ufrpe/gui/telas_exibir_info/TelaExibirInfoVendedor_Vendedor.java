@@ -73,8 +73,8 @@ public class TelaExibirInfoVendedor_Vendedor {
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaExibirInfoVendedor_Vendedor.dispose();
-				TelaVendedor telaVendedor = new TelaVendedor(null);
-				telaVendedor.setvisible(true);
+				TelaVendedor telaVendedor = new TelaVendedor(v);
+				telaVendedor.setVisible(true);
 			}
 		});
 		btnVoltar.setBounds(45, 345, 152, 23);
@@ -103,7 +103,7 @@ public class TelaExibirInfoVendedor_Vendedor {
 		btnContinuoInteressado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaExibirInfoVendedor_Vendedor.dispose();
-				TelaEditarVendedor telaEditarVendedor = new TelaEditarVendedor();
+				TelaEditarVendedor telaEditarVendedor = new TelaEditarVendedor(v);
 				telaEditarVendedor.setVisible(true);
 			}
 		});

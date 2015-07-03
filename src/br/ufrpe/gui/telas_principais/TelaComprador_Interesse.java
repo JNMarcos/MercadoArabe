@@ -78,7 +78,7 @@ public class TelaComprador_Interesse {
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setBounds(185, 69, 44, 17);
 		panel.add(label);
-		label.setText("" + c.getProdInteresses());
+		label.setText("" + c.getQuantProdInteresses());
 		label.setFont(new Font("Gisha", Font.BOLD, 13));
 
 		JLabel lblProdutos = new JLabel("produto(s)");

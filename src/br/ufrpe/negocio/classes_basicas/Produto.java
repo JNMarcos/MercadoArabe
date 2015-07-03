@@ -70,8 +70,8 @@ public class Produto implements Comparable<Produto>, Serializable{
 	public double getPreco() {
 		return preco;
 	}
-	public void setPreco(String string) {
-		this.preco = string;
+	public void setPreco(double preco) {
+		this.preco = preco;
 	}
 	public boolean isEstado() {
 		return estado;
@@ -107,6 +107,10 @@ public class Produto implements Comparable<Produto>, Serializable{
 	}
 	public void setCompradoresInteressados(List<Comprador> compradoresInteressados) {
 		this.compradoresInteressados = compradoresInteressados;
+	}
+	
+	public void adicionarInteressados (Comprador c){
+		this.compradoresInteressados.add(c);
 	}
 	@Override
 	public int hashCode() {
