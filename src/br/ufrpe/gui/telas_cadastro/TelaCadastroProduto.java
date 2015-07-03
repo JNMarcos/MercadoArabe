@@ -42,14 +42,12 @@ public class TelaCadastroProduto{
 	private JLabel lblQuantidade;
 	private JLabel lblPreco;
 	private JLabel lblDescricao;
-	private JLabel lblImagem;
 
 	private JTextField textFieldNome;
 	private JTextArea textDescricao;
 	private JComboBox<String> comboBoxCategoria;
 	private JComboBox<String> comboBoxQuant;
 	private JButton btnOk;
-	private JButton btnNewButton;
 	private JTextField preco;
 	private Vendedor v;
 	private Produto p;
@@ -86,14 +84,8 @@ public class TelaCadastroProduto{
 		painel1.setLayout(null);
 		painel2.setLayout(null);
 
-
-		lblImagem = new JLabel("Imagem");
-		lblImagem.setBounds(23, 10, 47, 17);
-		lblImagem.setFont(new Font("Gisha", Font.PLAIN, 13));
-		painel2.add(lblImagem);
-
 		lblDescricao = new JLabel("Descri\u00E7\u00E3o");
-		lblDescricao.setBounds(23, 38, 57, 17);
+		lblDescricao.setBounds(23, 11, 57, 17);
 		lblDescricao.setFont(new Font("Gisha", Font.PLAIN, 13));
 		painel2.add(lblDescricao);
 
@@ -168,7 +160,7 @@ public class TelaCadastroProduto{
 
 		textDescricao = new JTextArea("");
 		textDescricao.setFont(new Font("Gisha", Font.PLAIN, 14));
-		textDescricao.setBounds(23, 66, 353, 106);
+		textDescricao.setBounds(23, 33, 353, 139);
 		lblQuantidade.setFont(new Font("Gisha", Font.PLAIN, 13));
 		painel2.add(textDescricao);
 
@@ -201,16 +193,11 @@ public class TelaCadastroProduto{
 
 		btnOk = new JButton("Cadastrar");
 		btnOk.setFont(new Font("Gisha", Font.PLAIN, 13));
-		btnOk.setBounds(386, 110, 89, 23);
+		btnOk.setBounds(386, 84, 89, 23);
 		painel2.add(btnOk);
 		
 		EventoCadastrarProduto btnCadastrarProduto = new EventoCadastrarProduto();
 		btnOk.addActionListener(btnCadastrarProduto);
-
-		btnNewButton = new JButton("Selecionar");
-		btnNewButton.setFont(new Font("Gisha", Font.PLAIN, 13));
-		btnNewButton.setBounds(80, 8, 126, 23);
-		painel2.add(btnNewButton);
 		conteiner.setTitleAt(1, "Descri\u00E7\u00E3o");
 		frame.getContentPane().add(conteiner);
 

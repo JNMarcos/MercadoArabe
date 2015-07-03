@@ -14,7 +14,6 @@ import javax.swing.JSpinner;
 public class TelaCompradorConfirmarInteresse {
 	private JFrame frmConfirmarInteresseNo;
 	private JPanel panel;
-	private JSpinner spinner;
 	private JButton btnConfirmar;
 	private JButton btnVoltar;
 
@@ -42,7 +41,7 @@ public class TelaCompradorConfirmarInteresse {
 		frmConfirmarInteresseNo.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblUsurio = new JLabel("Quantos itens voc\u00EA deseja desse produto?");
+		JLabel lblUsurio = new JLabel("Voc\u00EA est\u00E1 interessado pelo produto?");
 		lblUsurio.setBounds(26, 28, 339, 17);
 		panel.add(lblUsurio);
 		lblUsurio.setFont(new Font("Gisha", Font.PLAIN, 13));
@@ -56,10 +55,5 @@ public class TelaCompradorConfirmarInteresse {
 		btnVoltar.setBounds(131, 73, 71, 25);
 		panel.add(btnVoltar);
 		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
-		
-		spinner = new JSpinner();
-		spinner.setFont(new Font("Gisha", Font.PLAIN, 13));
-		spinner.setBounds(324, 27, 77, 20);
-		panel.add(spinner);
 	}
 }

@@ -115,9 +115,16 @@ public class TelaEditarVendedor extends JFrame{
 		bairro.setFont(new Font("Gisha", Font.PLAIN, 13));
 		bairro.setColumns(10);
 
-		JComboBox comboBox = new JComboBox();
+		JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setFont(new Font("Gisha", Font.PLAIN, 13));
 		comboBox.setBounds(437, 116, 79, 20);
+		panel.add(comboBox);
+		
+		String[] arrayUF = {"", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", 
+				"MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", 
+				"RS", "RO", "RR", "SC", "SP", "SE", "TO"};
+		for(int i = 0; i < 28; i++)
+			comboBox.addItem(arrayUF[i]);
 		panel.add(comboBox);
 
 		JButton btnVoltar = new JButton("Voltar");

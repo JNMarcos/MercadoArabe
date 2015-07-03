@@ -49,7 +49,7 @@ public class TelaEditarProduto extends JFrame{
 					}
 					
 					if(!textField_2.getText().equals("")){
-						p.setPreco(textField_2.getText());
+						p.setPreco(Double.parseDouble(textField_2.getText()));
 					}
 					
 					if(!textArea.getText().equals("")){
