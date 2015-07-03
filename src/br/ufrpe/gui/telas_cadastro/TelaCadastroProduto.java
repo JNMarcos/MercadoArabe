@@ -185,7 +185,7 @@ public class TelaCadastroProduto{
 			public void actionPerformed(ActionEvent e) {
 				TelaCadastroProduto.dispose();
 				TelaVendedor telaVendedor = new TelaVendedor(null);
-				telaVendedor.setvisible(true);
+				telaVendedor.setVisible(true);
 			}
 		});
 		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));

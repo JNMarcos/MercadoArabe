@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
+import br.ufrpe.gui.telas_principais.TelaComprador_Principal;
 import br.ufrpe.negocio.Fachada;
 import br.ufrpe.negocio.classes_basicas.Comprador;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoCompradorException;
@@ -76,7 +77,14 @@ public class TelaEditarComprador extends JFrame{
 		
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
+				this.dispose();
+				TelaComprador_Principal telaComprador_Principal = new TelaComprador_Principal(c);
+				telaComprador_Principal.setVisible(true);
+			}
+
+			private void dispose() {
+				// TODO Auto-generated method stub
 				
 			}
 		});

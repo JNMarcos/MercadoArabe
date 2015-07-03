@@ -1,19 +1,27 @@
 package br.ufrpe.gui.telas_editar;
 
-import javax.swing.JFrame;
-import java.awt.SystemColor;
-import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JTextField;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JSpinner;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+import br.ufrpe.gui.telas_principais.TelaVendedor;
+import br.ufrpe.negocio.classes_basicas.Vendedor;
 
 public class TelaEditarProduto extends JFrame{
+	Vendedor v;
 	public TelaEditarProduto() {
 		setResizable(false);
+		setSize(490,355);
 		setTitle("Atualiza\u00E7\u00E3o de informa\u00E7\u00F5es sobre o produto");
 		getContentPane().setBackground(SystemColor.activeCaption);
 		getContentPane().setLayout(null);
@@ -34,6 +42,18 @@ public class TelaEditarProduto extends JFrame{
 		panel.add(comboBox);
 		
 		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				this.dispose();
+				TelaVendedor telaVendedor = new TelaVendedor(v);
+				telaVendedor.setVisible(true);
+			}
+
+			private void dispose() {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		btnVoltar.setBounds(127, 272, 67, 25);
 		panel.add(btnVoltar);
 		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
