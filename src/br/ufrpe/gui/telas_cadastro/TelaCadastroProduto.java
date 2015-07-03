@@ -238,7 +238,8 @@ public class TelaCadastroProduto{
 				JOptionPane.showMessageDialog(null, "O campo 'Preço' se encontra vazio! ", "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
 
 			} else if (textDescricao.equals("")) {
-				
+				JOptionPane.showMessageDialog(null, "O campo 'Descrição' se encontra vazio! ", "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
+
 			}else{
 				p.setCategoria((String) comboBoxCategoria.getSelectedItem());
 				p.setCompradoresInteressados(null);

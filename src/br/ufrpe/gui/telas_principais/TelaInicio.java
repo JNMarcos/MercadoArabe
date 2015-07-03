@@ -45,7 +45,6 @@ public class TelaInicio {
 					TelaInicio window = new TelaInicio();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
 				}
 			}
 		});

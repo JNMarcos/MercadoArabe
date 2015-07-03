@@ -64,8 +64,8 @@ public class TelaComprador_Favoritos {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				TelaComprador_Favoritos.dispose();
-				TelaComprador_Favoritos TelaComprador_Favoritos = new TelaComprador_Favoritos(c);
-				TelaComprador_Favoritos.setVisible(true);
+				TelaComprador_Principal TelaComprador_Principal = new TelaComprador_Principal(c);
+				TelaComprador_Principal.setVisible(true);
 			}
 		});
 		btnNewButton.setFont(new Font("Gisha", Font.PLAIN, 13));
@@ -180,6 +180,9 @@ public class TelaComprador_Favoritos {
 
 					}
                      fachada.removerDosFavoritos(c, prod);
+                     modelo.removeRow(linha_selecionada);
+                     //se o que tiver acima não funciona tentar isso
+                     //carregarTabela(modelo, c.getFavoritos());
                      frmMeuPerfil.dispose();
                      TelaComprador_Principal t = new TelaComprador_Principal(c);
                      t.setVisible(true);
@@ -200,7 +203,8 @@ public class TelaComprador_Favoritos {
 							p.getNome(),
 							p.getCategoria(),
 							p.getItensNoEstoque(),
-							p.getPreco(), p.getVendedor().getNomeUsuario()});
+							p.getPreco(), 
+							p.getVendedor().getNomeUsuario()});
 				}
 			}
 		}

@@ -1,6 +1,5 @@
 package br.ufrpe.gui.telas_principais;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
@@ -69,6 +68,9 @@ public class TelaVendedorConfirmarVenda {
 		panel.add(btnConfirmar);
 		btnConfirmar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
+		EventoConfirmarVenda evento = new EventoConfirmarVenda();
+		btnConfirmar.addActionListener(evento);
+		
 		btnVoltar = new JButton("Voltar ");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -94,7 +96,7 @@ public class TelaVendedorConfirmarVenda {
 		this.v = v;
 	}
 
-	public class EventoConfirmarInteresse implements ActionListener{
+	public class EventoConfirmarVenda implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -106,20 +108,30 @@ public class TelaVendedorConfirmarVenda {
 				JOptionPane.showMessageDialog(null, e1.getMessage(), "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
 			} catch (NaoEncontradoCompradorException e1) {
 				JOptionPane.showMessageDialog(null, e1.getMessage(), "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
+			} catch (IllegalArgumentException e1){
+				JOptionPane.showMessageDialog(null, "Não se pode realizar a venda!", "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
+
 			}
+			JOptionPane.showMessageDialog(null, "Venda feita com sucesso!");
 			frmConfirmarInteresseNo.dispose();
+			TelaExibirInfoProduto_Vendedor TelaExibirInfoProduto_Vendedor = new TelaExibirInfoProduto_Vendedor(p, v);
+			TelaExibirInfoProduto_Vendedor.setVisible(true);
+			
+			
 		}
-		
-	}
-	
-	protected void setvisible(boolean b) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	protected static void dispose() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void setVisible(boolean b) {
+		if(b == true)
+			frmConfirmarInteresseNo.setVisible(b);
+		else
+			frmConfirmarInteresseNo.setVisible(b);	
 	}
 
 }

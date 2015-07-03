@@ -124,13 +124,18 @@ public class ControladorProduto {
 
 	public void venderProduto(Produto produto, Vendedor vendedor, Comprador comprador) throws NaoEncontradoProdutoException,
 	NaoEncontradoVendedorException, NaoEncontradoCompradorException, IllegalArgumentException {
-		if (produto != null && comprador != null && vendedor != null){// todos devem existir senão não há transação
-			produto.decrementarItensNoEstoque();
-			repositorioComprador.adicionarAosAdquiridos(comprador, produto);
-			vendedor.getXp().adicionarPontosPorVender(produto); 
-			if (produto.getItensNoEstoque() == 0){
-				produto.setEstado(true);//é considerado vendido (não aparece nas buscas) e não pode mais ser alterado. veja método setEstado
-			}
+		if (produto != null && comprador != null && vendedor != null){
+			// todos devem existir senão não há transação
+			if (produto.getItensNoEstoque() != 0){
+				produto.decrementarItensNoEstoque();
+				repositorioComprador.adicionarAosAdquiridos(comprador, produto);
+				repositorioComprador.removerDosInteresses(comprador, produto);
+				produto.removerInteressado(comprador);
+				vendedor.getXp().adicionarPontosPorVender(produto); 
+				if (produto.getItensNoEstoque() == 0){
+					produto.setEstado(true);//é considerado vendido (não aparece nas buscas) e não pode mais ser alterado. veja método setEstado
+				} 
+			} else throw new IllegalArgumentException();
 		} else {
 			throw new IllegalArgumentException();
 		}
@@ -138,5 +143,9 @@ public class ControladorProduto {
 		//decrementa o n° de itens, atualiza pts do vendedor e muda estado do produto p/ vendido(true) se todos os itens do produto for vendido
 
 
+	}
+
+	public List<Produto> retornarProdutosDoVendedor(Vendedor v){
+		return repositorio.retornarProdutosDoVendedor(v);
 	}
 }

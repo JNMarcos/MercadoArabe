@@ -10,15 +10,18 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
+import br.ufrpe.gui.telas_exibir_info.TelaExibirInfoProduto_Vendedor;
 import br.ufrpe.negocio.Fachada;
 import br.ufrpe.negocio.classes_basicas.Produto;
 import br.ufrpe.negocio.classes_basicas.Vendedor;
+import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoProdutoException;
 
 public class TelaVendedor {
 
@@ -64,15 +67,15 @@ public class TelaVendedor {
 		
 		table = new JTable();
 		table.setFont(new Font("Gisha", Font.PLAIN, 13));
-		table.setCellSelectionEnabled(true);
 		
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		JScrollPane barraRolagem = new JScrollPane(table);
-		barraRolagem.setBounds(20, 131, 630, 160);
+		barraRolagem.setBounds(34, 230, 630, 160);
 		panel.add(barraRolagem);
 		
-		carregarTabela( modelo, v.);
+		List<Produto> produtos = fachada.retornarProdutosDoVendedor(v);
+		carregarTabela(modelo, produtos);
 		
 		JLabel lblPerfil = new JLabel("PERFIL");
 		lblPerfil.setBounds(14, 33, 114, 29);
@@ -179,10 +182,31 @@ public class TelaVendedor {
 	
 	private class EventoBotaoVer implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
-			
+			int linha_selecionada = table.getSelectedRow();
+            String nomeProd = null;
+            Produto prod = null;
+
+            if (table.getSelectedRow() < 0) {
+                    JOptionPane.showMessageDialog(null,
+                                    "Nenhum produto selecionado!");
+            } else {
+                    nomeProd = (String) table.getValueAt(linha_selecionada, 0);
+                    try {
+						prod = fachada.retornarProduto(nomeProd, v, null);
+					} catch (IllegalArgumentException | NullPointerException e1) {
+						JOptionPane.showMessageDialog(null, "Argumento inválido", "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
+
+					} catch (NaoEncontradoProdutoException e1) {
+						JOptionPane.showMessageDialog(null, e1.getMessage(), "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
+
+					}
+                    
+                    frmMeuPerfil.dispose();
+                    TelaExibirInfoProduto_Vendedor t = new TelaExibirInfoProduto_Vendedor(prod, v);
+                    t.setVisible(true);
 		}
 	}
-	
+	}
 	private class EventoBotaoSair implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 			frmMeuPerfil.dispose();
@@ -202,8 +226,8 @@ public class TelaVendedor {
 					modelo.addRow(new Object[] {
 							p.getNome(),
 							p.getCategoria(),
-							p.getItensNoEstoque(),
-							p.getPreco(), p.getVendedor().getNomeUsuario()});
+							p.getItensNoEstoque(), 
+							p.getPreco()});
 				}
 			}
 		}

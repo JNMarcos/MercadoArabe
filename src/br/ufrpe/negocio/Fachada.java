@@ -74,6 +74,9 @@ public class Fachada {
 		return controladorProduto.organizarProdutos(produtosASeremOrganizados);
 	}
 
+	public List<Produto> retornarProdutosDoVendedor(Vendedor v){
+		return controladorProduto.retornarProdutosDoVendedor(v);
+	}
 	//VENDEDOR
 	public void cadastrarVendedor(Vendedor vendedor) throws CpfJaCadastradoException, NomeUsuarioJaCadastradoException, NomeUsuarioForaPadroesException, SenhaForaPadroesException {
 		controladorVendedor.cadastrarVendedor(vendedor);
@@ -163,5 +166,10 @@ public class Fachada {
 	
 	public void removerDosInteresses(Comprador c, Produto p){
 		controladorComprador.removerDosInteresses(c, p);
+	}
+
+	public void retornarProdutosVendedor() {
+		// TODO Auto-generated method stub
+		
 	}
 }

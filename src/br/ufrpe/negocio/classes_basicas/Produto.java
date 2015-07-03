@@ -112,6 +112,10 @@ public class Produto implements Comparable<Produto>, Serializable{
 	public void adicionarInteressados (Comprador c){
 		this.compradoresInteressados.add(c);
 	}
+	
+	public void removerInteressado (Comprador c){
+		this.compradoresInteressados.remove(c);
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -67,7 +67,7 @@ public class TelaPesquisarProdutos extends JFrame {
 		setResizable(false);
 		setComprador(c);
 		setTitle("Pesquisa de Produtos");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 623, 610);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -177,13 +177,12 @@ public class TelaPesquisarProdutos extends JFrame {
 
 		table = new JTable(modelo);
 		table.setFont(new Font("Gisha", Font.PLAIN, 13));
-		table.setBounds(40, 179, 529, 304);
 		carregarTabela(modelo, null);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		JScrollPane scrollPane = new JScrollPane();
+		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(30, 169, 539, 330);
 		panel.add(scrollPane);
-		scrollPane.setViewportView(table);
+
 
 		lblDe = new JLabel("De");
 		lblDe.setFont(new Font("Gisha", Font.PLAIN, 13));
@@ -212,6 +211,15 @@ public class TelaPesquisarProdutos extends JFrame {
 	public void setComprador(Comprador c) {
 		this.c = c;
 	}
+	
+	public void setVisible(boolean b) {
+		if(b == true)
+			setVisible(b);
+		else
+			setVisible(b);
+	}
+	
+	
 	private class EventoBotaoPesquisar implements ActionListener{
 		public void actionPerformed(ActionEvent evento) {
 			List<Produto> produtos = new ArrayList<>();
@@ -229,7 +237,9 @@ public class TelaPesquisarProdutos extends JFrame {
 				produtos = fachada.organizarProdutos(produtos);
 				carregarTabela(modelo, produtos);
 			} catch (NaoEncontradoProdutoException e) {
-				JOptionPane.showMessageDialog(null, "Não encontrado nenhum produto com esses atributos! Tente com outras palavras-chave.");
+				JOptionPane.showMessageDialog(null, e.getMessage());
+			} catch (NullPointerException | IllegalArgumentException e){
+				JOptionPane.showMessageDialog(null, "Argumento inválido");
 			}
 
 		}
@@ -299,23 +309,24 @@ public class TelaPesquisarProdutos extends JFrame {
 					v = fachada.retornarVendedor(nomeVendedor);
 				} catch (NaoEncontradoVendedorException e1) {
 					JOptionPane.showMessageDialog(null,
-							"Nenhum vendedor encontrado!");
+							e1.getMessage());
 				}
 				try {
 					p = fachada.retornarProduto(nomeProduto, v, null);
 				} catch (NaoEncontradoProdutoException e) {
 					JOptionPane.showMessageDialog(null,
-							"Nenhum produto encontrado, sorry!");
+							e.getMessage());
 				}
 				Produto prod = null;
 				try {
 					prod = fachada.retornarProduto(p.getNome(), v, null);
 				} catch (NaoEncontradoProdutoException e) {
 					JOptionPane.showMessageDialog(null,
-							"Nenhum produto encontrado!");
+							e.getMessage());
 				}
+				dispose();
 				telaExibirProduto = new TelaExibirInfoProduto_Comprador(prod);
-				
+				telaExibirProduto.setVisible(true);
 			}
 		}
 	}

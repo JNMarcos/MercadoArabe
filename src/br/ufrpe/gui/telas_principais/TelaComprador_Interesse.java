@@ -164,7 +164,7 @@ public class TelaComprador_Interesse {
 					}
                      try {
 						prod = fachada.retornarProduto(nomeProd, vend, null);
-					} catch (IllegalArgumentException e1) {
+					} catch (IllegalArgumentException | NullPointerException e1) {
 						JOptionPane.showMessageDialog(null, "Argumento inválido", "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
 
 					} catch (NaoEncontradoProdutoException e1) {
@@ -173,6 +173,9 @@ public class TelaComprador_Interesse {
 					}
                      fachada.removerDosInteresses(c, prod);
                      prod.getCompradoresInteressados().remove(c);
+                     modelo.removeRow(linha_selecionada);
+                     //se o que tiver acima não funciona tentar isso
+                     //carregarTabela(modelo, c.getProdutosInteressantes());
                      frmMeuPerfil.dispose();
                      TelaComprador_Principal t = new TelaComprador_Principal(c);
                      t.setVisible(true);
@@ -201,7 +204,8 @@ public class TelaComprador_Interesse {
 							p.getNome(),
 							p.getCategoria(),
 							p.getItensNoEstoque(),
-							p.getPreco(), p.getVendedor().getNomeUsuario()});
+							p.getPreco(), 
+							p.getVendedor().getNomeUsuario()});
 				}
 			}
 		}
