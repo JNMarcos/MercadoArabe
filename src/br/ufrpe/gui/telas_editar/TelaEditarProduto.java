@@ -25,7 +25,10 @@ public class TelaEditarProduto extends JFrame{
 	Vendedor v;
 	Produto p;
 	Fachada f;
-	public TelaEditarProduto() {
+	public TelaEditarProduto(Produto p) {
+		setProduto(p);
+		setVendedor(v);
+		f = Fachada.getInstance();
 		setResizable(false);
 		setSize(490,355);
 		setTitle("Atualiza\u00E7\u00E3o de informa\u00E7\u00F5es sobre o produto");
@@ -163,6 +166,14 @@ public class TelaEditarProduto extends JFrame{
 		lblNewLabel_1.setFont(new Font("Gisha", Font.PLAIN, 13));
 		lblNewLabel_1.setBounds(297, 93, 82, 28);
 		panel.add(lblNewLabel_1);
+		
+	}
+	
+	private void setVendedor(Vendedor v) {
+		this.v = v;
+	}
+	private void setProduto(Produto p) {
+		this.p = p;
 	}
 
 	/**

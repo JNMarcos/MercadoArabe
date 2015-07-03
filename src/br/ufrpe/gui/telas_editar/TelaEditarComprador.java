@@ -22,6 +22,8 @@ public class TelaEditarComprador extends JFrame{
 		Fachada f;
 	public TelaEditarComprador() {
 		setTitle("Alterar senha");
+		setComprador(c);
+		f = Fachada.getInstance();
 		setResizable(false);
 		setSize(450,140);
 		getContentPane().setBackground(SystemColor.activeCaption);
@@ -45,7 +47,6 @@ public class TelaEditarComprador extends JFrame{
 		JButton btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				c = new Comprador();
 					try{
 						if (!passwordField.getPassword().equals("") && !passwordField_1.getPassword().equals("") 
 								&& passwordField.equals(passwordField_1)){
@@ -92,6 +93,10 @@ public class TelaEditarComprador extends JFrame{
 		btnVoltar.setBounds(346, 67, 89, 23);
 		panel.add(btnVoltar);
 		
+		}
+
+	void setComprador(Comprador c) {
+		this.c = c;
 		}
 
 	/**
