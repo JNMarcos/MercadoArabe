@@ -25,7 +25,7 @@ public class TelaEditarProduto extends JFrame{
 	Vendedor v;
 	Produto p;
 	Fachada f;
-	public TelaEditarProduto(Produto p) {
+	public TelaEditarProduto(Produto p, Vendedor v) {
 		setProduto(p);
 		setVendedor(v);
 		f = Fachada.getInstance();
@@ -43,12 +43,19 @@ public class TelaEditarProduto extends JFrame{
 		JButton btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				p = new Produto();
 				try{
 					if (!textField.getText().equals("")){
 						p.setNome(new String (textField.getText()));
 					}
-					f.atualizarProduto(p, v);
+					
+					if(!textField_2.getText().equals("")){
+						p.setPreco(textField_2.getText());
+					}
+					
+					if(!textArea.getText().equals("")){
+						p.setDescricao(textArea.getText());
+					}
+						f.atualizarProduto(p, v);
 				}catch (NullPointerException e1){
 					JOptionPane.showMessageDialog(null, "Argumento inválido");
 				} catch (IllegalArgumentException e1) {
@@ -57,31 +64,6 @@ public class TelaEditarProduto extends JFrame{
 					JOptionPane.showMessageDialog(null, e1.getMessage());
 				} 				
 			
-				try{
-					if(!textField_2.getText().equals("")){
-						p.setPreco(textField_2.getText());
-					}
-					f.atualizarProduto(p, v);
-				} catch(NullPointerException e1){
-					JOptionPane.showMessageDialog(null, "Argumento inválido");
-				} catch (IllegalArgumentException e1) {
-					JOptionPane.showMessageDialog(null, "Argumento inválido");
-				} catch (NaoEncontradoProdutoException e1) {
-					JOptionPane.showMessageDialog(null, e1.getMessage());
-				}
-				
-				try{
-					if(!textArea.getText().equals("")){
-						p.setDescricao(textArea.getText());
-					}
-					f.atualizarProduto(p, v);
-				} catch(NullPointerException e1){
-					JOptionPane.showMessageDialog(null, "Argumento inválido");
-				} catch (IllegalArgumentException e1) {
-					JOptionPane.showMessageDialog(null, "Argumento inválido");
-				} catch (NaoEncontradoProdutoException e1) {
-					JOptionPane.showMessageDialog(null, e1.getMessage());
-				} 
 			}
 		});
 		btnConfirmar.setBounds(261, 272, 95, 25);
