@@ -56,7 +56,7 @@ public class TelaEditarComprador extends JFrame{
 					} catch (IllegalArgumentException e) {
 						JOptionPane.showMessageDialog(null, "Argumento inválido");
 					} catch (NaoEncontradoCompradorException e) {
-						JOptionPane.showMessageDialog(null, "Argumento inválido");
+						JOptionPane.showMessageDialog(null, e.getMessage());
 					}
 			}
 		});
