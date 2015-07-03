@@ -3,13 +3,14 @@ package br.ufrpe.gui.telas_principais;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
 
 import br.ufrpe.gui.telas_exibir_info.TelaExibirInfoProduto_Vendedor;
 import br.ufrpe.negocio.Fachada;
@@ -20,9 +21,6 @@ import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoCompradorException;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoProdutoException;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoVendedorException;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 public class TelaVendedorConfirmarVenda {
 	private JFrame frmConfirmarInteresseNo;
 	private JPanel panel;
@@ -32,6 +30,7 @@ public class TelaVendedorConfirmarVenda {
 	private Comprador c;
 	private Produto p;
 	Fachada fachada;
+	
 	/**
 	 * Create the application.
 	 */
@@ -52,7 +51,7 @@ public class TelaVendedorConfirmarVenda {
 		frmConfirmarInteresseNo.setTitle("Confirmar venda do produto");
 		frmConfirmarInteresseNo.getContentPane().setBackground(SystemColor.activeCaption);
 		frmConfirmarInteresseNo.setBounds(100, 100, 538, 149);
-		frmConfirmarInteresseNo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmConfirmarInteresseNo.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmConfirmarInteresseNo.getContentPane().setLayout(null);
 		
 		panel = new JPanel();
@@ -75,7 +74,7 @@ public class TelaVendedorConfirmarVenda {
 			public void actionPerformed(ActionEvent e) {
 				TelaVendedorConfirmarVenda.dispose();
 				TelaExibirInfoProduto_Vendedor TelaExibirInfoProduto_Vendedor = new TelaExibirInfoProduto_Vendedor(p, v);
-				TelaExibirInfoProduto_Vendedor.setvisible(true);
+				TelaExibirInfoProduto_Vendedor.setVisible(true);
 			}
 		});
 		btnVoltar.setBounds(182, 73, 71, 25);

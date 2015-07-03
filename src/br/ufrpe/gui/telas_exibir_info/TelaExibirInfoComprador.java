@@ -2,6 +2,8 @@ package br.ufrpe.gui.telas_exibir_info;
 
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,15 +12,15 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import br.ufrpe.gui.telas_editar.TelaEditarComprador;
+import br.ufrpe.gui.telas_principais.TelaComprador_Principal;
 import br.ufrpe.negocio.classes_basicas.Comprador;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class TelaExibirInfoComprador {
 	Comprador c;
 	
 	private JFrame frmConheaOVendedor;
+	private TelaComprador_Principal telaCompradorPrincipal;
+			
 	public TelaExibirInfoComprador(Comprador c) {
 		initialize(c);
 	}
@@ -56,6 +58,9 @@ public class TelaExibirInfoComprador {
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frmConheaOVendedor.dispose();
+				telaCompradorPrincipal = new TelaComprador_Principal(c);
+				telaCompradorPrincipal.setVisible(true);
 			}
 		});
 		btnVoltar.setBounds(51, 141, 152, 23);

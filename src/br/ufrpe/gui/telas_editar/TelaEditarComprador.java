@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.UIManager;
 
 import br.ufrpe.gui.telas_principais.TelaComprador_Principal;
 import br.ufrpe.negocio.Fachada;
@@ -44,49 +45,44 @@ public class TelaEditarComprador extends JFrame{
 		panel.add(lblNovaSenha);
 		lblNovaSenha.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
+		passwordField = new JPasswordField();
+		passwordField.setFont(UIManager.getFont("PasswordField.font"));
+		passwordField.setBounds(134, 32, 200, 19);
+		panel.add(passwordField);
+		
+		passwordField_1 = new JPasswordField();
+		passwordField_1.setFont(UIManager.getFont("PasswordField.font"));
+		passwordField_1.setBounds(136, 66, 200, 20);
+		panel.add(passwordField_1);
+		
 		JButton btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-					try{
-						if (!passwordField.getPassword().equals("") && !passwordField_1.getPassword().equals("") 
-								&& passwordField.equals(passwordField_1)){
-							c.setSenha(new String (passwordField.getPassword()));
-						}
-						f.atualizarComprador(c);
-					} catch (NullPointerException e1){
-						JOptionPane.showMessageDialog(null, "Argumento inválido");
-					} catch (IllegalArgumentException e) {
-						JOptionPane.showMessageDialog(null, "Argumento inválido");
-					} catch (NaoEncontradoCompradorException e) {
-						JOptionPane.showMessageDialog(null, e.getMessage());
+				try{
+					if (!passwordField.getPassword().equals("") && !passwordField_1.getPassword().equals("") 
+							&& passwordField.equals(passwordField_1)){
+						c.setSenha(new String (passwordField.getPassword()));
 					}
+					f.atualizarComprador(c);
+					JOptionPane.showMessageDialog(null, "Senha alterada com sucesso!");
+					dispose();
+					TelaComprador_Principal telaComprador_Principal = new TelaComprador_Principal(c);
+					telaComprador_Principal.setVisible(true);
+				} catch (NaoEncontradoCompradorException e) {
+					JOptionPane.showMessageDialog(null, e.getMessage());
+				}
 			}
 		});
 		btnConfirmar.setBounds(344, 30, 91, 25);
 		panel.add(btnConfirmar);
 		btnConfirmar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
-		passwordField = new JPasswordField();
-		passwordField.setFont(new Font("Gisha", Font.PLAIN, 13));
-		passwordField.setBounds(134, 32, 200, 19);
-		panel.add(passwordField);
-		
-		passwordField_1 = new JPasswordField();
-		passwordField_1.setFont(new Font("Gisha", Font.PLAIN, 13));
-		passwordField_1.setBounds(136, 66, 200, 20);
-		panel.add(passwordField_1);
-		
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				this.dispose();
+				dispose();
 				TelaComprador_Principal telaComprador_Principal = new TelaComprador_Principal(c);
 				telaComprador_Principal.setVisible(true);
-			}
-
-			private void dispose() {
-				// TODO Auto-generated method stub
-				
 			}
 		});
 		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));

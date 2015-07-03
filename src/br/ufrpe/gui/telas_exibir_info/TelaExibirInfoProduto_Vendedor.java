@@ -18,7 +18,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class TelaExibirInfoProduto_Vendedor {
-	private static final long serialVersionUID = 1L;
 	private JFrame frmVejaMelhorO;
 	private JButton btnVoltar;
 	private JTable table;
@@ -56,7 +55,7 @@ public class TelaExibirInfoProduto_Vendedor {
 		btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaExibirInfoProduto_Vendedor.dispose();
+				frmVejaMelhorO.dispose();
 				TelaVendedor telaVendedor = new TelaVendedor(v);
 				telaVendedor.setVisible(true);
 			}
@@ -152,15 +151,10 @@ public class TelaExibirInfoProduto_Vendedor {
 		this.p = p;
 	}
 	
-
-	protected static void dispose() {
-		// TODO Auto-generated method stub
-		
+	public void setVisible(boolean b) {
+		if(b == true)
+			frmVejaMelhorO.setVisible(b);
+		else
+			frmVejaMelhorO.setVisible(b);
 	}
-
-	protected void setvisible(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

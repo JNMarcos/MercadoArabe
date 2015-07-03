@@ -38,7 +38,7 @@ public class TelaComprador_Interesse {
 		frmMeuPerfil.setTitle("Meu Perfil");
 		frmMeuPerfil.getContentPane().setBackground(SystemColor.activeCaption);
 		frmMeuPerfil.setBounds(100, 100, 696, 398);
-		frmMeuPerfil.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmMeuPerfil.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmMeuPerfil.getContentPane().setLayout(null);
 
 		panel = new JPanel();
@@ -49,7 +49,7 @@ public class TelaComprador_Interesse {
 		btnNewButton = new JButton("Voltar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaComprador_Interesse.dispose();
+				frmMeuPerfil.dispose();
 				TelaComprador_Principal telaComprador_Principal = new TelaComprador_Principal(null);
 				telaComprador_Principal.setVisible(true);
 			}
