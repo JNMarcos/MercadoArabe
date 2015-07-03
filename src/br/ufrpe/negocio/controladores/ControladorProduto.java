@@ -24,7 +24,7 @@ public class ControladorProduto {
 		this.repositorioComprador = RepositorioComprador.getInstancia();
 	}
 
-	public void cadastrarProduto(Produto produto, Vendedor vendedor) throws ProdutoJaCadastradoException {
+	public void cadastrarProduto(Produto produto, Vendedor vendedor) throws ProdutoJaCadastradoException, IllegalArgumentException {
 		boolean produtoJaExiste;
 		if (produto == null){
 			throw new IllegalArgumentException();
@@ -39,7 +39,7 @@ public class ControladorProduto {
 		}
 	}
 
-	public void removerProduto(Produto produto) throws NaoEncontradoProdutoException {
+	public void removerProduto(Produto produto) throws NaoEncontradoProdutoException, IllegalArgumentException {
 		if (produto != null){
 			int index = repositorio.procurarIndice(produto);
 			if (index != -1){
@@ -51,7 +51,7 @@ public class ControladorProduto {
 		}
 	}
 
-	public void atualizarProduto(Produto produto, Vendedor vendedor) throws NaoEncontradoProdutoException {
+	public void atualizarProduto(Produto produto, Vendedor vendedor) throws NaoEncontradoProdutoException, IllegalArgumentException {
 		Produto p;
 		int index;
 		if (produto != null && vendedor != null){
@@ -112,7 +112,7 @@ public class ControladorProduto {
 		return produtosParcialmenteRefinados;
 	}
 
-	public List<Produto> organizarProdutos (List<Produto> produtosASeremOrganizados) throws NaoEncontradoProdutoException{
+	public List<Produto> organizarProdutos (List<Produto> produtosASeremOrganizados) throws NaoEncontradoProdutoException, IllegalArgumentException{
 		List<Produto> retAux = null;
 		if (produtosASeremOrganizados != null){
 			retAux = repositorio.organizarProduto(produtosASeremOrganizados);
@@ -123,7 +123,7 @@ public class ControladorProduto {
 	}
 
 	public void venderProduto(Produto produto, Vendedor vendedor, Comprador comprador) throws NaoEncontradoProdutoException,
-	NaoEncontradoVendedorException, NaoEncontradoCompradorException {
+	NaoEncontradoVendedorException, NaoEncontradoCompradorException, IllegalArgumentException {
 		if (produto != null && comprador != null && vendedor != null){// todos devem existir senão não há transação
 			produto.decrementarItensNoEstoque();
 			repositorioComprador.adicionarAosAdquiridos(comprador, produto);

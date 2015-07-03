@@ -69,7 +69,7 @@ public class ControladorVendedor {
 		} 
 	}
 
-	public void removerVendedor(Vendedor vendedor) throws NaoEncontradoVendedorException {
+	public void removerVendedor(Vendedor vendedor) throws NaoEncontradoVendedorException, IllegalArgumentException {
 		List<Produto> produtosASeremRemovidos = null;
 		if (vendedor != null){
 			int index = repositorioVendedor.procurarIndice(vendedor);
@@ -155,11 +155,11 @@ public class ControladorVendedor {
 
 	}
 	
-	public Vendedor retornarVendedor(String nomeUsuario) throws NaoEncontradoVendedorException{
+	public Vendedor retornarVendedor(String nomeUsuario) throws NaoEncontradoVendedorException, IllegalArgumentException{
 		Vendedor vendedor = null;
 		if (!nomeUsuario.equals("")){
 			vendedor = repositorioVendedor.retornarVendedor(nomeUsuario);
-			if (vendedor.equals("")) throw new NaoEncontradoVendedorException();
+			if (vendedor == null) throw new NaoEncontradoVendedorException();
 		} else {
 			throw new IllegalArgumentException();
 		}

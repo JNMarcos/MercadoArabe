@@ -37,7 +37,7 @@ public class Fachada {
 		return instancia;
 	}
 	
-	public void cadastrarProduto(Produto produto, Vendedor vendedor) throws ProdutoJaCadastradoException {
+	public void cadastrarProduto(Produto produto, Vendedor vendedor) throws ProdutoJaCadastradoException, IllegalArgumentException {
 		controladorProduto.cadastrarProduto(produto, vendedor);
 	}
 
@@ -57,7 +57,7 @@ public class Fachada {
 		return controladorProduto.getProdutos();
 	}
 	
-	public Produto retornarProduto(String nomeProduto, Vendedor vendedor, List<Produto> produtos) throws NaoEncontradoProdutoException{
+	public Produto retornarProduto(String nomeProduto, Vendedor vendedor, List<Produto> produtos) throws NaoEncontradoProdutoException, IllegalArgumentException{
 		return controladorProduto.retornarProduto(nomeProduto, vendedor, produtos);
 	}
 
@@ -100,7 +100,7 @@ public class Fachada {
 		controladorVendedor.mesarioDataCadastroRemoverPontos(controladorVendedor.getVendedores());
 	}
 	
-	public Vendedor retornarVendedor(String nomeUsuario) throws NaoEncontradoVendedorException{
+	public Vendedor retornarVendedor(String nomeUsuario) throws NaoEncontradoVendedorException, IllegalArgumentException{
 		return controladorVendedor.retornarVendedor(nomeUsuario);
 	}
 	
@@ -116,11 +116,11 @@ public class Fachada {
 		controladorVendedor.atualizarVendedor(v);
 	}
 	//COMPRADOR
-	public void cadastrarComprador(Comprador comprador) throws NomeUsuarioJaCadastradoException, NomeUsuarioForaPadroesException, SenhaForaPadroesException{
+	public void cadastrarComprador(Comprador comprador) throws NomeUsuarioJaCadastradoException, NomeUsuarioForaPadroesException, SenhaForaPadroesException, IllegalArgumentException{
 		controladorComprador.cadastrarComprador(comprador);
 	}
 
-	public void removerComprador(Comprador comprador) throws NaoEncontradoCompradorException {
+	public void removerComprador(Comprador comprador) throws NaoEncontradoCompradorException, IllegalArgumentException {
 		controladorComprador.removerComprador(comprador);
 	}
 
@@ -132,6 +132,10 @@ public class Fachada {
 		controladorComprador.salvarComprador();
 	}
 
+	public Comprador retornarComprador(String nomeUsuario) throws NaoEncontradoCompradorException, IllegalArgumentException{
+		return controladorComprador.retornarComprador(nomeUsuario);
+	}
+	
 	public List<Comprador> retornarListaCompradores() {
 		return controladorComprador.getCompradores();
 	}
