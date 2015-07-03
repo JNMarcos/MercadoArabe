@@ -39,7 +39,7 @@ public class PessoaUtilidades {
 		boolean senhaOK = false;
 		boolean senhaMaiusculaOK = false;
 		boolean senhaCaractereEspecialOK = false;
-		if (!senha.isEmpty()){
+		if (!senha.equals("")){
 			if (senha.length() >= N_MINIMO_CARACTERES_SENHA && senha.length() <= N_MAXIMO_CARACTERES_SENHA){
 				for (int i = 0; i < senha.length(); i++){
 					if ((senha.charAt(i) >= 32 && senha.charAt(i) <= 64)
@@ -63,10 +63,10 @@ public class PessoaUtilidades {
 
 	public static boolean nomeUsuarioNosConformes(String nomeUsuario){
 		boolean nomeUsuarioOK = false;
-		if (!nomeUsuario.isEmpty()){
+		if (!nomeUsuario.equals("")){
 			if (nomeUsuario.length() >= N_MINIMO_CARACTERES_NOME_USUARIO && nomeUsuario.length() <= N_MAXIMO_CARACTERES_NOME_USUARIO){
 				nomeUsuarioOK = true;
-			}
+		}
 		}
 		return nomeUsuarioOK;
 	}

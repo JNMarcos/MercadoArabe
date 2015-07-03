@@ -102,27 +102,29 @@ public class RepositorioVendedor implements IRepositorioVendedor, Serializable{
 	
 	public boolean verificarNomeUsuarioJaExiste(String nomeUsuario){
 		boolean nomeUsuarioJaExiste = false;
-		if (!nomeUsuario.equals("") && !nomeUsuario.equals(" ")){
+		if (!nomeUsuario.equals("")){
 			for (int i = 0; i < vendedores.size(); i++){
 				if (vendedores.get(i).getNomeUsuario().equals(nomeUsuario)){
 					nomeUsuarioJaExiste = true;
 					break;
 				}
 			}
+		} else {
+			nomeUsuarioJaExiste = true;
 		}
 		return nomeUsuarioJaExiste;
 	}
 
 	public boolean verificarSenhaJaExiste(String senha){
 		boolean senhaJaExiste = false;
-		if (!senha.equals("") && !senha.equals(" ")){
+		if (!senha.equals("")){
 			for (int i = 0; i < vendedores.size(); i++){
 				if (vendedores.get(i).getSenha().equals(senha)){
 					senhaJaExiste = true;
 					break;
 				}
 			}
-		}
+		} else senhaJaExiste = true;
 		return senhaJaExiste;
 	}
 
