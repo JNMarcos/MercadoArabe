@@ -24,6 +24,9 @@ import javax.swing.text.MaskFormatter;
 import br.ufrpe.gui.telas_principais.TelaVendedor;
 import br.ufrpe.negocio.Fachada;
 import br.ufrpe.negocio.classes_basicas.Produto;
+import br.ufrpe.negocio.classes_basicas.Vendedor;
+import br.ufrpe.negocio.exceptions_negocio.ProdutoJaCadastradoException;
+import br.ufrpe.negocio.exceptions_negocio.QuantidadeMaximaItensUltrapassadaException;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -47,21 +50,23 @@ public class TelaCadastroProduto{
 	private JComboBox<String> comboBoxQuant;
 	private JButton btnOk;
 	private JButton btnNewButton;
-	private JTextField Preco;
+	private JTextField preco;
+	private Vendedor v;
 	private Produto p;
 	private Fachada fachada;
 
 	/**
 	 * Create the application.
 	 */
-	public TelaCadastroProduto() {
-		initialize();
+	public TelaCadastroProduto(Vendedor v) {
+		initialize(v);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(Vendedor v) {
+		setVendedor(v);
 		p = new Produto();
 		fachada = Fachada.getInstance();
 		frame = new JFrame("Cadastro de Produtos");
@@ -133,11 +138,11 @@ public class TelaCadastroProduto{
 		comboBoxCategoria.addItem("Brinquedos");
 		comboBoxCategoria.addItem("Beleza e Saúde");
 
-		Preco = new JTextField();
-		Preco.setFont(new Font("Gisha", Font.PLAIN, 13));
-		Preco.setBounds(62, 112, 105, 20);
-		painel1.add(Preco);
-		Preco.setColumns(10);
+		preco = new JTextField();
+		preco.setFont(new Font("Gisha", Font.PLAIN, 13));
+		preco.setBounds(62, 112, 105, 20);
+		painel1.add(preco);
+		preco.setColumns(10);
 
 		painel1.add(comboBoxCategoria);
 
@@ -185,7 +190,7 @@ public class TelaCadastroProduto{
 			public void actionPerformed(ActionEvent e) {
 				TelaCadastroProduto.dispose();
 				TelaVendedor telaVendedor = new TelaVendedor(null);
-				telaVendedor.setvisible(true);
+				telaVendedor.setVisible(true);
 			}
 		});
 		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
@@ -198,6 +203,9 @@ public class TelaCadastroProduto{
 		btnOk.setFont(new Font("Gisha", Font.PLAIN, 13));
 		btnOk.setBounds(386, 110, 89, 23);
 		painel2.add(btnOk);
+		
+		EventoCadastrarProduto btnCadastrarProduto = new EventoCadastrarProduto();
+		btnOk.addActionListener(btnCadastrarProduto);
 
 		btnNewButton = new JButton("Selecionar");
 		btnNewButton.setFont(new Font("Gisha", Font.PLAIN, 13));
@@ -207,6 +215,11 @@ public class TelaCadastroProduto{
 		frame.getContentPane().add(conteiner);
 
 
+	}
+
+	private void setVendedor(Vendedor v) {
+		this.v  = v;
+		
 	}
 
 	public class EventoCadastrarProduto implements ActionListener{
@@ -219,11 +232,31 @@ public class TelaCadastroProduto{
 
 			} else if (comboBoxQuant.getSelectedItem().equals("")){
 				JOptionPane.showMessageDialog(null, "O campo 'Quantidade' se encontra vazio! ", "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
-			} else if (Preco.equals("")){
+			} else if (preco.equals("")){
 				JOptionPane.showMessageDialog(null, "O campo 'Preço' se encontra vazio! ", "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
 
-			} else{
-				fachad
+			} else if (textDescricao.equals("")) {
+				
+			}else{
+				p.setCategoria((String) comboBoxCategoria.getSelectedItem());
+				p.setCompradoresInteressados(null);
+				p.setDescricao(textDescricao.getText());
+				p.setEstado(false);
+				int quantidadeItens = Integer.parseInt((String)comboBoxQuant.getSelectedItem());
+				try {
+					p.setQuantidade(quantidadeItens);
+				} catch (QuantidadeMaximaItensUltrapassadaException e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
+				}
+				p.setItensNoEstoque(quantidadeItens);
+				p.setPontos(0);
+				p.setPreco(Double.parseDouble(preco.getText()));
+				p.setVendedor(v);
+				try {
+					fachada.cadastrarProduto(p, v);
+				} catch (ProdutoJaCadastradoException e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		}
 

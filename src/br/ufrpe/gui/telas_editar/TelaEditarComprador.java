@@ -51,7 +51,7 @@ public class TelaEditarComprador extends JFrame{
 							c.setSenha(new String (passwordField.getPassword()));
 						}
 						f.atualizarComprador(c);
-					}catch (NullPointerException e1){
+					} catch (NullPointerException e1){
 						JOptionPane.showMessageDialog(null, "Argumento inválido");
 					} catch (IllegalArgumentException e) {
 						JOptionPane.showMessageDialog(null, "Argumento inválido");
