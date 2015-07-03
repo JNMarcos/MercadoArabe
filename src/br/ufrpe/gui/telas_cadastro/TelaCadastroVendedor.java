@@ -428,7 +428,7 @@ public class TelaCadastroVendedor {
 				if(textFieldNome.equals("")){
 					JOptionPane.showMessageDialog(null, "O campo 'Nome' se encontra vazio! ", "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
 
-				} else if(maskCpf.equals("")){
+				} else if(formattedTextFieldCpf.equals("")){
 					JOptionPane.showMessageDialog(null, "O campo 'CPF' se encontra vazio! ", "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
 
 				}  else if (comboBoxDia.getSelectedItem().equals("")){
@@ -449,7 +449,7 @@ public class TelaCadastroVendedor {
 				} else if (textFieldCidade.equals("")){
 					JOptionPane.showMessageDialog(null, "O campo 'Cidade' encontra vazio! ", "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
 
-				} else if (maskTelefone.equals("")){
+				} else if (formattedTextFieldTelefone.equals("")){
 					JOptionPane.showMessageDialog(null, "O campo 'Telefone' se encontra vazio! ", "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
 
 				} else if (textFieldEmail.equals("")){
