@@ -8,10 +8,17 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
+import br.ufrpe.negocio.Fachada;
+import br.ufrpe.negocio.classes_basicas.Comprador;
+import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoCompradorException;
+
 public class TelaEditarComprador extends JFrame{
+		Comprador c;
+		Fachada f;
 	public TelaEditarComprador() {
 		setTitle("Alterar senha");
 		setResizable(false);
@@ -35,6 +42,24 @@ public class TelaEditarComprador extends JFrame{
 		lblNovaSenha.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		JButton btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				c = new Comprador();
+					try{
+						if (!passwordField.getPassword().equals("") && !passwordField_1.getPassword().equals("") 
+								&& passwordField.equals(passwordField_1)){
+							c.setSenha(new String (passwordField.getPassword()));
+						}
+						f.atualizarComprador(c);
+					}catch (NullPointerException e1){
+						JOptionPane.showMessageDialog(null, "Argumento inválido");
+					} catch (IllegalArgumentException e) {
+						JOptionPane.showMessageDialog(null, "Argumento inválido");
+					} catch (NaoEncontradoCompradorException e) {
+						JOptionPane.showMessageDialog(null, "Argumento inválido");
+					}
+			}
+		});
 		btnConfirmar.setBounds(344, 30, 91, 25);
 		panel.add(btnConfirmar);
 		btnConfirmar.setFont(new Font("Gisha", Font.PLAIN, 13));
