@@ -15,10 +15,6 @@ import br.ufrpe.negocio.classes_basicas.Vendedor;
 import br.ufrpe.negocio.controladores.ControladorVendedor;
 
 public class RepositorioVendedor implements IRepositorioVendedor, Serializable{
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	List<Vendedor> vendedores = new ArrayList<Vendedor>();
 	public static ControladorVendedor cadastroVendedor = new ControladorVendedor();
@@ -80,54 +76,14 @@ public class RepositorioVendedor implements IRepositorioVendedor, Serializable{
 		}
 	}
 
+	@Override	
 	public List<Vendedor> getVendedores() {
 		if(this.vendedores!=null)
 			Collections.sort(vendedores);
 		return vendedores;
 	}
 
-
-	public boolean verificarCpfJaExiste(String cpfVendedor){
-		boolean cpfJaExiste = false;
-		if (!cpfVendedor.equals("") && !cpfVendedor.equals(" ")){
-				for (int i = 0; i < vendedores.size(); i++){
-					if (vendedores.get(i).getNomeUsuario().equals(cpfVendedor)){
-						cpfJaExiste = true;
-						break;
-					}
-				}
-			}
-		return cpfJaExiste;
-	}
-	
-	public boolean verificarNomeUsuarioJaExiste(String nomeUsuario){
-		boolean nomeUsuarioJaExiste = false;
-		if (!nomeUsuario.equals("")){
-			for (int i = 0; i < vendedores.size(); i++){
-				if (vendedores.get(i).getNomeUsuario().equals(nomeUsuario)){
-					nomeUsuarioJaExiste = true;
-					break;
-				}
-			}
-		} else {
-			nomeUsuarioJaExiste = true;
-		}
-		return nomeUsuarioJaExiste;
-	}
-
-	public boolean verificarSenhaJaExiste(String senha){
-		boolean senhaJaExiste = false;
-		if (!senha.equals("")){
-			for (int i = 0; i < vendedores.size(); i++){
-				if (vendedores.get(i).getSenha().equals(senha)){
-					senhaJaExiste = true;
-					break;
-				}
-			}
-		} else senhaJaExiste = true;
-		return senhaJaExiste;
-	}
-
+	@Override
 	public void cadastrarVendedor(Vendedor vendedor){
 		this.vendedores.add(vendedor);
 		salvarArquivo();
@@ -142,8 +98,9 @@ public class RepositorioVendedor implements IRepositorioVendedor, Serializable{
 		vendedores.remove(vendedor);
 		salvarArquivo();
 	}
+	
 	public int procurarIndice(Vendedor vendedor){
-		int retAux = -1;//índice que indica que não existe tal Vendedor
+		int retAux = -1;
 		for (int i = 0; i < vendedores.size(); i++){
 			if (vendedores.get(i).getNomeUsuario().equals(vendedor.getNomeUsuario())){
 				retAux = i;
@@ -152,7 +109,7 @@ public class RepositorioVendedor implements IRepositorioVendedor, Serializable{
 		}
 		return retAux;
 	}
-
+	
 	public Vendedor retornarVendedor(String nomeUsuario){
 		Vendedor vendedor = null;
 		for (int i = 0; i < vendedores.size(); i++){
@@ -163,7 +120,37 @@ public class RepositorioVendedor implements IRepositorioVendedor, Serializable{
 		}
 		return vendedor;
 	}
-
+	
+	@Override
+	public boolean verificarNomeUsuarioJaExiste(String nomeUsuario){
+		boolean nomeUsuarioJaExiste = false;
+		if (nomeUsuario != null){
+			if(vendedores.size() > 0) {
+				for (int i = 0; i < vendedores.size(); i++){
+					if (vendedores.get(i).getNomeUsuario().equals(nomeUsuario)) {
+						nomeUsuarioJaExiste = true;
+						break;
+					}
+				}
+			}
+		}
+		return nomeUsuarioJaExiste;
+	}
+	
+	public boolean verificarSenhaJaExiste(String senha){
+		boolean senhaJaExiste = false;
+		if (senha != null){
+			for (int i = 0; i < vendedores.size(); i++){
+				if (vendedores.get(i).getSenha().equals(senha)){
+					senhaJaExiste = true;
+					break;
+				}
+			}
+		}
+		return senhaJaExiste;
+	}
+	
+	@Override
 	public Vendedor verificarLogin(String nomeUsuario, String senha){
 		Vendedor vendedor = null;
 		for (int i = 0; i < vendedores.size(); i++){
@@ -174,6 +161,21 @@ public class RepositorioVendedor implements IRepositorioVendedor, Serializable{
 		}
 
 		return vendedor;
+	}
+	
+	public boolean verificarCpfJaExiste(String cpfVendedor){
+		boolean cpfJaExiste = false;
+		if (cpfVendedor != null){
+			if(vendedores.size() > 0) {
+				for (int i = 0; i < vendedores.size(); i++){
+					if (vendedores.get(i).getCpf().equals(cpfVendedor)){
+						cpfJaExiste = true;
+						break;
+					}
+				}
+			}
+		}
+		return cpfJaExiste;
 	}
 	
 	public void incrementarQtdProdutosAVenda(Vendedor v){

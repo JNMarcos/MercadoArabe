@@ -56,6 +56,7 @@ public class ControladorVendedor {
 			}
 			
 			PessoaUtilidades.nomeNosConformes(vendedor.getNome());
+			
 			//chamar método nomeUsuarioNosConforme e senha tb.		
 			cpfJaExiste = repositorioVendedor.verificarCpfJaExiste(vendedor.getCpf());
 			nomeUsuarioJaExiste = repositorioVendedor.verificarNomeUsuarioJaExiste(vendedor.getNomeUsuario());
@@ -69,7 +70,7 @@ public class ControladorVendedor {
 		} 
 	}
 
-	public void removerVendedor(Vendedor vendedor) throws NaoEncontradoVendedorException, IllegalArgumentException {
+	public void removerVendedor(Vendedor vendedor) throws NaoEncontradoVendedorException {
 		List<Produto> produtosASeremRemovidos = null;
 		if (vendedor != null){
 			int index = repositorioVendedor.procurarIndice(vendedor);
@@ -137,8 +138,10 @@ public class ControladorVendedor {
 		boolean retSenha = false;
 		boolean retNomeUsuario = false;
 
-		if (!senha.equals("")) retSenha = repositorioVendedor.verificarSenhaJaExiste(senha);
-		if (!nomeUsuario.equals("")) retNomeUsuario = repositorioVendedor.verificarNomeUsuarioJaExiste(nomeUsuario);
+		if (!senha.equals("")) 
+			retSenha = repositorioVendedor.verificarSenhaJaExiste(senha);
+		if (nomeUsuario != null) 
+			retNomeUsuario = repositorioVendedor.verificarNomeUsuarioJaExiste(nomeUsuario);
 
 		if (retSenha && retNomeUsuario){
 			vendedor = repositorioVendedor.verificarLogin(nomeUsuario, senha);
@@ -155,11 +158,11 @@ public class ControladorVendedor {
 
 	}
 	
-	public Vendedor retornarVendedor(String nomeUsuario) throws NaoEncontradoVendedorException, IllegalArgumentException{
+	public Vendedor retornarVendedor(String nomeUsuario) throws NaoEncontradoVendedorException{
 		Vendedor vendedor = null;
 		if (!nomeUsuario.equals("")){
 			vendedor = repositorioVendedor.retornarVendedor(nomeUsuario);
-			if (vendedor == null) throw new NaoEncontradoVendedorException();
+			if (vendedor.equals("")) throw new NaoEncontradoVendedorException();
 		} else {
 			throw new IllegalArgumentException();
 		}

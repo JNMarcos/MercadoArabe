@@ -346,30 +346,36 @@ public class TelaCadastroVendedor {
 		else
 			frame.setVisible(opcao);
 	}
+	
+	public int getAno() { //calcula ano
+		int ano = 1998;
+		for(int i=1; i<=84; i++) {
+			if(comboBoxAno.getSelectedIndex() == i) {
+				ano = ano - i;
+			}
+		}
+		return ano;
+	}
 
 	private class EventoBotaoAvancar_DadosPessoais implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 
-			vendedor.setNome(textFieldNome.getText());
-			vendedor.setCpf(formattedTextFieldCpf.getText());
-
-			//Converte o incice do comboBox em ano
-			int ano = 1998;
-			for(int i=1; i<=84; i++) {
-				if(comboBoxAno.getSelectedIndex() == i) {
-					ano = ano - i;
-				}
-			}
-
-			vendedor.setDataNascimento(comboBoxDia.getSelectedIndex(), comboBoxMes.getSelectedIndex(), ano);
+			
 
 			//vai pra proxima aba se n houver nenhum espaço em braco
-			if(vendedor.getNome().equals("") || vendedor.getCpf().equals("") || (comboBoxDia.getSelectedIndex() == 0 ||
+			if(textFieldNome.getText().equals("") || formattedTextFieldCpf.getText().equals("") || (comboBoxDia.getSelectedIndex() == 0 ||
 					comboBoxMes.getSelectedIndex() == 0 || comboBoxAno.getSelectedIndex() == 0)) {
+				
+				
 				JOptionPane.showMessageDialog(null, "Preencha todos os campos para prosseguir!");
 			}
-			else
+			else {
+				vendedor.setNome(textFieldNome.getText());
+				vendedor.setCpf(formattedTextFieldCpf.getText());
+				vendedor.setDataNascimento(comboBoxDia.getSelectedIndex(), comboBoxMes.getSelectedIndex(), getAno());
 				tabbedPane.setSelectedIndex(1); //vai para aba Contato 
+			}
+				
 		}
 	}
 
@@ -471,15 +477,7 @@ public class TelaCadastroVendedor {
 					String senhaConfirma = new String(passwordField_Confirmar.getPassword());
 
 					if(senha.equals(senhaConfirma)) {
-						vendedor.setNome(textFieldNome.getSelectedText());
-						vendedor.setNomeUsuario(textFieldNomeUsuario.getSelectedText());
-						//setContato já feito
-						
-						int dia = Integer.parseInt((String) comboBoxDia.getSelectedItem());
-						int mes = Integer.parseInt((String) comboBoxMes.getSelectedItem());
-						int ano = Integer.parseInt((String) comboBoxAno.getSelectedItem());
-						vendedor.setDataNascimento(dia, mes, ano);
-						
+						vendedor.setNomeUsuario(textFieldNomeUsuario.getText());
 						vendedor.setSenha(senha);
 						vendedor.setXp(xp);
 						vendedor.setDataCadastro();
@@ -524,9 +522,7 @@ public class TelaCadastroVendedor {
 			formattedTextFieldCpf.setText("");
 			passwordField.setText("");
 			passwordField_Confirmar.setText("");
-		} catch (IllegalArgumentException e){
-			JOptionPane.showMessageDialog(null, "Argumento inválido");
-		}	
+		} 	
 	}
 }
 
