@@ -63,6 +63,7 @@ public class TelaLoginComprador {
 		
 		textField_User = new JTextField();
 		textField_User.setBounds(139, 41, 182, 20);
+		textField_User.setFont(new Font("Gisha", Font.PLAIN, 13));
 		panel.add(textField_User);
 		textField_User.setColumns(10);
 		
