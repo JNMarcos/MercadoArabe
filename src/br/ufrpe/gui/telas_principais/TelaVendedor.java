@@ -5,21 +5,29 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 
+import br.ufrpe.negocio.Fachada;
+import br.ufrpe.negocio.classes_basicas.Produto;
 import br.ufrpe.negocio.classes_basicas.Vendedor;
 
 public class TelaVendedor {
 
 	private JFrame frmMeuPerfil;
+	private DefaultTableModel modelo = new DefaultTableModel();
 	private JTable table;
 	private TelaInicio telaInicio;
 	private Vendedor v;
+	Fachada fachada;
 
 	/**
 	 * Create the application.
@@ -33,6 +41,7 @@ public class TelaVendedor {
 	 */
 	private void initialize(Vendedor v) {
 		frmMeuPerfil = new JFrame();
+		fachada = Fachada.getInstance();
 		frmMeuPerfil.setResizable(false);
 		frmMeuPerfil.setTitle("Meu Perfil");
 		frmMeuPerfil.getContentPane().setBackground(SystemColor.activeCaption);
@@ -47,11 +56,23 @@ public class TelaVendedor {
 		frmMeuPerfil.getContentPane().add(panel);
 		panel.setLayout(null);
 		
+		modelo.setRowCount(0);
+		modelo.addColumn("Nome");
+		modelo.addColumn("Categoria");
+		modelo.addColumn("Quantidade");
+		modelo.addColumn("Preço");
+		
 		table = new JTable();
 		table.setFont(new Font("Gisha", Font.PLAIN, 13));
 		table.setCellSelectionEnabled(true);
-		table.setBounds(25, 216, 630, 160);
-		panel.add(table);
+		
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+		JScrollPane barraRolagem = new JScrollPane(table);
+		barraRolagem.setBounds(20, 131, 630, 160);
+		panel.add(barraRolagem);
+		
+		carregarTabela( modelo, v.);
 		
 		JLabel lblPerfil = new JLabel("PERFIL");
 		lblPerfil.setBounds(14, 33, 114, 29);
@@ -168,5 +189,24 @@ public class TelaVendedor {
 			telaInicio = new TelaInicio();
 			telaInicio.setVisible(true);
 		}
+	}
+	public static void carregarTabela(DefaultTableModel modelo, List<Produto> produtos){
+		modelo.setRowCount(0);
+
+		if (produtos != null) {
+
+			for (Produto p : produtos) {
+				if (p == null) {
+					break;
+				} else { 
+					modelo.addRow(new Object[] {
+							p.getNome(),
+							p.getCategoria(),
+							p.getItensNoEstoque(),
+							p.getPreco(), p.getVendedor().getNomeUsuario()});
+				}
+			}
+		}
+
 	}
 }
