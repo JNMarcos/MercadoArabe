@@ -22,9 +22,9 @@ import br.ufrpe.negocio.classes_basicas.Vendedor;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoProdutoException;
 
 public class TelaEditarProduto extends JFrame{
-	Vendedor v;
-	Produto p;
-	Fachada f;
+	private Vendedor v;
+	private Produto p;
+	private Fachada f;
 	public TelaEditarProduto(Produto p, Vendedor v) {
 		setProduto(p);
 		setVendedor(v);
@@ -70,7 +70,7 @@ public class TelaEditarProduto extends JFrame{
 		panel.add(btnConfirmar);
 		btnConfirmar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
-		JComboBox comboBox = new JComboBox();
+		JComboBox<String> comboBox = new JComboBox<>();
 		comboBox.setFont(new Font("Gisha", Font.PLAIN, 13));
 		comboBox.setBounds(95, 90, 172, 25);
 		panel.add(comboBox);
