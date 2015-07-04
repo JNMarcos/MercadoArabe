@@ -194,7 +194,7 @@ public class TelaVendedor {
 	}
 	private class Evento implements ActionListener{
 		public void actionPerformed(ActionEvent arg0) {
-			TelaVendedor.dispose();
+			frmMeuPerfil.dispose();
 			TelaCadastroProduto tela = new TelaCadastroProduto(v);
 			tela.setVisible(true);
 		}

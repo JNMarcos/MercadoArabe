@@ -372,7 +372,7 @@ public class TelaCadastroVendedor {
 			else {
 				vendedor.setNome(textFieldNome.getText());
 				vendedor.setCpf(formattedTextFieldCpf.getText());
-				vendedor.setDataNascimento(Integer.parseInt((String)comboBoxDia.getSelectedItem()), Integer.parseInt((String)comboBoxMes.getSelectedItem()), Integer.parseInt((String)comboBoxAno.getSelectedItem()));
+				vendedor.setDataNascimento(Integer.parseInt((String)comboBoxDia.getSelectedItem()), comboBoxMes.getSelectedIndex(), Integer.parseInt((String)comboBoxAno.getSelectedItem()));
 				tabbedPane.setSelectedIndex(1); //vai para aba Contato 
 			}
 				
