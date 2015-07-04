@@ -53,10 +53,28 @@ public class TelaEditarProduto{
 		panel.add(btnConfirmar);
 		btnConfirmar.setFont(new Font("Gisha", Font.PLAIN, 13));
 
-		comboBox = new JComboBox<>();
-		comboBox.setFont(new Font("Gisha", Font.PLAIN, 13));
-		comboBox.setBounds(95, 90, 172, 25);
-		panel.add(comboBox);
+		comboBoxCategoria = new JComboBox<>();
+		comboBoxCategoria.setFont(new Font("Gisha", Font.PLAIN, 13));
+		comboBoxCategoria.setBounds(95, 90, 172, 25);
+		panel.add(comboBoxCategoria);
+		
+		comboBoxCategoria.addItem(" ");
+		comboBoxCategoria.addItem("Auto");
+		comboBoxCategoria.addItem("Roupas");
+		comboBoxCategoria.addItem("Celulares");
+		comboBoxCategoria.addItem("Móveis");
+		comboBoxCategoria.addItem("Livros e Mídias Digitais");
+		comboBoxCategoria.addItem("Eletrodoméstico");
+		comboBoxCategoria.addItem("Eletroportáteis");
+		comboBoxCategoria.addItem("Eletroeletroônicos");
+		comboBoxCategoria.addItem("Info");
+		comboBoxCategoria.addItem("Games e Console");
+		comboBoxCategoria.addItem("Cama, Mesa e Banho");
+		comboBoxCategoria.addItem("Casa e Jardim");
+		comboBoxCategoria.addItem("TV e Áudio");
+		comboBoxCategoria.addItem("Instrumentos Musicais");
+		comboBoxCategoria.addItem("Brinquedos");
+		comboBoxCategoria.addItem("Beleza e Saúde");
 
 		JButton btnVoltar = new JButton("Voltar");
 		EventoVoltar e = new EventoVoltar();
@@ -159,8 +177,8 @@ public class TelaEditarProduto{
 							p.setDescricao(textArea.getText());
 						}
 
-						if (!comboBox.getSelectedItem().equals("")){
-							p.setCategoria((String)comboBox.getSelectedItem());
+						if (!comboBoxCategoria.getSelectedItem().equals("")){
+							p.setCategoria((String)comboBoxCategoria.getSelectedItem());
 						}
 						if (!spinner.getValue().equals("")){
 							try {
@@ -194,7 +212,7 @@ public class TelaEditarProduto{
 		private JButton btnConfirmar;
 		private JPanel panel;
 		private JSpinner spinner;
-		private JComboBox<String> comboBox;
+		private JComboBox<String> comboBoxCategoria;
 		
 		public void setVisible(boolean b) {
 			if (b == true) frame.setVisible(b);

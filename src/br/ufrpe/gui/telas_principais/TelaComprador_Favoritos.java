@@ -164,7 +164,7 @@ public class TelaComprador_Favoritos {
 
 					}
                      try {
-						prod = fachada.retornarProduto(nomeProd, vend, null);
+						prod = fachada.retornarProduto(nomeProd, vend, fachada.retornarListaProdutos());
 					} catch (IllegalArgumentException e1) {
 						JOptionPane.showMessageDialog(null, "Argumento inválido", "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
 

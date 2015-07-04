@@ -163,7 +163,7 @@ public class TelaComprador_Interesse {
 
 					}
                      try {
-						prod = fachada.retornarProduto(nomeProd, vend, null);
+						prod = fachada.retornarProduto(nomeProd, vend, fachada.retornarListaProdutos());
 					} catch (IllegalArgumentException | NullPointerException e1) {
 						JOptionPane.showMessageDialog(null, "Argumento inválido", "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
 

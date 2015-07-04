@@ -133,7 +133,8 @@ public class TelaExibirInfoProduto_Vendedor {
 		JLabel lblQtd = new JLabel("qtd");
 		lblQtd.setFont(new Font("Gisha", Font.PLAIN, 13));
 		lblQtd.setBounds(124, 99, 32, 50);
-		lblQtd.setText("" + p.getItensNoEstoque());
+		int itens = p.getQuantidade() - p.getItensNoEstoque();
+		lblQtd.setText("" + itens);
 		panel.add(lblQtd);
 
 		JLabel lblVendidos = new JLabel("vendidos");

@@ -84,7 +84,7 @@ public class ControladorProduto {
 	public List<Produto> buscarProdutos(Filtro filtro) throws NaoEncontradoProdutoException{
 		List<Produto> produtosParcialmenteRefinados = null; 
 		if (!filtro.getNomeProduto().equals("")){
-			produtosParcialmenteRefinados = repositorio.procurarProdutoPorNome(filtro.getNomeProduto(), produtosParcialmenteRefinados);
+			produtosParcialmenteRefinados = repositorio.procurarProdutoPorNome(filtro.getNomeProduto(), repositorio.getProdutos());
 		}
 
 		if (!filtro.getCategoria().equals("")){
