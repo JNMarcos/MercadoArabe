@@ -33,6 +33,7 @@ public class TelaEditarProduto{
 		setProduto(p);
 		setVendedor(v);
 		f = Fachada.getInstance();
+		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setSize(490,355);
 		frame.setTitle("Atualiza\u00E7\u00E3o de informa\u00E7\u00F5es sobre o produto");

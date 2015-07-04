@@ -28,6 +28,9 @@ public class TelaExibirInfoVendedor_Comprador extends JFrame {
 	private Comprador c;
 	private Produto p;
 	private Fachada fachada;
+	private JPanel panel;
+	private JButton btnVoltar;
+	private JButton btnContinuoInteressado;
 
 
 	/**
@@ -53,7 +56,7 @@ public class TelaExibirInfoVendedor_Comprador extends JFrame {
 		frmConheaOVendedor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmConheaOVendedor.getContentPane().setLayout(null);;
 
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setBounds(0, 0, 434, 261);
 		frmConheaOVendedor.getContentPane().add(panel);
 		panel.setLayout(null);
@@ -70,10 +73,13 @@ public class TelaExibirInfoVendedor_Comprador extends JFrame {
 		panel.add(lblNomeDoVendedor);
 		lblNomeDoVendedor.setFont(new Font("Gisha", Font.PLAIN, 13));
 
-		JButton btnVoltar = new JButton("Desistir da Compra");
+		btnVoltar = new JButton("Desistir da Compra");
 		btnVoltar.setBounds(50, 227, 152, 23);
 		panel.add(btnVoltar);
 		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
+		
+		EventoDesistirCompra e = new EventoDesistirCompra();
+		btnVoltar.addActionListener(e);
 
 		JLabel lblEmailDoVendedor = new JLabel("E-MAIL DO VENDEDOR");
 		lblEmailDoVendedor.setBounds(31, 144, 159, 14);
@@ -93,11 +99,11 @@ public class TelaExibirInfoVendedor_Comprador extends JFrame {
 		panel.add(lblCidadeDoVendedor);
 		lblCidadeDoVendedor.setFont(new Font("Gisha", Font.PLAIN, 13));
 
-		JButton btnContinuoInteressado = new JButton("Continuo interessado!");
+		btnContinuoInteressado = new JButton("Continuo interessado!");
 		btnContinuoInteressado.setFont(new Font("Gisha", Font.PLAIN, 13));
 		btnContinuoInteressado.setBounds(212, 227, 172, 23);
 		panel.add(btnContinuoInteressado);
-		
+
 		EventoContinuoInteressado btnInteressado = new EventoContinuoInteressado();
 		btnContinuoInteressado.addActionListener(btnInteressado);
 	}
@@ -120,7 +126,13 @@ public class TelaExibirInfoVendedor_Comprador extends JFrame {
 			fachada.adicionarAosInteresses(c, p);
 			p.adicionarInteressados(c);
 		}
-
 	}
+	public class EventoDesistirCompra implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+				frmConheaOVendedor.dispose();
+				TelaExibirInfoProduto_Comprador tela = new TelaExibirInfoProduto_Comprador(p);
+				tela.setVisible(true);
+			}
 
+		}
 }

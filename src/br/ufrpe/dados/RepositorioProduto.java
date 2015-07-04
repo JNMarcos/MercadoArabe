@@ -92,8 +92,8 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable{
 					nomeProdutoJaExiste = true;
 					break;
 				}
-			}
-		}
+			} 
+		}else nomeProdutoJaExiste = true;
 		return nomeProdutoJaExiste;
 	}
 

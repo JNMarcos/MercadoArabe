@@ -67,7 +67,7 @@ public class TelaVendedor {
 		modelo.addColumn("Quantidade");
 		modelo.addColumn("Preço");
 		
-		table = new JTable();
+		table = new JTable(modelo);
 		table.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
