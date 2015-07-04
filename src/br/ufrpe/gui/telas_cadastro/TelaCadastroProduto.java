@@ -1,25 +1,19 @@
 package br.ufrpe.gui.telas_cadastro;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-
+import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
-import javax.swing.JPanel;
-
-import java.awt.Font;
-import java.text.ParseException;
-
-import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
-import javax.swing.JButton;
-import javax.swing.text.MaskFormatter;
+import javax.swing.JTextField;
 
 import br.ufrpe.gui.telas_principais.TelaVendedor;
 import br.ufrpe.negocio.Fachada;
@@ -27,9 +21,6 @@ import br.ufrpe.negocio.classes_basicas.Produto;
 import br.ufrpe.negocio.classes_basicas.Vendedor;
 import br.ufrpe.negocio.exceptions_negocio.ProdutoJaCadastradoException;
 import br.ufrpe.negocio.exceptions_negocio.QuantidadeMaximaItensUltrapassadaException;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class TelaCadastroProduto{
 

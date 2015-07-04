@@ -187,10 +187,6 @@ public class TelaEditarProduto{
 				}
 		}
 
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
 		private JTextField textField;
 		private JTextArea textArea;
 		private JTextField textField_2;
