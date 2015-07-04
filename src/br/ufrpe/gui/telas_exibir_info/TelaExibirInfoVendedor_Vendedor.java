@@ -77,19 +77,19 @@ public class TelaExibirInfoVendedor_Vendedor {
 		btnVoltar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		JLabel lblEmailDoVendedor = new JLabel("E-MAIL DO VENDEDOR");
-		lblEmailDoVendedor.setBounds(31, 242, 300, 14);
+		lblEmailDoVendedor.setBounds(31, 257, 300, 14);
 		lblEmailDoVendedor.setText(v.getContato().getEmail());
 		panel.add(lblEmailDoVendedor);
 		lblEmailDoVendedor.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		JLabel lblTelefoneDoVendedor = new JLabel("TELEFONE DO VENDEDOR");
-		lblTelefoneDoVendedor.setBounds(31, 267, 190, 14);
+		lblTelefoneDoVendedor.setBounds(31, 282, 190, 14);
 		lblTelefoneDoVendedor.setText(v.getContato().getTelefone());
 		panel.add(lblTelefoneDoVendedor);
 		lblTelefoneDoVendedor.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		JLabel lblCidadeDoVendedor = new JLabel("CIDADE DO VENDEDOR");
-		lblCidadeDoVendedor.setBounds(31, 169, 323, 14);
+		lblCidadeDoVendedor.setBounds(31, 201, 323, 14);
 		lblCidadeDoVendedor.setText(v.getContato().getCidade());
 		panel.add(lblCidadeDoVendedor);
 		lblCidadeDoVendedor.setFont(new Font("Gisha", Font.PLAIN, 13));
@@ -103,15 +103,15 @@ public class TelaExibirInfoVendedor_Vendedor {
 		
 		JLabel lblNewLabel_5 = new JLabel("SENHA");
 		lblNewLabel_5.setFont(new Font("Gisha", Font.PLAIN, 13));
-		lblNewLabel_5.setBounds(31, 292, 200, 27);
+		lblNewLabel_5.setBounds(31, 307, 200, 27);
 		lblNewLabel_5.setText(v.getSenha());
 		panel.add(lblNewLabel_5);
 		
-		JLabel lblNewLabel_2 = new JLabel("BAIRRO");
-		lblNewLabel_2.setFont(new Font("Gisha", Font.PLAIN, 13));
-		lblNewLabel_2.setBounds(31, 192, 240, 20);
-		lblNewLabel_2.setText(v.getContato().getBairro());
-		panel.add(lblNewLabel_2);
+		JLabel lblBairro = new JLabel("BAIRRO");
+		lblBairro.setFont(new Font("Gisha", Font.PLAIN, 13));
+		lblBairro.setBounds(31, 167, 240, 20);
+		lblBairro.setText(v.getContato().getBairro());
+		panel.add(lblBairro);
 		
 		JLabel lblNewLabel_4 = new JLabel("USERNAME");
 		lblNewLabel_4.setBounds(91, 32, 288, 29);
@@ -121,7 +121,7 @@ public class TelaExibirInfoVendedor_Vendedor {
 		
 		JLabel lblNewLabel_3 = new JLabel("UF");
 		lblNewLabel_3.setFont(new Font("Gisha", Font.PLAIN, 13));
-		lblNewLabel_3.setBounds(31, 217, 122, 20);
+		lblNewLabel_3.setBounds(31, 226, 122, 20);
 		lblNewLabel_3.setText(v.getContato().getEstado());
 		panel.add(lblNewLabel_3);
 	}
