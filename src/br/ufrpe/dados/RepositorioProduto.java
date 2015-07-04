@@ -93,7 +93,7 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable{
 					break;
 				}
 			}
-		}
+		} else nomeProdutoJaExiste = true;
 		return nomeProdutoJaExiste;
 	}
 
@@ -117,7 +117,7 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable{
 		List<Produto> iProduto = null;
 		if (!nomeProduto.equals("") && !nomeProduto.equals(" ")){
 			if (produtoASerEncontrado.equals("")){
-				if (this.getProdutos() != null) iProduto = this.produtos;
+				if (!this.getProdutos().equals("")) iProduto = this.produtos;
 			} else {
 				iProduto = produtoASerEncontrado;
 			} //iterator ou listIterato

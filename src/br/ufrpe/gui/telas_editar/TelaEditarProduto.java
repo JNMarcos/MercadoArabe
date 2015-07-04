@@ -25,7 +25,7 @@ import br.ufrpe.negocio.exceptions_negocio.QuantidadeMaximaItensUltrapassadaExce
 import javax.swing.SpinnerNumberModel;
 
 public class TelaEditarProduto{
-	private JFrame frame;
+	private JFrame frame = new JFrame();
 	private Vendedor v;
 	private Produto p;
 	private Fachada f;

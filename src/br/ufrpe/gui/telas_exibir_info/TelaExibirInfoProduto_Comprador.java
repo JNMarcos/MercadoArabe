@@ -21,7 +21,7 @@ public class TelaExibirInfoProduto_Comprador extends JFrame{
 	private JButton btnVoltar;
 	private JButton btnInformaesDoVendedor;
 	
-	Produto p;
+	private Produto p;
 
 
 	/**

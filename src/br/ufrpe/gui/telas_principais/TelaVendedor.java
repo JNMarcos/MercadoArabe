@@ -171,9 +171,10 @@ public class TelaVendedor {
 		panel.add(lblXps);
 		
 		btnNovoProduto = new JButton("Novo Produto");
+		btnNovoProduto.setFont(new Font("Gisha", Font.PLAIN, 13));
 		Evento e = new Evento();
 		btnNovoProduto.addActionListener(e);
-		btnNovoProduto.setBounds(329, 181, 104, 23);
+		btnNovoProduto.setBounds(492, 185, 172, 23);
 		panel.add(btnNovoProduto);
 	}
 
