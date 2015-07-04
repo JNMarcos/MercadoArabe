@@ -64,7 +64,7 @@ public class TelaComprador_Interesse {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmMeuPerfil.dispose();
-				TelaComprador_Principal telaComprador_Principal = new TelaComprador_Principal(c);
+				TelaComprador_Principal telaComprador_Principal = new TelaComprador_Principal(null);
 				telaComprador_Principal.setVisible(true);
 			}
 		});

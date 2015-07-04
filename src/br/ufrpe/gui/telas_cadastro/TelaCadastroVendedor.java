@@ -244,7 +244,7 @@ public class TelaCadastroVendedor {
 		String[] arrayUF = {"", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", 
 				"MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", 
 				"RS", "RO", "RR", "SC", "SP", "SE", "TO"};
-		for(int i = 0; i <= 28; i++)
+		for(int i = 0; i < 28; i++)
 			comboBoxEstado.addItem(arrayUF[i]);
 		panelContato.add(comboBoxEstado);
 
@@ -360,7 +360,9 @@ public class TelaCadastroVendedor {
 	private class EventoBotaoAvancar_DadosPessoais implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 
-		//vai pra proxima aba se n houver nenhum espaço em braco
+			
+
+			//vai pra proxima aba se n houver nenhum espaço em braco
 			if(textFieldNome.getText().equals("") || formattedTextFieldCpf.getText().equals("") || (comboBoxDia.getSelectedIndex() == 0 ||
 					comboBoxMes.getSelectedIndex() == 0 || comboBoxAno.getSelectedIndex() == 0)) {
 				
