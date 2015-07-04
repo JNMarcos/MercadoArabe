@@ -227,11 +227,8 @@ public class TelaVendedor {
             } else {
                     nomeProd = (String) (table.getValueAt(linha_selecionada, 0));
                     try {
-						prod = fachada.retornarProduto(nomeProd, v, null);
-					} catch (IllegalArgumentException | NullPointerException e1) {
-						JOptionPane.showMessageDialog(null, "Argumento inválido", "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
-
-					} catch (NaoEncontradoProdutoException e1) {
+						prod = fachada.retornarProduto(nomeProd, v, fachada.retornarListaProdutos());
+					}  catch (NaoEncontradoProdutoException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage(), "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
 
 					}
