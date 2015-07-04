@@ -126,9 +126,11 @@ public class TelaExibirInfoVendedor_Vendedor {
 		panel.add(lblNewLabel_3);
 	}
 
-	protected static void dispose() {
-		// TODO Auto-generated method stub
-		
+	public void setVisible(boolean b) {
+		if(b == true)
+			frmConheaOVendedor.setVisible(b);
+		else
+			frmConheaOVendedor.setVisible(b);
 	}
 
 	private void setVendedor(Vendedor v) {
@@ -138,7 +140,7 @@ public class TelaExibirInfoVendedor_Vendedor {
 	
 	public class EventoVoltar implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			TelaExibirInfoVendedor_Vendedor.dispose();
+			frmConheaOVendedor.dispose();
 			TelaVendedor telaVendedor = new TelaVendedor(v);
 			telaVendedor.setVisible(true);
 		}
@@ -146,7 +148,7 @@ public class TelaExibirInfoVendedor_Vendedor {
 	
 	public class EventoEditar implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			TelaExibirInfoVendedor_Vendedor.dispose();
+			frmConheaOVendedor.dispose();
 			TelaEditarVendedor telaEditarVendedor = new TelaEditarVendedor(v);
 			telaEditarVendedor.setVisible(true);
 		}

@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 
 import br.ufrpe.gui.telas_cadastro.TelaCadastroProduto;
 import br.ufrpe.gui.telas_exibir_info.TelaExibirInfoProduto_Vendedor;
+import br.ufrpe.gui.telas_exibir_info.TelaExibirInfoVendedor_Vendedor;
 import br.ufrpe.negocio.Fachada;
 import br.ufrpe.negocio.classes_basicas.Produto;
 import br.ufrpe.negocio.classes_basicas.Vendedor;
@@ -31,6 +32,7 @@ public class TelaVendedor {
 	private JTable table;
 	private TelaInicio telaInicio;
 	private Vendedor v;
+	private TelaExibirInfoVendedor_Vendedor telaExibeInfoVendedor;
 	JButton btnNovoProduto;
 	Fachada fachada;
 
@@ -176,13 +178,16 @@ public class TelaVendedor {
 		btnNovoProduto.addActionListener(e);
 		btnNovoProduto.setBounds(514, 186, 143, 23);
 		panel.add(btnNovoProduto);
-	}
-
-	protected static void dispose() {
-		// TODO Auto-generated method stub
 		
+		JButton btnMeuPerfil = new JButton("Meu Perfil");
+		btnMeuPerfil.setFont(new Font("Gisha", Font.PLAIN, 13));
+		btnMeuPerfil.setBounds(530, 98, 114, 23);
+		panel.add(btnMeuPerfil);
+		
+		EventoMeuPerfil acaoMeuperfil = new EventoMeuPerfil();
+		btnMeuPerfil.addActionListener(acaoMeuperfil);
 	}
-
+	
 	public void setVendedor(Vendedor v) {
 		this.v = v;
 	}
@@ -193,6 +198,15 @@ public class TelaVendedor {
 		else
 			frmMeuPerfil.setVisible(b);
 	}
+	
+	private class EventoMeuPerfil implements ActionListener {
+		public void actionPerformed(ActionEvent evento) {
+			frmMeuPerfil.dispose();
+			telaExibeInfoVendedor = new TelaExibirInfoVendedor_Vendedor(v);
+			telaExibeInfoVendedor.setVisible(true);
+		}
+	}
+	
 	private class Evento implements ActionListener{
 		public void actionPerformed(ActionEvent arg0) {
 			frmMeuPerfil.dispose();
