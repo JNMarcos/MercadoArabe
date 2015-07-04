@@ -1,33 +1,32 @@
 package br.ufrpe.gui.telas_editar;
 
-import javax.swing.JFrame;
-
-import java.awt.SystemColor;
-
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-
 import java.awt.Font;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.JComboBox;
 
+import br.ufrpe.gui.telas_principais.TelaVendedor;
 import br.ufrpe.negocio.Fachada;
 import br.ufrpe.negocio.classes_basicas.Contato;
 import br.ufrpe.negocio.classes_basicas.Vendedor;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoVendedorException;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 public class TelaEditarVendedor extends JFrame{
 	Vendedor v;
 	Contato c;
 	Fachada fachada;
+	private TelaVendedor telaVendedor;
+	
 	public TelaEditarVendedor(Vendedor v) {
 		setVendedor(v);
 		fachada = Fachada.getInstance();
@@ -130,6 +129,9 @@ public class TelaEditarVendedor extends JFrame{
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				telaVendedor = new TelaVendedor(v);
+				telaVendedor.setVisible(true);
 			}
 		});
 		btnVoltar.setBounds(152, 268, 108, 23);
@@ -198,11 +200,14 @@ public class TelaEditarVendedor extends JFrame{
 					v.setSenha(new String (novaSenha.getPassword()));
 				}
 				v.setContato(c);
+				fachada.atualizarVendedor(v);
+				
+				dispose();
+				telaVendedor = new TelaVendedor(v);
+				telaVendedor.setVisible(true);
+				
 			} catch (NullPointerException e1){
 				JOptionPane.showMessageDialog(null, "Argumento inválido");
-			}
-			try {
-				fachada.atualizarVendedor(v);
 			} catch (IllegalArgumentException e1) {
 				JOptionPane.showMessageDialog(null, "Argumento inválido");
 			} catch (NaoEncontradoVendedorException e1) {
