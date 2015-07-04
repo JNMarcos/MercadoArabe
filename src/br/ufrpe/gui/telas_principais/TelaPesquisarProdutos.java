@@ -211,14 +211,6 @@ public class TelaPesquisarProdutos extends JFrame {
 		this.c = c;
 	}
 	
-	public void setVisible(boolean b) {
-		if(b == true)
-			setVisible(b);
-		else
-			setVisible(b);
-	}
-	
-	
 	private class EventoBotaoPesquisar implements ActionListener{
 		public void actionPerformed(ActionEvent evento) {
 			List<Produto> produtos = new ArrayList<>();
