@@ -52,6 +52,7 @@ public class TelaCadastroProduto{
 	private Vendedor v;
 	private Produto p;
 	private Fachada fachada;
+	private TelaVendedor telaVendedor;
 
 	/**
 	 * Create the application.
@@ -73,7 +74,7 @@ public class TelaCadastroProduto{
 		frame.setFont(new Font("Gisha", Font.PLAIN, 13));
 		frame.getContentPane().setBackground(SystemColor.activeCaption);
 		frame.setBounds(100, 100, 500, 270);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
 		conteiner = new JTabbedPane();
@@ -151,7 +152,7 @@ public class TelaCadastroProduto{
 		lblQuantidade.setFont(new Font("Gisha", Font.PLAIN, 13));
 		painel1.add(lblQuantidade);
 		
-		comboBoxQuant.addItem(" ");
+		comboBoxQuant.addItem("");
 		comboBoxQuant.addItem("1");
 		comboBoxQuant.addItem("2");
 		comboBoxQuant.addItem("3");
@@ -194,8 +195,8 @@ public class TelaCadastroProduto{
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaCadastroProduto.dispose();
-				TelaVendedor telaVendedor = new TelaVendedor(null);
+				frame.dispose();
+				TelaVendedor telaVendedor = new TelaVendedor(v);
 				telaVendedor.setVisible(true);
 			}
 		});
@@ -247,25 +248,28 @@ public class TelaCadastroProduto{
 				int quantidadeItens = Integer.parseInt((String)comboBoxQuant.getSelectedItem());
 				try {
 					p.setQuantidade(quantidadeItens);
+					p.setItensNoEstoque(quantidadeItens);
+					p.setPontos(0);
+					p.setPreco(Double.parseDouble(preco.getText()));
+					p.setVendedor(v);
+					fachada.cadastrarProduto(p, v);
+					
+					JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+					textFieldNome.setText("");
+					comboBoxCategoria.setSelectedIndex(0);
+					comboBoxQuant.setSelectedIndex(0);
+					preco.setText("");
+					textDescricao.setText("");
+					frame.dispose();
+					telaVendedor = new TelaVendedor(v);
+					telaVendedor.setVisible(true);
 				} catch (QuantidadeMaximaItensUltrapassadaException e) {
 					JOptionPane.showMessageDialog(null, e.getMessage(), "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
-				}
-				p.setItensNoEstoque(quantidadeItens);
-				p.setPontos(0);
-				p.setPreco(Double.parseDouble(preco.getText()));
-				p.setVendedor(v);
-				try {
-					fachada.cadastrarProduto(p, v);
 				} catch (ProdutoJaCadastradoException e) {
 					JOptionPane.showMessageDialog(null, e.getMessage(), "Mensagem de alerta", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		}
-
-	}
-
-	protected static void dispose() {
-		// TODO Auto-generated method stub
 
 	}
 
