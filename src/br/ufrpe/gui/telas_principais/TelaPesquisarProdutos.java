@@ -216,11 +216,11 @@ public class TelaPesquisarProdutos extends JFrame {
 		public void actionPerformed(ActionEvent evento) {
 			List<Produto> produtos = new ArrayList<>();
 			double de;
-			if (textFieldDe.equals("") == false){
+			if (!textFieldDe.equals("")){
 				de = Double.parseDouble(textFieldDe.getSelectedText());
 			} else de = 0.0;
 			double ate; 
-			if (textFieldAte.equals("") == false){
+			if (!textFieldAte.equals("")){
 				ate = Double.parseDouble(textFieldAte.getSelectedText());
 			} else ate = 0.0;
 			filtro = new Filtro(textFieldNome.getSelectedText(), (String) comboBox.getSelectedItem(), de, ate, textFieldCidade.getSelectedText());		
