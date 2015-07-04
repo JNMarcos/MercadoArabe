@@ -59,7 +59,7 @@ public class TelaExibirInfoComprador {
 		lblNomeDoVendedor.setFont(new Font("Gisha", Font.PLAIN, 13));
 		
 		JButton btnVoltar = new JButton("Voltar");
-		EventoEditar e1 = new EventoEditar();
+		EventoVoltar e1 = new EventoVoltar();
 		btnVoltar.addActionListener(e1);
 		btnVoltar.setBounds(51, 141, 152, 23);
 		panel.add(btnVoltar);
