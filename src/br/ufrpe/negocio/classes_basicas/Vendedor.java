@@ -28,6 +28,10 @@ public class Vendedor extends Pessoa implements Comparable<Vendedor>{
 	public void setDataCadastro() {
 		this.dataCadastro = LocalDate.now();
 	}
+	
+	public void setDataCadastro(LocalDate ld){
+		this.dataCadastro = ld;
+	}
 
 	public Contato getContato() {
 		return contato;

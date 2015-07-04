@@ -19,14 +19,19 @@ import br.ufrpe.gui.telas_principais.TelaVendedor;
 import br.ufrpe.negocio.Fachada;
 import br.ufrpe.negocio.classes_basicas.Contato;
 import br.ufrpe.negocio.classes_basicas.Vendedor;
+import br.ufrpe.negocio.exceptions_negocio.CpfJaCadastradoException;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoVendedorException;
+import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioForaPadroesException;
+import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioJaCadastradoException;
+import br.ufrpe.negocio.exceptions_negocio.SenhaForaPadroesException;
+import br.ufrpe.negocio.utilidades.PessoaUtilidades;
 
 public class TelaEditarVendedor extends JFrame{
 	Vendedor v;
 	Contato c;
 	Fachada fachada;
 	private TelaVendedor telaVendedor;
-	
+
 	public TelaEditarVendedor(Vendedor v) {
 		setVendedor(v);
 		fachada = Fachada.getInstance();
@@ -37,7 +42,7 @@ public class TelaEditarVendedor extends JFrame{
 		getContentPane().setLayout(null);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 551, 315);
+		panel.setBounds(0, 0, 524, 315);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 
@@ -92,13 +97,13 @@ public class TelaEditarVendedor extends JFrame{
 		telefone.setColumns(10);
 
 		JLabel lblNewLabel_3 = new JLabel("Apenas \u00E9 necess\u00E1rio preencher os dados que foram alterado.");
-		lblNewLabel_3.setFont(new Font("Gisha", Font.PLAIN, 11));
-		lblNewLabel_3.setBounds(30, 222, 486, 35);
+		lblNewLabel_3.setFont(new Font("Gisha", Font.PLAIN, 10));
+		lblNewLabel_3.setBounds(30, 245, 486, 23);
 		panel.add(lblNewLabel_3);
 
 		cidade = new JTextField();
 		cidade.setFont(new Font("Gisha", Font.PLAIN, 13));
-		cidade.setBounds(101, 116, 127, 22);
+		cidade.setBounds(101, 118, 127, 20);
 		panel.add(cidade);
 		cidade.setColumns(10);
 
@@ -109,17 +114,17 @@ public class TelaEditarVendedor extends JFrame{
 		lblAtualizeSuasInforme.setFont(new Font("Gisha", Font.PLAIN, 18));
 
 		bairro = new JTextField();
-		bairro.setBounds(284, 116, 116, 22);
+		bairro.setBounds(284, 118, 116, 20);
 		panel.add(bairro);
 		bairro.setFont(new Font("Gisha", Font.PLAIN, 13));
 		bairro.setColumns(10);
 
-		JComboBox<String> comboBox = new JComboBox<String>();
+		comboBox = new JComboBox<String>();
 		comboBox.setFont(new Font("Gisha", Font.PLAIN, 13));
 		comboBox.setBounds(437, 116, 79, 20);
 		panel.add(comboBox);
-		
-		String[] arrayUF = {"", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", 
+
+		String[] arrayUF = {" ", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", 
 				"MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", 
 				"RS", "RO", "RR", "SC", "SP", "SE", "TO"};
 		for(int i = 0; i < 28; i++)
@@ -140,7 +145,7 @@ public class TelaEditarVendedor extends JFrame{
 
 		novaSenhaConfirmar = new JPasswordField("");
 		novaSenhaConfirmar.setFont(new Font("Gisha", Font.PLAIN, 13));
-		novaSenhaConfirmar.setBounds(137, 193, 146, 23);
+		novaSenhaConfirmar.setBounds(137, 196, 146, 20);
 		panel.add(novaSenhaConfirmar);
 
 		novaSenha = new JPasswordField();
@@ -163,6 +168,11 @@ public class TelaEditarVendedor extends JFrame{
 		logradouro.setBounds(111, 82, 405, 20);
 		panel.add(logradouro);
 		logradouro.setColumns(10);
+
+		JLabel lblNewLabel_5 = new JLabel("A senha tem de ter no m\u00EDnimo 8 caracteres, dentre eles n\u00FAmeros ou caracteres especiais e letra em mai\u00FAscula.");
+		lblNewLabel_5.setFont(new Font("Gisha", Font.PLAIN, 10));
+		lblNewLabel_5.setBounds(10, 227, 506, 14);
+		panel.add(lblNewLabel_5);
 	}
 
 	private void setVendedor(Vendedor v) {
@@ -180,41 +190,87 @@ public class TelaEditarVendedor extends JFrame{
 	private JTextField cidade;
 	private JTextField bairro;
 	private JTextField logradouro;
+	private JComboBox<String> comboBox;
 
 	public class EventoAtualizarComprador implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			c = new Contato();
+			Vendedor vd = new Vendedor();
+			int nadaAlterado = 0;
 			try{
+				vd.setNome(v.getNome());
+				vd.setNomeUsuario(v.getNomeUsuario());
+				vd.setDataNascimento(v.getDia(), v.getDataNascimento().getMonthValue(),
+						v.getDataNascimento().getYear());
+				vd.setCpf(v.getCpf());
+				vd.setXp(v.getXp());
+				vd.setDataCadastro(v.getDataCadastro());
+
 				if(!email.getText().equals(""))	c.setEmail(email.getText());
-				else c.setEmail(v.getContato().getEmail());
+				else {c.setEmail(v.getContato().getEmail()); nadaAlterado++;}
 				if (!telefone.getText().equals("")) c.setTelefone(telefone.getText());
-				else c.setTelefone(v.getContato().getTelefone());
+				else {c.setTelefone(v.getContato().getTelefone()); nadaAlterado++;}
 				if (!cidade.getText().equals("")) c.setCidade(cidade.getText());
-				else c.setCidade(v.getContato().getCidade());
+				else {c.setCidade(v.getContato().getCidade()); nadaAlterado++;}
 				if (!bairro.getText().equals("")) c.setBairro(bairro.getText());
-				else c.setBairro(v.getContato().getBairro());
+				else {c.setBairro(v.getContato().getBairro()); nadaAlterado++;}
 				if (!logradouro.getText().equals("")) c.setLogradouro(logradouro.getText());
-				else c.setLogradouro(v.getContato().getLogradouro());
-				if (!novaSenha.getPassword().equals("") && !novaSenhaConfirmar.getPassword().equals("") 
-						&& novaSenha.equals(novaSenhaConfirmar)){
-					v.setSenha(new String (novaSenha.getPassword()));
+				else {c.setLogradouro(v.getContato().getLogradouro()); nadaAlterado++;}
+				if (!(comboBox.getSelectedIndex() == 0))  c.setEstado((String)comboBox.getSelectedItem());
+				else {c.setEstado(v.getContato().getEstado());nadaAlterado++;}
+				
+				vd.setContato(c);
+				
+				String senha = new String(novaSenha.getPassword());
+				String senhaConfirma = new String(novaSenhaConfirmar.getPassword());
+				if (!senha.equals("") && !senhaConfirma.equals("")){
+
+					if(senha.equals(senhaConfirma)) {
+						if (!senha.equals(v.getSenha())){
+							boolean estaOk = PessoaUtilidades.senhaNosConformes(senha);
+							if (estaOk){
+								vd.setSenha(senha);
+								fachada.removerVendedor(v);
+								fachada.cadastrarVendedor(vd);
+								JOptionPane.showMessageDialog(null, "Informações alteradas com sucesso!");
+								setVendedor(vd);
+								dispose();
+								telaVendedor = new TelaVendedor(v);
+								telaVendedor.setVisible(true);
+							} else{
+								JOptionPane.showMessageDialog(null, "Que tal seguir as regras apenas uma vez! \n\nA Gerência :)");
+
+							}
+						} else 
+							JOptionPane.showMessageDialog(null, "Essa já é sua senha!");
+					} else 
+						JOptionPane.showMessageDialog(null, "As senhas devem ser iguais!");
+				} else if (senha.equals("") && senhaConfirma.equals("") && nadaAlterado < 6) {
+					vd.setSenha(v.getSenha());
+					fachada.removerVendedor(v);
+					fachada.cadastrarVendedor(vd);
+					JOptionPane.showMessageDialog(null, "Informações alteradas com sucesso!");
+					setVendedor(vd);
+					dispose();
+					telaVendedor = new TelaVendedor(v);
+					telaVendedor.setVisible(true);
+				} else {
+					JOptionPane.showMessageDialog(null, "Nada alterado. Todos os espaços estão em branco! Insira alguma coisa para alterar.");
 				}
-				v.setContato(c);
-				fachada.atualizarVendedor(v);
-				
-				dispose();
-				telaVendedor = new TelaVendedor(v);
-				telaVendedor.setVisible(true);
-				
-			} catch (NullPointerException e1){
-				JOptionPane.showMessageDialog(null, "Argumento inválido");
-			} catch (IllegalArgumentException e1) {
-				JOptionPane.showMessageDialog(null, "Argumento inválido");
 			} catch (NaoEncontradoVendedorException e1) {
 				JOptionPane.showMessageDialog(null, e1.getMessage());
+			} catch (SenhaForaPadroesException e1){
+				JOptionPane.showMessageDialog(null, e1.getMessage());
+			} catch (IllegalArgumentException e1) {
+				JOptionPane.showMessageDialog(null, "Argumento inválido");
+			} catch (NomeUsuarioJaCadastradoException e1) {
+				JOptionPane.showMessageDialog(null, e1.getMessage());
+			} catch (NomeUsuarioForaPadroesException e1) {
+				JOptionPane.showMessageDialog(null, e1.getMessage());
+			} catch (CpfJaCadastradoException e1){
+				JOptionPane.showMessageDialog(null, e1.getMessage());
+
 			}
-
 		}
-
 	}
 }

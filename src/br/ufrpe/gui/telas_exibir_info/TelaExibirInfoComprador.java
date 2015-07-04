@@ -13,12 +13,10 @@ import javax.swing.SwingConstants;
 
 import br.ufrpe.gui.telas_editar.TelaEditarComprador;
 import br.ufrpe.gui.telas_principais.TelaComprador_Principal;
-import br.ufrpe.negocio.Fachada;
 import br.ufrpe.negocio.classes_basicas.Comprador;
 
 public class TelaExibirInfoComprador {
 	private Comprador c;
-	private Fachada f;
 	
 	private JFrame frmConheaOVendedor;
 	private TelaComprador_Principal telaCompradorPrincipal;
@@ -32,7 +30,6 @@ public class TelaExibirInfoComprador {
 	 */
 	private void initialize(Comprador c) {
 		setComprador(c);
-		f = Fachada.getInstance();
 		frmConheaOVendedor = new JFrame();
 		frmConheaOVendedor.setResizable(false);
 		frmConheaOVendedor.setTitle("Veja seus dados cadastrais");

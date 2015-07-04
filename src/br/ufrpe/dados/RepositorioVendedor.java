@@ -22,7 +22,7 @@ public class RepositorioVendedor implements IRepositorioVendedor, Serializable{
 
 	public static RepositorioVendedor getInstancia() {
 		if (instancia == null) {
-			instancia = new RepositorioVendedor();
+			instancia = lerDoArquivo();
 		}
 		return instancia;
 	}
@@ -86,17 +86,14 @@ public class RepositorioVendedor implements IRepositorioVendedor, Serializable{
 	@Override
 	public void cadastrarVendedor(Vendedor vendedor){
 		this.vendedores.add(vendedor);
-		salvarArquivo();
 	}
 	
 	public void atualizarVendedor(Vendedor vendedor, int posicao){
 		vendedores.set(posicao, vendedor);
-		salvarArquivo();
 	}
 	
 	public void removerVendedor(Vendedor vendedor) {
 		vendedores.remove(vendedor);
-		salvarArquivo();
 	}
 	
 	public int procurarIndice(Vendedor vendedor){

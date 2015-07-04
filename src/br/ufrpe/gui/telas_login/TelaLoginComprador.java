@@ -116,7 +116,7 @@ public class TelaLoginComprador {
 				telaComprador.setVisible(true);
 				
 				//mensagem boas vindas
-				JOptionPane.showMessageDialog(null, "Bem vindo, " + textField_User.getText() + "!");
+				JOptionPane.showMessageDialog(null, "Bem-vindo, " + textField_User.getText() + "!");
 				textField_User.setText("");
 				passwordField.setText("");
 				frame.dispose();

@@ -177,7 +177,7 @@ public class TelaComprador_Principal {
 		btnProdutosInteresse.setBounds(415, 402, 210, 23);
 		panel.add(btnProdutosInteresse);
 
-		JButton btnMeusDados = new JButton("Meus dados");
+		JButton btnMeusDados = new JButton("Meu perfil");
 		btnMeusDados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmMeuPerfil.dispose();

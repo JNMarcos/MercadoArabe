@@ -113,11 +113,13 @@ public class TelaLoginVendedor {
 				
 				String senha = new String(passwordField.getPassword());
 				vendedor = fachada.verificarLoginVendedor(textField_User.getText(), senha);
+				
+				
+				//mensagem boas vindas
+				JOptionPane.showMessageDialog(null, "Bem-vindo, " + textField_User.getText() + "!");
 				telaVendedor = new TelaVendedor(vendedor);
 				telaVendedor.setVisible(true);
 				
-				//mensagem boas vindas
-				JOptionPane.showMessageDialog(null, "Bem vindo, " + textField_User.getText() + "!");
 				textField_User.setText("");
 				passwordField.setText("");
 				frame.dispose();

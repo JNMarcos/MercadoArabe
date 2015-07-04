@@ -85,11 +85,16 @@ public class TelaCadastroComprador {
 				"19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
 		for(int i = 0; i < 32; i++)
 			comboBoxDia.addItem(arrayDia[i]);
+		
+		JLabel lblNewLabel_2 = new JLabel("A senha tem de ter no m\u00EDnimo 8 caracteres, dentre eles n\u00FAmeros ou caracteres especiais e letra em mai\u00FAscula.");
+		lblNewLabel_2.setFont(new Font("Gisha", Font.PLAIN, 10));
+		lblNewLabel_2.setBounds(10, 206, 500, 17);
+		panel.add(lblNewLabel_2);
 		panel.add(comboBoxDia);
 
 		comboBoxMes = new JComboBox<String>();
 		comboBoxMes.setFont(new Font("Gisha", Font.PLAIN, 13));
-		comboBoxMes.setBounds(188, 57, 91, 23);
+		comboBoxMes.setBounds(188, 58, 91, 23);
 		String[] arrayMes = {"", "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro",
 				"Outubro", "Novembro", "Dezembro"};
 		for(int i=0; i<13; i++)
@@ -125,12 +130,17 @@ public class TelaCadastroComprador {
 		textField_User.setColumns(10);
 
 		JLabel lblSenha = new JLabel("Senha");
-		lblSenha.setBounds(80, 143, 46, 14);
+		lblSenha.setBounds(81, 148, 46, 14);
 		panel.add(lblSenha);
 		lblSenha.setFont(new Font("Gisha", Font.PLAIN, 13));
+		
+		JLabel lblNewLabel_3 = new JLabel("O nome de usu\u00E1rio tem de ter no m\u00EDnimo 4 caracteres.");
+		lblNewLabel_3.setFont(new Font("Gisha", Font.PLAIN, 10));
+		lblNewLabel_3.setBounds(131, 127, 324, 14);
+		panel.add(lblNewLabel_3);
 
 		passwordField = new JPasswordField();
-		passwordField.setBounds(137, 139, 155, 23);
+		passwordField.setBounds(137, 145, 155, 23);
 		passwordField.setFont(UIManager.getFont("PasswordField.font"));
 		panel.add(passwordField);
 
@@ -149,7 +159,7 @@ public class TelaCadastroComprador {
 		EventoBotaoCadastrar acaoBtnCadastrar = new EventoBotaoCadastrar();
 		
 		btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setBounds(253, 219, 91, 23);
+		btnCadastrar.setBounds(258, 225, 91, 23);
 		btnCadastrar.setFont(new Font("Gisha", Font.PLAIN, 13));
 		panel.add(btnCadastrar);
 		btnCadastrar.addActionListener(acaoBtnCadastrar);
@@ -157,7 +167,7 @@ public class TelaCadastroComprador {
 		//botao cancelar
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setFont(new Font("Gisha", Font.PLAIN, 13));
-		btnCancelar.setBounds(152, 219, 91, 23);
+		btnCancelar.setBounds(152, 225, 91, 23);
 		panel.add(btnCancelar);
 		EventoBotaoCancelar acaoBtnCancelar = new EventoBotaoCancelar();
 		btnCancelar.addActionListener(acaoBtnCancelar);
@@ -214,7 +224,7 @@ public class TelaCadastroComprador {
 						fachada.salvarComprador();
 
 						//mensagem boas vindas
-						JOptionPane.showMessageDialog(null, "Usuário Cadastrado com sucesso!\nBem-vindo ao Mercado Árabe!");
+						JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!\nBem-vindo ao Mercado Árabe!");
 						textField_Nome.setText("");
 						textField_User.setText("");
 						passwordField.setText("");
@@ -233,16 +243,19 @@ public class TelaCadastroComprador {
 						+ "O Usuário deve conter no mínimo 4 caracteres.");
 				textField_User.setText("");
 				passwordField.setText("");
+				passwordFieldConfirmar.setText("");
 
 			} catch(SenhaForaPadroesException e) {
 				JOptionPane.showMessageDialog(null, "Senha inválida! Tente novamente!\n "
 						+ "A Senha deve conter no mínimo 8 caracteres e presença de números ou caracteres especiais"); //organizar aqui
 				passwordField.setText("");
+				passwordFieldConfirmar.setText("");
 
 			} catch(NomeUsuarioJaCadastradoException e) {
 				JOptionPane.showMessageDialog(null, "Nome de usuário já cadastrado! Tente um diferente!");
 				textField_User.setText("");
 				passwordField.setText("");
+				passwordFieldConfirmar.setText("");
 			}
 		}
 	}

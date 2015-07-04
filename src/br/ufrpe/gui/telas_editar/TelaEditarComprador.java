@@ -20,6 +20,7 @@ import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoCompradorException;
 import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioForaPadroesException;
 import br.ufrpe.negocio.exceptions_negocio.NomeUsuarioJaCadastradoException;
 import br.ufrpe.negocio.exceptions_negocio.SenhaForaPadroesException;
+import br.ufrpe.negocio.utilidades.PessoaUtilidades;
 
 public class TelaEditarComprador extends JFrame{
 	private Comprador c;
@@ -61,6 +62,11 @@ public class TelaEditarComprador extends JFrame{
 		btnConfirmar = new JButton("Confirmar");
 		EventoEditarComprador e = new EventoEditarComprador();
 		btnConfirmar.addActionListener(e);
+		
+		lblNewLabel = new JLabel("A senha tem de ter no m\u00EDnimo 8 caracteres, dentre eles n\u00FAmeros ou caracteres especiais e letra em mai\u00FAscula.");
+		lblNewLabel.setFont(new Font("Gisha", Font.PLAIN, 9));
+		lblNewLabel.setBounds(10, 11, 434, 14);
+		panel.add(lblNewLabel);
 
 		btnConfirmar.setBounds(344, 30, 91, 25);
 		panel.add(btnConfirmar);
@@ -90,48 +96,47 @@ public class TelaEditarComprador extends JFrame{
 
 	public class EventoEditarComprador implements ActionListener{
 		public void actionPerformed(ActionEvent arg0) {
-			Comprador cp = null;
+			Comprador cp = new Comprador();
 			try{
-				cp = c;
-				if (!passwordField.getPassword().equals("") && !passwordField_1.getPassword().equals("")){
-					String senha = new String(passwordField.getPassword());
-					String senhaConfirma = new String(passwordField_1.getPassword());
-					if(senha.equals(senhaConfirma)) {
-						f.removerComprador(cp);
-						cp.setSenha(new String (passwordField.getPassword()));
+				cp.setNome(c.getNome());
+				cp.setNomeUsuario(c.getNomeUsuario());
+				cp.setDataNascimento(c.getDia(), c.getDataNascimento().getMonthValue(),
+						c.getDataNascimento().getYear());
+				String senha = new String(passwordField.getPassword());
+				String senhaConfirma = new String(passwordField_1.getPassword());
+				if (!senha.equals("") && !senhaConfirma.equals("")){
 					
-					try {
-						f.cadastrarComprador(cp);
-						f.removerComprador(c);
-					} catch (IllegalArgumentException e) {
-						JOptionPane.showMessageDialog(null, "Argumento inválido");
-					} catch (NomeUsuarioJaCadastradoException e) {
-						JOptionPane.showMessageDialog(null, e.getMessage());
-					} catch (NomeUsuarioForaPadroesException e) {
-						JOptionPane.showMessageDialog(null, e.getMessage());
-						
-					} 
-					JOptionPane.showMessageDialog(null, "Senha alterada com sucesso!");
-					dispose();
-					TelaComprador_Principal telaComprador_Principal = new TelaComprador_Principal(c);
-					telaComprador_Principal.setVisible(true);
-					}
-				}
+					if(senha.equals(senhaConfirma)) {
+						if (!senha.equals(c.getSenha())){
+							boolean estaOk = PessoaUtilidades.senhaNosConformes(senha);
+							if (estaOk){
+								cp.setSenha(senha);
+								f.removerComprador(c);
+								f.cadastrarComprador(cp);
+								JOptionPane.showMessageDialog(null, "Senha alterada com sucesso!");
+								setComprador(cp);
+								dispose();
+								TelaComprador_Principal telaComprador_Principal = new TelaComprador_Principal(c);
+								telaComprador_Principal.setVisible(true);
+							} else{
+								JOptionPane.showMessageDialog(null, "Que tal seguir as regras apenas uma vez! \n\nA Gerência :)");
+
+							}
+						} else 
+							JOptionPane.showMessageDialog(null, "Essa já é sua senha!");
+					} else 
+						JOptionPane.showMessageDialog(null, "As senhas devem ser iguais!");
+				} else 
+					JOptionPane.showMessageDialog(null, "Há algum campo vazio!");	
 			} catch (NaoEncontradoCompradorException e) {
 				JOptionPane.showMessageDialog(null, e.getMessage());
-				try {
-					f.cadastrarComprador(cp);
-				}  catch (IllegalArgumentException e1) {
-					JOptionPane.showMessageDialog(null, "Argumento inválido");
-				} catch (NomeUsuarioJaCadastradoException e1) {
-					JOptionPane.showMessageDialog(null, e1.getMessage());
-				} catch (NomeUsuarioForaPadroesException e1) {
-					JOptionPane.showMessageDialog(null, e1.getMessage());
-				} catch (SenhaForaPadroesException e1) {
-					JOptionPane.showMessageDialog(null, e1.getMessage());
-
-				}
 			} catch (SenhaForaPadroesException e){
+				JOptionPane.showMessageDialog(null, e.getMessage());
+			} catch (IllegalArgumentException e) {
+				JOptionPane.showMessageDialog(null, "Argumento inválido");
+			} catch (NomeUsuarioJaCadastradoException e) {
+				JOptionPane.showMessageDialog(null, e.getMessage());
+			} catch (NomeUsuarioForaPadroesException e) {
 				JOptionPane.showMessageDialog(null, e.getMessage());
 			}
 		}
@@ -144,5 +149,6 @@ public class TelaEditarComprador extends JFrame{
 	private JButton btnVoltar;
 	private JPasswordField passwordField_1;
 	private JButton btnConfirmar;
+	private JLabel lblNewLabel;
 
 }

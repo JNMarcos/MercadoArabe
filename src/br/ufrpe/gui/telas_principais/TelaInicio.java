@@ -41,7 +41,7 @@ public class TelaInicio {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
+				try {		
 					TelaInicio window = new TelaInicio();
 					window.frame.setVisible(true);
 				} catch (Exception e) {

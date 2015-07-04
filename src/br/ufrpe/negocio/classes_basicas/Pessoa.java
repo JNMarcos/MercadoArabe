@@ -13,6 +13,11 @@ public abstract class Pessoa implements Serializable{
 	private LocalDate dataNascimento;
 	private String nomeUsuario;
 	private String senha;
+	private int dia;
+	
+	public int getDia() {
+		return dia;
+	}
 	
 	public String getNome() {
 		return nome;
@@ -35,6 +40,7 @@ public abstract class Pessoa implements Serializable{
 
 	public void setDataNascimento(int dia, int mes, int ano) {
 		Year anoAgora = Year.now();
+		this.dia = dia;
 		int anoAgoraEmInteiro = anoAgora.getValue();
 		if (dia >= 1 && dia <= 31 && mes >= 1  && mes <= 12 && ano >= 1900 && ano <= anoAgoraEmInteiro){
 			LocalDate dataNascimento = LocalDate.of(ano, mes, dia);

@@ -3,7 +3,6 @@ package br.ufrpe.gui.telas_principais;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -214,20 +213,24 @@ public class TelaPesquisarProdutos extends JFrame {
 	
 	private class EventoBotaoPesquisar implements ActionListener{
 		public void actionPerformed(ActionEvent evento) {
-			List<Produto> produtos = new ArrayList<>();
+			List<Produto> produtos = null;
 			double de;
-			if (!textFieldDe.equals("")){
+			if ((!textFieldDe.equals("")) && !(Integer.parseInt(textFieldDe.getText()) < 0.0)){
 				de = Double.parseDouble(textFieldDe.getSelectedText());
 			} else de = 0.0;
 			double ate; 
-			if (!textFieldAte.equals("")){
+			if (!textFieldAte.equals("") && !(Integer.parseInt(textFieldAte.getText()) < 0.0)){
 				ate = Double.parseDouble(textFieldAte.getSelectedText());
 			} else ate = 0.0;
 			filtro = new Filtro(textFieldNome.getSelectedText(), (String) comboBox.getSelectedItem(), de, ate, textFieldCidade.getSelectedText());		
 			try {
 				produtos = fachada.buscarProdutos(filtro);
+				if (!produtos.equals(""))
 				produtos = fachada.organizarProdutos(produtos);
+				else 
+					JOptionPane.showMessageDialog(null, "Não há nenhum produto com esses atributos!");
 				carregarTabela(modelo, produtos);
+				JOptionPane.showMessageDialog(null, "Pesquisa realizada com sucesso!");
 			} catch (NaoEncontradoProdutoException e) {
 				JOptionPane.showMessageDialog(null, e.getMessage());
 			} catch (NullPointerException | IllegalArgumentException e){

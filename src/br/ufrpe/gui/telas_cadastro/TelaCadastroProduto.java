@@ -110,7 +110,7 @@ public class TelaCadastroProduto{
 		comboBoxCategoria.addItem("Livros e Mídias Digitais");
 		comboBoxCategoria.addItem("Eletrodoméstico");
 		comboBoxCategoria.addItem("Eletroportáteis");
-		comboBoxCategoria.addItem("Eletroeletroônicos");
+		comboBoxCategoria.addItem("Eletroeletrônicos");
 		comboBoxCategoria.addItem("Info");
 		comboBoxCategoria.addItem("Games e Console");
 		comboBoxCategoria.addItem("Cama, Mesa e Banho");
@@ -244,7 +244,7 @@ public class TelaCadastroProduto{
 					p.setPreco(Double.parseDouble(preco.getText()));
 					p.setVendedor(v);
 					fachada.cadastrarProduto(p, v);
-					
+					fachada.salvarProduto();
 					JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
 					textFieldNome.setText("");
 					comboBoxCategoria.setSelectedIndex(0);

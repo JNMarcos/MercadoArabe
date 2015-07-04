@@ -77,6 +77,8 @@ public class TelaCadastroVendedor {
 	private Vendedor vendedor;
 	private Contato contato;
 	private Xp xp;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
 
 	/**
 	 * Create the application.
@@ -96,7 +98,7 @@ public class TelaCadastroVendedor {
 		frame = new JFrame("Cadastro Vendedor");
 		frame.setResizable(false);
 		frame.getContentPane().setBackground(SystemColor.activeCaption);
-		frame.setBounds(100, 100, 443, 297);
+		frame.setBounds(100, 100, 444, 297);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
@@ -153,7 +155,7 @@ public class TelaCadastroVendedor {
 		//mes
 		comboBoxMes = new JComboBox<>();
 		comboBoxMes.setFont(new Font("Gisha", Font.PLAIN, 13));
-		comboBoxMes.setBounds(194, 111, 91, 23);
+		comboBoxMes.setBounds(195, 112, 91, 23);
 		String[] arrayMes = {"", "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro",
 				"Outubro", "Novembro", "Dezembro"};
 		for(int i=0; i<13; i++)
@@ -163,7 +165,7 @@ public class TelaCadastroVendedor {
 		//ano
 		comboBoxAno = new JComboBox<>();
 		comboBoxAno.setFont(new Font("Gisha", Font.PLAIN, 13));
-		comboBoxAno.setBounds(294, 111, 57, 23);
+		comboBoxAno.setBounds(294, 112, 57, 23);
 		String[] arrayAno = new String[84];
 		Integer ano = 1998;											//menores de 18 n podem cadastrar
 		for(int i=0; i<84; i++, ano--) {
@@ -292,15 +294,20 @@ public class TelaCadastroVendedor {
 		panelCredenciais = new JPanel();
 		tabbedPane.addTab("Credenciais", null, panelCredenciais, null);
 		panelCredenciais.setLayout(null);
+		
+		lblNewLabel = new JLabel("A senha tem de ter no m\u00EDnimo 8 caracteres, dentre eles n\u00FAmeros ou caracteres especiais e letra em mai\u00FAscula.");
+		lblNewLabel.setFont(new Font("Gisha", Font.PLAIN, 9));
+		lblNewLabel.setBounds(0, 144, 435, 14);
+		panelCredenciais.add(lblNewLabel);
 
 		lblNomeUsuario = new JLabel("Usu\u00E1rio");
 		lblNomeUsuario.setFont(new Font("Gisha", Font.PLAIN, 13));
-		lblNomeUsuario.setBounds(94, 51, 65, 23);
+		lblNomeUsuario.setBounds(94, 29, 46, 23);
 		panelCredenciais.add(lblNomeUsuario);
 
 		textFieldNomeUsuario = new JTextField();
 		textFieldNomeUsuario.setFont(new Font("Gisha", Font.PLAIN, 13));
-		textFieldNomeUsuario.setBounds(150, 51, 202, 23);
+		textFieldNomeUsuario.setBounds(150, 29, 202, 23);
 		panelCredenciais.add(textFieldNomeUsuario);
 		textFieldNomeUsuario.setColumns(10);
 
@@ -308,6 +315,11 @@ public class TelaCadastroVendedor {
 		lblSenha.setFont(new Font("Gisha", Font.PLAIN, 13));
 		lblSenha.setBounds(94, 85, 46, 23);
 		panelCredenciais.add(lblSenha);
+		
+		lblNewLabel_1 = new JLabel("O nome de usu\u00E1rio tem de ter no m\u00EDnimo 4 caracteres.");
+		lblNewLabel_1.setFont(new Font("Gisha", Font.PLAIN, 9));
+		lblNewLabel_1.setBounds(150, 60, 256, 14);
+		panelCredenciais.add(lblNewLabel_1);
 
 		passwordField = new JPasswordField();
 		passwordField.setBounds(150, 85, 128, 23);
@@ -482,9 +494,10 @@ public class TelaCadastroVendedor {
 						vendedor.setXp(xp);
 						vendedor.setDataCadastro();
 						fachada.cadastrarVendedor(vendedor);
+						fachada.salvarVendedor();
 
 						//mensagem boas vindas
-						JOptionPane.showMessageDialog(null, "Usuário Cadastrado com sucesso!\nBem-vindo ao Mercado Árabe");
+						JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!\nBem-vindo ao Mercado Árabe");
 						textFieldNomeUsuario.setText("");
 						passwordField.setText("");
 						passwordField_Confirmar.setText("");

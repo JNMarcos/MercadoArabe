@@ -20,6 +20,7 @@ import br.ufrpe.negocio.Fachada;
 import br.ufrpe.negocio.classes_basicas.Produto;
 import br.ufrpe.negocio.classes_basicas.Vendedor;
 import br.ufrpe.negocio.exceptions_negocio.NaoEncontradoProdutoException;
+import br.ufrpe.negocio.exceptions_negocio.ProdutoJaCadastradoException;
 import br.ufrpe.negocio.exceptions_negocio.QuantidadeMaximaItensUltrapassadaException;
 
 import javax.swing.SpinnerNumberModel;
@@ -29,6 +30,7 @@ public class TelaEditarProduto{
 	private Vendedor v;
 	private Produto p;
 	private Fachada f;
+	private TelaVendedor telaVendedor;
 	public TelaEditarProduto(Produto p, Vendedor v) {
 		setProduto(p);
 		setVendedor(v);
@@ -66,7 +68,7 @@ public class TelaEditarProduto{
 		comboBoxCategoria.addItem("Livros e Mídias Digitais");
 		comboBoxCategoria.addItem("Eletrodoméstico");
 		comboBoxCategoria.addItem("Eletroportáteis");
-		comboBoxCategoria.addItem("Eletroeletroônicos");
+		comboBoxCategoria.addItem("Eletroeletrônicos");
 		comboBoxCategoria.addItem("Info");
 		comboBoxCategoria.addItem("Games e Console");
 		comboBoxCategoria.addItem("Cama, Mesa e Banho");
@@ -163,42 +165,45 @@ public class TelaEditarProduto{
 		
 		public class EventoEditar implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
+				Produto pd = new Produto();
 				try{
+					
 					if (p.getItensNoEstoque() == p.getQuantidade()){
-						if (!textField.getText().equals("")){
-							p.setNome(textField.getText());
-						}
+						if (!textField.getText().equals("")) pd.setNome(textField.getText());
+						else pd.setNome(p.getNome());
+						if(!textField_2.getText().equals("")) pd.setPreco(Double.parseDouble(textField_2.getText()));
+						else pd.setPreco(p.getPreco());
 
-						if(!textField_2.getText().equals("")){
-							p.setPreco(Double.parseDouble(textField_2.getText()));
-						}
+						if(!textArea.getText().equals(""))	pd.setDescricao(textArea.getText());
+						else pd.setDescricao(p.getDescricao());
 
-						if(!textArea.getText().equals("")){
-							p.setDescricao(textArea.getText());
-						}
-
-						if (!comboBoxCategoria.getSelectedItem().equals("")){
-							p.setCategoria((String)comboBoxCategoria.getSelectedItem());
-						}
+						if (!(comboBoxCategoria.getSelectedItem().equals("")))	pd.setCategoria((String)comboBoxCategoria.getSelectedItem());
+						else pd.setCategoria(p.getCategoria());
 						if (!spinner.getValue().equals("")){
 							try {
-								p.setQuantidade((Integer) spinner.getValue());
+								pd.setQuantidade((Integer) spinner.getValue());
 							} catch (QuantidadeMaximaItensUltrapassadaException e1) {
 								JOptionPane.showMessageDialog(null, e1.getMessage());
 							}
-						}
-						f.atualizarProduto(p, v);
-						JOptionPane.showMessageDialog(null, "Atualização efita com sucesso!");
+						} else
+							try {
+								pd.setQuantidade(p.getQuantidade());
+							} catch (QuantidadeMaximaItensUltrapassadaException e1) {
+								JOptionPane.showMessageDialog(null, e1.getMessage());
+							}
+						f.removerProduto(p);
+						f.cadastrarProduto(pd, v);
+						f.salvarProduto();
+						setProduto(pd);
+						frame.dispose();
+						telaVendedor = new TelaVendedor(v);
+						telaVendedor.setVisible(true);
+						JOptionPane.showMessageDialog(null, "Atualização feita com sucesso!");
 					} else {
 						JOptionPane.showMessageDialog(null, "Você já vendeu um produto, infelizmente não pode mais alterar mais nada quanto ao produto.");
-
 					}
 						
-					} catch (NullPointerException e1){
-						JOptionPane.showMessageDialog(null, "Argumento inválido");
-					} catch (IllegalArgumentException e1) {
-						JOptionPane.showMessageDialog(null, "Argumento inválido");
-					} catch (NaoEncontradoProdutoException e1) {
+					} catch (NaoEncontradoProdutoException | IllegalArgumentException | ProdutoJaCadastradoException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage());
 					} 		
 

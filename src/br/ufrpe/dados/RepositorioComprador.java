@@ -23,7 +23,7 @@ public class RepositorioComprador implements IRepositorioComprador, Serializable
 
 	public static RepositorioComprador getInstancia() {
 		if (instancia == null) {
-			instancia = new RepositorioComprador();
+			instancia = lerDoArquivo();
 		}
 		return instancia;
 	}

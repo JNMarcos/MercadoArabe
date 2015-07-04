@@ -88,7 +88,11 @@ public class ControladorProduto {
 		}
 
 		if (!filtro.getCategoria().equals("")){
+			if (produtosParcialmenteRefinados.equals(""))
+			produtosParcialmenteRefinados = repositorio.procurarProdutoPorCategoria(filtro.getCategoria(), repositorio.getProdutos());
+			else 
 			produtosParcialmenteRefinados = repositorio.procurarProdutoPorCategoria(filtro.getCategoria(), produtosParcialmenteRefinados);
+
 		}
 
 		if(filtro.getFaixaPrecoDe() != 0.0 || filtro.getFaixaPrecoAte() != 0.0){
@@ -97,24 +101,25 @@ public class ControladorProduto {
 				filtro.setFaixaPrecoDe(filtro.getFaixaPrecoAte());
 				filtro.setFaixaPrecoAte(momentaneo);
 			}
-			produtosParcialmenteRefinados = repositorio.procurarProdutoPorFaixaPreco(filtro.getFaixaPrecoDe(), filtro.getFaixaPrecoAte(), produtosParcialmenteRefinados);
+			if (produtosParcialmenteRefinados.equals(""))
+				produtosParcialmenteRefinados = repositorio.procurarProdutoPorFaixaPreco(filtro.getFaixaPrecoDe(), filtro.getFaixaPrecoAte(), repositorio.getProdutos());
+				else 
+				produtosParcialmenteRefinados = repositorio.procurarProdutoPorFaixaPreco(filtro.getFaixaPrecoDe(), filtro.getFaixaPrecoAte(), produtosParcialmenteRefinados);
 		}
 
 		if (!filtro.getLocalVendedor().equals("")){
-			produtosParcialmenteRefinados = repositorio.procurarProdutoPorLocalVendedor(filtro.getLocalVendedor(), produtosParcialmenteRefinados);
+			if (produtosParcialmenteRefinados.equals(""))
+				produtosParcialmenteRefinados = repositorio.procurarProdutoPorLocalVendedor(filtro.getLocalVendedor(), repositorio.getProdutos());
+			else 
+				produtosParcialmenteRefinados = repositorio.procurarProdutoPorFaixaPreco(filtro.getFaixaPrecoDe(), filtro.getFaixaPrecoAte(), produtosParcialmenteRefinados);
 
 		}
-
-		if (produtosParcialmenteRefinados == null){
-			throw new NaoEncontradoProdutoException();
-		}
-
 		return produtosParcialmenteRefinados;
 	}
 
 	public List<Produto> organizarProdutos (List<Produto> produtosASeremOrganizados) throws NaoEncontradoProdutoException, IllegalArgumentException{
 		List<Produto> retAux = null;
-		if (produtosASeremOrganizados != null){
+		if (!produtosASeremOrganizados.equals("")){
 			retAux = repositorio.organizarProduto(produtosASeremOrganizados);
 		} else{
 			throw new NaoEncontradoProdutoException();

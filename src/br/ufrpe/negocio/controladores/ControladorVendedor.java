@@ -54,9 +54,9 @@ public class ControladorVendedor {
 			} else{
 				throw new SenhaForaPadroesException();
 			}
-			
+
 			PessoaUtilidades.nomeNosConformes(vendedor.getNome());
-			
+
 			//chamar método nomeUsuarioNosConforme e senha tb.		
 			cpfJaExiste = repositorioVendedor.verificarCpfJaExiste(vendedor.getCpf());
 			nomeUsuarioJaExiste = repositorioVendedor.verificarNomeUsuarioJaExiste(vendedor.getNomeUsuario());
@@ -121,7 +121,7 @@ public class ControladorVendedor {
 		Period periodoDiasControlador = null;
 		Period periodoDiasVendedor;
 		if (this.getDia() != null)	periodoDiasControlador = Period.between(this.getDia(), dataHoje);
-		
+
 		if (this.getDia() == null || (periodoDiasControlador.getDays() == 1)){
 			for (int i = 0; i < vendedores.size(); i++){
 				periodoDiasVendedor = Period.between(vendedores.get(i).getDataCadastro(), LocalDate.now());
@@ -140,24 +140,21 @@ public class ControladorVendedor {
 
 		if (!senha.equals("")) 
 			retSenha = repositorioVendedor.verificarSenhaJaExiste(senha);
-		if (nomeUsuario != null) 
+		if (!nomeUsuario.equals("")) 
 			retNomeUsuario = repositorioVendedor.verificarNomeUsuarioJaExiste(nomeUsuario);
 
 		if (retSenha && retNomeUsuario){
 			vendedor = repositorioVendedor.verificarLogin(nomeUsuario, senha);
-		} else if (retNomeUsuario == false && retSenha){
+		} else if (retNomeUsuario == false && retSenha == true){
 			throw new NaoEncontradoVendedorException();
-		} else if (retNomeUsuario && retSenha == false){
+		} else if (retNomeUsuario == true && retSenha == false){
 			throw new SenhaIncorretaException();
-		} else {
-			throw new NaoEncontradoVendedorException();// mais importante saber para alguém que o usuario não existe do que uma senha
-		}
+		} else if (retNomeUsuario == false && retSenha == false) throw new NaoEncontradoVendedorException();
 
-		if (retNomeUsuario && vendedor == null) throw new SenhaIncorretaException();
 		return vendedor;
 
 	}
-	
+
 	public Vendedor retornarVendedor(String nomeUsuario) throws NaoEncontradoVendedorException{
 		Vendedor vendedor = null;
 		if (!nomeUsuario.equals("")){
@@ -166,14 +163,14 @@ public class ControladorVendedor {
 		} else {
 			throw new IllegalArgumentException();
 		}
-		
+
 		return vendedor;
 	}
-	
+
 	public void incrementarQtdProdutosAVenda(Vendedor v){
 		repositorioVendedor.incrementarQtdProdutosAVenda(v);
 	}
-	
+
 	public void decrementarQtdProdutosAVenda(Vendedor v){
 		repositorioVendedor.decrementarQtdProdutosAVenda(v);
 	}

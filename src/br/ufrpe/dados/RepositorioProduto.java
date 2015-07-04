@@ -24,7 +24,7 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable{
 
 	public static RepositorioProduto getInstancia() {
 		if (instancia == null) {
-			instancia = new RepositorioProduto();
+			instancia = lerDoArquivo();
 		}
 		return instancia;
 	}

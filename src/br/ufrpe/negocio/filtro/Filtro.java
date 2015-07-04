@@ -39,8 +39,8 @@ public class Filtro {
 		return faixaPrecoAte;
 	}
 	public void setFaixaPrecoAte(double faixaPrecoAte) {
-			if (faixaPrecoAte <= 0.0) this.faixaPrecoDe = 0.0;
-			else this.faixaPrecoDe = faixaPrecoAte;
+			if (faixaPrecoAte <= 0.0) this.faixaPrecoAte = 0.0;
+			else this.faixaPrecoAte = faixaPrecoAte;
 	}
 	public String getLocalVendedor() {
 		return localVendedor;
