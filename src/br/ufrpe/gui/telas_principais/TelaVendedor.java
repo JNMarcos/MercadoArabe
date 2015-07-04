@@ -171,9 +171,10 @@ public class TelaVendedor {
 		panel.add(lblXps);
 		
 		btnNovoProduto = new JButton("Novo Produto");
+		btnNovoProduto.setFont(new Font("Gisha", Font.PLAIN, 13));
 		Evento e = new Evento();
 		btnNovoProduto.addActionListener(e);
-		btnNovoProduto.setBounds(329, 181, 104, 23);
+		btnNovoProduto.setBounds(514, 186, 143, 23);
 		panel.add(btnNovoProduto);
 	}
 
@@ -210,7 +211,7 @@ public class TelaVendedor {
                     JOptionPane.showMessageDialog(null,
                                     "Nenhum produto selecionado!");
             } else {
-                    nomeProd = (String) table.getValueAt(linha_selecionada, 0);
+                    nomeProd = (String) (table.getValueAt(linha_selecionada, 0));
                     try {
 						prod = fachada.retornarProduto(nomeProd, v, null);
 					} catch (IllegalArgumentException | NullPointerException e1) {

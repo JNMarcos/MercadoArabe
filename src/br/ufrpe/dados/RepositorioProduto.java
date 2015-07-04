@@ -99,6 +99,7 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable{
 
 	public void cadastrarProduto(Produto produto){
 		this.produtos.add(produto);
+		produto.getVendedor().incrementarQtdProdutosAVenda();
 		salvarArquivo();
 	}
 
@@ -117,11 +118,11 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable{
 		List<Produto> iProduto = null;
 		if (!nomeProduto.equals("") && !nomeProduto.equals(" ")){
 			if (produtoASerEncontrado.equals("")){
-				if (this.getProdutos() != null) iProduto = this.produtos;
+				if (!this.getProdutos().equals("")) iProduto = this.produtos;
 			} else {
 				iProduto = produtoASerEncontrado;
 			} //iterator ou listIterato
-			if (iProduto != null){
+			if (!iProduto.equals("")){
 				for (int i = 0; i < iProduto.size(); i++){
 					if (iProduto.get(i).getNome().equalsIgnoreCase(nomeProduto) && iProduto.get(i).getVendedor().equals(vendedor)){
 						produto = iProduto.get(i);
@@ -160,7 +161,7 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable{
 	public List<Produto> procurarProdutoPorCategoria(String categoriaProduto, List<Produto> produtosASeremRefinados){
 		List<Produto> produtosEncontrados = null;
 		List<Produto> iProduto = null;
-		if (!categoriaProduto.equals(null)){
+		if (!categoriaProduto.equals("")){
 
 			if (produtosASeremRefinados == null){
 				if (this.getProdutos() != null){
@@ -214,7 +215,7 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable{
 	public List<Produto> procurarProdutoPorLocalVendedor(String localVendedor, List<Produto> produtosASeremRefinados){
 		List<Produto> produtosEncontrados = null;
 		List<Produto> iProduto = null;
-		if (!localVendedor.equals(null)){
+		if (!localVendedor.equals("")){
 
 			if (produtosASeremRefinados == null){
 				if (this.getProdutos() != null){
@@ -237,7 +238,7 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable{
 
 	public List<Produto> retornarProdutosDoVendedor(Vendedor vendedor){
 		List <Produto> produtosVendedor = null;
-		if (!vendedor.equals("") && this.getProdutos() != null){
+		if (!vendedor.equals("") && !this.getProdutos().equals("")){
 			produtosVendedor = new ArrayList<Produto>();
 			for (int i = 0; i < produtos.size(); i++){
 				if (produtos.get(i).getVendedor().equals(vendedor)){

@@ -186,7 +186,7 @@ public class TelaComprador_Favoritos {
 	
 	public class EventoVoltar implements ActionListener{
 		public void actionPerformed(ActionEvent arg0) {
-			TelaComprador_Favoritos.dispose();
+			frmMeuPerfil.dispose();
 			TelaComprador_Principal TelaComprador_Principal = new TelaComprador_Principal(c);
 			TelaComprador_Principal.setVisible(true);
 		}
