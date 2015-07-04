@@ -106,6 +106,7 @@ public class TelaPesquisarProdutos extends JFrame {
 		comboBox = new JComboBox<>();
 		comboBox.setBounds(106, 61, 200, 23);
 		comboBox.setFont(new Font("Gisha", Font.PLAIN, 13));
+		comboBox.addItem(" ");
 		comboBox.addItem("Auto");
 		comboBox.addItem("Roupas");
 		comboBox.addItem("Celulares");

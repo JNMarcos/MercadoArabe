@@ -137,16 +137,16 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable{
 	public List<Produto> procurarProdutoPorNome(String nomeProduto, List<Produto> produtosASeremRefinados){
 		List<Produto> produtosEncontrados = null;
 		List<Produto> iProduto = null;
-		if (!nomeProduto.equals(null)){
+		if (!nomeProduto.equals("")){
 
-			if (produtosASeremRefinados == null){// se a lista entregue como parâmetro for vazia, use a do repositório
-				if (this.getProdutos() != null){
+			if (produtosASeremRefinados.equals("")){// se a lista entregue como parâmetro for vazia, use a do repositório
+				if (!this.getProdutos().equals("")){
 					iProduto = this.produtos;
 				}
 			} else {
 				iProduto = produtosASeremRefinados;
 			} 
-			if (iProduto != null){
+			if (!iProduto.equals("")){
 				produtosEncontrados = new ArrayList<Produto>();
 				for (int i = 0; i < iProduto.size(); i++){
 					if (iProduto.get(i).getNome().equalsIgnoreCase(nomeProduto)){
@@ -163,14 +163,14 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable{
 		List<Produto> iProduto = null;
 		if (!categoriaProduto.equals("")){
 
-			if (produtosASeremRefinados == null){
-				if (this.getProdutos() != null){
+			if (produtosASeremRefinados.equals("")){
+				if (!this.getProdutos().equals("")){
 					iProduto = this.produtos;
 				}
 			} else {
 				iProduto = produtosASeremRefinados;
 			}
-			if (iProduto != null){
+			if (!iProduto.equals("")){
 				produtosEncontrados = new ArrayList<Produto>();
 				for (int i = 0; i < iProduto.size(); i++){
 					if (iProduto.get(i).getCategoria().equalsIgnoreCase(categoriaProduto)){
@@ -187,14 +187,14 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable{
 		List<Produto> produtosEncontrados = null;
 		List<Produto> iProduto = null;
 		if ((de > 0.0 || ate > 0.0) && de != ate && (de < ate || ate == 0.0)){//ou de ou ate tem de ser maior que zero
-			if (produtosASeremRefinados == null){
-				if (this.getProdutos() != null){ 
+			if (produtosASeremRefinados.equals("")){
+				if (!this.getProdutos().equals("")){ 
 					iProduto = this.produtos;
 				}
 			} else {
 				iProduto = produtosASeremRefinados;
 			} 
-			if (iProduto != null){
+			if (!iProduto.equals("")){
 				produtosEncontrados = new ArrayList<Produto>();
 				for (int i = 0; i < iProduto.size(); i++){
 					if (ate != 0.0){
@@ -217,14 +217,14 @@ public class RepositorioProduto implements IRepositorioProduto, Serializable{
 		List<Produto> iProduto = null;
 		if (!localVendedor.equals("")){
 
-			if (produtosASeremRefinados == null){
-				if (this.getProdutos() != null){
+			if (produtosASeremRefinados.equals("")){
+				if (!this.getProdutos().equals("")){
 					iProduto = this.produtos;
 				}
 			} else {
 				iProduto = produtosASeremRefinados;
 			} 
-			if (iProduto != null){
+			if (!iProduto.equals("")){
 				produtosEncontrados = new ArrayList<Produto>();
 				for (int i = 0; i < iProduto.size(); i++){
 					if (iProduto.get(i).getVendedor().getContato().getCidade().equalsIgnoreCase(localVendedor)){
